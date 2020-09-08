@@ -1,0 +1,53 @@
+package com.qpay.customer.api
+
+import com.qpay.customer.api.Api.API_VERSION
+import com.qpay.customer.api.Api.DIRECTORY_ACCOUNT
+import com.qpay.customer.api.Api.DIRECTORY_BANK
+import com.qpay.customer.api.Api.DIRECTORY_BANK_INFO
+import com.qpay.customer.api.Api.DIRECTORY_CARD
+import com.qpay.customer.api.Api.DIRECTORY_CONNECT
+import com.qpay.customer.api.Api.DIRECTORY_PROFILE
+import com.qpay.customer.api.Api.REPO
+
+object Api {
+    const val PROTOCOL = "http"
+    const val API_ROOT = "210.4.67.205:6107"
+    const val API_ROOT_URL = "$PROTOCOL://$API_ROOT"
+    const val REPO = "api"
+    const val API_VERSION = "v1"
+    const val DIRECTORY_ACCOUNT = "account"
+    const val DIRECTORY_CONNECT = "connect"
+    const val DIRECTORY_BANK_INFO = "bankinformation"
+    const val DIRECTORY_CARD = "banklink"
+    const val DIRECTORY_BANK = "cardlink"
+    const val DIRECTORY_PROFILE = "profile"
+    const val ContentType = "Content-Type: application/json"
+}
+
+object ApiEndPoint {
+    /* Registration */
+    const val INQUIRE = "/$REPO/$API_VERSION/${DIRECTORY_ACCOUNT}/inquire"
+    const val REQUESTOTP = "/$REPO/$API_VERSION/${DIRECTORY_ACCOUNT}/request-otp"
+    const val REGISTRATION = "/$REPO/$API_VERSION/${DIRECTORY_ACCOUNT}"
+    const val CONNECT_TOKEN = "/$REPO/$API_VERSION/${DIRECTORY_CONNECT}/token"
+    const val GET_BANK_LIST = "/$REPO/$API_VERSION/${DIRECTORY_BANK_INFO}/bank-list"
+    const val ADD_BANK = "/$REPO/$API_VERSION/${DIRECTORY_BANK}"
+    const val ADD_CARD = "/$REPO/$API_VERSION/${DIRECTORY_CARD}"
+    const val MY_ACCOUNT_LIST = "/$REPO/$API_VERSION/${DIRECTORY_PROFILE}/accounts"
+}
+
+object ResponseCodes {
+    const val CODE_SUCCESS = 200
+    const val CODE_TOKEN_EXPIRE = 401
+    const val CODE_UNAUTHORIZED = 403
+    const val CODE_VALIDATION_ERROR = 400
+    const val CODE_DEVICE_CHANGE = 451
+    const val CODE_FIRST_LOGIN = 426
+}
+
+object ApiCallStatus {
+    const val LOADING = 0
+    const val SUCCESS = 1
+    const val ERROR = 2
+    const val EMPTY = 3
+}
