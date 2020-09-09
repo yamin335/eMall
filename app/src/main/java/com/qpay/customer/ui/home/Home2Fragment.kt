@@ -51,20 +51,20 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
 
         //registerToolbar(viewDataBinding.toolbar)
 
-        viewDataBinding.cardTopUp.setOnClickListener {
-            navController.navigate(Home2FragmentDirections.actionHome2FragmentToTopUpMobileFragment(
-                TopUpHelper()
-            ))
-        }
-
-        val token = preferencesHelper.getAccessTokenHeader()
-
-        paymentListAdapter = PaymentMethodListAdapter(appExecutors) {
-            //navController.navigate(HomeFragmentDirections.actionBooksToChapterList(it))
-        }
-
-
-
+//        viewDataBinding.cardTopUp.setOnClickListener {
+//            navController.navigate(Home2FragmentDirections.actionHome2FragmentToTopUpMobileFragment(
+//                TopUpHelper()
+//            ))
+//        }
+//
+//        val token = preferencesHelper.getAccessTokenHeader()
+//
+//        paymentListAdapter = PaymentMethodListAdapter(appExecutors) {
+//            //navController.navigate(HomeFragmentDirections.actionBooksToChapterList(it))
+//        }
+//
+//
+//
         viewModel.slideDataList.forEach { slideData ->
             val slide = SliderView(requireContext())
             slide.sliderTextTitle = slideData.textTitle
@@ -72,28 +72,28 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
             slide.sliderImage(slideData.slideImage)
             viewDataBinding.sliderLayout.addSlider(slide)
         }
-
-        Log.e("res", preferencesHelper.getAccessTokenHeader())
-        paymentListAdapter.submitList(viewModel.paymentMethodList)
-        viewDataBinding.recyclerPaymentMethods.adapter = paymentListAdapter
-
-
-
-        paymentListAdapter.onClicked.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                if (it.id == "-1") {
-                    /**
-                     * add payment method
-                     */
-                    val action = Home2FragmentDirections.actionHome2FragmentToAddPaymentMethodsFragment()
-                    navController.navigate(action)
-                }
-            }
-        })
+//
+//        Log.e("res", preferencesHelper.getAccessTokenHeader())
+//        paymentListAdapter.submitList(viewModel.paymentMethodList)
+//        viewDataBinding.recyclerPaymentMethods.adapter = paymentListAdapter
+//
+//
+//
+//        paymentListAdapter.onClicked.observe(viewLifecycleOwner, Observer {
+//            if (it != null) {
+//                if (it.id == "-1") {
+//                    /**
+//                     * add payment method
+//                     */
+//                    val action = Home2FragmentDirections.actionHome2FragmentToAddPaymentMethodsFragment()
+//                    navController.navigate(action)
+//                }
+//            }
+//        })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.toolbar_menu, menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
 }

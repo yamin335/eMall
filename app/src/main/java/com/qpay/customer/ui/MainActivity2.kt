@@ -111,7 +111,7 @@ class MainActivity2 : DaggerAppCompatActivity(), NavigationHost {
             hideKeyboard()
             currentDestinationId = destination.id
             val hasBottomNav = destination.id !in fragmentArrayWithoutBottomNav
-            binding.appBarMain.showBottomNav = hasBottomNav
+            binding.contentMain.showBottomNav = hasBottomNav
             if (hasBottomNav) {
                 setupBottomNav(destination.id)
                 /*set title explicitly to avoid title error on locale changes*/
@@ -156,8 +156,8 @@ class MainActivity2 : DaggerAppCompatActivity(), NavigationHost {
 
     private fun setupBottomNav(id: Int) {
 
-        binding.appBarMain.bottomNavigationView.setupWithNavController(navController)
-        NavigationUI.setupWithNavController(binding.appBarMain.bottomNavigationView, navController)
+        binding.contentMain.bottomNavigationView.setupWithNavController(navController)
+        NavigationUI.setupWithNavController(binding.contentMain.bottomNavigationView, navController)
 
         // Setting Up ActionBar with Navigation Controller
         //Prevent Back arrow in action bar of top level destination we can use appbar configuration for back arrow issue
