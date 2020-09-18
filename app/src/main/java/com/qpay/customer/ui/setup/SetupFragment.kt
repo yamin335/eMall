@@ -19,7 +19,6 @@ class SetupFragment  : BaseFragment<SetupBinding, SetupViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
         viewDataBinding.btnProceed.setOnClickListener {
-            navController.navigate(SetupFragmentDirections.actionSetupToSetupComplete())
         }
 
     }

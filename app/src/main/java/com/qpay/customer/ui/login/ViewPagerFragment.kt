@@ -3,6 +3,8 @@ package com.qpay.customer.ui.login
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import com.daimajia.slider.library.SliderLayout
 import com.qpay.customer.R
@@ -18,6 +20,14 @@ class ViewPagerFragment : BaseFragment<ViewPagerBinding, ViewPagerViewModel>() {
         get() = R.layout.fragment_view_pager
     override val viewModel: ViewPagerViewModel by viewModels {
         viewModelFactory
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // This callback will only be called when MyFragment is at least Started.
+        requireActivity().onBackPressedDispatcher.addCallback(this, true) {
+            requireActivity().finish()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,4 +57,6 @@ class ViewPagerFragment : BaseFragment<ViewPagerBinding, ViewPagerViewModel>() {
 
         updateStatusBarBackgroundColor("#1E4356")
     }
+
+
 }

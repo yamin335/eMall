@@ -56,8 +56,8 @@ class PinNumberFragment : BaseFragment<PinNumberBinding, PinNumberViewModel>() {
                             , data.getString("refresh_token"), data.getString("token_type")
                         )
                         preferencesHelper.saveToken(tokenInfo)
-                        val action = PinNumberFragmentDirections.actionPinNumberFragmentToHome()
-                        navController.navigate(action)
+                        //val action = PinNumberFragmentDirections.actionPinNumberFragmentToHome()
+                        //navController.navigate(action)
                     }
                     it.isSuccess == false && it.errorMessage != null -> {
                         showWarningToast(mContext, it.errorMessage)

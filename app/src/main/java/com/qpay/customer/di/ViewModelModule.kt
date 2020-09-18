@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.qpay.customer.ViewModelFactory
 import com.qpay.customer.nid_scan.NIDScanCameraXViewModel
+import com.qpay.customer.ui.LoginActivityViewModel
+import com.qpay.customer.ui.MainActivityViewModel
 import com.qpay.customer.ui.add_payment_methods.AddBankViewModel
 import com.qpay.customer.ui.add_payment_methods.AddCardViewModel
 import com.qpay.customer.ui.add_payment_methods.AddPaymentMethodsViewModel
 import com.qpay.customer.ui.chapter_list.ChapterListViewModel
-import com.qpay.customer.ui.home.HomeViewModel
+import com.qpay.customer.ui.home.*
 import com.qpay.customer.ui.how_works.HowWorksViewModel
 import com.qpay.customer.ui.login.SignInViewModel
 import com.qpay.customer.ui.on_boarding.tou.TouViewModel
@@ -23,6 +25,7 @@ import com.qpay.customer.ui.splash.SplashViewModel
 import com.qpay.customer.ui.video_play.LoadWebViewViewModel
 import com.qpay.customer.ui.video_play.VideoPlayViewModel
 import com.qpay.customer.ui.login.ViewPagerViewModel
+import com.qpay.customer.ui.more.MoreViewModel
 import com.qpay.customer.ui.otp_signin.OtpSignInViewModel
 import com.qpay.customer.ui.pin_number.PinNumberViewModel
 import com.qpay.customer.ui.profile_signin.ProfileSignInViewModel
@@ -43,6 +46,40 @@ abstract class ViewModelModule {
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(LoginActivityViewModel::class)
+    abstract fun bindLoginActivityViewModel(viewModel: LoginActivityViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainActivityViewModel::class)
+    abstract fun bindMainActivityViewModel(viewModel: MainActivityViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MoreBookListViewModel::class)
+    abstract fun bindMoreBookListViewModel(viewModel: MoreBookListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MoreViewModel::class)
+    abstract fun bindMoreViewModel(viewModel: MoreViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SetAViewModel::class)
+    abstract fun bindSetAViewModel(viewModel: SetAViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SetBViewModel::class)
+    abstract fun bindSetBViewModel(viewModel: SetBViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SetCViewModel::class)
+    abstract fun bindSetCViewModel(viewModel: SetCViewModel): ViewModel
 
     @Binds
     @IntoMap

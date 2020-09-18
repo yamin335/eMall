@@ -21,7 +21,6 @@ class PreOnBoardingFragment() : BaseFragment<PreOnBoardBinding, PreOnBoardingVie
         super.onViewCreated(view, savedInstanceState)
         updateStatusBarBackgroundColor("#689F38")
         viewDataBinding.btnOnboardingStart.setOnClickListener {
-            navController.navigate(PreOnBoardingFragmentDirections.actionPreOnBoardToHowWorks())
         }
     }
 }

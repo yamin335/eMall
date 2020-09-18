@@ -1,6 +1,5 @@
 package com.qpay.customer.ui
 
-
 import android.content.Intent
 import android.util.SparseArray
 import androidx.core.util.forEach
@@ -23,12 +22,15 @@ fun BottomNavigationView.setupWithNavController(
     fragmentManager: FragmentManager,
     containerId: Int,
     intent: Intent
-): LiveData<NavController> {
+): Pair<LiveData<NavController>, LiveData<NavHostFragment>> {
 
     // Map of tags
     val graphIdToTagMap = SparseArray<String>()
     // Result. Mutable live data with the selected controlled
     val selectedNavController = MutableLiveData<NavController>()
+
+    // Result. Mutable live data with the selected navHostFragment
+    val selectedNavHostFragment = MutableLiveData<NavHostFragment>()
 
     var firstFragmentGraphId = 0
 
@@ -58,6 +60,7 @@ fun BottomNavigationView.setupWithNavController(
         if (this.selectedItemId == graphId) {
             // Update livedata with the selected graph
             selectedNavController.value = navHostFragment.navController
+            selectedNavHostFragment.value = navHostFragment
             attachNavHostFragment(fragmentManager, navHostFragment, index == 0)
         } else {
             detachNavHostFragment(fragmentManager, navHostFragment)
@@ -110,6 +113,7 @@ fun BottomNavigationView.setupWithNavController(
                 selectedItemTag = newlySelectedItemTag
                 isOnFirstFragment = selectedItemTag == firstFragmentTag
                 selectedNavController.value = selectedFragment.navController
+                selectedNavHostFragment.value = selectedFragment
                 true
             } else {
                 false
@@ -137,7 +141,7 @@ fun BottomNavigationView.setupWithNavController(
             }
         }
     }
-    return selectedNavController
+    return Pair(selectedNavController, selectedNavHostFragment)
 }
 
 private fun BottomNavigationView.setupDeepLinks(

@@ -10,11 +10,19 @@ import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
 import com.qpay.customer.BR
 import com.qpay.customer.R
 import com.qpay.customer.databinding.WebViewBinding
 import com.qpay.customer.ui.common.BaseFragment
+import com.qpay.customer.ui.home.SetAFragment
+import com.qpay.customer.ui.home.SetBFragment
+import com.qpay.customer.ui.home.SetCFragment
+import com.qpay.customer.ui.home.VideoTabViewPagerAdapter
 
 
 class LoadWebViewFragment: BaseFragment<WebViewBinding, LoadWebViewViewModel>() {
@@ -35,10 +43,25 @@ class LoadWebViewFragment: BaseFragment<WebViewBinding, LoadWebViewViewModel>() 
         //arguments?.let { LoadWebViewFragmentArgs.fromBundle(it).title }
     }
 
+    private lateinit var viewPagerFragments: Array<Fragment>
+    private val viewPagerPageTitles = arrayOf("Set A", "Set B", "Set C")
+
+    private lateinit var pagerAdapter: VideoTabViewPagerAdapter
+
+    private var viewPagerCurrentItem = 0
+
+    private lateinit var viewPager2PageChangeCallback: ViewPager2PageChangeCallback
+
+    private val setAFragment: SetAFragment = SetAFragment()
+    private val setBFragment: SetBFragment = SetBFragment()
+    private val setCFragment: SetCFragment = SetCFragment()
+
     @SuppressLint("SetJavaScriptEnabled", "ObsoleteSdkInt")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //activity?.title = title
+
+        registerToolbar(viewDataBinding.toolbar)
 
         val webSettings = viewDataBinding.webView.settings
         webSettings.javaScriptEnabled = true
@@ -99,10 +122,38 @@ class LoadWebViewFragment: BaseFragment<WebViewBinding, LoadWebViewViewModel>() 
                 viewDataBinding.progressBar.visibility = View.GONE
             }
         }
+
+        viewPagerFragments = arrayOf(setAFragment, setBFragment, setCFragment)
+
+        pagerAdapter = VideoTabViewPagerAdapter(viewPagerFragments, childFragmentManager, viewLifecycleOwner.lifecycle)
+
+        viewDataBinding.viewPager.adapter = pagerAdapter
+
+        viewPager2PageChangeCallback = ViewPager2PageChangeCallback {
+            setCurrentPageItemPosition(it)
+        }
+
+        viewDataBinding.viewPager.registerOnPageChangeCallback(viewPager2PageChangeCallback)
+
+        TabLayoutMediator(viewDataBinding.tabs, viewDataBinding.viewPager) { tab, position ->
+            tab.text = viewPagerPageTitles[position]
+            //tab.icon = ContextCompat.getDrawable(requireContext(), viewPagerPageIcons[position])
+        }.attach()
     }
 
     override fun onDestroyView() {
         viewDataBinding.webView.webViewClient = null
         super.onDestroyView()
+    }
+
+    private fun setCurrentPageItemPosition(position: Int) {
+        viewPagerCurrentItem = position
+    }
+}
+
+class ViewPager2PageChangeCallback(private val listener: (Int) -> Unit) : ViewPager2.OnPageChangeCallback() {
+    override fun onPageSelected(position: Int) {
+        super.onPageSelected(position)
+        listener.invoke(position)
     }
 }

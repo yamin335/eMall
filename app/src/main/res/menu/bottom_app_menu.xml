@@ -9,18 +9,18 @@
         android:icon="@drawable/home" />
     <item
         android:id="@+id/pay_nav"
-        android:title="@string/pay"
+        android:title="History"
         app:showAsAction="always"
-        android:icon="@drawable/pay"/>
+        android:icon="@drawable/ic_baseline_history_24"/>
     <item
-        android:title="Scan&amp;Pay"
+        android:title="Live"
         app:showAsAction="always"
         android:enabled="false"
         android:checkable="false"
         android:checked="false" />
     <item
         android:id="@+id/transaction_nav"
-        android:title="@string/transactions"
+        android:title="Service"
         android:icon="@drawable/transactions"
         app:showAsAction="always" />
     <item

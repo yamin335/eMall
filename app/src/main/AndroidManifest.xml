@@ -3,16 +3,10 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.qpay.customer">
-
     <!-- Enable instant app support -->
-    <dist:module dist:instant="true" />
-
-    <!-- Declare features -->
-    <uses-feature android:name="android.hardware.camera" />
-
-    <!-- Declare permissions -->
+    <dist:module dist:instant="true" /> <!-- Declare features -->
+    <uses-feature android:name="android.hardware.camera" /> <!-- Declare permissions -->
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -32,31 +26,22 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="m">
+        <activity android:name=".ui.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-        <!-- Optional: Add it to automatically download ML model to device after
-          your app is installed.-->
-        <meta-data
-            android:name="com.google.mlkit.vision.DEPENDENCIES"
-            android:value="barcode,face,ocr,ica" />
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
-            android:name=".ui.MainActivity2"
+            android:name=".ui.MainActivity"
             android:clearTaskOnLaunch="true"
             android:rotationAnimation="seamless"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
-            android:windowSoftInputMode="adjustResize|adjustPan"
             tools:targetApi="O">
-
-            <!-- Main app intent filter -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
             <!-- Register as a system camera app -->
             <intent-filter>
@@ -86,35 +71,33 @@
                 android:value="true" />
 
         </activity>
-        <activity
-            android:name=".ui.MainActivity"
-            android:screenOrientation="portrait"
-            android:label=""
-            android:theme="@style/SplashTheme"
-            android:windowSoftInputMode="adjustResize|adjustPan"
-            >
-        </activity>
 
-        <receiver android:name="com.qpay.customer.SyncOnConnectivityReceiver" />
-        <!--to disable default workmanager initiation-->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <!--
+ Optional: Add it to automatically download ML model to device after
+          your app is installed.
+        -->
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="barcode,face,ocr,ica" />
+
+        <receiver android:name=".SyncOnConnectivityReceiver" /> <!-- to disable default workmanager initiation -->
         <provider
             android:name="androidx.work.impl.WorkManagerInitializer"
             android:authorities="${applicationId}.workmanager-init"
             android:exported="false"
-            tools:node="remove" />
-
-
-        <!--for capture file using camera-->
-        <!--        <provider-->
-        <!--            android:name="androidx.core.content.FileProvider"-->
-        <!--            android:authorities="com.qpay.customer.fileprovider"-->
-        <!--            android:exported="false"-->
-        <!--            android:grantUriPermissions="true">-->
-        <!--            <meta-data-->
-        <!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
-        <!--                android:resource="@xml/file_paths"/>-->
-        <!--        </provider>-->
-
+            tools:node="remove" /> <!-- for capture file using camera -->
+        <!-- <provider -->
+        <!-- android:name="androidx.core.content.FileProvider" -->
+        <!-- android:authorities="com.qpay.customer.fileprovider" -->
+        <!-- android:exported="false" -->
+        <!-- android:grantUriPermissions="true"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.support.FILE_PROVIDER_PATHS" -->
+        <!-- android:resource="@xml/file_paths"/> -->
+        <!-- </provider> -->
         <!-- FileProvider used to share photos with other apps -->
         <provider
             android:name="androidx.core.content.FileProvider"

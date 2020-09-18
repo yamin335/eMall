@@ -1,5 +1,6 @@
 package com.qpay.customer.ui.splash
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.qpay.customer.R
 import com.qpay.customer.BR
 import com.qpay.customer.databinding.SplashBinding
+import com.qpay.customer.ui.LoginHandlerCallback
 import com.qpay.customer.ui.common.BaseFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -26,6 +28,30 @@ class SplashFragment : BaseFragment<SplashBinding, SplashViewModel>() {
     }
 
     private lateinit var animation: Animation
+
+    private var listener: LoginHandlerCallback? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is LoginHandlerCallback) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement LoginHandlerCallback")
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (fromLogout) {
+            findNavController().navigate(SplashFragmentDirections.actionSplashToLogin())
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,7 +74,11 @@ class SplashFragment : BaseFragment<SplashBinding, SplashViewModel>() {
                         delay(1200L)
                     }
 
-                    findNavController().navigate(SplashFragmentDirections.actionSplashToAuth())
+                    if (preferencesHelper.isLoggedIn) {
+                        listener?.onLoggedIn()
+                    } else {
+                        findNavController().navigate(SplashFragmentDirections.actionSplashToLogin())
+                    }
                 }
             }
 
@@ -72,5 +102,9 @@ class SplashFragment : BaseFragment<SplashBinding, SplashViewModel>() {
 //                }
 //            }
 //        })
+    }
+
+    companion object {
+        var fromLogout = false
     }
 }

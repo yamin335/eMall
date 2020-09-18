@@ -51,10 +51,48 @@ class SignInFragment : BaseFragment<SignInBinding, SignInViewModel>() {
 
         viewDataBinding.btnProceed.setOnClickListener {
             hideKeyboard()
-            viewModel.mobileNo.value?.let { mobileNo ->
-                inquireAccount(mobileNo, Build.ID)
-            }
+            tempopenOperatorSelectionDialog()
+//            viewModel.mobileNo.value?.let { mobileNo ->
+//                inquireAccount(mobileNo, Build.ID)
+//            }
         }
+    }
+
+    private fun tempopenOperatorSelectionDialog() {
+        val bottomSheetDialog = BottomSheetDialog(mActivity)
+        val binding = DataBindingUtil.inflate<LayoutOperatorSelectionBinding>(
+            layoutInflater,
+            R.layout.layout_operator_selection,
+            null,
+            false
+        )
+        bottomSheetDialog.setContentView(binding.root)
+
+
+        binding.btnBanglalink.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            val action = SignInFragmentDirections.actionSignInFragmentToTermsFragment(registrationHelper)
+            navController.navigate(action)
+        }
+
+        binding.btnGrameenphone.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            val action = SignInFragmentDirections.actionSignInFragmentToTermsFragment(registrationHelper)
+            navController.navigate(action)
+        }
+
+        binding.btnRobi.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            val action = SignInFragmentDirections.actionSignInFragmentToTermsFragment(registrationHelper)
+            navController.navigate(action)
+        }
+
+        binding.btnTeletalk.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            val action = SignInFragmentDirections.actionSignInFragmentToTermsFragment(registrationHelper)
+            navController.navigate(action)
+        }
+        bottomSheetDialog.show()
     }
 
     private fun openOperatorSelectionDialog() {

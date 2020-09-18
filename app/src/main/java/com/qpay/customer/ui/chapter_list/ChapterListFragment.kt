@@ -20,6 +20,8 @@ class ChapterListFragment : BaseFragment<FragmentChapterListBinding, ChapterList
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        registerToolbar(viewDataBinding.toolbar)
+
         chapterListAdapter = ChapterListAdapter(appExecutors) {
             navController.navigate(
                 //ChapterListFragmentDirections.actionChapterListToVideoPlay("vedio_file")

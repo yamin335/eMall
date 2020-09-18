@@ -19,7 +19,7 @@ import com.qpay.customer.BR
 import com.qpay.customer.R
 import com.qpay.customer.databinding.OtpSignInBinding
 import com.qpay.customer.models.registration.RegistrationHelperModel
-import com.qpay.customer.ui.MainActivity2
+import com.qpay.customer.ui.MainActivity
 import com.qpay.customer.ui.common.BaseFragment
 import com.qpay.customer.util.AppConstants.START_TIME_IN_MILLI_SECONDS
 import com.qpay.customer.util.AppConstants.otpWaitMessage
@@ -70,6 +70,8 @@ class OtpSignInFragment : BaseFragment<OtpSignInBinding, OtpSignInViewModel>(), 
 
         helper = args.registrationHelper
         startTimer()
+
+        viewDataBinding.etOtpCode.isEnabled = true
 
         viewDataBinding.btnSubmit.setOnClickListener {
             TedPermission.with(requireContext())
@@ -142,11 +144,11 @@ class OtpSignInFragment : BaseFragment<OtpSignInBinding, OtpSignInViewModel>(), 
             }
         })
 
-        if (helper.isRegistered) {
-            viewDataBinding.etOtpCode.isEnabled = true
-        } else {
-            viewModel.requestOTP(args.registrationHelper.mobile, args.registrationHelper.isTermsAccepted.toString())
-        }
+//        if (helper.isRegistered) {
+//            viewDataBinding.etOtpCode.isEnabled = true
+//        } else {
+//            viewModel.requestOTP(args.registrationHelper.mobile, args.registrationHelper.isTermsAccepted.toString())
+//        }
     }
 
 //    private fun pauseTimer() {

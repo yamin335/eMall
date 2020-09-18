@@ -25,7 +25,7 @@ class HomeFragment : BaseFragment<HomeBinding, HomeViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
         doctorsListAdapter = DoctorsListAdapter(appExecutors) {
-            navController.navigate(HomeFragmentDirections.actionBooksToChapterList(it))
+            //navController.navigate(HomeFragmentDirections.actionBooksToChapterList(it))
         }
         doctorsListAdapter.submitList(viewModel.doctorList)
 

@@ -5,8 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Bitmap
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.hardware.display.DisplayManager
 import android.media.MediaScannerConnection
@@ -48,11 +46,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.qpay.customer.R
 import com.qpay.customer.models.NIDBackModel
-import com.qpay.customer.models.NIDDataModels
 import com.qpay.customer.models.NIDFrontModel
 import com.qpay.customer.ui.MainActivity
-import com.qpay.customer.util.ANIMATION_FAST_MILLIS
-import com.qpay.customer.util.ANIMATION_SLOW_MILLIS
 import java.io.File
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat

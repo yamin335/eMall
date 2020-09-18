@@ -252,7 +252,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : ViewModel> : DaggerFragment
         /*if (navController().currentDestination?.id != R.id.other_page_success_dialog)
             try {
                 val bundleArgs = bundleOf("message" to (msg
-                        ?: "${(activity as? MainActivity)?.supportActionBar?.title
+                        ?: "${(activity as? MainActivity1)?.supportActionBar?.title
                                 ?: "Transaction"} is Successful!"), "callback" to callback)
                 navigateTo(R.id.other_page_success_dialog, bundleArgs)
             } catch (e: java.lang.Exception) {
@@ -266,7 +266,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : ViewModel> : DaggerFragment
 
     protected fun showFailed(msg: String? = null, tryCallback: (() -> Unit)? = null) {
         /*val message = if (NetworkUtils.isNetworkConnected(requireContext()))
-            msg ?: "${(activity as? MainActivity)?.supportActionBar?.title
+            msg ?: "${(activity as? MainActivity1)?.supportActionBar?.title
                     ?: "Transaction"} failed!"
         else {
             getString(R.string.no_internet_error)

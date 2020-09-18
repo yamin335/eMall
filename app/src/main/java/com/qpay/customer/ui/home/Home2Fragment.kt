@@ -1,30 +1,17 @@
 package com.qpay.customer.ui.home
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.view.WindowManager
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.navOptions
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.tabs.TabLayout
-import com.google.gson.Gson
 import com.qpay.customer.BR
 import com.qpay.customer.R
 import com.qpay.customer.databinding.Home2Binding
-import com.qpay.customer.databinding.LayoutAddPaymentMethodBinding
-import com.qpay.customer.models.Bank
-import com.qpay.customer.models.registration.DefaultResponse
-import com.qpay.customer.models.topup.TopUpHelper
+import com.qpay.customer.ui.LoginHandlerCallback
+import com.qpay.customer.ui.LogoutHandlerCallback
 import com.qpay.customer.ui.common.BaseFragment
 import com.qpay.customer.ui.login.SliderView
-import com.qpay.customer.ui.pin_number.PinNumberFragmentDirections
-import com.qpay.customer.util.showWarningToast
-import org.json.JSONObject
 
 class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
     override val bindingVariable: Int
@@ -35,8 +22,23 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
         viewModelFactory
     }
 
-
     lateinit var paymentListAdapter: PaymentMethodListAdapter
+
+    private var listener: LogoutHandlerCallback? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is LogoutHandlerCallback) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement LoginHandlerCallback")
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +73,14 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
             slide.sliderTextDescription = slideData.descText
             slide.sliderImage(slideData.slideImage)
             viewDataBinding.sliderLayout.addSlider(slide)
+        }
+
+        viewDataBinding.item1.setOnClickListener {
+            navController.navigate(Home2FragmentDirections.actionHome2FragmentToChapterListFragment())
+        }
+
+        viewDataBinding.item6.setOnClickListener {
+            navController.navigate(Home2FragmentDirections.actionHome2FragmentToMoreBookListFragment())
         }
 //
 //        Log.e("res", preferencesHelper.getAccessTokenHeader())

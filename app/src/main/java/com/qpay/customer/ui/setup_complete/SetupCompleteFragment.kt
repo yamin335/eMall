@@ -20,7 +20,6 @@ class SetupCompleteFragment  : BaseFragment<SetupCompleteBinding, SetupCompleteV
         super.onViewCreated(view, savedInstanceState)
 
         viewDataBinding.btnContinue.setOnClickListener {
-            navController.navigate(SetupCompleteFragmentDirections.actionSetupCompleteToHome())
         }
     }
 

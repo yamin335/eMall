@@ -10,19 +10,18 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.system.Os.open
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.WindowManager
+import androidx.activity.addCallback
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.qpay.customer.BR
 import com.qpay.customer.R
 import com.qpay.customer.databinding.ProfileSignInBinding
-import com.qpay.customer.ui.MainActivity
-import com.qpay.customer.ui.NavigationHost
+import com.qpay.customer.ui.LoginHandlerCallback
 import com.qpay.customer.ui.common.BaseFragment
 import com.qpay.customer.util.*
 import com.qpay.customer.util.AppConstants.commonErrorMessage
@@ -31,7 +30,6 @@ import timber.log.Timber
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
-import java.nio.channels.AsynchronousServerSocketChannel.open
 import java.util.*
 
 private const val REQUEST_TAKE_PHOTO_NID_FRONT = 1
@@ -49,13 +47,33 @@ class ProfileSignInFragment : BaseFragment<ProfileSignInBinding, ProfileSignInVi
     var rivNidFrontCaptureImage: String = ""
     var rivNidBackCaptureImage: String = ""
 
-    val args: ProfileSignInFragmentArgs by navArgs()
+//    val args: ProfileSignInFragmentArgs by navArgs()
+
+    private var listener: LoginHandlerCallback? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is LoginHandlerCallback) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement LoginHandlerCallback")
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mActivity.window?.setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
         )
+
+//        requireActivity().onBackPressedDispatcher.addCallback(this, true) {
+//            val tt = 0
+//        }
     }
 
 //    override fun onDestroy() {
@@ -83,52 +101,54 @@ class ProfileSignInFragment : BaseFragment<ProfileSignInBinding, ProfileSignInVi
 
         })
 
-        val nidFrontData = args.NIDData.frontData
-        val nidBackData = args.NIDData.backData
+//        val nidFrontData = args.NIDData.frontData
+//        val nidBackData = args.NIDData.backData
 
-        viewDataBinding.nameField.setText(nidFrontData.name)
-        viewDataBinding.birthDayField.setText(nidFrontData.birthDate)
-        viewDataBinding.nidField.setText(nidFrontData.nidNo)
-        viewDataBinding.addressField.setText(nidBackData.birthPlace)
+//        viewDataBinding.nameField.setText(nidFrontData.name)
+//        viewDataBinding.birthDayField.setText(nidFrontData.birthDate)
+//        viewDataBinding.nidField.setText(nidFrontData.nidNo)
+//        viewDataBinding.addressField.setText(nidBackData.birthPlace)
 
         viewDataBinding.btnSubmit.setOnClickListener {
-            print("Model: ${Build.MODEL} -- ID: ${Build.ID} -- Manufacturer: ${Build.MANUFACTURER}")
-            val helper = args.registrationHelper
-            val name = viewDataBinding.nameField.text.toString()
-
-            // For test only
-            val inputStream: InputStream = mContext.assets.open("grace_hopper.jpg")
-            val bitmap: Bitmap = BitmapFactory.decodeStream(inputStream)
-            val userImage = BitmapUtilss.fileFromBitmap(bitmap, mContext).asFilePart("UserImage")
-            viewModel.registerNewUser(helper.mobile, helper.otp,
-                helper.pinNumber, name, helper.operator, Build.ID,
-                Build.MANUFACTURER, Build.MODEL, nidFrontData.nidNo, null, null, userImage)
-                .observe(viewLifecycleOwner, androidx.lifecycle.Observer {response ->
-
-                response?.let {
-                    when {
-                        it.isSuccess == true -> {
-                            preferencesHelper.isRegistered = true
-                            preferencesHelper.isTermsAccepted = true
-                            preferencesHelper.pinNumber = helper.pinNumber
-                            preferencesHelper.mobileNo = helper.mobile
-                            preferencesHelper.operator = helper.operator
-                            preferencesHelper.deviceId = Build.ID
-                            preferencesHelper.deviceName = Build.MANUFACTURER
-                            preferencesHelper.deviceModel = Build.MODEL
-
-                            showSuccessToast(mContext, registrationSuccessMessage)
-                            navController.navigate(ProfileSignInFragmentDirections.actionProfileSignInFragmentToSignInFragment())
-                        }
-                        it.isSuccess == false && it.errorMessage != null -> {
-                            showWarningToast(mContext, it.errorMessage)
-                        }
-                        else -> {
-                            showWarningToast(mContext, commonErrorMessage)
-                        }
-                    }
-                }
-            })
+            preferencesHelper.isLoggedIn = true
+            listener?.onLoggedIn()
+//            print("Model: ${Build.MODEL} -- ID: ${Build.ID} -- Manufacturer: ${Build.MANUFACTURER}")
+//            val helper = args.registrationHelper
+//            val name = viewDataBinding.nameField.text.toString()
+//
+//            // For test only
+//            val inputStream: InputStream = mContext.assets.open("grace_hopper.jpg")
+//            val bitmap: Bitmap = BitmapFactory.decodeStream(inputStream)
+//            val userImage = BitmapUtilss.fileFromBitmap(bitmap, mContext).asFilePart("UserImage")
+//            viewModel.registerNewUser(helper.mobile, helper.otp,
+//                helper.pinNumber, name, helper.operator, Build.ID,
+//                Build.MANUFACTURER, Build.MODEL, nidFrontData.nidNo, null, null, userImage)
+//                .observe(viewLifecycleOwner, androidx.lifecycle.Observer {response ->
+//
+//                response?.let {
+//                    when {
+//                        it.isSuccess == true -> {
+//                            preferencesHelper.isRegistered = true
+//                            preferencesHelper.isTermsAccepted = true
+//                            preferencesHelper.pinNumber = helper.pinNumber
+//                            preferencesHelper.mobileNo = helper.mobile
+//                            preferencesHelper.operator = helper.operator
+//                            preferencesHelper.deviceId = Build.ID
+//                            preferencesHelper.deviceName = Build.MANUFACTURER
+//                            preferencesHelper.deviceModel = Build.MODEL
+//
+//                            showSuccessToast(mContext, registrationSuccessMessage)
+//                            navController.navigate(ProfileSignInFragmentDirections.actionProfileSignInFragmentToSignInFragment())
+//                        }
+//                        it.isSuccess == false && it.errorMessage != null -> {
+//                            showWarningToast(mContext, it.errorMessage)
+//                        }
+//                        else -> {
+//                            showWarningToast(mContext, commonErrorMessage)
+//                        }
+//                    }
+//                }
+//            })
         }
         viewDataBinding.rivNidFrontImage.setOnClickListener {
             //dispatchTakePictureIntent("rivNidFrontImage")

@@ -5,8 +5,7 @@ import com.qpay.customer.ui.add_payment_methods.AddBankFragment
 import com.qpay.customer.ui.add_payment_methods.AddCardFragment
 import com.qpay.customer.ui.add_payment_methods.AddPaymentMethodsFragment
 import com.qpay.customer.ui.chapter_list.ChapterListFragment
-import com.qpay.customer.ui.home.Home2Fragment
-import com.qpay.customer.ui.home.HomeFragment
+import com.qpay.customer.ui.home.*
 import com.qpay.customer.ui.how_works.HowWorksFragment
 import com.qpay.customer.ui.login.SignInFragment
 import com.qpay.customer.ui.terms_and_conditions.TermsAndConditionsFragment
@@ -22,6 +21,7 @@ import com.qpay.customer.ui.splash.SplashFragment
 import com.qpay.customer.ui.video_play.LoadWebViewFragment
 import com.qpay.customer.ui.video_play.VideoPlayFragment
 import com.qpay.customer.ui.login.ViewPagerFragment
+import com.qpay.customer.ui.more.MoreFragment
 import com.qpay.customer.ui.otp_signin.OtpSignInFragment
 import com.qpay.customer.ui.pin_number.PinNumberFragment
 import com.qpay.customer.ui.profile_signin.ProfileSignInFragment
@@ -42,6 +42,9 @@ abstract class FragmentBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributeTermsAndConditionsFragment(): TermsAndConditionsFragment
 
+    @ContributesAndroidInjector
+    abstract fun contributeMoreBookListFragment(): MoreBookListFragment
+
 
     @ContributesAndroidInjector
     abstract fun contributeSignInFragment(): SignInFragment
@@ -54,6 +57,18 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeHomeFragment(): HomeFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMoreFragment(): MoreFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeSetAFragment(): SetAFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeSetBFragment(): SetBFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeSetCFragment(): SetCFragment
 
     @ContributesAndroidInjector
     abstract fun contributeHome2Fragment(): Home2Fragment

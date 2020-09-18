@@ -37,8 +37,7 @@ class AppPreferencesHelper @Inject constructor(
     override var deviceId by StringPreference(prefs, KEY_DEVICE_ID, defaultValue = null, commit = true)
     override var deviceName by StringPreference(prefs, KEY_DEVICE_NAME, defaultValue = null, commit = true)
     override var deviceModel by StringPreference(prefs, KEY_DEVICE_MODEL, defaultValue = null, commit = true)
-
-    override var isLoggedIn by BooleanPreference(prefs, PREF_KEY_IS_LOGGED_IN, false)
+    override var isLoggedIn by BooleanPreference(prefs, KEY_IS_LOGGED_IN, defaultValue = false, commit = true)
 
     override var accessToken by StringPreference(prefs, PREF_KEY_ACCESS_TOKEN, null, true)
 
@@ -54,7 +53,7 @@ class AppPreferencesHelper @Inject constructor(
 
     override fun logoutUser() {
         prefs.value.edit {
-            remove(PREF_KEY_IS_LOGGED_IN)
+            remove(KEY_IS_LOGGED_IN)
             remove(PREF_KEY_ACCESS_TOKEN)
             remove(PREF_KEY_ACCESS_TOKEN_EXPIRES_IN)
             remove(PREF_KEY_REFRESH_TOKEN)
@@ -155,13 +154,13 @@ class AppPreferencesHelper @Inject constructor(
         private const val KEY_DEVICE_ID = "DeviceId"
         private const val KEY_DEVICE_NAME = "DeviceName"
         private const val KEY_DEVICE_MODEL = "DeviceModel"
+        private const val KEY_IS_LOGGED_IN = "LoginStatus"
 
         private const val PREF_KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN"
 
         private const val PREF_KEY_ACCESS_TOKEN_EXPIRES_IN = "PREF_KEY_ACCESS_TOKEN_EXPIRES_IN"
 
         private const val PREF_KEY_REFRESH_TOKEN = "PREF_KEY_REFRESH_TOKEN"
-        private const val PREF_KEY_IS_LOGGED_IN = "PREF_KEY_IS_LOGGED_IN"
 
         private const val KEY_USER_ROLE = "USER_ROLE"
         private const val KEY_PHONE_NUMBER = "PHONE_NUMBER"

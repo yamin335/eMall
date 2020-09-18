@@ -1,288 +1,148 @@
 package com.qpay.customer.ui
 
-import android.annotation.SuppressLint
-import android.content.*
-import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkRequest
-import android.os.Build
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import androidx.annotation.RequiresApi
+import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.common.GoogleApiAvailability
-import com.google.android.gms.security.ProviderInstaller
-import com.google.android.play.core.appupdate.AppUpdateManager
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.UpdateAvailability
-import com.qpay.customer.BuildConfig
+import com.google.android.material.appbar.MaterialToolbar
 import com.qpay.customer.R
-import com.qpay.customer.SyncOnConnectivityReceiver
 import com.qpay.customer.databinding.MainActivityBinding
-import com.qpay.customer.util.CommonUtils
-import com.qpay.customer.util.NetworkUtils
+import com.qpay.customer.util.hideKeyboard
 import dagger.android.support.DaggerAppCompatActivity
-import timber.log.Timber
 import java.io.File
+import javax.inject.Inject
 
-class MainActivity  : DaggerAppCompatActivity(),
-    ProviderInstaller.ProviderInstallListener,
-    NavigationHost {
+interface LoginHandlerCallback {
+    fun onLoggedIn()
+}
+
+interface LogoutHandlerCallback {
+    fun onLoggedOut()
+}
+
+class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavigationHost {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel: MainActivityViewModel by viewModels {
+        // Get the ViewModel.
+        viewModelFactory
+    }
 
     lateinit var binding: MainActivityBinding
 
-    private val navController: NavController
-        get() = findNavController(R.id.container)
-
     private var currentNavController: LiveData<NavController>? = null
 
-    private val connectivityReceiver by lazy {
-        SyncOnConnectivityReceiver()
-    }
+    private var currentNavHostFragment: LiveData<NavHostFragment>? = null
 
-    private val filter = IntentFilter()
-
-    private var retryProviderInstall: Boolean = false
-
-    lateinit var appUpdateManager: AppUpdateManager
-
-    /*fragment ids which doesn't need bottom navigation or drawer*/
-    private val fragmentArrayWithoutBottomNav = intArrayOf(
+    private val fragmentWithoutBottomNav = setOf(
         R.id.splashFragment,
         R.id.viewPagerFragment,
         R.id.signInFragment,
         R.id.termsAndConditions,
         R.id.otpSignInFragment,
         R.id.pinNumberFragment,
-        R.id.profileSignInFragment,
-        R.id.preOnBoardFragment,
-        R.id.howWorksFragment,
-        R.id.registrationFragment,
-        R.id.otpFragment,
-        R.id.touFragment,
-        R.id.setupFragment,
-        R.id.setupCompleteFragment,
-        R.id.chapterListFragment,
-        R.id.videoPlayFragment,
-        R.id.cameraFragment,
-        R.id.NIDScanCameraXFragment
+        R.id.profileSignInFragment
     )
 
-    private val topLevelDestinations = setOf(
-        R.id.homeFragment,
-        R.id.profilesFragment,
-        R.id.settingsFragment
-    )
+    private var navigatedFromDashboard = false
 
-    private val appBarConfiguration: AppBarConfiguration by lazy {
-        AppBarConfiguration(topLevelDestinations)
+    private var loginNavHostFragment: NavHostFragment? =null
+
+    override fun onBackPressed() {
+        onBackPressedDispatcher.onBackPressed()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return currentNavController?.value?.navigateUp() ?: false || super.onSupportNavigateUp()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //EventBus.getDefault().register(this)
-        ProviderInstaller.installIfNeededAsync(this, this)
-        setTheme(R.style.AppTheme)
-        appUpdaterSetUp()
+
         binding = DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
         binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+        binding.showBottomNav = true
 
-
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            CommonUtils.hideKeyboard(this@MainActivity)
-            val hasBottomNav = destination.id !in fragmentArrayWithoutBottomNav
-            binding.showBottomNav = hasBottomNav
-            if (hasBottomNav) {
-                setupBottomNav(destination.id)
-                /*set title explicitly to avoid title error on locale changes*/
-                val label = destination.label
-                if (!label.isNullOrBlank()) title = label
-            }
-            if (destination.id !in fragmentArrayWithoutBottomNav) {
-
-            }
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Timber.d("using registerNetworkCallback")
-            createChangeConnectivityMonitor()
-            filter.addAction(BuildConfig.APPLICATION_ID + ".CONNECTIVITY_CHANGE")
-        } else {
-            Timber.d("using old broadcast receiver")
-            filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION)
-        }
+        // Setup multi-backStack supported bottomNav
+        if (savedInstanceState == null) {
+            setupBottomNavigationBar()
+        } // Else, need to wait for onRestoreInstanceState
     }
 
-
-    private fun setupBottomNav(id: Int) {
-        val bottomNavigationView = binding.bottomNavigationView
-        bottomNavigationView.setupWithNavController(navController)
-        NavigationUI.setupWithNavController(bottomNavigationView, navController)
-
-        // Setting Up ActionBar with Navigation Controller
-        //Prevent Back arrow in action bar of top level destination we can use appbar configuration for back arrow issue
-        //setupActionBarWithNavController method use for change the action bar title when bottom nav item changed
-        // setupActionBarWithNavController(navController,appBarConfiguration)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() ?: false
-    }
-
-    private fun appUpdaterSetUp() {
-        appUpdateManager = AppUpdateManagerFactory.create(this)
-        appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-            // Checks that the platform will allow the specified type of update.
-            if ((appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE)
-                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
-            ) {
-                // Request the update.
-                try {
-                    appUpdateManager.startUpdateFlowForResult(
-                        appUpdateInfo,
-                        AppUpdateType.IMMEDIATE,
-                        this,
-                        REQUEST_APP_UPDATE
-                    )
-                } catch (e: IntentSender.SendIntentException) {
-                    e.printStackTrace()
-                }
-            }
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.N)
-    private fun createChangeConnectivityMonitor() {
-        val intent = Intent(BuildConfig.APPLICATION_ID + ".CONNECTIVITY_CHANGE")
-        val connectivityManager =
-            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        connectivityManager.registerNetworkCallback(
-            NetworkRequest.Builder().build(),
-            object : ConnectivityManager.NetworkCallback() {
-                /**
-                 * @param network
-                 */
-                override fun onAvailable(network: Network) {
-                    Timber.d("On available network")
-                    sendBroadcast(intent)
-                }
-
-                /**
-                 * @param network
-                 */
-                override fun onLost(network: Network) {
-                    Timber.d("On not available network")
-                    sendBroadcast(intent)
-                }
-            })
-
-    }
-
-
-    var isPaused = false
-    override fun onPause() {
-        super.onPause()
-        isPaused = true
-        unregisterReceiver(connectivityReceiver)
-        //unregisterReceiver(callAnsweredBroadCastReceiver)
-    }
-
-    override fun onDestroy() {
-        //EventBus.getDefault().unregister(this)
-        super.onDestroy()
-    }
-
-    @SuppressLint("NewApi")
-    override fun onResume() {
-        super.onResume()
-        isPaused = false
-        if (!NetworkUtils.isNetworkConnected(this@MainActivity)) {
-            //CommonUtils.showErrorSnack(findViewById(R.id.container), R.string.no_internet_error)
-        }
-        registerReceiver(connectivityReceiver, filter)
-        appUpdateManager
-            .appUpdateInfo
-            .addOnSuccessListener { appUpdateInfo ->
-                if (appUpdateInfo.updateAvailability()
-                    == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
-                ) {
-                    // If an in-app update is already running, resume the update.
-                    try {
-                        appUpdateManager.startUpdateFlowForResult(
-                            appUpdateInfo,
-                            AppUpdateType.IMMEDIATE,
-                            this,
-                            REQUEST_APP_UPDATE
-                        )
-                    } catch (e: IntentSender.SendIntentException) {
-                        e.printStackTrace()
-                    }
-                }
-            }
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        // Now that BottomNavigationBar has restored its instance state
+        // and its selectedItemId, we can proceed with setting up the
+        // BottomNavigationBar with Navigation
+        setupBottomNavigationBar()
     }
 
     /**
-     * On resume, check to see if we flagged that we need to reinstall the
-     * provider.
+     * Called on first creation and when restoring state.
      */
-    override fun onPostResume() {
-        super.onPostResume()
-        if (retryProviderInstall) {
-            // We can now safely retry installation.
-            ProviderInstaller.installIfNeededAsync(this, this)
-        }
-        retryProviderInstall = false
-    }
+    private fun setupBottomNavigationBar() {
 
-    /**
-     * This method is called if updating fails; the error code indicates
-     * whether the error is recoverable.
-     */
-    override fun onProviderInstallFailed(errorCode: Int, recoveryIntent: Intent?) {
-        GoogleApiAvailability.getInstance().apply {
-            if (isUserResolvableError(errorCode)) {
-                // Recoverable error. Show a dialog prompting the user to
-                // install/update/enable Google Play services.
-                showErrorDialogFragment(this@MainActivity, errorCode, ERROR_DIALOG_REQUEST_CODE) {
-                    // The user chose not to take the recovery action
-                    onProviderInstallerNotAvailable()
-                }
-            } else {
-                onProviderInstallerNotAvailable()
+        val navGraphIds = listOf(
+            R.navigation.home_nav_graph,
+            R.navigation.pay_nav_graph,
+            R.navigation.transaction_nav_graph,
+            R.navigation.more_nav_graph
+        )
+
+        // Setup the bottom navigation view with a payment_graph of navigation graphs
+        val (controller, navHost) = binding.bottomNav.setupWithNavController(
+            navGraphIds = navGraphIds,
+            fragmentManager = supportFragmentManager,
+            containerId = R.id.nav_host_container,
+            intent = intent
+        )
+
+        // Whenever the selected controller changes, setup the action bar.
+        controller.observe(this, Observer { navController ->
+//            appBarConfiguration = AppBarConfiguration(
+//                navGraph = navController.graph,
+//                drawerLayout = drawer_layout
+//            )
+            // Set up ActionBar
+//            setSupportActionBar(toolbar)
+//            setupActionBarWithNavController(navController)
+
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                hideKeyboard()
+                binding.showBottomNav = destination.id !in fragmentWithoutBottomNav
             }
-        }
+
+//            setupActionBarWithNavController(navController)
+        })
+        currentNavController = controller
+        currentNavHostFragment = navHost
     }
 
-    private fun onProviderInstallerNotAvailable() {
-        // This is reached if the provider cannot be updated for some reason.
-        // App should consider all HTTP com munication to be vulnerable, and take
-        // appropriate action.
+    override fun onLoggedOut() {
+        startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+        overridePendingTransition(R.anim.slide_in_left, R.anim.fade_out)
+        finish()
     }
 
-    /**
-     * This method is only called if the provider is successfully updated
-     * (or is already up-to-date).
-     */
-
-    override fun onProviderInstalled() {
-        // Provider is up-to-date, app can make secure network calls.
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            ERROR_DIALOG_REQUEST_CODE -> // Adding a fragment via GoogleApiAvailability.showErrorDialogFragment
-                // before the instance state is restored throws an error. So instead,
-                // set a flag here, which will cause the fragment to delay until
-                // onPostResume.
-                retryProviderInstall = true
+    override fun registerToolbarWithNavigation(toolbar: Toolbar) {
+        setSupportActionBar(toolbar)
+        currentNavController?.value?.let {
+            setupActionBarWithNavController(it)
         }
     }
 
@@ -300,10 +160,5 @@ class MainActivity  : DaggerAppCompatActivity(),
             return if (mediaDir != null && mediaDir.exists())
                 mediaDir else appContext.filesDir
         }
-    }
-
-    override fun registerToolbarWithNavigation(toolbar: Toolbar) {
-        setSupportActionBar(toolbar)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 }
