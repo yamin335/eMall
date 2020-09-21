@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.qpay.customer.ui.otp_signin.OtpSignInViewModel" />
+            type="com.rtchubs.engineerbooks.ui.otp_signin.OtpSignInViewModel" />
     </data>
 
     <RelativeLayout

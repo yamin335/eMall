@@ -7,7 +7,9 @@
 
     <fragment
         android:id="@+id/payFragment"
-        android:name="com.qpay.customer.PayFragment"
+        android:name="com.rtchubs.engineerbooks.PayFragment"
         android:label="Pay"
         tools:layout="@layout/fragment_pay" />
+
+    <include app:graph="@navigation/drawer_nav_graph" />
 </navigation>

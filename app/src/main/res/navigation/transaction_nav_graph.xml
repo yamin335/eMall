@@ -7,7 +7,9 @@
 
     <fragment
         android:id="@+id/transactionFragment"
-        android:name="com.qpay.customer.TransactionFragment"
+        android:name="com.rtchubs.engineerbooks.TransactionFragment"
         android:label="Transaction"
         tools:layout="@layout/fragment_transaction" />
+
+    <include app:graph="@navigation/drawer_nav_graph" />
 </navigation>

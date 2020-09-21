@@ -3,7 +3,7 @@
     <data>
         <variable
             name="model"
-            type="com.qpay.customer.models.PaymentMethod" />
+            type="com.rtchubs.engineerbooks.models.PaymentMethod" />
     </data>
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"

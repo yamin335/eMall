@@ -1,3 +1,2 @@
-include ':searchablespinner'
 include ':app'
-rootProject.name = "QPay"
+rootProject.name = "Engineer Books"

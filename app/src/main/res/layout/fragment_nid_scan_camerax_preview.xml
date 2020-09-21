@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.qpay.customer.nid_scan.NIDScanCameraXViewModel" />
+            type="com.rtchubs.engineerbooks.nid_scan.NIDScanCameraXViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.qpay.customer.nid_scan.GraphicOverlay
+        <com.rtchubs.engineerbooks.nid_scan.GraphicOverlay
             android:id="@+id/graphic_overlay"
             android:layout_width="0dp"
             android:layout_height="0dp"

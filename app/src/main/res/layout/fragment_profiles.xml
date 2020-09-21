@@ -73,7 +73,7 @@
                             android:textColor="#000000" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.pri.SearchableSpinner
+                    <Spinner
                         android:id="@+id/spGender"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

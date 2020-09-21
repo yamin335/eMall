@@ -7,7 +7,7 @@
     <data class="AddCardFragmentBinding">
         <variable
             name="viewModel"
-            type="com.qpay.customer.ui.add_payment_methods.AddCardViewModel" />
+            type="com.rtchubs.engineerbooks.ui.add_payment_methods.AddCardViewModel" />
     </data>
 
     <LinearLayout

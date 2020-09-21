@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.qpay.customer.ui.profile_signin.ProfileSignInViewModel" />
+            type="com.rtchubs.engineerbooks.ui.profile_signin.ProfileSignInViewModel" />
     </data>
 
     <LinearLayout
@@ -99,7 +99,7 @@
 
                 </LinearLayout>
 
-                <com.pri.SearchableSpinner
+                <Spinner
                     android:id="@+id/spGender"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

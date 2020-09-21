@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.qpay.customer.ui.topup.TopUpBankCardViewModel" />
+            type="com.rtchubs.engineerbooks.ui.topup.TopUpBankCardViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

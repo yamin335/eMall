@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.qpay.customer.ui.topup.TopUpMobileViewModel" />
+            type="com.rtchubs.engineerbooks.ui.topup.TopUpMobileViewModel" />
     </data>
 
 

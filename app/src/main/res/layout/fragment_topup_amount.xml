@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.qpay.customer.ui.topup.TopUpAmountViewModel" />
+            type="com.rtchubs.engineerbooks.ui.topup.TopUpAmountViewModel" />
     </data>
 
     <RelativeLayout

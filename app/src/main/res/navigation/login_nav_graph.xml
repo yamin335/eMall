@@ -9,7 +9,7 @@
     <!--Splash Screen-->
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.qpay.customer.ui.splash.SplashFragment">
+        android:name="com.rtchubs.engineerbooks.ui.splash.SplashFragment">
         <action
             android:id="@+id/action_splash_to_login"
             app:destination="@id/viewPagerFragment"
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/viewPagerFragment"
-        android:name="com.qpay.customer.ui.login.ViewPagerFragment"
+        android:name="com.rtchubs.engineerbooks.ui.login.ViewPagerFragment"
         tools:layout="@layout/fragment_view_pager">
         <action
             android:id="@+id/action_viewPagerFragment_to_signInFragment"
@@ -40,7 +40,7 @@
 
     <fragment
         android:id="@+id/termsAndConditions"
-        android:name="com.qpay.customer.ui.terms_and_conditions.TermsAndConditionsFragment"
+        android:name="com.rtchubs.engineerbooks.ui.terms_and_conditions.TermsAndConditionsFragment"
         tools:layout="@layout/fragment_terms_and_condition">
 
         <action
@@ -49,12 +49,12 @@
 
         <argument
             android:name="registrationHelper"
-            app:argType="com.qpay.customer.models.registration.RegistrationHelperModel" />
+            app:argType="com.rtchubs.engineerbooks.models.registration.RegistrationHelperModel" />
     </fragment>
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.qpay.customer.ui.login.SignInFragment"
+        android:name="com.rtchubs.engineerbooks.ui.login.SignInFragment"
         tools:layout="@layout/fragment_sign_in">
 
         <action
@@ -72,7 +72,7 @@
     </fragment>
     <fragment
         android:id="@+id/otpSignInFragment"
-        android:name="com.qpay.customer.ui.otp_signin.OtpSignInFragment"
+        android:name="com.rtchubs.engineerbooks.ui.otp_signin.OtpSignInFragment"
         tools:layout="@layout/fragment_otp_sign_in">
         <action
             android:id="@+id/action_otpSignInFragment_to_pinNumberFragment"
@@ -85,11 +85,11 @@
             app:popUpToInclusive="false" />
         <argument
             android:name="registrationHelper"
-            app:argType="com.qpay.customer.models.registration.RegistrationHelperModel" />
+            app:argType="com.rtchubs.engineerbooks.models.registration.RegistrationHelperModel" />
     </fragment>
     <fragment
         android:id="@+id/pinNumberFragment"
-        android:name="com.qpay.customer.ui.pin_number.PinNumberFragment"
+        android:name="com.rtchubs.engineerbooks.ui.pin_number.PinNumberFragment"
         tools:layout="@layout/fragment_pin_number">
         <action
             android:id="@+id/action_pinNumberFragment_to_permissionsFragment"
@@ -100,11 +100,11 @@
             app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="registrationHelper"
-            app:argType="com.qpay.customer.models.registration.RegistrationHelperModel" />
+            app:argType="com.rtchubs.engineerbooks.models.registration.RegistrationHelperModel" />
     </fragment>
     <fragment
         android:id="@+id/profileSignInFragment"
-        android:name="com.qpay.customer.ui.profile_signin.ProfileSignInFragment"
+        android:name="com.rtchubs.engineerbooks.ui.profile_signin.ProfileSignInFragment"
         tools:layout="@layout/fragment_profile_sign_in">
         <action
             android:id="@+id/action_profileSignInFragment_to_signInFragment"
@@ -118,14 +118,14 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="NIDData"
-            app:argType="com.qpay.customer.models.NIDDataModels" />
+            app:argType="com.rtchubs.engineerbooks.models.NIDDataModels" />
         <argument
             android:name="registrationHelper"
-            app:argType="com.qpay.customer.models.registration.RegistrationHelperModel" />
+            app:argType="com.rtchubs.engineerbooks.models.registration.RegistrationHelperModel" />
     </fragment>
     <fragment
         android:id="@+id/permissionsFragment"
-        android:name="com.qpay.customer.camerax.PermissionsFragment"
+        android:name="com.rtchubs.engineerbooks.camerax.PermissionsFragment"
         android:label="PermissionsFragment">
 
         <action
@@ -138,11 +138,11 @@
             app:popUpTo="@id/pinNumberFragment" />
         <argument
             android:name="registrationHelper"
-            app:argType="com.qpay.customer.models.registration.RegistrationHelperModel" />
+            app:argType="com.rtchubs.engineerbooks.models.registration.RegistrationHelperModel" />
     </fragment>
     <fragment
         android:id="@+id/NIDScanCameraXFragment"
-        android:name="com.qpay.customer.nid_scan.NIDScanCameraXFragment"
+        android:name="com.rtchubs.engineerbooks.nid_scan.NIDScanCameraXFragment"
         android:label="NIDScanCameraXFragment">
         <action
             android:id="@+id/action_NIDScanCameraXFragment_to_profileSignInFragment"
@@ -154,7 +154,7 @@
             app:popUpTo="@id/pinNumberFragment" />
         <argument
             android:name="registrationHelper"
-            app:argType="com.qpay.customer.models.registration.RegistrationHelperModel" />
+            app:argType="com.rtchubs.engineerbooks.models.registration.RegistrationHelperModel" />
     </fragment>
 
 </navigation>
