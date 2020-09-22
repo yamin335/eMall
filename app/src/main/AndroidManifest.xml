@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.rtchubs.engineerbooks">
+    package="com.rtchubs.edokanpat">
     <!-- Enable instant app support -->
     <dist:module dist:instant="true" /> <!-- Declare features -->
     <uses-feature android:name="android.hardware.camera" /> <!-- Declare permissions -->
@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
-        android:name="com.rtchubs.engineerbooks.App"
+        android:name="com.rtchubs.edokanpat.App"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,7 +26,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="m">
-        <activity android:name="com.rtchubs.engineerbooks.ui.LoginActivity"
+        <activity android:name="com.rtchubs.edokanpat.ui.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|adjustPan">
             <intent-filter>
@@ -36,7 +36,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.rtchubs.engineerbooks.ui.MainActivity"
+            android:name="com.rtchubs.edokanpat.ui.MainActivity"
             android:clearTaskOnLaunch="true"
             android:rotationAnimation="seamless"
             android:screenOrientation="portrait"
@@ -83,7 +83,7 @@
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="barcode,face,ocr,ica" />
 
-        <receiver android:name="com.rtchubs.engineerbooks.SyncOnConnectivityReceiver" /> <!-- to disable default workmanager initiation -->
+        <receiver android:name="com.rtchubs.edokanpat.SyncOnConnectivityReceiver" /> <!-- to disable default workmanager initiation -->
         <provider
             android:name="androidx.work.impl.WorkManagerInitializer"
             android:authorities="${applicationId}.workmanager-init"

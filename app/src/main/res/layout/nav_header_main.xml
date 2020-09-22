@@ -3,7 +3,7 @@
 
     <data>
         <variable name="viewModel"
-            type="com.rtchubs.engineerbooks.ui.MainActivityViewModel"/>
+            type="com.rtchubs.edokanpat.ui.MainActivityViewModel"/>
     </data>
 
     <FrameLayout

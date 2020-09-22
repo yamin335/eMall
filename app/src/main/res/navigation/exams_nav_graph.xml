@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/examsFragment"
-        android:name="com.rtchubs.engineerbooks.ui.exams.ExamsFragment"
+        android:name="com.rtchubs.edokanpat.ui.exams.ExamsFragment"
         android:label="ExamsFragment" />
 
 </navigation>

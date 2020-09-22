@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.rtchubs.engineerbooks.ui.topup.TopUpAmountViewModel" />
+            type="com.rtchubs.edokanpat.ui.topup.TopUpAmountViewModel" />
     </data>
 
     <RelativeLayout

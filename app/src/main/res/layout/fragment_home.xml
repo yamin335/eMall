@@ -6,7 +6,7 @@
     <data class="HomeBinding">
         <variable
             name="viewModel"
-            type="com.rtchubs.engineerbooks.ui.home.HomeViewModel" />
+            type="com.rtchubs.edokanpat.ui.home.HomeViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

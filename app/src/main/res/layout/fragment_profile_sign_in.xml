@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.rtchubs.engineerbooks.ui.profile_signin.ProfileSignInViewModel" />
+            type="com.rtchubs.edokanpat.ui.profile_signin.ProfileSignInViewModel" />
     </data>
 
     <LinearLayout

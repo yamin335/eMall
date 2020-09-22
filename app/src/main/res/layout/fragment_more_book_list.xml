@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.rtchubs.engineerbooks.ui.home.MoreBookListViewModel" />
+            type="com.rtchubs.edokanpat.ui.home.MoreBookListViewModel" />
     </data>
 
 

@@ -7,7 +7,7 @@
     <data class="AddBankFragmentBinding">
         <variable
             name="viewModel"
-            type="com.rtchubs.engineerbooks.ui.add_payment_methods.AddBankViewModel" />
+            type="com.rtchubs.edokanpat.ui.add_payment_methods.AddBankViewModel" />
     </data>
 
     <LinearLayout

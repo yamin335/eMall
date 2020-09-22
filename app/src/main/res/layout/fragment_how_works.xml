@@ -5,7 +5,7 @@
     <data class="HowWorksBinding">
         <variable
             name="viewModel"
-            type="com.rtchubs.engineerbooks.ui.how_works.HowWorksViewModel" />
+            type="com.rtchubs.edokanpat.ui.how_works.HowWorksViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

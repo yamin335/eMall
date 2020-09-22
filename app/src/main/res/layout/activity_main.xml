@@ -5,7 +5,7 @@
 
     <data class="MainActivityBinding">
         <variable name="viewModel"
-            type="com.rtchubs.engineerbooks.ui.MainActivityViewModel"/>
+            type="com.rtchubs.edokanpat.ui.MainActivityViewModel"/>
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

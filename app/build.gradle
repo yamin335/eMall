@@ -20,7 +20,7 @@ android {
     compileSdkVersion build_versions.target_sdk
 
     defaultConfig {
-        applicationId "com.rtchubs.engineerbooks"
+        applicationId "com.rtchubs.edokanpat"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1

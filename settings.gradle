@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "Engineer Books"
+rootProject.name = "eDokanPat"
