@@ -45,21 +45,37 @@
                 android:layout_height="1dp"
                 android:background="?attr/actionBarDivider"/>
 
-            <com.daimajia.slider.library.SliderLayout
-                android:id="@+id/sliderLayout"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                app:indicator_visibility="visible"
-                app:auto_cycle="false"
-                app:pager_animation="Default" />
+                android:layout_height="wrap_content">
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:id="@+id/loader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-7dp"
+                    android:layout_alignParentTop="true"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/themeColor"
+                    app:showLoader="@{viewModel.apiCallStatus}"/>
+
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/sliderLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:indicator_visibility="visible"
+                    app:auto_cycle="false"
+                    app:pager_animation="Default" />
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Subjects"
+                android:text="Top Malls"
                 android:textColor="@color/gray"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"/>
@@ -92,21 +108,20 @@
                         android:layout_margin="8dp"
                         android:background="@drawable/spinner_background"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/payNow"
+                        app:layout_constraintEnd_toStartOf="@+id/item2"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:id="@+id/temp1"
+                            android:id="@+id/logo1"
                             android:layout_width="0dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0"
-                            app:srcCompat="@drawable/engineers" />
+                            app:layout_constraintVertical_bias="0.0" />
 
                         <TextView
                             android:id="@+id/label1"
@@ -117,17 +132,19 @@
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
                             android:textSize="13sp"
-                            android:text="Bangla"
+                            android:gravity="center"
+                            android:maxLines="2"
+                            android:ellipsize="end"
                             android:textColor="@color/gray"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/temp1" />
+                            app:layout_constraintTop_toBottomOf="@+id/logo1" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/payNow"
+                        android:id="@+id/item2"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:clickable="true"
@@ -141,15 +158,14 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:id="@+id/temp2"
+                            android:id="@+id/logo2"
                             android:layout_width="0dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0"
-                            app:srcCompat="@drawable/engineers" />
+                            app:layout_constraintVertical_bias="0.0" />
 
                         <TextView
                             android:id="@+id/label2"
@@ -159,13 +175,15 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="Bangladesh &amp; Global Studies"
+                            android:gravity="center"
                             android:textColor="@color/gray"
                             android:textSize="13sp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/temp2" />
+                            app:layout_constraintTop_toBottomOf="@+id/logo2" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -180,19 +198,18 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/payNow"
+                        app:layout_constraintStart_toEndOf="@+id/item2"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:id="@+id/temp3"
+                            android:id="@+id/logo3"
                             android:layout_width="0dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0"
-                            app:srcCompat="@drawable/engineers" />
+                            app:layout_constraintVertical_bias="0.0"/>
 
                         <TextView
                             android:id="@+id/label3"
@@ -202,13 +219,15 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="Biology"
+                            android:gravity="center"
                             android:textColor="@color/gray"
                             android:textSize="13sp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/temp3" />
+                            app:layout_constraintTop_toBottomOf="@+id/logo3" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -228,7 +247,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/packages"
+                        android:id="@+id/item4"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:clickable="true"
@@ -236,21 +255,20 @@
                         android:layout_margin="8dp"
                         android:background="@drawable/spinner_background"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/openTicket"
+                        app:layout_constraintEnd_toStartOf="@+id/item5"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:id="@+id/temp4"
+                            android:id="@+id/logo4"
                             android:layout_width="0dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0"
-                            app:srcCompat="@drawable/engineers" />
+                            app:layout_constraintVertical_bias="0.0" />
 
                         <TextView
                             android:id="@+id/label4"
@@ -260,18 +278,20 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="Chemistry"
+                            android:gravity="center"
                             android:textColor="@color/gray"
                             android:textSize="13sp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/temp4" />
+                            app:layout_constraintTop_toBottomOf="@+id/logo4" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/openTicket"
+                        android:id="@+id/item5"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:clickable="true"
@@ -281,19 +301,18 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/item6"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/packages"
+                        app:layout_constraintStart_toEndOf="@+id/item4"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:id="@+id/temp5"
+                            android:id="@+id/logo5"
                             android:layout_width="0dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0"
-                            app:srcCompat="@drawable/engineers" />
+                            app:layout_constraintVertical_bias="0.0" />
 
                         <TextView
                             android:id="@+id/label5"
@@ -303,13 +322,15 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="English"
+                            android:gravity="center"
                             android:textColor="@color/gray"
                             android:textSize="13sp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/temp5" />
+                            app:layout_constraintTop_toBottomOf="@+id/logo5" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -324,11 +345,11 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/openTicket"
+                        app:layout_constraintStart_toEndOf="@+id/item5"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:id="@+id/temp6"
+                            android:id="@+id/logo6"
                             android:layout_width="0dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -336,7 +357,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.0"
-                            app:srcCompat="@drawable/engineers" />
+                            app:srcCompat="@drawable/more_shopping_malls" />
 
                         <TextView
                             android:id="@+id/label6"
@@ -347,12 +368,13 @@
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
                             android:text="More"
+                            android:gravity="center"
                             android:textColor="@color/gray"
                             android:textSize="13sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/temp6" />
+                            app:layout_constraintTop_toBottomOf="@+id/logo6" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

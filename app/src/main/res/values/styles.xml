@@ -21,6 +21,15 @@
 
     </style>
 
+    <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
     <!-- ToggleGroupButton material button -->
     <style name="Widget.App.Button.ToggleGroupButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="iconPadding">0dp</item>
@@ -138,7 +147,7 @@
 
     <style name="SplashBaseTheme" parent="AppTheme" />
 
-    <style name="SplashTheme" parent="@style/SplashBaseTheme">
+    <style name="MainTheme" parent="@style/SplashBaseTheme">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowAnimationStyle">@null</item>

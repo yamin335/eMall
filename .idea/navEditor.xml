@@ -577,6 +577,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="allShopListFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="613" />
+                            <option name="y" value="835" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="chapterListFragment">
                     <value>
                       <LayoutPositions>
@@ -631,12 +643,22 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_home2Fragment_to_allShopListFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_home2Fragment_to_chapterListFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_home2Fragment_to_moreBookListFragment">
+                            <entry key="action_home2Fragment_to_exams_nav_graph">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_home2Fragment_to_moreShoppingMallFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -663,14 +685,23 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="moreBookListFragment">
+                  <entry key="moreShoppingMallFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="811" />
-                            <option name="y" value="491" />
+                            <option name="x" value="877" />
+                            <option name="y" value="510" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_moreShoppingMallFragment_to_allShopListFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

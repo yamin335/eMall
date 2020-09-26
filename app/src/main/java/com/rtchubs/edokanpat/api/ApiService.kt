@@ -2,6 +2,9 @@ package com.rtchubs.edokanpat.api
 
 import com.google.gson.JsonObject
 import com.rtchubs.edokanpat.api.Api.ContentType
+import com.rtchubs.edokanpat.models.AllMerchantResponse
+import com.rtchubs.edokanpat.models.AllProductResponse
+import com.rtchubs.edokanpat.models.AllShoppingMallResponse
 import com.rtchubs.edokanpat.models.common.MyAccountListResponse
 import com.rtchubs.edokanpat.models.payment_account_models.AddCardOrBankResponse
 import com.rtchubs.edokanpat.models.payment_account_models.BankOrCardListResponse
@@ -86,5 +89,18 @@ interface ApiService {
     suspend fun myAccountList(
         @Header("Authorization") token: String
     ): Response<MyAccountListResponse>
+
+
+    // eDokanPat
+    @GET(ApiEndPoint.ALL_MALL)
+    suspend fun getAllMalls(): Response<AllShoppingMallResponse>
+
+    @GET(ApiEndPoint.ALL_MERCHANTS)
+    suspend fun getAllMerchants(): Response<AllMerchantResponse>
+
+    @GET(ApiEndPoint.MERCHANT_PRODUCTS)
+    suspend fun getAllProducts(
+        @Path("id") type: String
+    ): Response<AllProductResponse>
 
 }

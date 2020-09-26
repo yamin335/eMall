@@ -32,16 +32,24 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+
         <action
-            android:id="@+id/action_home2Fragment_to_moreBookListFragment"
-            app:destination="@id/moreBookListFragment"
+            android:id="@+id/action_home2Fragment_to_exams_nav_graph"
+            app:destination="@id/exams_nav_graph"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_home2Fragment_to_exams_nav_graph"
-            app:destination="@id/exams_nav_graph"
+            android:id="@+id/action_home2Fragment_to_moreShoppingMallFragment"
+            app:destination="@id/moreShoppingMallFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_home2Fragment_to_allShopListFragment"
+            app:destination="@id/allShopListFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -216,9 +224,25 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
-    <fragment
-        android:id="@+id/moreBookListFragment"
-        android:name="com.rtchubs.edokanpat.ui.home.MoreBookListFragment"
-        android:label="Book List" />
     <include app:graph="@navigation/exams_nav_graph" />
+    <fragment
+        android:id="@+id/moreShoppingMallFragment"
+        android:name="com.rtchubs.edokanpat.ui.home.MoreShoppingMallFragment"
+        android:label="Shopping Malls" >
+        <action
+            android:id="@+id/action_moreShoppingMallFragment_to_allShopListFragment"
+            app:destination="@id/allShopListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/allShopListFragment"
+        android:name="com.rtchubs.edokanpat.ui.home.AllShopListFragment"
+        android:label="Shops" >
+        <argument
+            android:name="shoppingMall"
+            app:argType="com.rtchubs.edokanpat.models.ShoppingMall" />
+    </fragment>
 </navigation>

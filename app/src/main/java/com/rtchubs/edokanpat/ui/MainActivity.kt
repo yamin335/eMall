@@ -53,7 +53,6 @@ class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavDrawer
     private var currentNavHostFragment: LiveData<NavHostFragment>? = null
 
     private val fragmentWithoutBottomNav = setOf(
-        R.id.splashFragment,
         R.id.viewPagerFragment,
         R.id.signInFragment,
         R.id.termsAndConditions,

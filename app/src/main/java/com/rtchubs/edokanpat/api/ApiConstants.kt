@@ -1,6 +1,7 @@
 package com.rtchubs.edokanpat.api
 
 import com.rtchubs.edokanpat.api.Api.API_VERSION
+import com.rtchubs.edokanpat.api.Api.DIRECTORY
 import com.rtchubs.edokanpat.api.Api.DIRECTORY_ACCOUNT
 import com.rtchubs.edokanpat.api.Api.DIRECTORY_BANK
 import com.rtchubs.edokanpat.api.Api.DIRECTORY_BANK_INFO
@@ -10,10 +11,11 @@ import com.rtchubs.edokanpat.api.Api.DIRECTORY_PROFILE
 import com.rtchubs.edokanpat.api.Api.REPO
 
 object Api {
-    const val PROTOCOL = "http"
-    const val API_ROOT = "210.4.67.205:6107"
+    const val PROTOCOL = "https"
+    const val API_ROOT = "rtchubs.dev"
     const val API_ROOT_URL = "$PROTOCOL://$API_ROOT"
-    const val REPO = "api"
+    const val REPO = "edokanpat"
+    const val DIRECTORY = "api"
     const val API_VERSION = "v1"
     const val DIRECTORY_ACCOUNT = "account"
     const val DIRECTORY_CONNECT = "connect"
@@ -34,6 +36,11 @@ object ApiEndPoint {
     const val ADD_BANK = "/$REPO/$API_VERSION/${DIRECTORY_BANK}"
     const val ADD_CARD = "/$REPO/$API_VERSION/${DIRECTORY_CARD}"
     const val MY_ACCOUNT_LIST = "/$REPO/$API_VERSION/${DIRECTORY_PROFILE}/accounts"
+
+    // eDokanPat
+    const val ALL_MALL = "/$REPO/$DIRECTORY/$DIRECTORY/shopping-malls"
+    const val ALL_MERCHANTS = "/$REPO/$DIRECTORY/$DIRECTORY/all-merchants"
+    const val MERCHANT_PRODUCTS = "/$REPO/$DIRECTORY/$DIRECTORY/products-by-merchant/{id}"
 }
 
 object ResponseCodes {

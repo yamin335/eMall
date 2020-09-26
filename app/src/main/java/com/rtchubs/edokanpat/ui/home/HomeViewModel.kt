@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.api.*
+import com.rtchubs.edokanpat.models.AllShoppingMallResponse
 import com.rtchubs.edokanpat.models.Book
 import com.rtchubs.edokanpat.models.PaymentMethod
 import com.rtchubs.edokanpat.models.SubBook
@@ -24,6 +25,11 @@ class HomeViewModel @Inject constructor(
     private val application: Application,
     private val repository: HomeRepository
 ) : BaseViewModel(application) {
+    // eDokanPat
+    val allShoppingMallResponse: MutableLiveData<AllShoppingMallResponse> by lazy {
+        MutableLiveData<AllShoppingMallResponse>()
+    }
+
     val defaultResponse: MutableLiveData<DefaultResponse> = MutableLiveData()
     val doctorList: List<Book>
         get() = listOf(
@@ -130,11 +136,11 @@ class HomeViewModel @Inject constructor(
 
 
     val slideDataList = listOf<SlideData>(
-        SlideData(R.drawable.slider_image_1, "Ads1", "Easy, Fast and Secure Way"),
-        SlideData(R.drawable.slider_image_1, "Ads2", "Easy, Fast and Secure Way"),
-        SlideData(R.drawable.slider_image_1, "Ads3", "Easy, Fast and Secure Way"),
-        SlideData(R.drawable.slider_image_1, "Ads4", "Easy, Fast and Secure Way"),
-        SlideData(R.drawable.slider_image_1, "Ads5", "Easy, Fast and Secure Way")
+        SlideData(R.drawable.slider_image_1, "Ads1", "Now Easy and Fast Shopping"),
+        SlideData(R.drawable.slider_image_1, "Ads2", "Now Easy and Fast Shopping"),
+        SlideData(R.drawable.slider_image_1, "Ads3", "Now Easy and Fast Shopping"),
+        SlideData(R.drawable.slider_image_1, "Ads4", "Now Easy and Fast Shopping"),
+        SlideData(R.drawable.slider_image_1, "Ads5", "Now Easy and Fast Shopping")
     )
 
     inner class SlideData(
@@ -173,6 +179,33 @@ class HomeViewModel @Inject constructor(
                                 DefaultResponse::class.java
                             )
                         )
+                        apiCallStatus.postValue(ApiCallStatus.ERROR)
+                    }
+                }
+            }
+        }
+    }
+
+    // eDokanPat
+    fun getAllShoppingMallList() {
+        if (checkNetworkStatus()) {
+            val handler = CoroutineExceptionHandler { _, exception ->
+                exception.printStackTrace()
+                apiCallStatus.postValue(ApiCallStatus.ERROR)
+                toastError.postValue(AppConstants.serverConnectionErrorMessage)
+            }
+
+            apiCallStatus.postValue(ApiCallStatus.LOADING)
+            viewModelScope.launch(handler) {
+                when (val apiResponse = ApiResponse.create(repository.getAllMallsRepo())) {
+                    is ApiSuccessResponse -> {
+                        apiCallStatus.postValue(ApiCallStatus.SUCCESS)
+                        allShoppingMallResponse.postValue(apiResponse.body)
+                    }
+                    is ApiEmptyResponse -> {
+                        apiCallStatus.postValue(ApiCallStatus.EMPTY)
+                    }
+                    is ApiErrorResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.ERROR)
                     }
                 }

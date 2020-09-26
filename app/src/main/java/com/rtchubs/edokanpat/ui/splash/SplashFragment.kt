@@ -48,7 +48,7 @@ class SplashFragment : BaseFragment<SplashBinding, SplashViewModel>() {
         super.onCreate(savedInstanceState)
 
         if (fromLogout) {
-            findNavController().navigate(SplashFragmentDirections.actionSplashToLogin())
+            //findNavController().navigate(SplashFragmentDirections.actionSplashToLogin())
         }
     }
 
@@ -76,7 +76,7 @@ class SplashFragment : BaseFragment<SplashBinding, SplashViewModel>() {
                     if (preferencesHelper.isLoggedIn) {
                         listener?.onLoggedIn()
                     } else {
-                        findNavController().navigate(SplashFragmentDirections.actionSplashToLogin())
+                        //findNavController().navigate(SplashFragmentDirections.actionSplashToLogin())
                     }
                 }
             }

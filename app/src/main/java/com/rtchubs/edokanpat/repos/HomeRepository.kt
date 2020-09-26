@@ -2,6 +2,9 @@ package com.rtchubs.edokanpat.repos
 
 import com.google.gson.JsonObject
 import com.rtchubs.edokanpat.api.ApiService
+import com.rtchubs.edokanpat.models.AllMerchantResponse
+import com.rtchubs.edokanpat.models.AllProductResponse
+import com.rtchubs.edokanpat.models.AllShoppingMallResponse
 import com.rtchubs.edokanpat.models.payment_account_models.AddCardOrBankResponse
 import com.rtchubs.edokanpat.models.payment_account_models.BankOrCardListResponse
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +43,25 @@ class HomeRepository @Inject constructor(private val apiService: ApiService) {
 
         return withContext(Dispatchers.IO) {
             apiService.addCardAccount(jsonObjectBody, token)
+        }
+    }
+
+    // eDokanPat
+    suspend fun getAllMallsRepo(): Response<AllShoppingMallResponse> {
+        return withContext(Dispatchers.IO) {
+            apiService.getAllMalls()
+        }
+    }
+
+    suspend fun getAllMerchantsRepo(): Response<AllMerchantResponse> {
+        return withContext(Dispatchers.IO) {
+            apiService.getAllMerchants()
+        }
+    }
+
+    suspend fun getAllProductsRepo(id: String): Response<AllProductResponse> {
+        return withContext(Dispatchers.IO) {
+            apiService.getAllProducts(id)
         }
     }
 }

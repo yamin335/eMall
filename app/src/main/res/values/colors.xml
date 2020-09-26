@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    // eDokanPat
+    <color name="color1">#6E757C</color>
+
     // QPay App Colors
     <color name="themeColor">#1E4356</color>
     <color name="themeColorLight">#234e66</color>

@@ -48,6 +48,12 @@ abstract class FragmentBuildersModule {
     abstract fun contributeMoreBookListFragment(): MoreBookListFragment
 
     @ContributesAndroidInjector
+    abstract fun contributeMoreShoppingMallFragment(): MoreShoppingMallFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAllShopListFragment(): AllShopListFragment
+
+    @ContributesAndroidInjector
     abstract fun contributeSignInFragment(): SignInFragment
 
     @ContributesAndroidInjector

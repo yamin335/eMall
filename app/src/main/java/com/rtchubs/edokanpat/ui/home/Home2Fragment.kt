@@ -1,13 +1,21 @@
 package com.rtchubs.edokanpat.ui.home
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.Home2Binding
+import com.rtchubs.edokanpat.models.ShoppingMall
 import com.rtchubs.edokanpat.ui.LogoutHandlerCallback
 import com.rtchubs.edokanpat.ui.NavDrawerHandlerCallback
 import com.rtchubs.edokanpat.ui.common.BaseFragment
@@ -27,6 +35,8 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
     private var listener: LogoutHandlerCallback? = null
 
     private var drawerListener: NavDrawerHandlerCallback? = null
+
+    private var allShoppingMall = ArrayList<ShoppingMall>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -89,12 +99,180 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
         }
 
         viewDataBinding.item1.setOnClickListener {
-            navController.navigate(Home2FragmentDirections.actionHome2FragmentToChapterListFragment())
+            if (allShoppingMall.isNotEmpty()) {
+                navController.navigate(Home2FragmentDirections.actionHome2FragmentToAllShopListFragment(allShoppingMall[0]))
+            }
+        }
+
+        viewDataBinding.item2.setOnClickListener {
+            if (allShoppingMall.size > 1) {
+                navController.navigate(Home2FragmentDirections.actionHome2FragmentToAllShopListFragment(allShoppingMall[1]))
+            }
+        }
+
+        viewDataBinding.item3.setOnClickListener {
+            if (allShoppingMall.size > 2) {
+                navController.navigate(Home2FragmentDirections.actionHome2FragmentToAllShopListFragment(allShoppingMall[2]))
+            }
+        }
+
+        viewDataBinding.item4.setOnClickListener {
+            if (allShoppingMall.size > 3) {
+                navController.navigate(Home2FragmentDirections.actionHome2FragmentToAllShopListFragment(allShoppingMall[3]))
+            }
+        }
+
+        viewDataBinding.item5.setOnClickListener {
+            if (allShoppingMall.size > 4) {
+                navController.navigate(Home2FragmentDirections.actionHome2FragmentToAllShopListFragment(allShoppingMall[4]))
+            }
         }
 
         viewDataBinding.item6.setOnClickListener {
-            navController.navigate(Home2FragmentDirections.actionHome2FragmentToMoreBookListFragment())
+            navController.navigate(Home2FragmentDirections.actionHome2FragmentToMoreShoppingMallFragment())
         }
+
+        viewModel.allShoppingMallResponse.observe(viewLifecycleOwner, Observer { response ->
+            response?.data?.let { mallList ->
+                allShoppingMall = mallList as ArrayList<ShoppingMall>
+                if (mallList.isNotEmpty()) {
+                    viewDataBinding.label1.text = mallList[0].name
+                    Glide.with(requireContext()).load(mallList[0].thumbnail).listener(object :
+                        RequestListener<Drawable?> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Drawable?>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            viewDataBinding.logo1.setImageResource(R.drawable.shopping_mall)
+                            return true
+                        }
+
+                        override fun onResourceReady(
+                            resource: Drawable?,
+                            model: Any?,
+                            target: Target<Drawable?>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            return true
+                        }
+
+                    }).into(viewDataBinding.logo1)
+                }
+
+                if (mallList.size > 1) {
+                    viewDataBinding.label2.text = mallList[1].name
+                    Glide.with(requireContext()).load(mallList[1].thumbnail).listener(object :
+                        RequestListener<Drawable?> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Drawable?>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            viewDataBinding.logo2.setImageResource(R.drawable.shopping_mall)
+                            return true
+                        }
+
+                        override fun onResourceReady(
+                            resource: Drawable?,
+                            model: Any?,
+                            target: Target<Drawable?>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            return true
+                        }
+
+                    }).into(viewDataBinding.logo2)
+                }
+
+                if (mallList.size > 2) {
+                    viewDataBinding.label3.text = mallList[2].name
+                    Glide.with(requireContext()).load(mallList[2].thumbnail).listener(object :
+                        RequestListener<Drawable?> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Drawable?>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            viewDataBinding.logo3.setImageResource(R.drawable.shopping_mall)
+                            return true
+                        }
+
+                        override fun onResourceReady(
+                            resource: Drawable?,
+                            model: Any?,
+                            target: Target<Drawable?>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            return true
+                        }
+
+                    }).into(viewDataBinding.logo3)
+                }
+
+                if (mallList.size > 3) {
+                    viewDataBinding.label4.text = mallList[3].name
+                    Glide.with(requireContext()).load(mallList[3].thumbnail).listener(object :
+                        RequestListener<Drawable?> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Drawable?>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            viewDataBinding.logo4.setImageResource(R.drawable.shopping_mall)
+                            return true
+                        }
+
+                        override fun onResourceReady(
+                            resource: Drawable?,
+                            model: Any?,
+                            target: Target<Drawable?>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            return true
+                        }
+
+                    }).into(viewDataBinding.logo4)
+                }
+
+                if (mallList.size > 4) {
+                    viewDataBinding.label5.text = mallList[4].name
+                    Glide.with(requireContext()).load(mallList[4].thumbnail).listener(object :
+                        RequestListener<Drawable?> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Drawable?>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            viewDataBinding.logo5.setImageResource(R.drawable.shopping_mall)
+                            return true
+                        }
+
+                        override fun onResourceReady(
+                            resource: Drawable?,
+                            model: Any?,
+                            target: Target<Drawable?>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            return true
+                        }
+
+                    }).into(viewDataBinding.logo5)
+                }
+            }
+        })
+
+        viewModel.getAllShoppingMallList()
 //
 //        Log.e("res", preferencesHelper.getAccessTokenHeader())
 //        paymentListAdapter.submitList(viewModel.paymentMethodList)
