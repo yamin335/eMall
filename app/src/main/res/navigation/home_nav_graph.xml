@@ -244,5 +244,20 @@
         <argument
             android:name="shoppingMall"
             app:argType="com.rtchubs.edokanpat.models.ShoppingMall" />
+        <action
+            android:id="@+id/action_allShopListFragment_to_productListFragment"
+            app:destination="@id/productListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.rtchubs.edokanpat.ui.home.ProductListFragment"
+        android:label="Products" >
+        <argument
+            android:name="merchant"
+            app:argType="com.rtchubs.edokanpat.models.Merchant" />
     </fragment>
 </navigation>

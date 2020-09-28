@@ -54,6 +54,9 @@ abstract class FragmentBuildersModule {
     abstract fun contributeAllShopListFragment(): AllShopListFragment
 
     @ContributesAndroidInjector
+    abstract fun contributeProductListFragment(): ProductListFragment
+
+    @ContributesAndroidInjector
     abstract fun contributeSignInFragment(): SignInFragment
 
     @ContributesAndroidInjector

@@ -38,7 +38,7 @@ class AllShopListFragment :
         allShopListAdapter = AllShopListAdapter(
                 appExecutors
             ) { item ->
-            // Need to go to product page
+            navController.navigate(AllShopListFragmentDirections.actionAllShopListFragmentToProductListFragment(item))
         }
 
         viewDataBinding.rvAllShopList.adapter = allShopListAdapter

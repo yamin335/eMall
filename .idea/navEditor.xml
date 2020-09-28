@@ -706,6 +706,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="productListFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1071" />
+                            <option name="y" value="967" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="topUpAmountFragment">
                     <value>
                       <LayoutPositions>

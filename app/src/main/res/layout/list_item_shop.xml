@@ -39,7 +39,7 @@
                 android:cropToPadding="true"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/doctor_3"
+                tools:src="@drawable/doctor_3"
                 app:imageRequestListener="@{imageRequestListener}"
                 app:imageUrl="@{model.thumbnail}"
                 app:layout_constraintBottom_toTopOf="@+id/name"
