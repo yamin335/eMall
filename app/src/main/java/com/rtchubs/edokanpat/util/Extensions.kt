@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -32,6 +33,10 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
+
+fun Context.colorList(id: Int): ColorStateList {
+    return ColorStateList.valueOf(ContextCompat.getColor(this, id))
+}
 
 val String.colorValue
     get() = Color.parseColor(this)

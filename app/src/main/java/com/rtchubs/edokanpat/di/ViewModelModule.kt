@@ -70,6 +70,11 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(ProductDetailsViewModel::class)
+    abstract fun bindProductDetailsViewModel(viewModel: ProductDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(MoreShoppingMallViewModel::class)
     abstract fun bindMoreShoppingMallViewModel(viewModel: MoreShoppingMallViewModel): ViewModel
 

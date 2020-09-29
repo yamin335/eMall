@@ -35,6 +35,8 @@ class AllShopListFragment :
         super.onViewCreated(view, savedInstanceState)
         registerToolbar(viewDataBinding.toolbar)
 
+        viewDataBinding.toolbar.title = args.shoppingMall.name
+
         allShopListAdapter = AllShopListAdapter(
                 appExecutors
             ) { item ->

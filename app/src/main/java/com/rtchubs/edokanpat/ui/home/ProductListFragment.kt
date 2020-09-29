@@ -3,6 +3,7 @@ package com.rtchubs.edokanpat.ui.home
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -37,10 +38,12 @@ class ProductListFragment :
         super.onViewCreated(view, savedInstanceState)
         registerToolbar(viewDataBinding.toolbar)
 
+        viewDataBinding.toolbar.title = args.merchant.name
+
         productListAdapter = ProductListAdapter(
                 appExecutors
             ) { item ->
-//            navController.navigate(MoreShoppingMallFragmentDirections.actionMoreShoppingMallFragmentToAllShopListFragment(item))
+            navController.navigate(ProductListFragmentDirections.actionProductListFragmentToProductDetailsFragment(item))
         }
 
         viewDataBinding.rvProductList.addItemDecoration(GridRecyclerItemDecorator(2, 20, true))
@@ -59,5 +62,16 @@ class ProductListFragment :
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_product_list, menu)
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId) {
+            android.R.id.home -> {
+                navController.navigateUp()
+            }
+        }
+
+        return true
     }
 }
