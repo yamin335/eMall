@@ -6,8 +6,6 @@ import com.rtchubs.edokanpat.prefs.PreferencesHelper
 import javax.inject.Inject
 
 class SetupCompleteViewModel @Inject constructor(
-    private val preferencesHelper: PreferencesHelper,
-    private val context: Context
 ) : ViewModel() {
 
 }

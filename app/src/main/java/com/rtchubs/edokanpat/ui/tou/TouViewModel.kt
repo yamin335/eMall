@@ -1,4 +1,4 @@
-package com.rtchubs.edokanpat.ui.on_boarding.tou
+package com.rtchubs.edokanpat.ui.tou
 
 import androidx.lifecycle.ViewModel
 import com.rtchubs.edokanpat.prefs.PreferencesHelper

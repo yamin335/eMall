@@ -15,7 +15,7 @@ import com.rtchubs.edokanpat.ui.home.*
 import com.rtchubs.edokanpat.ui.how_works.HowWorksViewModel
 import com.rtchubs.edokanpat.ui.info.InfoViewModel
 import com.rtchubs.edokanpat.ui.login.SignInViewModel
-import com.rtchubs.edokanpat.ui.on_boarding.tou.TouViewModel
+import com.rtchubs.edokanpat.ui.tou.TouViewModel
 import com.rtchubs.edokanpat.ui.otp.OtpViewModel
 import com.rtchubs.edokanpat.ui.pre_on_boarding.PreOnBoardingViewModel
 import com.rtchubs.edokanpat.ui.profiles.ProfilesViewModel

@@ -128,9 +128,11 @@ dependencies {
     kapt deps.dagger.compiler
     kapt deps.dagger.android_support_compiler
 
-    /*room*/
-    implementation deps.room.runtime
-    kapt deps.room.compiler
+    //Room database
+    implementation "androidx.room:room-runtime:2.2.5"
+    implementation "androidx.room:room-ktx:2.2.5"
+    kapt "androidx.room:room-compiler:2.2.5"
+    androidTestImplementation "androidx.room:room-testing:2.2.5"
 
     /*retrofit*/
     implementation deps.retrofit.runtime

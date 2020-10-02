@@ -2,8 +2,8 @@ package com.rtchubs.edokanpat.di
 
 import android.app.Application
 import android.content.Context
-import androidx.room.Room
-import com.rtchubs.edokanpat.local_db.AppDb
+import com.rtchubs.edokanpat.local_db.dao.CartDao
+import com.rtchubs.edokanpat.local_db.db.AppDatabase
 import com.rtchubs.edokanpat.prefs.AppPreferencesHelper
 import com.rtchubs.edokanpat.prefs.PreferencesHelper
 import com.rtchubs.edokanpat.util.AppConstants
@@ -26,38 +26,23 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideDb(app: Application): AppDb {
-        return Room
-            .databaseBuilder(app, AppDb::class.java, "psb.db")
-            .fallbackToDestructiveMigration()
-            .build()
-    }
-
-    @Singleton
-    @Provides
     fun providePicasso(app: Application, okHttpClient: OkHttpClient) = Picasso.Builder(app)
         .downloader(OkHttp3Downloader(okHttpClient))
         .listener { _, _, e -> if (BuildConfig.DEBUG) e.printStackTrace() }
         .loggingEnabled(BuildConfig.DEBUG)
         .build()
 
-    /*@Singleton
+    @Singleton
     @Provides
-    fun provideProfileDao(db: AppDb): ProfileDao {
-        return db.profileDao()
+    fun provideDb(app: Application): AppDatabase {
+        return AppDatabase.getInstance(app)
     }
 
     @Singleton
     @Provides
-    fun provideBankDao(db: AppDb): BankDao {
-        return db.bankDao()
+    fun provideLoginDao(db: AppDatabase): CartDao {
+        return db.cartDao()
     }
-
-    @Singleton
-    @Provides
-    fun provideStatementDao(db: AppDb): StatementDao {
-        return db.statementDao()
-    }*/
 
 
     @Singleton

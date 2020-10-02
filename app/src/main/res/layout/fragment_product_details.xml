@@ -135,22 +135,37 @@
                     app:layout_constraintTop_toBottomOf="@+id/rating"
                     tools:text="Female Quin Dress" />
 
-                <TextView
-                    android:id="@+id/productPrice"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="5dp"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:textColor="#E91E63"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:text="@{price}"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="@+id/rating"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/productName"
-                    tools:text="$250" />
+                    app:layout_constraintStart_toEndOf="@+id/rating"
+                    app:layout_constraintTop_toTopOf="@+id/rating">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Price:"
+                        android:textSize="15sp"
+                        android:layout_marginEnd="8dp"/>
+
+                    <TextView
+                        android:id="@+id/productPrice"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@{price}"
+                        android:textColor="#E91E63"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+
+                        tools:text="$250" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/text1"
@@ -164,7 +179,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/productPrice"/>
+                    app:layout_constraintTop_toBottomOf="@+id/productName"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvColorChooser"

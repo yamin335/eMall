@@ -11,7 +11,7 @@ import com.rtchubs.edokanpat.ui.how_works.HowWorksFragment
 import com.rtchubs.edokanpat.ui.info.InfoFragment
 import com.rtchubs.edokanpat.ui.login.SignInFragment
 import com.rtchubs.edokanpat.ui.terms_and_conditions.TermsAndConditionsFragment
-import com.rtchubs.edokanpat.ui.on_boarding.tou.TouFragment
+import com.rtchubs.edokanpat.ui.tou.TouFragment
 import com.rtchubs.edokanpat.ui.otp.OtpFragment
 import com.rtchubs.edokanpat.ui.pre_on_boarding.PreOnBoardingFragment
 import com.rtchubs.edokanpat.ui.profiles.ProfilesFragment

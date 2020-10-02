@@ -1,4 +1,4 @@
-package com.rtchubs.edokanpat.ui.on_boarding.tou
+package com.rtchubs.edokanpat.ui.tou
 
 import android.os.Bundle
 import android.view.View
@@ -7,6 +7,7 @@ import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.databinding.TouBinding
 import com.rtchubs.edokanpat.ui.common.BaseFragment
+import com.rtchubs.edokanpat.ui.tou.TouViewModel
 
 class TouFragment  : BaseFragment<TouBinding, TouViewModel>() {
     override val bindingVariable: Int
