@@ -11,9 +11,9 @@ import com.rtchubs.edokanpat.api.Api.REPO
 
 object Api {
     const val PROTOCOL = "https"
-    const val API_ROOT = "rtchubs.dev"
+    const val API_ROOT = "backend.e-dokanpat.com"
     const val API_ROOT_URL = "$PROTOCOL://$API_ROOT"
-    const val REPO = "api/api"
+    const val REPO = "api"
     const val API_VERSION = "v1"
     const val DIRECTORY_ACCOUNT = "account"
     const val DIRECTORY_CONNECT = "connect"

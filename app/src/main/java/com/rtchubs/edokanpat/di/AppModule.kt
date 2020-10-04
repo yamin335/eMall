@@ -44,7 +44,6 @@ class AppModule {
         return db.cartDao()
     }
 
-
     @Singleton
     @Provides
     internal fun providePreferencesHelper(appPreferencesHelper: AppPreferencesHelper): PreferencesHelper {

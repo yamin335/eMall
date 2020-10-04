@@ -134,6 +134,9 @@ dependencies {
     kapt "androidx.room:room-compiler:2.2.5"
     androidTestImplementation "androidx.room:room-testing:2.2.5"
 
+    //Livedata ktx
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+
     /*retrofit*/
     implementation deps.retrofit.runtime
     api deps.retrofit.converter_gson

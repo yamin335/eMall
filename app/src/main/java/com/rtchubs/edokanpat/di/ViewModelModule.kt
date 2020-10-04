@@ -9,6 +9,7 @@ import com.rtchubs.edokanpat.ui.MainActivityViewModel
 import com.rtchubs.edokanpat.ui.add_payment_methods.AddBankViewModel
 import com.rtchubs.edokanpat.ui.add_payment_methods.AddCardViewModel
 import com.rtchubs.edokanpat.ui.add_payment_methods.AddPaymentMethodsViewModel
+import com.rtchubs.edokanpat.ui.cart.CartViewModel
 import com.rtchubs.edokanpat.ui.chapter_list.ChapterListViewModel
 import com.rtchubs.edokanpat.ui.exams.ExamsViewModel
 import com.rtchubs.edokanpat.ui.home.*
@@ -67,6 +68,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ProductListViewModel::class)
     abstract fun bindProductListViewModel(viewModel: ProductListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CartViewModel::class)
+    abstract fun bindCartViewModel(viewModel: CartViewModel): ViewModel
 
     @Binds
     @IntoMap

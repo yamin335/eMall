@@ -598,6 +598,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="cartFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1280" />
+                            <option name="y" value="451" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="chapterListFragment">
                     <value>
                       <LayoutPositions>
@@ -735,6 +747,15 @@
                             <option name="x" value="1071" />
                             <option name="y" value="967" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_productListFragment_to_productDetailsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
