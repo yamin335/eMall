@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -61,7 +62,26 @@ class ProductListFragment :
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_product_list, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+
+        val menuItem = menu.findItem(R.id.menu_cart)
+        val actionView = menuItem.actionView
+        val badge = actionView.findViewById<TextView>(R.id.badge)
+        badge.text = viewModel.cartItemCount.value?.toString()
+        actionView.setOnClickListener {
+            onOptionsItemSelected(menuItem)
+        }
+
+        viewModel.cartItemCount.observe(viewLifecycleOwner, Observer {
+            it?.let { value ->
+                if (value < 1) {
+                    badge.visibility = View.INVISIBLE
+                    return@Observer
+                } else {
+                    badge.visibility = View.VISIBLE
+                    badge.text = value.toString()
+                }
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -69,6 +89,10 @@ class ProductListFragment :
         when(item.itemId) {
             android.R.id.home -> {
                 navController.navigateUp()
+            }
+
+            R.id.menu_cart -> {
+                navController.navigate(ProductListFragmentDirections.actionProductListFragmentToCartFragment())
             }
         }
 

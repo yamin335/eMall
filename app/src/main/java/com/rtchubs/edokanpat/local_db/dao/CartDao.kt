@@ -1,16 +1,23 @@
 package com.rtchubs.edokanpat.local_db.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.rtchubs.edokanpat.local_db.dbo.CartItem
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CartDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun addItemToCart(item: CartItem)
 
+    @Delete
+    suspend fun deleteCartItem(cartItem: CartItem)
+
     @Query("SELECT * FROM cart")
-    suspend fun getCartItems(): List<CartItem>
+    fun getCartItems(): Flow<List<CartItem>>
+
+    @Query("SELECT COUNT(id) FROM cart")
+    fun getCartItemsCount(): Flow<Int>
+
+    @Query("SELECT EXISTS (SELECT 1 FROM cart WHERE id = :id)")
+    fun doesItemExists(id: Int): Flow<Boolean>
 }

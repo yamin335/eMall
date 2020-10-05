@@ -3,19 +3,21 @@ package com.rtchubs.edokanpat.ui.home
 import android.database.sqlite.SQLiteAbortException
 import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteException
+import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
+import android.widget.TextView
+import androidx.core.view.children
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.android.material.badge.BadgeDrawable
 import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.ProductDetailsFragmentBinding
@@ -124,18 +126,40 @@ class ProductDetailsFragment :
                 }
 
                 lifecycleScope.launch(handler) {
-                    cart.addItemToCart(CartItem(product.id, product.name, product.barcode, product.mrp, product.category_id, product.merchant_id))
+                    cart.addItemToCart(CartItem(product.id, product.name, product.barcode, product.mrp, quantity, product.category_id, product.merchant_id))
                 }
             } catch (e: SQLiteException) {
                 e.printStackTrace()
             }
         }
 
+        viewModel.doesItemExists(product).observe(viewLifecycleOwner, Observer {
+            viewDataBinding.addToCart.isEnabled = it != true
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_product_details, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+
+        val menuItem = menu.findItem(R.id.menu_cart)
+        val actionView = menuItem.actionView
+        val badge = actionView.findViewById<TextView>(R.id.badge)
+        badge.text = viewModel.cartItemCount.value?.toString()
+        actionView.setOnClickListener {
+            onOptionsItemSelected(menuItem)
+        }
+
+        viewModel.cartItemCount.observe(viewLifecycleOwner, Observer {
+            it?.let { value ->
+                if (value < 1) {
+                    badge.visibility = View.INVISIBLE
+                    return@Observer
+                } else {
+                    badge.visibility = View.VISIBLE
+                    badge.text = value.toString()
+                }
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

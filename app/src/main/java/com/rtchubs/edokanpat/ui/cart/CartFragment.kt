@@ -10,6 +10,9 @@ import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.CartFragmentBinding
 import com.rtchubs.edokanpat.databinding.MoreFragmentBinding
 import com.rtchubs.edokanpat.databinding.SetAFragmentBinding
+import com.rtchubs.edokanpat.ui.add_payment_methods.AddPaymentMethodsFragment
+import com.rtchubs.edokanpat.ui.add_payment_methods.AddPaymentMethodsFragmentDirections
+import com.rtchubs.edokanpat.ui.add_payment_methods.BankOrCardListAdapter
 import com.rtchubs.edokanpat.ui.common.BaseFragment
 import com.rtchubs.edokanpat.ui.home.ProductListAdapter
 import com.rtchubs.edokanpat.ui.home.ProductListFragmentDirections
@@ -24,13 +27,32 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
 
     override val viewModel: CartViewModel by viewModels { viewModelFactory }
 
+    lateinit var cartItemListAdapter: CartItemListAdapter
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         registerToolbar(viewDataBinding.toolbar)
 
+        cartItemListAdapter = CartItemListAdapter(
+            appExecutors
+        ) { item ->
+            viewModel.deleteCartItem(item)
+        }
+
+        viewDataBinding.rvCartItems.adapter = cartItemListAdapter
+
         viewModel.cartItems.observe(viewLifecycleOwner, Observer {
-            val list = it
-            val tt = list
+            it?.let { list ->
+                cartItemListAdapter.submitList(list)
+
+                var total = 0.0
+                list.forEach { item ->
+                    val price = item.mrp ?: 0.0
+                    val quantity = item.quantity ?: 0
+                    total += price * quantity
+                }
+                viewDataBinding.totalPrice = total.toString()
+            }
         })
 
 //        viewDataBinding.toolbar.title = args.merchant.name

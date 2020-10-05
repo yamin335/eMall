@@ -334,10 +334,10 @@
                         android:layout_height="wrap_content"
                         android:text="Add to Cart"
                         android:layout_marginEnd="16dp"
-                        android:textColor="@color/white"
+                        android:textColor="@color/button_text_state_colors"
                         android:textAllCaps="false"
                         android:layout_marginBottom="0dp"
-                        android:backgroundTint="#E91E63"
+                        android:backgroundTint="@color/button_state_colors"
                         app:cornerRadius="20dp"
                         />
 
