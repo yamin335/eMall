@@ -1,11 +1,9 @@
 package com.rtchubs.edokanpat.ui.home
 
 import android.app.Application
+import android.database.sqlite.SQLiteException
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.google.gson.Gson
 import com.rtchubs.edokanpat.api.*
 import com.rtchubs.edokanpat.local_db.dao.CartDao
@@ -42,5 +40,19 @@ class ProductDetailsViewModel @Inject constructor(
             }
         }
         return result
+    }
+
+    fun addToCart(product: Product, quantity: Int) {
+        try {
+            val handler = CoroutineExceptionHandler { _, exception ->
+                exception.printStackTrace()
+            }
+
+            viewModelScope.launch(handler) {
+                cartDao.addItemToCart(CartItem(product.id, product.name, product.barcode, product.mrp, quantity, product.category_id, product.merchant_id))
+            }
+        } catch (e: SQLiteException) {
+            e.printStackTrace()
+        }
     }
 }

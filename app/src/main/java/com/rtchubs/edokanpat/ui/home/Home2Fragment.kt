@@ -156,7 +156,7 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
                             dataSource: DataSource?,
                             isFirstResource: Boolean
                         ): Boolean {
-                            return true
+                            return false
                         }
 
                     }).into(viewDataBinding.logo1)
@@ -183,7 +183,7 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
                             dataSource: DataSource?,
                             isFirstResource: Boolean
                         ): Boolean {
-                            return true
+                            return false
                         }
 
                     }).into(viewDataBinding.logo2)
@@ -210,7 +210,7 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
                             dataSource: DataSource?,
                             isFirstResource: Boolean
                         ): Boolean {
-                            return true
+                            return false
                         }
 
                     }).into(viewDataBinding.logo3)
@@ -237,7 +237,7 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
                             dataSource: DataSource?,
                             isFirstResource: Boolean
                         ): Boolean {
-                            return true
+                            return false
                         }
 
                     }).into(viewDataBinding.logo4)
@@ -264,7 +264,7 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
                             dataSource: DataSource?,
                             isFirstResource: Boolean
                         ): Boolean {
-                            return true
+                            return false
                         }
 
                     }).into(viewDataBinding.logo5)

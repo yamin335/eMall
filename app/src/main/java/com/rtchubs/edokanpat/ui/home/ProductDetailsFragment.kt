@@ -25,6 +25,7 @@ import com.rtchubs.edokanpat.local_db.dao.CartDao
 import com.rtchubs.edokanpat.local_db.db.AppDatabase
 import com.rtchubs.edokanpat.local_db.dbo.CartItem
 import com.rtchubs.edokanpat.ui.common.BaseFragment
+import com.rtchubs.edokanpat.util.showWarningToast
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -49,6 +50,7 @@ class ProductDetailsFragment :
     lateinit var pdColorChooserAdapter: PDColorChooserAdapter
     lateinit var pdSizeChooserAdapter: PDSizeChooserAdapter
     var quantity = 1
+    var alreadyAddedToCart = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,21 +122,17 @@ class ProductDetailsFragment :
         }
 
         viewDataBinding.addToCart.setOnClickListener {
-            try {
-                val handler = CoroutineExceptionHandler { _, exception ->
-                    println("Caught during database creation --> $exception")
-                }
-
-                lifecycleScope.launch(handler) {
-                    cart.addItemToCart(CartItem(product.id, product.name, product.barcode, product.mrp, quantity, product.category_id, product.merchant_id))
-                }
-            } catch (e: SQLiteException) {
-                e.printStackTrace()
+            if (alreadyAddedToCart) {
+                showWarningToast(requireContext(), "You already added this item!")
+            } else {
+                viewModel.addToCart(product, quantity)
             }
         }
 
         viewModel.doesItemExists(product).observe(viewLifecycleOwner, Observer {
-            viewDataBinding.addToCart.isEnabled = it != true
+            it?.let { value ->
+                alreadyAddedToCart = value
+            }
         })
     }
 
@@ -163,7 +161,6 @@ class ProductDetailsFragment :
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when(item.itemId) {
             android.R.id.home -> {
                 navController.navigateUp()
