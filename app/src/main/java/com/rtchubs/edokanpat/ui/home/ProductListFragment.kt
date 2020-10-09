@@ -10,12 +10,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.MoreShoppingListFragmentBinding
 import com.rtchubs.edokanpat.databinding.ProductListFragmentBinding
+import com.rtchubs.edokanpat.models.Product
 import com.rtchubs.edokanpat.ui.common.BaseFragment
 import com.rtchubs.edokanpat.util.GridRecyclerItemDecorator
+import com.rtchubs.edokanpat.util.showErrorToast
+import com.rtchubs.edokanpat.util.showSuccessToast
+import com.rtchubs.edokanpat.util.showWarningToast
 
 class ProductListFragment :
     BaseFragment<ProductListFragmentBinding, ProductListViewModel>() {
@@ -27,6 +33,7 @@ class ProductListFragment :
         viewModelFactory
     }
 
+    lateinit var productCategoryAdapter: ProductCategoryListAdapter
     lateinit var productListAdapter: ProductListAdapter
     val args: ProductListFragmentArgs by navArgs()
 
@@ -39,16 +46,49 @@ class ProductListFragment :
         super.onViewCreated(view, savedInstanceState)
         registerToolbar(viewDataBinding.toolbar)
 
+        viewModel.toastWarning.observe(viewLifecycleOwner, Observer {
+            it?.let { message ->
+                showWarningToast(requireContext(), message)
+                viewModel.toastWarning.postValue(null)
+            }
+        })
+
+        viewModel.toastSuccess.observe(viewLifecycleOwner, Observer {
+            it?.let { message ->
+                showSuccessToast(requireContext(), message)
+                viewModel.toastSuccess.postValue(null)
+            }
+        })
+
         viewDataBinding.toolbar.title = args.merchant.name
 
+        productCategoryAdapter = ProductCategoryListAdapter(
+            appExecutors
+        ) { item ->
+            //viewDataBinding.imageUrl = item
+        }
+
+        viewDataBinding.rvProductCategory.adapter = productCategoryAdapter
+
+        productCategoryAdapter.submitList(listOf("T-Shirt", "Shoes", "Pants", "Hats", "Shorts", "Shocks", "Sunglasses"))
+
         productListAdapter = ProductListAdapter(
-                appExecutors
-            ) { item ->
+            appExecutors,
+            object : ProductListAdapter.ProductListActionCallback {
+                override fun addToFavorite(item: Product) {
+                    viewModel.addToFavorite(item)
+                }
+
+                override fun addToCart(item: Product) {
+                    viewModel.addToCart(item, 1)
+                }
+
+            }) { item ->
             navController.navigate(ProductListFragmentDirections.actionProductListFragmentToProductDetailsFragment(item))
         }
 
-        viewDataBinding.rvProductList.addItemDecoration(GridRecyclerItemDecorator(2, 20, true))
-        viewDataBinding.rvProductList.layoutManager = GridLayoutManager(mContext, 2)
+        //viewDataBinding.rvProductList.addItemDecoration(GridRecyclerItemDecorator(2, 40, true))
+        viewDataBinding.rvProductList.layoutManager = StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL)
         viewDataBinding.rvProductList.adapter = productListAdapter
 
         viewModel.productListResponse.observe(viewLifecycleOwner, Observer { response ->

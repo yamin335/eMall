@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/payFragment"
-        android:name="com.rtchubs.edokanpat.PayFragment"
+        android:name="com.rtchubs.edokanpat.ui.home.FavoriteFragment"
         android:label="Pay"
-        tools:layout="@layout/fragment_pay" />
+        tools:layout="@layout/fragment_favorite" />
 
     <include app:graph="@navigation/drawer_nav_graph" />
 </navigation>

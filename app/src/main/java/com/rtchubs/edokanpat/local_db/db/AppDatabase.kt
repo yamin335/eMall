@@ -4,20 +4,27 @@ import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.rtchubs.edokanpat.local_db.dao.CartDao
+import com.rtchubs.edokanpat.local_db.dao.FavoriteDao
 import com.rtchubs.edokanpat.local_db.dbo.CartItem
+import com.rtchubs.edokanpat.models.Product
 
 /**
  * Main database.
  */
 @Database(
     entities = [
-        CartItem::class],
+        CartItem::class,
+        Product::class
+    ],
     version = 1,
     exportSchema = false
 )
+@TypeConverters(RoomDataConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun cartDao(): CartDao
+    abstract fun favoriteDao(): FavoriteDao
 
     companion object {
 

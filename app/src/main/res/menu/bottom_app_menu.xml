@@ -6,12 +6,12 @@
         android:id="@+id/home_nav"
         android:title="@string/home"
         app:showAsAction="always"
-        android:icon="@drawable/home" />
+        android:icon="@drawable/ic_outline_home_24" />
     <item
         android:id="@+id/pay_nav"
-        android:title="History"
+        android:title="Favorites"
         app:showAsAction="always"
-        android:icon="@drawable/ic_baseline_history_24"/>
+        android:icon="@drawable/ic_outline_favorite_border_24"/>
     <item
         android:title="Live"
         app:showAsAction="always"
@@ -20,12 +20,12 @@
         android:checked="false" />
     <item
         android:id="@+id/transaction_nav"
-        android:title="Service"
-        android:icon="@drawable/transactions"
+        android:title="Orders"
+        android:icon="@drawable/ic_baseline_turned_in_not_24"
         app:showAsAction="always" />
     <item
         android:id="@+id/more_nav"
         android:title="@string/more"
-        android:icon="@drawable/more"
+        android:icon="@drawable/ic_outline_border_all_24"
         app:showAsAction="always"/>
 </menu>

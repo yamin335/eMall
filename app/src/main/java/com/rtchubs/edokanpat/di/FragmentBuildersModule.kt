@@ -64,6 +64,9 @@ abstract class FragmentBuildersModule {
     abstract fun contributeCartFragment(): CartFragment
 
     @ContributesAndroidInjector
+    abstract fun contributeFavoriteFragment(): FavoriteFragment
+
+    @ContributesAndroidInjector
     abstract fun contributeSignInFragment(): SignInFragment
 
     @ContributesAndroidInjector

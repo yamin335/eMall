@@ -31,6 +31,7 @@
         android:id="@+id/relative1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/themeBackgroundColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -40,25 +41,17 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentTop="true"
-            android:background="@color/white"
+            android:background="@color/themeColor"
             android:theme="@style/AppTheme.AppBarOverlay"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextColor="@color/gray" />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/toolbar"
-            android:background="?attr/actionBarDivider"
-            android:elevation="1dp" />
+            app:titleTextColor="@color/white" />
 
         <ProgressBar
             android:id="@+id/loader"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/divider"
+            android:layout_below="@id/toolbar"
             android:layout_marginTop="-7dp"
             android:indeterminate="true"
             android:elevation="1dp"
@@ -68,7 +61,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/divider">
+            android:layout_below="@id/toolbar">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -167,7 +160,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -183,24 +176,39 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="Color"/>
+                        android:text="Color"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvColorChooser"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:layout_constrainedWidth="true"
+                        android:layout_marginStart="8dp"
                         android:clipToPadding="false"
-                        android:orientation="horizontal"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/text1"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:spanCount="9"
+                        tools:itemCount="25"
                         tools:listitem="@layout/list_item_product_details_color_chooser" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linear4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -216,22 +224,37 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="5dp"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="Size" />
+                        android:text="Size"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvSizeChooser"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:layout_constrainedWidth="true"
+                        android:layout_marginStart="8dp"
                         android:clipToPadding="false"
-                        android:orientation="horizontal"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/text2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:spanCount="4"
                         tools:listitem="@layout/list_item_product_details_size_chooser" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:id="@+id/linear5"
@@ -263,9 +286,10 @@
                         android:layout_marginEnd="4dp"
                         android:clickable="true"
                         android:focusable="true"
+                        app:rippleColor="@color/themeButtonColor"
                         app:cardElevation="0dp"
                         app:cardCornerRadius="13dp"
-                        app:cardBackgroundColor="#EEEEEE">
+                        app:cardBackgroundColor="#DDDDDD">
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -298,9 +322,10 @@
                         android:layout_marginStart="4dp"
                         android:clickable="true"
                         android:focusable="true"
+                        app:rippleColor="@color/themeButtonColor"
                         app:cardElevation="0dp"
                         app:cardCornerRadius="13dp"
-                        app:cardBackgroundColor="#EEEEEE">
+                        app:cardBackgroundColor="#DDDDDD">
 
                         <ImageView
                             android:layout_width="match_parent"

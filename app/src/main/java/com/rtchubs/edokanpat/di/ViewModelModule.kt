@@ -76,6 +76,11 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(FavoriteViewModel::class)
+    abstract fun bindFavoriteViewModel(viewModel: FavoriteViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(ProductDetailsViewModel::class)
     abstract fun bindProductDetailsViewModel(viewModel: ProductDetailsViewModel): ViewModel
 

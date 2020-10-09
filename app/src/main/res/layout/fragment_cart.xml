@@ -18,6 +18,7 @@
         android:id="@+id/relative1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/themeBackgroundColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,25 +28,17 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentTop="true"
-            android:background="@color/white"
+            android:background="@color/themeColor"
             android:theme="@style/AppTheme.AppBarOverlay"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextColor="@color/gray" />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/toolbar"
-            android:background="?attr/actionBarDivider"
-            android:elevation="1dp" />
+            app:titleTextColor="@color/white" />
 
         <ProgressBar
             android:id="@+id/loader"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/divider"
+            android:layout_below="@id/toolbar"
             android:layout_marginTop="-7dp"
             android:indeterminate="true"
             android:elevation="1dp"
@@ -55,7 +48,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/divider">
+            android:layout_below="@id/toolbar">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

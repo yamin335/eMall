@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
@@ -25,6 +26,8 @@ import com.rtchubs.edokanpat.local_db.dao.CartDao
 import com.rtchubs.edokanpat.local_db.db.AppDatabase
 import com.rtchubs.edokanpat.local_db.dbo.CartItem
 import com.rtchubs.edokanpat.ui.common.BaseFragment
+import com.rtchubs.edokanpat.util.GridRecyclerItemDecorator
+import com.rtchubs.edokanpat.util.showSuccessToast
 import com.rtchubs.edokanpat.util.showWarningToast
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -51,6 +54,7 @@ class ProductDetailsFragment :
     lateinit var pdSizeChooserAdapter: PDSizeChooserAdapter
     var quantity = 1
     var alreadyAddedToCart = false
+    var alreadyAddedToFavorite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +70,13 @@ class ProductDetailsFragment :
         viewDataBinding.toolbar.title = product.name
         viewDataBinding.name = product.name
         viewDataBinding.price = "$${product.mrp}"
+
+        viewModel.toastSuccess.observe(viewLifecycleOwner, Observer {
+            it?.let { message ->
+                showSuccessToast(requireContext(), message)
+                viewModel.toastSuccess.postValue(null)
+            }
+        })
 
         pdImageSampleAdapter = PDImageSampleAdapter(
             appExecutors
@@ -99,6 +110,8 @@ class ProductDetailsFragment :
 
         pdColorChooserAdapter.submitList(listOf("#d32f2f", "#0AB939", "#2A5D79", "#C7A90D", "#FD87A9", "#E91E63", "#D500F9"))
 
+        //viewDataBinding.rvSizeChooser.addItemDecoration(GridRecyclerItemDecorator(4, 0, true))
+        //viewDataBinding.rvSizeChooser.layoutManager = GridLayoutManager(requireContext(), 4)
         pdSizeChooserAdapter = PDSizeChooserAdapter(
             appExecutors
         ) { item ->
@@ -123,15 +136,29 @@ class ProductDetailsFragment :
 
         viewDataBinding.addToCart.setOnClickListener {
             if (alreadyAddedToCart) {
-                showWarningToast(requireContext(), "You already added this item!")
+                showWarningToast(requireContext(), "Already added to cart!")
             } else {
                 viewModel.addToCart(product, quantity)
             }
         }
 
-        viewModel.doesItemExists(product).observe(viewLifecycleOwner, Observer {
+        viewDataBinding.addToFavorite.setOnClickListener {
+            if (alreadyAddedToFavorite) {
+                showWarningToast(requireContext(), "Already added to favorite!")
+            } else {
+                viewModel.addToFavorite(product)
+            }
+        }
+
+        viewModel.doesItemExistsInCart(product).observe(viewLifecycleOwner, Observer {
             it?.let { value ->
                 alreadyAddedToCart = value
+            }
+        })
+
+        viewModel.doesItemExistsInFavorite(product).observe(viewLifecycleOwner, Observer {
+            it?.let { value ->
+                alreadyAddedToFavorite = value
             }
         })
     }

@@ -3,6 +3,7 @@ package com.rtchubs.edokanpat.di
 import android.app.Application
 import android.content.Context
 import com.rtchubs.edokanpat.local_db.dao.CartDao
+import com.rtchubs.edokanpat.local_db.dao.FavoriteDao
 import com.rtchubs.edokanpat.local_db.db.AppDatabase
 import com.rtchubs.edokanpat.prefs.AppPreferencesHelper
 import com.rtchubs.edokanpat.prefs.PreferencesHelper
@@ -40,8 +41,14 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideLoginDao(db: AppDatabase): CartDao {
+    fun provideCartDao(db: AppDatabase): CartDao {
         return db.cartDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideFavoriteDao(db: AppDatabase): FavoriteDao {
+        return db.favoriteDao()
     }
 
     @Singleton

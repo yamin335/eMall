@@ -5,7 +5,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 @Entity(primaryKeys = ["userId"])
-/*@TypeConverters(TypeConverters::class)*/
+/*@RoomDataConverter(RoomDataConverter::class)*/
 data class ProfileInfo(
     @SerializedName("userId")
     @Expose

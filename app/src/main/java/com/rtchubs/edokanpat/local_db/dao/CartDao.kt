@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CartDao {
-    @Insert(onConflict = OnConflictStrategy.ABORT)
-    suspend fun addItemToCart(item: CartItem)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addItemToCart(item: CartItem): Long
 
     @Delete
     suspend fun deleteCartItem(cartItem: CartItem)

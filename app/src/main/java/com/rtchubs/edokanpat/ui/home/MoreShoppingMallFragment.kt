@@ -5,6 +5,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.MoreShoppingListFragmentBinding
@@ -33,8 +35,7 @@ class MoreShoppingMallFragment :
             navController.navigate(MoreShoppingMallFragmentDirections.actionMoreShoppingMallFragmentToAllShopListFragment(item))
         }
 
-        viewDataBinding.rvMoreShoppingMallList.addItemDecoration(GridRecyclerItemDecorator(2, 40, true))
-        viewDataBinding.rvMoreShoppingMallList.layoutManager = GridLayoutManager(mContext, 2)
+        viewDataBinding.rvMoreShoppingMallList.layoutManager = StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL)
         viewDataBinding.rvMoreShoppingMallList.adapter = shoppingMallListAdapter
 
         viewModel.allShoppingMallResponse.observe(viewLifecycleOwner, Observer { response ->

@@ -20,6 +20,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.rtchubs.edokanpat.AppExecutors
 import com.rtchubs.edokanpat.R
+import com.rtchubs.edokanpat.databinding.FavoriteListItemBinding
 import com.rtchubs.edokanpat.databinding.MoreShoppingListItemBinding
 import com.rtchubs.edokanpat.databinding.ProductListItemBinding
 import com.rtchubs.edokanpat.databinding.ShopListItemBinding
@@ -30,11 +31,10 @@ import com.rtchubs.edokanpat.models.Product
 import com.rtchubs.edokanpat.util.DataBoundListAdapter
 import kotlinx.android.synthetic.main.popup_menu_product_item.view.*
 
-class ProductListAdapter(
+class FavoriteListAdapter(
     private val appExecutors: AppExecutors,
-    private val itemActionCallback: ProductListActionCallback,
     private val itemCallback: ((Product) -> Unit)? = null
-) : DataBoundListAdapter<Product, ProductListItemBinding>(
+) : DataBoundListAdapter<Product, FavoriteListItemBinding>(
     appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem.id == newItem.id
@@ -53,32 +53,26 @@ class ProductListAdapter(
     private val viewPool: RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool()
 
     val onClicked = MutableLiveData<Product>()
-    override fun createBinding(parent: ViewGroup): ProductListItemBinding {
+    override fun createBinding(parent: ViewGroup): FavoriteListItemBinding {
         return DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.list_item_product, parent, false
+            R.layout.list_item_favorite, parent, false
         )
     }
 
 
-    override fun bind(binding: ProductListItemBinding, position: Int) {
-        val context = binding.root.context
+    override fun bind(binding: FavoriteListItemBinding, position: Int) {
         val item = getItem(position)
-        binding.productName = item.name
+        binding.item = item
         binding.imageUrl = item.thumbnail
-        binding.productPrice = "$ ${item.mrp}"
 
-        binding.root.setOnClickListener {
+        binding.remove.setOnClickListener {
             itemCallback?.invoke(item)
-        }
-
-        binding.menu.setOnClickListener {
-            Toast.makeText(binding.root.context, "PopUp Menu Working", Toast.LENGTH_LONG).show()
         }
 
         binding.imageRequestListener = object: RequestListener<Drawable> {
             override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                binding.logo.setImageResource(R.drawable.product_image)
+                binding.thumbnail.setImageResource(R.drawable.product_image)
                 return true
             }
 
@@ -86,37 +80,5 @@ class ProductListAdapter(
                 return false
             }
         }
-
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val viewPopupMenu = inflater.inflate(R.layout.popup_menu_product_item, null)
-        val popupMenu = PopupWindow(viewPopupMenu, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        popupMenu.isOutsideTouchable = true
-        //popupMenu.setBackgroundDrawable(ColorDrawable(Color.WHITE))
-        popupMenu.animationStyle = android.R.style.Animation_Dialog
-        popupMenu.elevation = 20F
-
-        popupMenu.setOnDismissListener {
-            //        Toast.makeText(context, "Dismissed!!!", Toast.LENGTH_LONG).show()
-        }
-
-        val popupMenuView = popupMenu.contentView
-        popupMenuView.menuFavorite.setOnClickListener {
-            itemActionCallback.addToFavorite(item)
-            popupMenu.dismiss()
-        }
-
-        popupMenuView.menuCart.setOnClickListener {
-            itemActionCallback.addToCart(item)
-            popupMenu.dismiss()
-        }
-
-        binding.menu.setOnClickListener {
-            popupMenu.showAsDropDown(binding.menu,-200, -150, Gravity.NO_GRAVITY)
-        }
-    }
-
-    interface ProductListActionCallback {
-        fun addToFavorite(item: Product)
-        fun addToCart(item: Product)
     }
 }

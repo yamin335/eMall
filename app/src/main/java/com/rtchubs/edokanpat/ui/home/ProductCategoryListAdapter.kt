@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
@@ -26,11 +27,11 @@ import com.rtchubs.edokanpat.models.Product
 import com.rtchubs.edokanpat.util.DataBoundListAdapter
 import com.rtchubs.edokanpat.util.colorList
 
-class PDSizeChooserAdapter(
+class ProductCategoryListAdapter(
     private val appExecutors: AppExecutors,
     private val itemCallback: ((String) -> Unit)? = null
 
-) : DataBoundListAdapter<String, PDSizeChooserBinding>(
+) : DataBoundListAdapter<String, ProductCategoryListItemBinding>(
     appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<String>() {
         override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
             return oldItem == newItem
@@ -51,25 +52,25 @@ class PDSizeChooserAdapter(
     val onClicked = MutableLiveData<String>()
     private var selectedItemIndex = -1
 
-    override fun createBinding(parent: ViewGroup): PDSizeChooserBinding {
+    override fun createBinding(parent: ViewGroup): ProductCategoryListItemBinding {
         return DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.list_item_product_details_size_chooser, parent, false
+            R.layout.list_item_product_category, parent, false
         )
     }
 
 
-    override fun bind(binding: PDSizeChooserBinding, position: Int) {
+    override fun bind(binding: ProductCategoryListItemBinding, position: Int) {
         val item = getItem(position)
 
-        binding.sizeIndicatorText.text = item
+        binding.categoryName.text = item
 
         if (selectedItemIndex == position) {
-            binding.sizeIndicator.setCardBackgroundColor(ColorStateList.valueOf(Color.parseColor("#E91E63")))
-            binding.sizeIndicatorText.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFFFF")))
+            binding.cardCategory.setCardBackgroundColor(ContextCompat.getColor(binding.root.context, R.color.themeColor))
+            binding.categoryName.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFFFF")))
         } else {
-            binding.sizeIndicator.setCardBackgroundColor(ColorStateList.valueOf(Color.parseColor("#DDDDDD")))
-            binding.sizeIndicatorText.setTextColor(ColorStateList.valueOf(Color.parseColor("#555555")))
+            binding.cardCategory.setCardBackgroundColor(ColorStateList.valueOf(Color.parseColor("#FFFFFF")))
+            binding.categoryName.setTextColor(ColorStateList.valueOf(Color.parseColor("#555555")))
         }
 
         binding.root.setOnClickListener {
