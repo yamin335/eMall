@@ -25,33 +25,33 @@ class ProductDetailsViewModel @Inject constructor(
         }
     }
 
-    fun doesItemExistsInCart(item: Product): LiveData<Boolean> {
-        val result = MutableLiveData<Boolean>()
-        val handler = CoroutineExceptionHandler { _, exception ->
-            exception.printStackTrace()
-        }
-
-        viewModelScope.launch(handler) {
-            cartDao.doesItemExists(item.id).collect {
-                result.postValue(it)
-            }
-        }
-        return result
-    }
-
-    fun doesItemExistsInFavorite(item: Product): LiveData<Boolean> {
-        val result = MutableLiveData<Boolean>()
-        val handler = CoroutineExceptionHandler { _, exception ->
-            exception.printStackTrace()
-        }
-
-        viewModelScope.launch(handler) {
-            favoriteDao.doesItemExistsInFavorite(item.id).collect {
-                result.postValue(it)
-            }
-        }
-        return result
-    }
+//    fun doesItemExistsInCart(item: Product): LiveData<Boolean> {
+//        val result = MutableLiveData<Boolean>()
+//        val handler = CoroutineExceptionHandler { _, exception ->
+//            exception.printStackTrace()
+//        }
+//
+//        viewModelScope.launch(handler) {
+//            cartDao.doesItemExists(item.id).collect {
+//                result.postValue(it)
+//            }
+//        }
+//        return result
+//    }
+//
+//    fun doesItemExistsInFavorite(item: Product): LiveData<Boolean> {
+//        val result = MutableLiveData<Boolean>()
+//        val handler = CoroutineExceptionHandler { _, exception ->
+//            exception.printStackTrace()
+//        }
+//
+//        viewModelScope.launch(handler) {
+//            favoriteDao.doesItemExistsInFavorite(item.id).collect {
+//                result.postValue(it)
+//            }
+//        }
+//        return result
+//    }
 
     fun addToCart(product: Product, quantity: Int) {
         try {
@@ -60,8 +60,10 @@ class ProductDetailsViewModel @Inject constructor(
             }
 
             viewModelScope.launch(handler) {
-                val response = cartDao.addItemToCart(CartItem(product.id, product.name, product.barcode, product.mrp, quantity, product.category_id, product.merchant_id))
-                if (response != -1L) {
+                val response = cartDao.addItemToCart(CartItem(0, product, quantity))
+                if (response == -1L) {
+                    toastWarning.postValue("Already added to cart!")
+                } else {
                     toastSuccess.postValue("Added to cart")
                 }
             }
@@ -78,7 +80,9 @@ class ProductDetailsViewModel @Inject constructor(
 
             viewModelScope.launch(handler) {
                 val response = favoriteDao.addItemToFavorite(product)
-                if (response != -1L) {
+                if (response == -1L) {
+                    toastWarning.postValue("Already added to favorite!")
+                } else {
                     toastSuccess.postValue("Added to favorite")
                 }
             }

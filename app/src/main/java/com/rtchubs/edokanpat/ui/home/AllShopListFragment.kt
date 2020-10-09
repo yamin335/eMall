@@ -1,7 +1,11 @@
 package com.rtchubs.edokanpat.ui.home
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -30,6 +34,11 @@ class AllShopListFragment :
     val args: AllShopListFragmentArgs by navArgs()
 
     lateinit var allShopListAdapter: AllShopListAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -99,5 +108,43 @@ class AllShopListFragment :
         })
 
         viewModel.getAllShopList()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_product_details, menu)
+
+        val menuItem = menu.findItem(R.id.menu_cart)
+        val actionView = menuItem.actionView
+        val badge = actionView.findViewById<TextView>(R.id.badge)
+        badge.text = viewModel.cartItemCount.value?.toString()
+        actionView.setOnClickListener {
+            onOptionsItemSelected(menuItem)
+        }
+
+        viewModel.cartItemCount.observe(viewLifecycleOwner, Observer {
+            it?.let { value ->
+                if (value < 1) {
+                    badge.visibility = View.INVISIBLE
+                    return@Observer
+                } else {
+                    badge.visibility = View.VISIBLE
+                    badge.text = value.toString()
+                }
+            }
+        })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home -> {
+                navController.navigateUp()
+            }
+
+            R.id.menu_cart -> {
+                navController.navigate(AllShopListFragmentDirections.actionAllShopListFragmentToCartFragment())
+            }
+        }
+
+        return true
     }
 }

@@ -46,6 +46,7 @@
             app:showLoader="@{viewModel.apiCallStatus}" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar">
@@ -59,7 +60,6 @@
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
-                    android:padding="16dp"
                     android:paddingBottom="16dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -128,5 +128,16 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/emptyView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Empty Cart"
+            android:textColor="#BBBBBB"
+            android:textSize="25sp"
+            android:textAlignment="center"
+            android:layout_centerInParent="true"/>
+
     </RelativeLayout>
 </layout>

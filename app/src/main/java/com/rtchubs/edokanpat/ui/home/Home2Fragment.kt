@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
@@ -89,6 +90,22 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
         viewDataBinding.appLogo.setOnClickListener {
             drawerListener?.toggleNavDrawer()
         }
+
+        viewDataBinding.cartMenu.setOnClickListener {
+            navController.navigate(Home2FragmentDirections.actionHome2FragmentToCartFragment())
+        }
+
+        viewModel.cartItemCount.observe(viewLifecycleOwner, Observer {
+            it?.let { value ->
+                if (value < 1) {
+                    viewDataBinding.badge.visibility = View.INVISIBLE
+                    return@Observer
+                } else {
+                    viewDataBinding.badge.visibility = View.VISIBLE
+                    viewDataBinding.badge.text = value.toString()
+                }
+            }
+        })
 
         viewModel.slideDataList.forEach { slideData ->
             val slide = SliderView(requireContext())

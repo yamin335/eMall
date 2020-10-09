@@ -71,6 +71,13 @@ class ProductDetailsFragment :
         viewDataBinding.name = product.name
         viewDataBinding.price = "$${product.mrp}"
 
+        viewModel.toastWarning.observe(viewLifecycleOwner, Observer {
+            it?.let { message ->
+                showWarningToast(requireContext(), message)
+                viewModel.toastWarning.postValue(null)
+            }
+        })
+
         viewModel.toastSuccess.observe(viewLifecycleOwner, Observer {
             it?.let { message ->
                 showSuccessToast(requireContext(), message)
@@ -150,17 +157,17 @@ class ProductDetailsFragment :
             }
         }
 
-        viewModel.doesItemExistsInCart(product).observe(viewLifecycleOwner, Observer {
-            it?.let { value ->
-                alreadyAddedToCart = value
-            }
-        })
-
-        viewModel.doesItemExistsInFavorite(product).observe(viewLifecycleOwner, Observer {
-            it?.let { value ->
-                alreadyAddedToFavorite = value
-            }
-        })
+//        viewModel.doesItemExistsInCart(product).observe(viewLifecycleOwner, Observer {
+//            it?.let { value ->
+//                alreadyAddedToCart = value
+//            }
+//        })
+//
+//        viewModel.doesItemExistsInFavorite(product).observe(viewLifecycleOwner, Observer {
+//            it?.let { value ->
+//                alreadyAddedToFavorite = value
+//            }
+//        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -12,6 +12,7 @@ import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.FavoriteFragmentBinding
 import com.rtchubs.edokanpat.databinding.ProductListFragmentBinding
+import com.rtchubs.edokanpat.models.Product
 import com.rtchubs.edokanpat.ui.LogoutHandlerCallback
 import com.rtchubs.edokanpat.ui.NavDrawerHandlerCallback
 import com.rtchubs.edokanpat.ui.common.BaseFragment
@@ -60,17 +61,45 @@ class FavoriteFragment : BaseFragment<FavoriteFragmentBinding, FavoriteViewModel
             drawerListener?.toggleNavDrawer()
         }
 
+        viewDataBinding.cartMenu.setOnClickListener {
+            navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToCartFragment2())
+        }
+
+        viewModel.cartItemCount.observe(viewLifecycleOwner, Observer {
+            it?.let { value ->
+                if (value < 1) {
+                    viewDataBinding.badge.visibility = View.INVISIBLE
+                    return@Observer
+                } else {
+                    viewDataBinding.badge.visibility = View.VISIBLE
+                    viewDataBinding.badge.text = value.toString()
+                }
+            }
+        })
+
         favoriteListAdapter = FavoriteListAdapter(
-            appExecutors
+            appExecutors,
+            object : FavoriteListAdapter.FavoriteListActionCallback {
+                override fun onRemove(item: Product) {
+                    viewModel.deleteFavoriteItem(item)
+                }
+            }
         ) { item ->
-            viewModel.deleteFavoriteItem(item)
+            navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToProductDetailsFragment2(item))
         }
 
         viewDataBinding.rvFavoriteList.adapter = favoriteListAdapter
 
         viewModel.favoriteItems.observe(viewLifecycleOwner, Observer {
             it?.let { list ->
-                favoriteListAdapter.submitList(list)
+                if (list.isEmpty()) {
+                    viewDataBinding.container.visibility = View.GONE
+                    viewDataBinding.emptyView.visibility = View.VISIBLE
+                } else {
+                    viewDataBinding.container.visibility = View.VISIBLE
+                    viewDataBinding.emptyView.visibility = View.GONE
+                    favoriteListAdapter.submitList(list)
+                }
             }
         })
     }

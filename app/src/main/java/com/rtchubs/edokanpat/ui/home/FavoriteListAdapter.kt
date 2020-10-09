@@ -33,6 +33,7 @@ import kotlinx.android.synthetic.main.popup_menu_product_item.view.*
 
 class FavoriteListAdapter(
     private val appExecutors: AppExecutors,
+    private val actionCallback: FavoriteListActionCallback,
     private val itemCallback: ((Product) -> Unit)? = null
 ) : DataBoundListAdapter<Product, FavoriteListItemBinding>(
     appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<Product>() {
@@ -66,8 +67,12 @@ class FavoriteListAdapter(
         binding.item = item
         binding.imageUrl = item.thumbnail
 
-        binding.remove.setOnClickListener {
+        binding.root.setOnClickListener {
             itemCallback?.invoke(item)
+        }
+
+        binding.remove.setOnClickListener {
+            actionCallback.onRemove(item)
         }
 
         binding.imageRequestListener = object: RequestListener<Drawable> {
@@ -80,5 +85,9 @@ class FavoriteListAdapter(
                 return false
             }
         }
+    }
+
+    interface FavoriteListActionCallback {
+        fun onRemove(item: Product)
     }
 }

@@ -22,8 +22,15 @@ import javax.inject.Inject
 
 class FavoriteViewModel @Inject constructor(
     private val application: Application,
-    private val favoriteDao: FavoriteDao
+    private val favoriteDao: FavoriteDao,
+    private val cartDao: CartDao
 ) : BaseViewModel(application) {
+
+    val cartItemCount: LiveData<Int> = liveData {
+        cartDao.getCartItemsCount().collect { count ->
+            emit(count)
+        }
+    }
 
     val favoriteItems: LiveData<List<Product>> = liveData {
         favoriteDao.getFavoriteItems().collect { list ->

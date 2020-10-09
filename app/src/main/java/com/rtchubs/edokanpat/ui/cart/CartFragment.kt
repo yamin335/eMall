@@ -43,15 +43,23 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
 
         viewModel.cartItems.observe(viewLifecycleOwner, Observer {
             it?.let { list ->
-                cartItemListAdapter.submitList(list)
 
-                var total = 0.0
-                list.forEach { item ->
-                    val price = item.mrp ?: 0.0
-                    val quantity = item.quantity ?: 0
-                    total += price * quantity
+                if (list.isEmpty()) {
+                    viewDataBinding.container.visibility = View.GONE
+                    viewDataBinding.emptyView.visibility = View.VISIBLE
+                } else {
+                    viewDataBinding.container.visibility = View.VISIBLE
+                    viewDataBinding.emptyView.visibility = View.GONE
+                    cartItemListAdapter.submitList(list)
+
+                    var total = 0.0
+                    list.forEach { item ->
+                        val price = item.product.mrp ?: 0.0
+                        val quantity = item.quantity ?: 0
+                        total += price * quantity
+                    }
+                    viewDataBinding.totalPrice = total.toString()
                 }
-                viewDataBinding.totalPrice = total.toString()
             }
         })
 
