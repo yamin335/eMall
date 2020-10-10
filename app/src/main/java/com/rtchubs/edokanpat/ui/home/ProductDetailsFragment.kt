@@ -93,12 +93,12 @@ class ProductDetailsFragment :
 
         viewDataBinding.rvSampleImage.adapter = pdImageSampleAdapter
 
-        pdImageSampleAdapter.submitList(listOf(product.product_image1, product.product_image2, product.product_image3, product.product_image4, product.product_image5))
+        pdImageSampleAdapter.submitList(listOf(product.thumbnail, product.thumbnail, product.thumbnail, product.thumbnail, product.thumbnail))
 
         viewDataBinding.imageUrl = product.thumbnail
         viewDataBinding.imageRequestListener = object: RequestListener<Drawable> {
             override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                viewDataBinding.imageView.setImageResource(R.drawable.product_image)
+                viewDataBinding.imageView.setImageResource(R.drawable.image_placeholder)
                 return true
             }
 

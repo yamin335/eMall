@@ -77,7 +77,7 @@ class FavoriteListAdapter(
 
         binding.imageRequestListener = object: RequestListener<Drawable> {
             override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                binding.thumbnail.setImageResource(R.drawable.product_image)
+                binding.thumbnail.setImageResource(R.drawable.image_placeholder)
                 return true
             }
 

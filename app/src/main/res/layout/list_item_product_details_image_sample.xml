@@ -28,6 +28,7 @@
             android:id="@+id/imageView"
             android:layout_width="0dp"
             android:layout_height="80dp"
+            android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:layout_margin="4dp"
             app:imageRequestListener="@{imageRequestListener}"
@@ -37,7 +38,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/product_image" />
+            tools:src="@drawable/image_placeholder" />
 
         <FrameLayout
             android:id="@+id/frame"

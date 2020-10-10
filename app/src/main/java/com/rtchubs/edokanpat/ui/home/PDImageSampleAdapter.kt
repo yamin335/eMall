@@ -73,7 +73,7 @@ class PDImageSampleAdapter(
 
         binding.imageRequestListener = object: RequestListener<Drawable> {
             override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                binding.imageView.setImageResource(R.drawable.product_image)
+                binding.imageView.setImageResource(R.drawable.image_placeholder)
                 return true
             }
 

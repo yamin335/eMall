@@ -33,6 +33,7 @@
                 android:id="@+id/logo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
                 app:layout_constrainedHeight="true"
                 android:padding="8dp"
                 android:layout_gravity="center"
