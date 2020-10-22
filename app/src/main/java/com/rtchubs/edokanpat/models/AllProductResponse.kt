@@ -6,7 +6,7 @@ import java.io.Serializable
 
 data class AllProductResponse(val code: Int?, val status: String?, val message: String?, val data: List<Product>?)
 
-data class ProductCategory(val id: Int?, val name: String?, val description: String?, val merchant_id: Int?, val created_at: String?, val updated_at: String?)
+data class ProductCategory(val id: Int?, val name: String?, val description: String?, val merchant_id: Int?, val created_at: String?, val updated_at: String?) : Serializable
 
 @Entity(tableName = "favorite")
 data class Product(

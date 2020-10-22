@@ -17,7 +17,4 @@ interface CartDao {
 
     @Query("SELECT COUNT(id) FROM cart")
     fun getCartItemsCount(): Flow<Int>
-
-    @Query("SELECT EXISTS (SELECT 1 FROM cart WHERE id = :id)")
-    fun doesItemExists(id: Int): Flow<Boolean>
 }

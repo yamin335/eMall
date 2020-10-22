@@ -25,13 +25,6 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_home2Fragment_to_chapterListFragment"
-            app:destination="@id/chapterListFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_home2Fragment_to_exams_nav_graph"
@@ -63,48 +56,6 @@
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
-    <fragment
-        android:id="@+id/chapterListFragment"
-        android:name="com.rtchubs.edokanpat.ui.chapter_list.ChapterListFragment"
-        android:label="Chapters"
-        tools:layout="@layout/fragment_home">
-
-        <action
-            android:id="@+id/action_chapterList_to_VideoPlay"
-            app:destination="@id/videoPlayFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/home_navigation" />
-
-        <action
-            android:id="@+id/action_chapterList_to_WebView"
-            app:destination="@id/loadWebViewFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/home_navigation" />
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/videoPlayFragment"
-        android:name="com.rtchubs.edokanpat.ui.video_play.VideoPlayFragment"
-        android:label="Video"
-        tools:layout="@layout/fragment_home">
-        <argument
-            android:name="chapterUrl"
-            app:argType="string" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/loadWebViewFragment"
-        android:name="com.rtchubs.edokanpat.ui.video_play.LoadWebViewFragment"
-        android:label="Video"
-        tools:layout="@layout/fragment_load_web_view">
-    </fragment>
 
     <fragment
         android:id="@+id/addPaymentMethodsFragment"
@@ -259,15 +210,15 @@
             android:name="shoppingMall"
             app:argType="com.rtchubs.edokanpat.models.ShoppingMall" />
         <action
-            android:id="@+id/action_allShopListFragment_to_productListFragment"
-            app:destination="@id/productListFragment"
+            android:id="@+id/action_allShopListFragment_to_cartFragment"
+            app:destination="@id/cartFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_allShopListFragment_to_cartFragment"
-            app:destination="@id/cartFragment"
+            android:id="@+id/action_allShopListFragment_to_shopDetailsFragment"
+            app:destination="@id/shopDetailsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -314,4 +265,33 @@
         android:id="@+id/cartFragment"
         android:name="com.rtchubs.edokanpat.ui.cart.CartFragment"
         android:label="Cart" />
+    <fragment
+        android:id="@+id/shopDetailsFragment"
+        android:name="com.rtchubs.edokanpat.ui.shops.ShopDetailsFragment"
+        android:label="ShopDetailsFragment" >
+        <argument
+            android:name="merchant"
+            app:argType="com.rtchubs.edokanpat.models.Merchant" />
+        <action
+            android:id="@+id/action_shopDetailsFragment_to_productListFragment"
+            app:destination="@id/productListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_shopDetailsFragment_to_cartFragment"
+            app:destination="@id/cartFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_shopDetailsFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 </navigation>

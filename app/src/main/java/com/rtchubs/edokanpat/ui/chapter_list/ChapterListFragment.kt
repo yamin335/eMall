@@ -23,10 +23,10 @@ class ChapterListFragment : BaseFragment<FragmentChapterListBinding, ChapterList
         registerToolbar(viewDataBinding.toolbar)
 
         chapterListAdapter = ChapterListAdapter(appExecutors) {
-            navController.navigate(
-                //ChapterListFragmentDirections.actionChapterListToVideoPlay("vedio_file")
-                ChapterListFragmentDirections.actionChapterListToWebView()
-            )
+//            navController.navigate(
+//                //ChapterListFragmentDirections.actionChapterListToVideoPlay("vedio_file")
+//                //ChapterListFragmentDirections.actionChapterListToWebView()
+//            )
         }
 
         viewDataBinding.rvChapterList.adapter = chapterListAdapter

@@ -21,7 +21,7 @@ import com.rtchubs.edokanpat.ui.common.BaseFragment
 import com.rtchubs.edokanpat.ui.home.SetAFragment
 import com.rtchubs.edokanpat.ui.home.SetBFragment
 import com.rtchubs.edokanpat.ui.home.SetCFragment
-import com.rtchubs.edokanpat.ui.home.VideoTabViewPagerAdapter
+import com.rtchubs.edokanpat.ui.home.FragmentViewPagerAdapter
 
 
 class LoadWebViewFragment: BaseFragment<WebViewBinding, LoadWebViewViewModel>() {
@@ -45,7 +45,7 @@ class LoadWebViewFragment: BaseFragment<WebViewBinding, LoadWebViewViewModel>() 
     private lateinit var viewPagerFragments: Array<Fragment>
     private val viewPagerPageTitles = arrayOf("Set A", "Set B", "Set C")
 
-    private lateinit var pagerAdapter: VideoTabViewPagerAdapter
+    private lateinit var pagerAdapter: FragmentViewPagerAdapter
 
     private var viewPagerCurrentItem = 0
 
@@ -124,7 +124,7 @@ class LoadWebViewFragment: BaseFragment<WebViewBinding, LoadWebViewViewModel>() 
 
         viewPagerFragments = arrayOf(setAFragment, setBFragment, setCFragment)
 
-        pagerAdapter = VideoTabViewPagerAdapter(viewPagerFragments, childFragmentManager, viewLifecycleOwner.lifecycle)
+        pagerAdapter = FragmentViewPagerAdapter(viewPagerFragments, childFragmentManager, viewLifecycleOwner.lifecycle)
 
         viewDataBinding.viewPager.adapter = pagerAdapter
 

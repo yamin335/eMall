@@ -63,7 +63,7 @@ class ProductListViewModel @Inject constructor(
             }
 
             viewModelScope.launch(handler) {
-                val response = cartDao.addItemToCart(CartItem(0, product, quantity))
+                val response = cartDao.addItemToCart(CartItem(product.id, product, quantity))
                 if (response == -1L) {
                     toastWarning.postValue("Already added to cart!")
                 } else {

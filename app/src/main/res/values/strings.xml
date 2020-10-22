@@ -489,4 +489,6 @@
     <string name="select_account_type">Select Account Type</string>
     <string name="info">Info</string>
     <string name="exams">Exams</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

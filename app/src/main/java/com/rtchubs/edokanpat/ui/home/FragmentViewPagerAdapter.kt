@@ -5,9 +5,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class VideoTabViewPagerAdapter internal constructor(private val fragmentList: Array<Fragment>,
-                                                   fragmentManager: FragmentManager,
-                                                   lifecycle: Lifecycle
+class FragmentViewPagerAdapter internal constructor(private val fragmentList: Array<Fragment>,
+                                                    fragmentManager: FragmentManager,
+                                                    lifecycle: Lifecycle
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {

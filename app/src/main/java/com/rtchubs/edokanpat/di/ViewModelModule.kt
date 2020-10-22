@@ -32,6 +32,8 @@ import com.rtchubs.edokanpat.ui.more.MoreViewModel
 import com.rtchubs.edokanpat.ui.otp_signin.OtpSignInViewModel
 import com.rtchubs.edokanpat.ui.pin_number.PinNumberViewModel
 import com.rtchubs.edokanpat.ui.profile_signin.ProfileSignInViewModel
+import com.rtchubs.edokanpat.ui.shops.ShopDetailsContactUsViewModel
+import com.rtchubs.edokanpat.ui.shops.ShopDetailsViewModel
 import com.rtchubs.edokanpat.ui.terms_and_conditions.TermsViewModel
 import com.rtchubs.edokanpat.ui.topup.TopUpAmountViewModel
 import com.rtchubs.edokanpat.ui.topup.TopUpBankCardViewModel
@@ -93,6 +95,16 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AllShopListViewModel::class)
     abstract fun bindAllShopListViewModel(viewModel: AllShopListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ShopDetailsViewModel::class)
+    abstract fun bindShopDetailsViewModel(viewModel: ShopDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ShopDetailsContactUsViewModel::class)
+    abstract fun bindShopDetailsContactUsViewModel(viewModel: ShopDetailsContactUsViewModel): ViewModel
 
     @Binds
     @IntoMap

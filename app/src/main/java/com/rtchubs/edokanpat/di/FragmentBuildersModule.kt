@@ -28,6 +28,9 @@ import com.rtchubs.edokanpat.ui.more.MoreFragment
 import com.rtchubs.edokanpat.ui.otp_signin.OtpSignInFragment
 import com.rtchubs.edokanpat.ui.pin_number.PinNumberFragment
 import com.rtchubs.edokanpat.ui.profile_signin.ProfileSignInFragment
+import com.rtchubs.edokanpat.ui.shops.ShopDetailsContactUsFragment
+import com.rtchubs.edokanpat.ui.shops.ShopDetailsFragment
+import com.rtchubs.edokanpat.ui.shops.ShopDetailsProductListFragment
 import com.rtchubs.edokanpat.ui.topup.TopUpAmountFragment
 import com.rtchubs.edokanpat.ui.topup.TopUpBankCardFragment
 import com.rtchubs.edokanpat.ui.topup.TopUpMobileFragment
@@ -53,6 +56,15 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeAllShopListFragment(): AllShopListFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeShopDetailsFragment(): ShopDetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeShopDetailsProductListFragment(): ShopDetailsProductListFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeShopDetailsContactUsFragment(): ShopDetailsContactUsFragment
 
     @ContributesAndroidInjector
     abstract fun contributeProductListFragment(): ProductListFragment

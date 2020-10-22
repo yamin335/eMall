@@ -49,7 +49,7 @@ class AllShopListFragment :
         allShopListAdapter = AllShopListAdapter(
                 appExecutors
             ) { item ->
-            navController.navigate(AllShopListFragmentDirections.actionAllShopListFragmentToProductListFragment(item))
+            navController.navigate(AllShopListFragmentDirections.actionAllShopListFragmentToShopDetailsFragment(item))
         }
 
         viewDataBinding.rvAllShopList.adapter = allShopListAdapter
