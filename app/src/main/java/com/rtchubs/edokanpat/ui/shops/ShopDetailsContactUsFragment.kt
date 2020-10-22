@@ -59,6 +59,23 @@ class ShopDetailsContactUsFragment : BaseFragment<ShopDetailsContactUsFragmentBi
             }
         }
 
+        viewDataBinding.rowAddress.setOnClickListener {
+            merchant?.address?.let { address ->
+                showAddressOnGoogleMap("RC7F+9M Dhaka")
+            }
+        }
+
+    }
+
+    private fun showAddressOnGoogleMap(code: String) {
+        // Display the location using a global plus code.
+        val gmmIntentUri = Uri.parse("http://plus.codes/$code")
+        //gmmIntentUri = Uri.parse("https://plus.codes/QJQ5+XX,San%20Francisco")
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+        mapIntent.resolveActivity(requireActivity().packageManager)?.let {
+            startActivity(mapIntent)
+        }
     }
 
     private fun openWhatsApp(number: String) {

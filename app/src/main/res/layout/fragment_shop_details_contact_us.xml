@@ -150,6 +150,7 @@
                             android:textColor="@color/colorPrimary"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
                             tools:text="+88-09603-111999"/>
                         <TextView
                             android:text="Email"
@@ -166,15 +167,61 @@
                     android:layout_width="match_parent"
                     android:layout_height="1px" android:layout_marginStart="49dp"/>
 
-                <TextView
+                <RelativeLayout
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@{merchant.address}"
-                    tools:text="Level-1, Jamuna Future Park, Uttara, Dhaka-1230, Bangladesh"/>
+                    android:id="@+id/rowAddress">
+                    <ImageView
+                        android:id="@+id/iconAddress"
+                        app:tint="#2196F3"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/ic_outline_location_on_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_toEndOf="@id/iconAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:text="@{merchant.address}"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            tools:text="Level-1, Jamuna Future Park, Uttara, Dhaka-1230, Bangladesh"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:text="Address"
+                                android:textSize="10sp"
+                                android:textColor="#808080"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"/>
+
+                            <TextView
+                                android:text="Show on Google Map"
+                                android:textSize="12sp"
+                                android:textColor="#2196F3"
+                                android:gravity="end"
+                                android:layout_marginEnd="16dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
 
             </LinearLayout>
 
