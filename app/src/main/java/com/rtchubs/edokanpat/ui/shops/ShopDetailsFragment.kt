@@ -122,6 +122,15 @@ class ShopDetailsFragment :
         super.onViewCreated(view, savedInstanceState)
         registerToolbar(viewDataBinding.toolbar)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            viewDataBinding.openArLocation.visibility = View.VISIBLE
+            viewDataBinding.openArLocation.setOnClickListener {
+                navController.navigate(ShopDetailsFragmentDirections.actionShopDetailsFragmentToARLocationFragment())
+            }
+        } else {
+            viewDataBinding.openArLocation.visibility = View.GONE
+        }
+
         viewDataBinding.toolbar.title = args.merchant.name
 
         viewPagerFragments = arrayOf(ShopDetailsProductListFragment.newInstance(args.merchant), ShopDetailsContactUsFragment.newInstance(args.merchant))

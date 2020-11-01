@@ -1,5 +1,6 @@
 package com.rtchubs.edokanpat.di
 
+import com.rtchubs.edokanpat.ar_location.ARLocationFragment
 import com.rtchubs.edokanpat.nid_scan.NIDScanCameraXFragment
 import com.rtchubs.edokanpat.ui.add_payment_methods.AddBankFragment
 import com.rtchubs.edokanpat.ui.add_payment_methods.AddCardFragment
@@ -177,4 +178,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeTopUpBankCardFragment(): TopUpBankCardFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeARLocationFragment(): ARLocationFragment
 }

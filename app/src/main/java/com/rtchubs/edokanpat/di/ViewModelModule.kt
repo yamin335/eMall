@@ -3,6 +3,7 @@ package com.rtchubs.edokanpat.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rtchubs.edokanpat.ViewModelFactory
+import com.rtchubs.edokanpat.ar_location.ARLocationViewModel
 import com.rtchubs.edokanpat.nid_scan.NIDScanCameraXViewModel
 import com.rtchubs.edokanpat.ui.LoginActivityViewModel
 import com.rtchubs.edokanpat.ui.MainActivityViewModel
@@ -278,5 +279,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(TopUpBankCardViewModel::class)
     abstract fun bindTopUpBankCardViewModel(viewModel: TopUpBankCardViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ARLocationViewModel::class)
+    abstract fun bindARLocationViewModel(viewModel: ARLocationViewModel): ViewModel
 
 }

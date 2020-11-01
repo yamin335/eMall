@@ -58,7 +58,8 @@ class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavDrawer
         R.id.termsAndConditions,
         R.id.otpSignInFragment,
         R.id.pinNumberFragment,
-        R.id.profileSignInFragment
+        R.id.profileSignInFragment,
+        R.id.ARLocationFragment
     )
 
     private var navigatedFromDashboard = false
