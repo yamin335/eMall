@@ -23,6 +23,7 @@ import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.ARLocationFragmentBinding
 import com.rtchubs.edokanpat.ui.common.BaseFragment
 import com.rtchubs.edokanpat.util.showWarningToast
+import com.rtchubs.edokanpat.util.toRounded
 import uk.co.appoly.arcorelocation.LocationMarker
 import uk.co.appoly.arcorelocation.LocationScene
 import uk.co.appoly.arcorelocation.rendering.LocationNodeRender
@@ -136,7 +137,15 @@ class ARLocationFragment : BaseFragment<ARLocationFragmentBinding, ARLocationVie
                             val shopName = eView?.findViewById<TextView>(R.id.shopName)
                             shopName?.text = args.location.placeName
                             val distanceView = eView?.findViewById<TextView>(R.id.distance)
-                            distanceView?.text = node.distance.toString() + "M"
+                            var distance = node.distance
+
+                            if (distance >= 1000) {
+                                var dist = distance.toDouble() / 1000
+                                dist = dist.toRounded(2)
+                                distanceView?.text = dist.toString() + " KM"
+                            } else {
+                                distanceView?.text = node.distance.toString() + " M"
+                            }
                         }
                     // Adding the marker
                     locationScene?.mLocationMarkers?.add(layoutLocationMarker)
