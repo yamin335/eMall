@@ -304,5 +304,9 @@
     <fragment
         android:id="@+id/ARLocationFragment"
         android:name="com.rtchubs.edokanpat.ar_location.ARLocationFragment"
-        android:label="ARLocationFragment" />
+        android:label="ARLocationFragment" >
+        <argument
+            android:name="location"
+            app:argType="com.rtchubs.edokanpat.models.LocationData" />
+    </fragment>
 </navigation>

@@ -18,6 +18,10 @@
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <!-- <uses-sdk tools:overrideLibrary="uk.co.arcorelocation"/> -->
 
+    <!-- This tag indicates that this application requires ARCore. This results in the application
+    only being visible in the Google Play Store on devices that support ARCore. -->
+    <uses-feature android:name="android.hardware.camera.ar" android:required="true"/>
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -30,6 +34,11 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="m">
+
+        <!-- This tag indicates that this application requires ARCore. This results in the
+    application only being visible in the Google Play Store on devices that support
+    ARCore. -->
+        <meta-data android:name="com.google.ar.core" android:value="required" />
 
         <activity android:name=".ui.SplashActivity"
             android:screenOrientation="portrait"

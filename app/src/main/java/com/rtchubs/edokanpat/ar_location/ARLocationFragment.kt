@@ -2,45 +2,36 @@ package com.rtchubs.edokanpat.ar_location
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
+import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
+import androidx.navigation.fragment.navArgs
 import com.google.ar.core.*
 import com.google.ar.core.exceptions.CameraNotAvailableException
-import com.google.ar.core.exceptions.UnavailableApkTooOldException
-import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException
-import com.google.ar.core.exceptions.UnavailableSdkTooOldException
+import com.google.ar.core.exceptions.UnavailableException
+import com.google.ar.sceneform.FrameTime
+import com.google.ar.sceneform.Node
+import com.google.ar.sceneform.rendering.ViewRenderable
 import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.R
-import com.rtchubs.edokanpat.ar_location.helpers.DisplayRotationHelper
-import com.rtchubs.edokanpat.ar_location.helpers.TapHelper
-import com.rtchubs.edokanpat.ar_location.rendering.BackgroundRenderer
-import com.rtchubs.edokanpat.ar_location.rendering.ObjectRenderer
-import com.rtchubs.edokanpat.ar_location.rendering.PlaneRenderer
-import com.rtchubs.edokanpat.ar_location.rendering.PointCloudRenderer
 import com.rtchubs.edokanpat.databinding.ARLocationFragmentBinding
 import com.rtchubs.edokanpat.ui.common.BaseFragment
+import com.rtchubs.edokanpat.util.showWarningToast
 import uk.co.appoly.arcorelocation.LocationMarker
 import uk.co.appoly.arcorelocation.LocationScene
-import uk.co.appoly.arcorelocation.rendering.AnnotationRenderer
-import uk.co.appoly.arcorelocation.rendering.ImageRenderer
+import uk.co.appoly.arcorelocation.rendering.LocationNodeRender
 import uk.co.appoly.arcorelocation.utils.ARLocationPermissionHelper
-import uk.co.appoly.arcorelocation.utils.Utils2D
-import java.io.IOException
 import java.util.*
-import javax.microedition.khronos.egl.EGLConfig
-import javax.microedition.khronos.opengles.GL10
+import java.util.concurrent.CompletableFuture
+import java.util.concurrent.ExecutionException
 
-class ARLocationFragment : BaseFragment<ARLocationFragmentBinding, ARLocationViewModel>(),
-    GLSurfaceView.Renderer {
+class ARLocationFragment : BaseFragment<ARLocationFragmentBinding, ARLocationViewModel>() {
 
     override val bindingVariable: Int
         get() = BR.viewModel
@@ -51,26 +42,19 @@ class ARLocationFragment : BaseFragment<ARLocationFragmentBinding, ARLocationVie
 
     private val TAG: String = ARLocationFragment::class.java.simpleName
 
-    private var mSession: Session? = null
-    private var mMessageSnackbar: Snackbar? = null
-    private var mDisplayRotationHelper: DisplayRotationHelper? = null
+    private var installRequested = false
+    private var hasFinishedLoading = false
 
-    private val mBackgroundRenderer = BackgroundRenderer()
+    // Renderables for this example
+    private var exampleLayoutRenderable: ViewRenderable? = null
 
-    private val mPlaneRenderer = PlaneRenderer()
-    private val mPointCloud = PointCloudRenderer()
-    private var tapHelper: TapHelper? = null
-
-    // Temporary matrix allocated here to reduce number of allocations for each frame.
-    private val mAnchorMatrix = FloatArray(16)
-
-    // Tap handling and UI.
-    //private final ArrayBlockingQueue<MotionEvent> mQueuedSingleTaps = new ArrayBlockingQueue<>(16);
-    private val mAnchors = ArrayList<Anchor>()
+    // Our ARCore-Location scene
 
     private var locationScene: LocationScene? = null
 
     private var systemUIConfigurationBackup: Int = 0
+
+    private val args: ARLocationFragmentArgs by navArgs()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -82,107 +66,126 @@ class ARLocationFragment : BaseFragment<ARLocationFragmentBinding, ARLocationVie
         restoreSystemUI()
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mDisplayRotationHelper = DisplayRotationHelper( /*context=*/requireContext())
-        }
 
-        tapHelper = TapHelper( /*context=*/requireContext())
-        viewDataBinding.surfaceview.setOnTouchListener(tapHelper)
+        // Build a renderable from a 2D View.
+        val exampleLayout: CompletableFuture<ViewRenderable> = ViewRenderable.builder()
+            .setView(requireContext(), R.layout.example_layout)
+            .build()
 
-        // Set up renderer.
-        viewDataBinding.surfaceview.setPreserveEGLContextOnPause(true)
-        viewDataBinding.surfaceview.setEGLContextClientVersion(2)
-        viewDataBinding.surfaceview.setEGLConfigChooser(8, 8, 8, 8, 16, 0) // Alpha used for plane blending.
+        CompletableFuture.allOf(
+            exampleLayout
+        ).handle<Any?> { notUsed: Void?, throwable: Throwable? ->
+                // When you build a Renderable, Sceneform loads its resources in the background while
+                // returning a CompletableFuture. Call handle(), thenAccept(), or check isDone()
+                // before calling get().
+                if (throwable != null) {
+                    DemoUtils.displayError(
+                        requireContext(),
+                        "Unable to load renderables",
+                        throwable
+                    )
+                    return@handle null
+                }
+                try {
+                    exampleLayoutRenderable = exampleLayout.get()
+                    hasFinishedLoading = true
+                } catch (ex: InterruptedException) {
+                    DemoUtils.displayError(requireContext(), "Unable to load renderables", ex)
+                } catch (ex: ExecutionException) {
+                    DemoUtils.displayError(requireContext(), "Unable to load renderables", ex)
+                }
+                null
+            }
 
-        viewDataBinding.surfaceview.setRenderer(this)
-        viewDataBinding.surfaceview.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY)
+        // Set an update listener on the Scene that will hide the loading message once a Plane is
+        // detected.
 
-        var exception: Exception? = null
-        var message: String? = null
-        try {
-            mSession = Session( /* context= */requireContext())
-        } catch (e: UnavailableArcoreNotInstalledException) {
-            message = "Please install ARCore"
-            exception = e
-        } catch (e: UnavailableApkTooOldException) {
-            message = "Please update ARCore"
-            exception = e
-        } catch (e: UnavailableSdkTooOldException) {
-            message = "Please update this app"
-            exception = e
-        } catch (e: Exception) {
-            message = "This device does not support AR"
-            exception = e
-        }
+        // Set an update listener on the Scene that will hide the loading message once a Plane is
+        // detected.
+        viewDataBinding.arSceneView
+            .scene
+            .addOnUpdateListener { frameTime: FrameTime? ->
+                if (!hasFinishedLoading) {
+                    return@addOnUpdateListener
+                }
+                if (locationScene == null) {
+                    // If our locationScene object hasn't been setup yet, this is a good time to do it
+                    // We know that here, the AR components have been initiated.
+                    locationScene = LocationScene(
+                        requireActivity(),
+                        viewDataBinding.arSceneView
+                    )
 
-        if (message != null) {
-            showSnackbarMessage(message, true)
-            Log.e(TAG, "Exception creating session", exception)
-            return
-        }
+                    // Now lets create our location markers.
+                    // First, a layout
+                    val layoutLocationMarker = LocationMarker(
+                        args.location.long,
+                        args.location.lat,
+                        getExampleView()
+                    )
 
-        // Create default config and check if supported.
+                    // An example "onRender" event, called every frame
+                    // Updates the layout with the markers distance
+                    layoutLocationMarker.renderEvent =
+                        LocationNodeRender { node ->
+                            val eView = exampleLayoutRenderable?.view
+                            val shopName = eView?.findViewById<TextView>(R.id.shopName)
+                            shopName?.text = args.location.placeName
+                            val distanceView = eView?.findViewById<TextView>(R.id.distance)
+                            distanceView?.text = node.distance.toString() + "M"
+                        }
+                    // Adding the marker
+                    locationScene?.mLocationMarkers?.add(layoutLocationMarker)
+                }
+                val frame = viewDataBinding.arSceneView.arFrame ?: return@addOnUpdateListener
+                if (frame.camera.trackingState != TrackingState.TRACKING) {
+                    return@addOnUpdateListener
+                }
+                if (locationScene != null) {
+                    locationScene!!.processFrame(frame)
+                }
+                for (plane in frame.getUpdatedTrackables(
+                    Plane::class.java
+                )) {
+                    if (plane.trackingState == TrackingState.TRACKING) {
+                        hideLoadingMessage()
+                    }
+                }
+            }
 
-        // Create default config and check if supported.
-        val config = Config(mSession)
-        if (!mSession!!.isSupported(config)) {
-            showSnackbarMessage("This device does not support AR", true)
-        }
-        mSession!!.configure(config)
+
+        // Lastly request CAMERA & fine location permission which is required by ARCore-Location.
 
 
-        // Set up our location scene
+        // Lastly request CAMERA & fine location permission which is required by ARCore-Location.
+        ARLocationPermissionHelper.requestPermission(requireActivity())
 
+    }
 
-        // Set up our location scene
-        locationScene = LocationScene(requireContext(), requireActivity(), mSession)
-
-        // Image marker at Eiffel Tower
-
-        // Image marker at Eiffel Tower
-        val eiffelTower = LocationMarker(
-            90.432124,
-            23.800899,
-            ImageRenderer("eiffel.png")
-        )
-        eiffelTower.setOnTouchListener {
+    /**
+     * Example node of a layout
+     *
+     * @return
+     */
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun getExampleView(): Node {
+        val base = Node()
+        base.renderable = exampleLayoutRenderable
+        val c: Context = requireContext()
+        // Add  listeners etc here
+        val eView = exampleLayoutRenderable!!.view
+        eView.setOnTouchListener { v: View?, event: MotionEvent? ->
             Toast.makeText(
-                requireContext(),
-                "Touched Eiffel Tower", Toast.LENGTH_SHORT
-            ).show()
+                c, "Location marker touched.", Toast.LENGTH_LONG
+            )
+                .show()
+            false
         }
-        eiffelTower.touchableSize = 1000
-        locationScene!!.mLocationMarkers.add(
-            eiffelTower
-        )
-
-        // Annotation at Buckingham Palace
-
-        // Annotation at Buckingham Palace
-        locationScene!!.mLocationMarkers.add(
-            LocationMarker(
-                -1.535823,
-                52.284501,
-                AnnotationRenderer("Buckingham Palace")
-            )
-        )
-
-        // Example of using your own renderer.
-        // Uses a slightly modified version of hello_ar_java's ObjectRenderer
-
-        // Example of using your own renderer.
-        // Uses a slightly modified version of hello_ar_java's ObjectRenderer
-        locationScene!!.mLocationMarkers.add(
-            LocationMarker(
-                90.430650,
-                23.800017,
-                ObjectRenderer("andy.obj", "andy.png")
-            )
-        )
-
+        return base
     }
 
     override fun onResume() {
@@ -191,39 +194,62 @@ class ARLocationFragment : BaseFragment<ARLocationFragmentBinding, ARLocationVie
         // ARCore requires camera permissions to operate. If we did not yet obtain runtime
         // permission on Android M and above, now is a good time to ask the user for it.
         if (ARLocationPermissionHelper.hasPermission(requireActivity())) {
-            if (locationScene != null) locationScene!!.resume()
-            if (mSession != null) {
-                showLoadingMessage()
-                // Note that order matters - see the note in onPause(), the reverse applies here.
-                try {
-                    mSession!!.resume()
-                } catch (e: CameraNotAvailableException) {
-                    e.printStackTrace()
-                }
-            }
-            viewDataBinding.surfaceview.onResume()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                mDisplayRotationHelper!!.onResume()
-            }
+
         } else {
             ARLocationPermissionHelper.requestPermission(requireActivity())
+        }
+
+        if (locationScene != null) {
+            locationScene?.resume()
+        }
+
+        if (viewDataBinding.arSceneView.session == null) {
+            // If the session wasn't created yet, don't resume rendering.
+            // This can happen if ARCore needs to be updated or permissions are not granted yet.
+            try {
+                val session = DemoUtils.createArSession(requireActivity(), installRequested)
+                if (session == null) {
+                    installRequested = ARLocationPermissionHelper.hasPermission(requireActivity())
+                    return
+                } else {
+                    viewDataBinding.arSceneView.setupSession(session)
+                }
+            } catch (e: UnavailableException) {
+                DemoUtils.handleSessionException(requireActivity(), e)
+            }
+        }
+
+        try {
+            viewDataBinding.arSceneView.resume()
+        } catch (ex: CameraNotAvailableException) {
+            DemoUtils.displayError(requireContext(), "Unable to get camera", ex)
+            navController.popBackStack()
+            return
+        }
+
+        if (viewDataBinding.arSceneView.session != null) {
+            showLoadingMessage()
         }
     }
 
     override fun onPause() {
         super.onPause()
-        if (locationScene != null) locationScene!!.pause()
-        // Note that the order matters - GLSurfaceView is paused first so that it does not try
-        // to query the session. If Session is paused before GLSurfaceView, GLSurfaceView may
-        // still call mSession.update() and get a SessionPausedException.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mDisplayRotationHelper!!.onPause()
+
+        if (locationScene != null) {
+            locationScene?.pause()
         }
-        viewDataBinding.surfaceview.onPause()
-        if (mSession != null) {
-            mSession!!.pause()
+
+        if (viewDataBinding.arSceneView != null) {
+            viewDataBinding.arSceneView.pause()
         }
     }
+
+//    override fun onDestroy() {
+//        if (viewDataBinding != null) {
+//            viewDataBinding.arSceneView.destroy()
+//        }
+//        super.onDestroy()
+//    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -231,15 +257,28 @@ class ARLocationFragment : BaseFragment<ARLocationFragmentBinding, ARLocationVie
         grantResults: IntArray
     ) {
         if (!ARLocationPermissionHelper.hasPermission(requireActivity())) {
-            Toast.makeText(
-                requireContext(),
-                "Camera permission is needed to run this application", Toast.LENGTH_LONG
-            ).show()
             if (!ARLocationPermissionHelper.shouldShowRequestPermissionRationale(requireActivity())) {
                 // Permission denied with checking "Do not ask again".
                 ARLocationPermissionHelper.launchPermissionSettings(requireActivity())
+            } else {
+                showWarningToast(
+                    requireContext(),
+                    "Camera permission is needed to run this application"
+                )
             }
             navController.popBackStack()
+        }
+    }
+
+    private fun showLoadingMessage() {
+        if (viewDataBinding.loader != null) {
+            viewDataBinding.loader.visibility = View.VISIBLE
+        }
+    }
+
+    private fun hideLoadingMessage() {
+        if (viewDataBinding.loader != null) {
+            viewDataBinding.loader.visibility = View.GONE
         }
     }
 
@@ -259,187 +298,4 @@ class ARLocationFragment : BaseFragment<ARLocationFragmentBinding, ARLocationVie
         requireActivity().window.decorView.systemUiVisibility = systemUIConfigurationBackup
         requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
-
-    private fun showSnackbarMessage(
-        message: String,
-        finishOnDismiss: Boolean
-    ) {
-        mMessageSnackbar = Snackbar.make(
-            requireActivity().findViewById(android.R.id.content),
-            message, Snackbar.LENGTH_INDEFINITE
-        )
-        mMessageSnackbar!!.view.setBackgroundColor(-0x40cdcdce)
-        if (finishOnDismiss) {
-            mMessageSnackbar!!.setAction(
-                "Dismiss"
-            ) { mMessageSnackbar!!.dismiss() }
-            mMessageSnackbar!!.addCallback(
-                object : BaseTransientBottomBar.BaseCallback<Snackbar?>() {
-                    override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                        super.onDismissed(transientBottomBar, event)
-                        navController.popBackStack()
-                    }
-                })
-        }
-        mMessageSnackbar!!.show()
-    }
-
-
-
-    private fun showLoadingMessage() {
-        requireActivity().runOnUiThread { showSnackbarMessage("Searching for surfaces...", false) }
-    }
-
-    private fun hideLoadingMessage() {
-        requireActivity().runOnUiThread {
-            if (mMessageSnackbar != null) {
-                mMessageSnackbar!!.dismiss()
-            }
-            mMessageSnackbar = null
-        }
-    }
-
-    override fun onDrawFrame(gl: GL10?) {
-        // Clear screen to notify driver it should not load any pixels from previous frame.
-
-        // Clear screen to notify driver it should not load any pixels from previous frame.
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-
-        if (mSession == null) {
-            return
-        }
-        // Notify ARCore session that the view size changed so that the perspective matrix and
-        // the video background can be properly adjusted.
-        // Notify ARCore session that the view size changed so that the perspective matrix and
-        // the video background can be properly adjusted.
-        mDisplayRotationHelper!!.updateSessionIfNeeded(mSession)
-
-        try {
-            // Obtain the current frame from ARSession. When the configuration is set to
-            // UpdateMode.BLOCKING (it is by default), this will throttle the rendering to the
-            // camera framerate.
-            val frame = mSession!!.update()
-            val camera = frame.camera
-
-
-            // Handle taps. Handling only one tap per frame, as taps are usually low frequency
-            // compared to frame rate.
-            val tap = tapHelper!!.poll()
-            if (tap != null && camera.trackingState == TrackingState.TRACKING) {
-                Log.i(TAG,
-                    "HITTEST: Got a tap and tracking"
-                )
-                Utils2D.handleTap(requireActivity(), locationScene, frame, tap)
-            }
-
-            // Draw background.
-            mBackgroundRenderer.draw(frame)
-
-            // Draw location markers
-            locationScene!!.draw(frame)
-
-            // If not tracking, don't draw 3d objects.
-            if (camera.trackingState == TrackingState.PAUSED) {
-                return
-            }
-
-            // Get projection matrix.
-            val projmtx = FloatArray(16)
-            camera.getProjectionMatrix(projmtx, 0, 0.1f, 100.0f)
-
-            // Get camera matrix and draw.
-            val viewmtx = FloatArray(16)
-            camera.getViewMatrix(viewmtx, 0)
-
-            // Compute lighting from average intensity of the image.
-            val lightIntensity = frame.lightEstimate.pixelIntensity
-
-            // Visualize tracked points.
-            val pointCloud = frame.acquirePointCloud()
-            mPointCloud.update(pointCloud)
-            mPointCloud.draw(viewmtx, projmtx)
-
-            // Application is responsible for releasing the point cloud resources after
-            // using it.
-            pointCloud.release()
-
-            // Check if we detected at least one plane. If so, hide the loading message.
-            if (mMessageSnackbar != null) {
-                for (plane in mSession!!.getAllTrackables(
-                    Plane::class.java
-                )) {
-                    if (plane.type == Plane.Type.HORIZONTAL_UPWARD_FACING
-                        && plane.trackingState == TrackingState.TRACKING
-                    ) {
-                        hideLoadingMessage()
-                        break
-                    }
-                }
-            }
-
-            // Visualize planes.
-            mPlaneRenderer.drawPlanes(
-                mSession!!.getAllTrackables(Plane::class.java),
-                camera.displayOrientedPose,
-                projmtx
-            )
-
-            // Visualize anchors created by touch.
-            val scaleFactor = 1.0f
-            for (anchor in mAnchors) {
-                if (anchor.trackingState != TrackingState.TRACKING) {
-                    continue
-                }
-                // Get the current pose of an Anchor in world space. The Anchor pose is updated
-                // during calls to session.update() as ARCore refines its estimate of the world.
-                anchor.pose.toMatrix(mAnchorMatrix, 0)
-            }
-        } catch (t: Throwable) {
-            // Avoid crashing the application due to unhandled exceptions.
-            Log.e(TAG,
-                "Exception on the OpenGL thread",
-                t
-            )
-        }
-    }
-
-    override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
-        mDisplayRotationHelper!!.onSurfaceChanged(width, height)
-        GLES20.glViewport(0, 0, width, height)
-    }
-
-    override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        GLES20.glClearColor(0.1f, 0.1f, 0.1f, 1.0f)
-
-        // Create the texture and pass it to ARCore session to be filled during update().
-
-        // Create the texture and pass it to ARCore session to be filled during update().
-        mBackgroundRenderer.createOnGlThread( /*context=*/requireContext())
-        if (mSession != null) {
-            mSession!!.setCameraTextureName(mBackgroundRenderer.textureId)
-        }
-
-        // Prepare the other rendering objects.
-        /*try {
-            mVirtualObject.createOnGlThread(*/
-        /*context=*/ /*this, "andy.obj", "andy.png");
-            mVirtualObject.setMaterialProperties(0.0f, 3.5f, 1.0f, 6.0f);
-
-            mVirtualObjectShadow.createOnGlThread(*/
-        /*context=*/ /*this,
-                "andy_shadow.obj", "andy_shadow.png");
-            mVirtualObjectShadow.setBlendMode(BlendMode.Shadow);
-            mVirtualObjectShadow.setMaterialProperties(1.0f, 0.0f, 0.0f, 1.0f);
-        } catch (IOException e) {
-            Log.e(TAG, "Failed to read obj file");
-        }*/try {
-            mPlaneRenderer.createOnGlThread( /*context=*/requireContext(), "trigrid.png")
-        } catch (e: IOException) {
-            Log.e(TAG,
-                "Failed to read plane texture"
-            )
-        }
-        mPointCloud.createOnGlThread( /*context=*/requireContext())
-    }
-
 }

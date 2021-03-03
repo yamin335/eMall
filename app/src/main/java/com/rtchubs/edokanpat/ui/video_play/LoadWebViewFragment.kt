@@ -141,7 +141,7 @@ class LoadWebViewFragment: BaseFragment<WebViewBinding, LoadWebViewViewModel>() 
     }
 
     override fun onDestroyView() {
-        viewDataBinding.webView.webViewClient = null
+        //viewDataBinding.webView.webViewClient = null
         super.onDestroyView()
     }
 

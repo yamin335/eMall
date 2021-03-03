@@ -9,11 +9,18 @@
         android:layout_height="match_parent"
         tools:context="com.google.ar.core.examples.java.helloar.HelloArActivity">
 
-        <android.opengl.GLSurfaceView
-            android:id="@+id/surfaceview"
+        <com.google.ar.sceneform.ArSceneView
+            android:id="@+id/ar_scene_view"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_gravity="top" />
+            android:layout_gravity="top"/>
+
+        <ProgressBar
+            android:id="@+id/loader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:layout_centerInParent="true"/>
 
     </RelativeLayout>
 </layout>

@@ -142,8 +142,8 @@ deps.mlkit_text_recognition = "com.google.android.gms:play-services-mlkit-text-r
 ext.deps = deps
 
 def build_versions = [:]
-build_versions.min_sdk = 21
-build_versions.target_sdk = 29
+build_versions.min_sdk = 24
+build_versions.target_sdk = 30
 ext.build_versions = build_versions
 
 def addRepos(RepositoryHandler handler) {

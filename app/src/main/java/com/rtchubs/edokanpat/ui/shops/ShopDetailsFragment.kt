@@ -21,6 +21,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.ShopDetailsFragmentBinding
+import com.rtchubs.edokanpat.models.LocationData
 import com.rtchubs.edokanpat.models.Merchant
 import com.rtchubs.edokanpat.models.Product
 import com.rtchubs.edokanpat.ui.common.BaseFragment
@@ -125,7 +126,13 @@ class ShopDetailsFragment :
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             viewDataBinding.openArLocation.visibility = View.VISIBLE
             viewDataBinding.openArLocation.setOnClickListener {
-                navController.navigate(ShopDetailsFragmentDirections.actionShopDetailsFragmentToARLocationFragment())
+                val merchant = args.merchant
+                val lat = merchant.lat ?: return@setOnClickListener
+                val long = merchant.long ?: return@setOnClickListener
+                val shopName = merchant.name ?: "Unknown Place"
+                navController.navigate(ShopDetailsFragmentDirections.actionShopDetailsFragmentToARLocationFragment(
+                    LocationData(shopName, lat, long)
+                ))
             }
         } else {
             viewDataBinding.openArLocation.visibility = View.GONE
