@@ -146,7 +146,7 @@ class HomeViewModel @Inject constructor(
         )
 
 
-    val slideDataList = listOf<SlideData>(
+    val slideDataList = listOf(
         SlideData(R.drawable.slider_image_1, "Ads1", "Now Easy and Fast Shopping"),
         SlideData(R.drawable.slider_image_1, "Ads2", "Now Easy and Fast Shopping"),
         SlideData(R.drawable.slider_image_1, "Ads3", "Now Easy and Fast Shopping"),

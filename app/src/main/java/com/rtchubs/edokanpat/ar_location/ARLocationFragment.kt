@@ -72,6 +72,10 @@ class ARLocationFragment : BaseFragment<ARLocationFragmentBinding, ARLocationVie
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewDataBinding.back.setOnClickListener {
+            navController.popBackStack()
+        }
+
         // Build a renderable from a 2D View.
         val exampleLayout: CompletableFuture<ViewRenderable> = ViewRenderable.builder()
             .setView(requireContext(), R.layout.example_layout)
@@ -101,9 +105,6 @@ class ARLocationFragment : BaseFragment<ARLocationFragmentBinding, ARLocationVie
                 }
                 null
             }
-
-        // Set an update listener on the Scene that will hide the loading message once a Plane is
-        // detected.
 
         // Set an update listener on the Scene that will hide the loading message once a Plane is
         // detected.
@@ -137,12 +138,12 @@ class ARLocationFragment : BaseFragment<ARLocationFragmentBinding, ARLocationVie
                             val shopName = eView?.findViewById<TextView>(R.id.shopName)
                             shopName?.text = args.location.placeName
                             val distanceView = eView?.findViewById<TextView>(R.id.distance)
-                            var distance = node.distance
+                            val distance = node.distance
 
                             if (distance >= 1000) {
                                 var dist = distance.toDouble() / 1000
                                 dist = dist.toRounded(2)
-                                distanceView?.text = dist.toString() + " KM"
+                                distanceView?.text = "$dist KM"
                             } else {
                                 distanceView?.text = node.distance.toString() + " M"
                             }
@@ -155,7 +156,7 @@ class ARLocationFragment : BaseFragment<ARLocationFragmentBinding, ARLocationVie
                     return@addOnUpdateListener
                 }
                 if (locationScene != null) {
-                    locationScene!!.processFrame(frame)
+                    locationScene?.processFrame(frame)
                 }
                 for (plane in frame.getUpdatedTrackables(
                     Plane::class.java
@@ -166,13 +167,8 @@ class ARLocationFragment : BaseFragment<ARLocationFragmentBinding, ARLocationVie
                 }
             }
 
-
-        // Lastly request CAMERA & fine location permission which is required by ARCore-Location.
-
-
         // Lastly request CAMERA & fine location permission which is required by ARCore-Location.
         ARLocationPermissionHelper.requestPermission(requireActivity())
-
     }
 
     /**

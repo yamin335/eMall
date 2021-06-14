@@ -13,7 +13,7 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_outline_favorite_border_24"/>
     <item
-        android:title="Live"
+        android:title="Live Chat"
         app:showAsAction="always"
         android:enabled="false"
         android:checkable="false"

@@ -2,6 +2,7 @@ package com.rtchubs.edokanpat.local_db.db
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
+import com.rtchubs.edokanpat.models.OrderProduct
 import com.rtchubs.edokanpat.models.Product
 import com.rtchubs.edokanpat.models.ProductCategory
 
@@ -27,6 +28,16 @@ class RoomDataConverter {
 
     @TypeConverter
     fun productToJsonString(product: Product): String {
+        return gson.toJson(product)
+    }
+
+    @TypeConverter
+    fun jsonStringToOrderProduct(value: String): OrderProduct {
+        return gson.fromJson(value, OrderProduct::class.java)
+    }
+
+    @TypeConverter
+    fun orderProductToJsonString(product: OrderProduct): String {
         return gson.toJson(product)
     }
 

@@ -18,6 +18,7 @@ import com.google.android.material.navigation.NavigationView
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.MainActivityBinding
 import com.rtchubs.edokanpat.ui.home.Home2FragmentDirections
+import com.rtchubs.edokanpat.ui.live_chat.LiveChatActivity
 import com.rtchubs.edokanpat.util.hideKeyboard
 import com.rtchubs.edokanpat.util.shouldCloseDrawerFromBackPress
 import dagger.android.support.DaggerAppCompatActivity
@@ -74,6 +75,11 @@ class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavDrawer
         binding.viewModel = viewModel
         binding.mainContainer.showBottomNav = true
         binding.drawerNavigation.setNavigationItemSelectedListener(this)
+
+        binding.mainContainer.btnLiveChat.setOnClickListener {
+            startActivity(Intent(this, LiveChatActivity::class.java))
+            overridePendingTransition(R.anim.slide_up, R.anim.slide_down)
+        }
 
         // Setup multi-backStack supported bottomNav
         if (savedInstanceState == null) {

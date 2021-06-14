@@ -17,6 +17,8 @@ import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.ShopDetailsProductListFragmentBinding
 import com.rtchubs.edokanpat.models.Merchant
+import com.rtchubs.edokanpat.models.OrderMerchant
+import com.rtchubs.edokanpat.models.OrderProduct
 import com.rtchubs.edokanpat.models.Product
 import com.rtchubs.edokanpat.ui.LogoutHandlerCallback
 import com.rtchubs.edokanpat.ui.NavDrawerHandlerCallback
@@ -51,6 +53,14 @@ class ShopDetailsProductListFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        orderMerchant = OrderMerchant(merchant?.id, merchant?.name, merchant?.user_name,
+            merchant?.password, merchant?.shop_name, merchant?.mobile,
+            merchant?.lat, merchant?.long, merchant?.whatsApp,
+            merchant?.email, merchant?.address, merchant?.shop_address,
+            merchant?.shop_logo, merchant?.thumbnail, merchant?.isActive,
+            merchant?.shopping_mall_id, merchant?.shopping_mall_level_id,
+            merchant?.created_at, merchant?.updated_at)
+
         viewModel.toastWarning.observe(viewLifecycleOwner, Observer {
             it?.let { message ->
                 showWarningToast(requireContext(), message)
@@ -73,7 +83,15 @@ class ShopDetailsProductListFragment :
                 }
 
                 override fun addToCart(item: Product) {
-                    viewModel.addToCart(item, 1)
+                    viewModel.addToCart(
+                        OrderProduct(item.id, item.name, item.barcode,
+                        item.description, item.buying_price?.toInt(), item.selling_price?.toInt(),
+                        item.mrp?.toInt(), item.expired_date, item.thumbnail,
+                        item.product_image1, item.product_image2,
+                        item.product_image3, item.product_image4,
+                        item.product_image5, item.category_id, item.merchant_id,
+                        item.created_at, item.updated_at,
+                        orderMerchant, item.category), 1)
                 }
 
             }) { item ->
@@ -111,6 +129,8 @@ class ShopDetailsProductListFragment :
          * @param merchant Selected Merchant.
          * @return A new instance of fragment 'ShopDetailsProductListFragment'.
          */
+
+        var orderMerchant: OrderMerchant? = null
 
         @JvmStatic
         fun newInstance(merchant: Merchant) =

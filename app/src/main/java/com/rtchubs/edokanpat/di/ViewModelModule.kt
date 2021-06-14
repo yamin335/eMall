@@ -16,6 +16,7 @@ import com.rtchubs.edokanpat.ui.exams.ExamsViewModel
 import com.rtchubs.edokanpat.ui.home.*
 import com.rtchubs.edokanpat.ui.how_works.HowWorksViewModel
 import com.rtchubs.edokanpat.ui.info.InfoViewModel
+import com.rtchubs.edokanpat.ui.live_chat.LiveChatViewModel
 import com.rtchubs.edokanpat.ui.login.SignInViewModel
 import com.rtchubs.edokanpat.ui.tou.TouViewModel
 import com.rtchubs.edokanpat.ui.otp.OtpViewModel
@@ -284,5 +285,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ARLocationViewModel::class)
     abstract fun bindARLocationViewModel(viewModel: ARLocationViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LiveChatViewModel::class)
+    abstract fun bindLiveChatViewModel(viewModel: LiveChatViewModel): ViewModel
 
 }

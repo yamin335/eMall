@@ -26,7 +26,9 @@ import com.rtchubs.edokanpat.databinding.ProductDetailsFragmentBinding
 import com.rtchubs.edokanpat.local_db.dao.CartDao
 import com.rtchubs.edokanpat.local_db.db.AppDatabase
 import com.rtchubs.edokanpat.local_db.dbo.CartItem
+import com.rtchubs.edokanpat.models.OrderProduct
 import com.rtchubs.edokanpat.ui.common.BaseFragment
+import com.rtchubs.edokanpat.ui.shops.ShopDetailsProductListFragment
 import com.rtchubs.edokanpat.util.GridRecyclerItemDecorator
 import com.rtchubs.edokanpat.util.showSuccessToast
 import com.rtchubs.edokanpat.util.showWarningToast
@@ -146,7 +148,15 @@ class ProductDetailsFragment :
             if (alreadyAddedToCart) {
                 showWarningToast(requireContext(), "Already added to cart!")
             } else {
-                viewModel.addToCart(product, quantity)
+                viewModel.addToCart(
+                    OrderProduct(product.id, product.name, product.barcode,
+                        product.description, product.buying_price?.toInt(), product.selling_price?.toInt(),
+                        product.mrp?.toInt(), product.expired_date, product.thumbnail,
+                        product.product_image1, product.product_image2,
+                        product.product_image3, product.product_image4,
+                        product.product_image5, product.category_id, product.merchant_id,
+                        product.created_at, product.updated_at,
+                        ShopDetailsProductListFragment.orderMerchant, product.category), quantity)
             }
         }
 

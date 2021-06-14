@@ -11,6 +11,7 @@ import com.rtchubs.edokanpat.local_db.dao.CartDao
 import com.rtchubs.edokanpat.local_db.dao.FavoriteDao
 import com.rtchubs.edokanpat.local_db.dbo.CartItem
 import com.rtchubs.edokanpat.models.AllProductResponse
+import com.rtchubs.edokanpat.models.OrderProduct
 import com.rtchubs.edokanpat.models.Product
 import com.rtchubs.edokanpat.repos.HomeRepository
 import com.rtchubs.edokanpat.ui.common.BaseViewModel
@@ -56,14 +57,14 @@ class ProductListViewModel @Inject constructor(
         }
     }
 
-    fun addToCart(product: Product, quantity: Int) {
+    fun addToCart(product: OrderProduct, quantity: Int) {
         try {
             val handler = CoroutineExceptionHandler { _, exception ->
                 exception.printStackTrace()
             }
 
             viewModelScope.launch(handler) {
-                val response = cartDao.addItemToCart(CartItem(product.id, product, quantity))
+                val response = cartDao.addItemToCart(CartItem(product.id ?: 0, product, quantity))
                 if (response == -1L) {
                     toastWarning.postValue("Already added to cart!")
                 } else {

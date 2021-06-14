@@ -39,6 +39,7 @@ object ApiEndPoint {
     const val ALL_MALL = "/$REPO/shopping-malls"
     const val ALL_MERCHANTS = "/$REPO/all-merchants"
     const val MERCHANT_PRODUCTS = "/$REPO/products-by-merchant/{id}"
+    const val SALE = "/$REPO/sale"
 }
 
 object ResponseCodes {

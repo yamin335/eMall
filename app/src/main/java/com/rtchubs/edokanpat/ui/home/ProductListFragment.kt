@@ -16,8 +16,12 @@ import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.MoreShoppingListFragmentBinding
 import com.rtchubs.edokanpat.databinding.ProductListFragmentBinding
+import com.rtchubs.edokanpat.models.Merchant
+import com.rtchubs.edokanpat.models.OrderMerchant
+import com.rtchubs.edokanpat.models.OrderProduct
 import com.rtchubs.edokanpat.models.Product
 import com.rtchubs.edokanpat.ui.common.BaseFragment
+import com.rtchubs.edokanpat.ui.shops.ShopDetailsProductListFragment
 import com.rtchubs.edokanpat.util.GridRecyclerItemDecorator
 import com.rtchubs.edokanpat.util.showErrorToast
 import com.rtchubs.edokanpat.util.showSuccessToast
@@ -25,6 +29,7 @@ import com.rtchubs.edokanpat.util.showWarningToast
 
 class ProductListFragment :
     BaseFragment<ProductListFragmentBinding, ProductListViewModel>() {
+
     override val bindingVariable: Int
         get() = BR.viewModel
     override val layoutId: Int
@@ -80,7 +85,14 @@ class ProductListFragment :
                 }
 
                 override fun addToCart(item: Product) {
-                    viewModel.addToCart(item, 1)
+                    viewModel.addToCart(OrderProduct(item.id, item.name, item.barcode,
+                        item.description, item.buying_price?.toInt(), item.selling_price?.toInt(),
+                        item.mrp?.toInt(), item.expired_date, item.thumbnail,
+                        item.product_image1, item.product_image2,
+                        item.product_image3, item.product_image4,
+                        item.product_image5, item.category_id, item.merchant_id,
+                        item.created_at, item.updated_at,
+                        ShopDetailsProductListFragment.orderMerchant, item.category), 1)
                 }
 
             }) { item ->
