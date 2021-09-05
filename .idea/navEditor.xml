@@ -704,8 +704,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-236" />
-                            <option name="y" value="-787" />
+                            <option name="x" value="603" />
+                            <option name="y" value="-317" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -1273,6 +1273,18 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="addProductFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="208" />
+                            <option name="y" value="8" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="drawer_nav_graph">
                     <value>
                       <LayoutPositions>

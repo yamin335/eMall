@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.MergeAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.rtchubs.edokanpat.AppExecutors
 import com.rtchubs.edokanpat.R
@@ -37,28 +36,28 @@ class DoctorsListAdapter(
     private val viewPool: RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool()
     lateinit var topSpecialistAdapter: TopSpecialistAdapter
     lateinit var subDoctorsListAdapter: SubDoctorsListAdapter
-    lateinit var mergeAdapter: MergeAdapter
+    //lateinit var mergeAdapter: MergeAdapter
 
     override fun createBinding(parent: ViewGroup): ItemDoctorsListBinding {
         val binding: ItemDoctorsListBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             R.layout.item_doctors_list, parent, false
         )
-        binding.rvDoctorsList.setRecycledViewPool(viewPool)
+        //binding.rvDoctorsList.setRecycledViewPool(viewPool)
 
         topSpecialistAdapter = TopSpecialistAdapter(appExecutors, itemCallback)
         subDoctorsListAdapter = SubDoctorsListAdapter(appExecutors, itemCallback)
-        mergeAdapter = MergeAdapter(topSpecialistAdapter, subDoctorsListAdapter)
+        //mergeAdapter = MergeAdapter(topSpecialistAdapter, subDoctorsListAdapter)
 
         //binding.rvDoctorsList.adapter = SubDoctorsListAdapter(appExecutors , itemCallback)
-        binding.rvDoctorsList.adapter = mergeAdapter
+        //binding.rvDoctorsList.adapter = mergeAdapter
         return binding
     }
 
 
     override fun bind(binding: ItemDoctorsListBinding, position: Int) {
         val item = getItem(position)
-        binding.tvTitle.text = item.title
+        //binding.tvTitle.text = item.title
         if (position == 0) {
             topSpecialistAdapter.submitList(item.listOfSubDoctors)
         } else {

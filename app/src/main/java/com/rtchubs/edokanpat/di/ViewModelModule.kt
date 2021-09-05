@@ -10,6 +10,7 @@ import com.rtchubs.edokanpat.ui.MainActivityViewModel
 import com.rtchubs.edokanpat.ui.add_payment_methods.AddBankViewModel
 import com.rtchubs.edokanpat.ui.add_payment_methods.AddCardViewModel
 import com.rtchubs.edokanpat.ui.add_payment_methods.AddPaymentMethodsViewModel
+import com.rtchubs.edokanpat.ui.add_product.AddProductViewModel
 import com.rtchubs.edokanpat.ui.cart.CartViewModel
 import com.rtchubs.edokanpat.ui.chapter_list.ChapterListViewModel
 import com.rtchubs.edokanpat.ui.exams.ExamsViewModel
@@ -290,5 +291,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LiveChatViewModel::class)
     abstract fun bindLiveChatViewModel(viewModel: LiveChatViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddProductViewModel::class)
+    abstract fun bindAddProductViewModel(viewModel: AddProductViewModel): ViewModel
 
 }

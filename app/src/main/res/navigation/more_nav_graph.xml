@@ -9,7 +9,20 @@
         android:id="@+id/moreFragment"
         android:name="com.rtchubs.edokanpat.ui.more.MoreFragment"
         android:label="More"
-        tools:layout="@layout/fragment_more" />
+        tools:layout="@layout/fragment_more" >
+        <action
+            android:id="@+id/action_moreFragment_to_addProductFragment"
+            app:destination="@id/addProductFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
     <include app:graph="@navigation/drawer_nav_graph" />
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="com.rtchubs.edokanpat.ui.add_product.AddProductFragment"
+        android:label="Add New Product"
+        tools:layout="@layout/fragment_add_product"/>
 </navigation>

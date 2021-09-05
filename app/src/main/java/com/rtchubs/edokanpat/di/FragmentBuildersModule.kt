@@ -5,6 +5,7 @@ import com.rtchubs.edokanpat.nid_scan.NIDScanCameraXFragment
 import com.rtchubs.edokanpat.ui.add_payment_methods.AddBankFragment
 import com.rtchubs.edokanpat.ui.add_payment_methods.AddCardFragment
 import com.rtchubs.edokanpat.ui.add_payment_methods.AddPaymentMethodsFragment
+import com.rtchubs.edokanpat.ui.add_product.AddProductFragment
 import com.rtchubs.edokanpat.ui.cart.CartFragment
 import com.rtchubs.edokanpat.ui.chapter_list.ChapterListFragment
 import com.rtchubs.edokanpat.ui.exams.ExamsFragment
@@ -181,4 +182,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeARLocationFragment(): ARLocationFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAddProductFragment(): AddProductFragment
 }
