@@ -6,7 +6,7 @@
     <data class="Home2Binding">
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.home.HomeViewModel" />
+            type="com.mallzhub.customer.ui.home.HomeViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/moreFragment"
-        android:name="com.rtchubs.edokanpat.ui.more.MoreFragment"
+        android:name="com.mallzhub.customer.ui.more.MoreFragment"
         android:label="More"
         tools:layout="@layout/fragment_more" >
         <action
@@ -22,7 +22,7 @@
     <include app:graph="@navigation/drawer_nav_graph" />
     <fragment
         android:id="@+id/addProductFragment"
-        android:name="com.rtchubs.edokanpat.ui.add_product.AddProductFragment"
+        android:name="com.mallzhub.customer.ui.add_product.AddProductFragment"
         android:label="Add New Product"
         tools:layout="@layout/fragment_add_product"/>
 </navigation>

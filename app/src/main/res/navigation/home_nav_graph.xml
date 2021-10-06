@@ -8,7 +8,7 @@
     <fragment
         tools:layout="@layout/fragment_main2"
         android:id="@+id/home2Fragment"
-        android:name="com.rtchubs.edokanpat.ui.home.Home2Fragment"
+        android:name="com.mallzhub.customer.ui.home.Home2Fragment"
         android:label="QPay" >
         <action
             android:id="@+id/action_home2Fragment_to_addPaymentMethodsFragment"
@@ -60,7 +60,7 @@
     <fragment
         android:id="@+id/addPaymentMethodsFragment"
         tools:layout="@layout/layout_add_payment_method"
-        android:name="com.rtchubs.edokanpat.ui.add_payment_methods.AddPaymentMethodsFragment"
+        android:name="com.mallzhub.customer.ui.add_payment_methods.AddPaymentMethodsFragment"
         android:label="@string/select_account_type" >
         <action
             android:id="@+id/action_addPaymentMethodsFragment_to_addBankFragment"
@@ -79,7 +79,7 @@
     </fragment>
     <fragment
         android:id="@+id/addBankFragment"
-        android:name="com.rtchubs.edokanpat.ui.add_payment_methods.AddBankFragment"
+        android:name="com.mallzhub.customer.ui.add_payment_methods.AddBankFragment"
         android:label="Add Bank Account"
         tools:layout="@layout/fragment_add_bank" >
         <action
@@ -94,11 +94,11 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="selectedBank"
-            app:argType="com.rtchubs.edokanpat.models.payment_account_models.BankOrCard" />
+            app:argType="com.mallzhub.customer.models.payment_account_models.BankOrCard" />
     </fragment>
     <fragment
         android:id="@+id/addCardFragment"
-        android:name="com.rtchubs.edokanpat.ui.add_payment_methods.AddCardFragment"
+        android:name="com.mallzhub.customer.ui.add_payment_methods.AddCardFragment"
         android:label="Add Debit/Credit Card"
         tools:layout="@layout/fragment_add_card" >
         <action
@@ -113,16 +113,16 @@
             app:popUpToInclusive="true"/>
         <argument
             android:name="selectedCard"
-            app:argType="com.rtchubs.edokanpat.models.payment_account_models.BankOrCard" />
+            app:argType="com.mallzhub.customer.models.payment_account_models.BankOrCard" />
     </fragment>
     <fragment
         android:id="@+id/topUpMobileFragment"
-        android:name="com.rtchubs.edokanpat.ui.topup.TopUpMobileFragment"
+        android:name="com.mallzhub.customer.ui.topup.TopUpMobileFragment"
         android:label="Mobile Number"
         tools:layout="@layout/fragment_topup_mobile">
         <argument
             android:name="topUpHelper"
-            app:argType="com.rtchubs.edokanpat.models.topup.TopUpHelper" />
+            app:argType="com.mallzhub.customer.models.topup.TopUpHelper" />
         <action
             android:id="@+id/action_topUpMobileFragment_to_topUpAmountFragment"
             app:destination="@id/topUpAmountFragment"
@@ -133,12 +133,12 @@
     </fragment>
     <fragment
         android:id="@+id/topUpAmountFragment"
-        android:name="com.rtchubs.edokanpat.ui.topup.TopUpAmountFragment"
+        android:name="com.mallzhub.customer.ui.topup.TopUpAmountFragment"
         android:label="Recharge Amount"
         tools:layout="@layout/fragment_topup_amount">
         <argument
             android:name="topUpHelper"
-            app:argType="com.rtchubs.edokanpat.models.topup.TopUpHelper" />
+            app:argType="com.mallzhub.customer.models.topup.TopUpHelper" />
         <action
             android:id="@+id/action_topUpAmountFragment_to_topUpBankCardFragment"
             app:destination="@id/topUpBankCardFragment"
@@ -149,12 +149,12 @@
     </fragment>
     <fragment
         android:id="@+id/topUpPinFragment"
-        android:name="com.rtchubs.edokanpat.ui.topup.TopUpPinFragment"
+        android:name="com.mallzhub.customer.ui.topup.TopUpPinFragment"
         android:label="Pin Number"
         tools:layout="@layout/fragment_topup_pin">
         <argument
             android:name="topUpHelper"
-            app:argType="com.rtchubs.edokanpat.models.topup.TopUpHelper" />
+            app:argType="com.mallzhub.customer.models.topup.TopUpHelper" />
         <action
             android:id="@+id/action_topUpPinFragment_to_home2Fragment"
             app:destination="@id/home2Fragment"
@@ -168,12 +168,12 @@
     </fragment>
     <fragment
         android:id="@+id/topUpBankCardFragment"
-        android:name="com.rtchubs.edokanpat.ui.topup.TopUpBankCardFragment"
+        android:name="com.mallzhub.customer.ui.topup.TopUpBankCardFragment"
         tools:layout="@layout/fragment_topup_bank_card"
         android:label="Select Account">
         <argument
             android:name="topUpHelper"
-            app:argType="com.rtchubs.edokanpat.models.topup.TopUpHelper" />
+            app:argType="com.mallzhub.customer.models.topup.TopUpHelper" />
         <action
             android:id="@+id/action_topUpBankCardFragment_to_topUpPinFragment"
             app:destination="@id/topUpPinFragment"
@@ -185,7 +185,7 @@
     <include app:graph="@navigation/exams_nav_graph" />
     <fragment
         android:id="@+id/moreShoppingMallFragment"
-        android:name="com.rtchubs.edokanpat.ui.home.MoreShoppingMallFragment"
+        android:name="com.mallzhub.customer.ui.home.MoreShoppingMallFragment"
         android:label="Shopping Malls" >
         <action
             android:id="@+id/action_moreShoppingMallFragment_to_allShopListFragment"
@@ -204,11 +204,11 @@
     </fragment>
     <fragment
         android:id="@+id/allShopListFragment"
-        android:name="com.rtchubs.edokanpat.ui.home.AllShopListFragment"
+        android:name="com.mallzhub.customer.ui.home.AllShopListFragment"
         android:label="Shops" >
         <argument
             android:name="shoppingMall"
-            app:argType="com.rtchubs.edokanpat.models.ShoppingMall" />
+            app:argType="com.mallzhub.customer.models.ShoppingMall" />
         <action
             android:id="@+id/action_allShopListFragment_to_cartFragment"
             app:destination="@id/cartFragment"
@@ -226,11 +226,11 @@
     </fragment>
     <fragment
         android:id="@+id/productListFragment"
-        android:name="com.rtchubs.edokanpat.ui.home.ProductListFragment"
+        android:name="com.mallzhub.customer.ui.home.ProductListFragment"
         android:label="Products" >
         <argument
             android:name="merchant"
-            app:argType="com.rtchubs.edokanpat.models.Merchant" />
+            app:argType="com.mallzhub.customer.models.Merchant" />
         <action
             android:id="@+id/action_productListFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment"
@@ -248,11 +248,11 @@
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
-        android:name="com.rtchubs.edokanpat.ui.home.ProductDetailsFragment"
+        android:name="com.mallzhub.customer.ui.home.ProductDetailsFragment"
         android:label="Product Details" >
         <argument
             android:name="product"
-            app:argType="com.rtchubs.edokanpat.models.Product" />
+            app:argType="com.mallzhub.customer.models.Product" />
         <action
             android:id="@+id/action_productDetailsFragment_to_cartFragment"
             app:destination="@id/cartFragment"
@@ -263,15 +263,15 @@
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.rtchubs.edokanpat.ui.cart.CartFragment"
+        android:name="com.mallzhub.customer.ui.cart.CartFragment"
         android:label="Cart" />
     <fragment
         android:id="@+id/shopDetailsFragment"
-        android:name="com.rtchubs.edokanpat.ui.shops.ShopDetailsFragment"
+        android:name="com.mallzhub.customer.ui.shops.ShopDetailsFragment"
         android:label="ShopDetailsFragment" >
         <argument
             android:name="merchant"
-            app:argType="com.rtchubs.edokanpat.models.Merchant" />
+            app:argType="com.mallzhub.customer.models.Merchant" />
         <action
             android:id="@+id/action_shopDetailsFragment_to_productListFragment"
             app:destination="@id/productListFragment"
@@ -303,10 +303,10 @@
     </fragment>
     <fragment
         android:id="@+id/ARLocationFragment"
-        android:name="com.rtchubs.edokanpat.ar_location.ARLocationFragment"
+        android:name="com.mallzhub.customer.ar_location.ARLocationFragment"
         android:label="ARLocationFragment" >
         <argument
             android:name="location"
-            app:argType="com.rtchubs.edokanpat.models.LocationData" />
+            app:argType="com.mallzhub.customer.models.LocationData" />
     </fragment>
 </navigation>

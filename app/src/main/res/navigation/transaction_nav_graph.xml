@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/transactionFragment"
-        android:name="com.rtchubs.edokanpat.TransactionFragment"
+        android:name="com.mallzhub.customer.TransactionFragment"
         android:label="Transaction"
         tools:layout="@layout/fragment_transaction" />
 

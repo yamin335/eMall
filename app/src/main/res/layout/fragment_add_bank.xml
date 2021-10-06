@@ -7,7 +7,7 @@
     <data class="AddBankFragmentBinding">
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.add_payment_methods.AddBankViewModel" />
+            type="com.mallzhub.customer.ui.add_payment_methods.AddBankViewModel" />
     </data>
 
     <LinearLayout

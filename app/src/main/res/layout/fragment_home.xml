@@ -6,7 +6,7 @@
     <data class="HomeBinding">
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.home.HomeViewModel" />
+            type="com.mallzhub.customer.ui.home.HomeViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

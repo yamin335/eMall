@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.login.SignInViewModel" />
+            type="com.mallzhub.customer.ui.login.SignInViewModel" />
     </data>
 
 

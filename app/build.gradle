@@ -12,7 +12,7 @@ android {
         config {
             storeFile file('../idc_keystore')
             storePassword 'Idc123$..'
-            keyAlias = 'rtchubs'
+            keyAlias = 'mallzhub'
             keyPassword 'Idc123$..'
         }
     }*/
@@ -20,7 +20,7 @@ android {
     compileSdkVersion build_versions.target_sdk
 
     defaultConfig {
-        applicationId "com.rtchubs.edokanpat"
+        applicationId "com.mallzhub.customer"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1

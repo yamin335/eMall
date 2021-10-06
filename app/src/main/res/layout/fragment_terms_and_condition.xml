@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.terms_and_conditions.TermsViewModel" />
+            type="com.mallzhub.customer.ui.terms_and_conditions.TermsViewModel" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"

@@ -7,7 +7,7 @@
         <import type="android.graphics.drawable.Drawable"/>
         <variable
             name="item"
-            type="com.rtchubs.edokanpat.local_db.dbo.CartItem" />
+            type="com.mallzhub.customer.local_db.dbo.CartItem" />
         <variable
             name="imageRequestListener"
             type="com.bumptech.glide.request.RequestListener&lt;Drawable>" />

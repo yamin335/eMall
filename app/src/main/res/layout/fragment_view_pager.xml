@@ -7,7 +7,7 @@
     <data class="ViewPagerBinding">
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.login.ViewPagerViewModel" />
+            type="com.mallzhub.customer.ui.login.ViewPagerViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

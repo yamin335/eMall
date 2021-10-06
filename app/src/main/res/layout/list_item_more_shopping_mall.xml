@@ -8,7 +8,7 @@
         <import type="android.graphics.drawable.Drawable"/>
         <variable
             name="model"
-            type="com.rtchubs.edokanpat.models.ShoppingMall" />
+            type="com.mallzhub.customer.models.ShoppingMall" />
 
         <variable
             name="imageRequestListener"

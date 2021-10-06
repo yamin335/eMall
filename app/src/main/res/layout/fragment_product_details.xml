@@ -16,7 +16,7 @@
 
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.home.ProductDetailsViewModel" />
+            type="com.mallzhub.customer.ui.home.ProductDetailsViewModel" />
 
         <variable
             name="name"

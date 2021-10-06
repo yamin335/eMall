@@ -6,7 +6,7 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.live_chat.LiveChatViewModel" />
+            type="com.mallzhub.customer.ui.live_chat.LiveChatViewModel" />
     </data>
 
     <LinearLayout

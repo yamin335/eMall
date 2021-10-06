@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.shops.ShopDetailsViewModel" />
+            type="com.mallzhub.customer.ui.shops.ShopDetailsViewModel" />
     </data>
 
 
