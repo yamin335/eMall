@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bot_nav"
+    app:startDestination="@id/botFragment">
+
+    <fragment
+        android:id="@+id/botFragment"
+        android:name="com.mallzhub.customer.ui.live_chat.BotFragment"
+        android:label="Bot"
+        tools:layout="@layout/fragment_bot"/>
+</navigation>

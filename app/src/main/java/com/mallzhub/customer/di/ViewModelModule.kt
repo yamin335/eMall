@@ -32,6 +32,7 @@ import com.mallzhub.customer.ui.video_play.LoadWebViewViewModel
 import com.mallzhub.customer.ui.video_play.VideoPlayViewModel
 import com.mallzhub.customer.ui.login.ViewPagerViewModel
 import com.mallzhub.customer.ui.more.MoreViewModel
+import com.mallzhub.customer.ui.offer.OfferViewModel
 import com.mallzhub.customer.ui.otp_signin.OtpSignInViewModel
 import com.mallzhub.customer.ui.pin_number.PinNumberViewModel
 import com.mallzhub.customer.ui.profile_signin.ProfileSignInViewModel
@@ -296,5 +297,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AddProductViewModel::class)
     abstract fun bindAddProductViewModel(viewModel: AddProductViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OfferViewModel::class)
+    abstract fun bindOfferViewModel(viewModel: OfferViewModel): ViewModel
 
 }
