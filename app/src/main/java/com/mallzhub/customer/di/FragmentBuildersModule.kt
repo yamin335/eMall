@@ -29,6 +29,8 @@ import com.mallzhub.customer.ui.video_play.VideoPlayFragment
 import com.mallzhub.customer.ui.login.ViewPagerFragment
 import com.mallzhub.customer.ui.more.MoreFragment
 import com.mallzhub.customer.ui.offer.OfferFragment
+import com.mallzhub.customer.ui.order.OrderListFragment
+import com.mallzhub.customer.ui.order.OrderTrackHistoryFragment
 import com.mallzhub.customer.ui.otp_signin.OtpSignInFragment
 import com.mallzhub.customer.ui.pin_number.PinNumberFragment
 import com.mallzhub.customer.ui.profile_signin.ProfileSignInFragment
@@ -193,4 +195,10 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeBotFragment(): BotFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeOrderListFragment(): OrderListFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeOrderTrackHistoryFragment(): OrderTrackHistoryFragment
 }

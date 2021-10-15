@@ -86,7 +86,7 @@ class ProductListFragment :
                         item.product_image3, item.product_image4,
                         item.product_image5, item.category_id, item.merchant_id,
                         item.created_at, item.updated_at,
-                        ShopDetailsProductListFragment.orderMerchant, item.category), 1)
+                        ShopDetailsProductListFragment.orderMerchant, item.category, 0), 1)
                 }
 
             }) { item ->

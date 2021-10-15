@@ -18,7 +18,6 @@ import com.google.android.material.navigation.NavigationView
 import com.mallzhub.customer.R
 import com.mallzhub.customer.databinding.MainActivityBinding
 import com.mallzhub.customer.ui.home.Home2FragmentDirections
-import com.mallzhub.customer.ui.live_chat.LiveChatActivity
 import com.mallzhub.customer.util.hideKeyboard
 import com.mallzhub.customer.util.shouldCloseDrawerFromBackPress
 import dagger.android.support.DaggerAppCompatActivity
@@ -99,7 +98,7 @@ class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavDrawer
             R.navigation.home_nav_graph,
             R.navigation.bot_nav_graph,
             R.navigation.offer_nav_graph,
-            R.navigation.transaction_nav_graph,
+            R.navigation.order_nav_graph,
             R.navigation.more_nav_graph
         )
 

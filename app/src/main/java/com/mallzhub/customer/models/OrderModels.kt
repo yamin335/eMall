@@ -20,7 +20,7 @@ data class OrderProduct(val id: Int?, val name: String?, val barcode: String?,
                         val product_image3: String?, val product_image4: String?,
                         val product_image5: String?, val category_id: Int?, val merchant_id: Int?,
                         val created_at: String?, val updated_at: String?,
-                        val merchant: OrderMerchant?, val category: ProductCategory?): Serializable
+                        val merchant: OrderMerchant?, val category: ProductCategory?, val available_qty: Any?): Serializable
 
 data class OrderMerchant(val id: Int?, val name: String?, val user_name: String?,
                          val password: String?, val shop_name: String?, val mobile: String?,

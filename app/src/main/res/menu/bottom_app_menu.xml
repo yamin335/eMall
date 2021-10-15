@@ -25,7 +25,7 @@
 <!--        android:checkable="false"-->
 <!--        android:checked="false" />-->
     <item
-        android:id="@+id/transaction_nav"
+        android:id="@+id/order_nav"
         android:title="Orders"
         android:icon="@drawable/ic_baseline_turned_in_not_24"
         app:showAsAction="always" />

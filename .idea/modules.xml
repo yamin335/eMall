@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/eDokanPat.iml" filepath="$PROJECT_DIR$/.idea/modules/eDokanPat.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/eDokanPat.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/eDokanPat.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MallzHub.iml" filepath="$PROJECT_DIR$/.idea/modules/MallzHub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MallzHub.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MallzHub.app.iml" />
     </modules>
   </component>
 </project>

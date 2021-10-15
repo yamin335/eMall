@@ -1,5 +1,6 @@
 package com.mallzhub.customer.api
 
+import com.mallzhub.customer.api.Api.API_REPO
 import com.mallzhub.customer.api.Api.API_VERSION
 import com.mallzhub.customer.api.Api.DIRECTORY_ACCOUNT
 import com.mallzhub.customer.api.Api.DIRECTORY_BANK
@@ -7,13 +8,13 @@ import com.mallzhub.customer.api.Api.DIRECTORY_BANK_INFO
 import com.mallzhub.customer.api.Api.DIRECTORY_CARD
 import com.mallzhub.customer.api.Api.DIRECTORY_CONNECT
 import com.mallzhub.customer.api.Api.DIRECTORY_PROFILE
-import com.mallzhub.customer.api.Api.REPO
 
 object Api {
-    const val PROTOCOL = "https"
-    const val API_ROOT = "backend.mallhubs.com"
+    private const val PROTOCOL = "https"
+    //private const val API_ROOT = "backend.mallhubs.com"
+    private const val API_ROOT = "backend.mobmalls.com"
     const val API_ROOT_URL = "$PROTOCOL://$API_ROOT"
-    const val REPO = "api"
+    const val API_REPO = "api"
     const val API_VERSION = "v1"
     const val DIRECTORY_ACCOUNT = "account"
     const val DIRECTORY_CONNECT = "connect"
@@ -26,20 +27,21 @@ object Api {
 
 object ApiEndPoint {
     /* Registration */
-    const val INQUIRE = "/$REPO/$API_VERSION/${DIRECTORY_ACCOUNT}/inquire"
-    const val REQUESTOTP = "/$REPO/$API_VERSION/${DIRECTORY_ACCOUNT}/request-otp"
-    const val REGISTRATION = "/$REPO/$API_VERSION/${DIRECTORY_ACCOUNT}"
-    const val CONNECT_TOKEN = "/$REPO/$API_VERSION/${DIRECTORY_CONNECT}/token"
-    const val GET_BANK_LIST = "/$REPO/$API_VERSION/${DIRECTORY_BANK_INFO}/bank-list"
-    const val ADD_BANK = "/$REPO/$API_VERSION/${DIRECTORY_BANK}"
-    const val ADD_CARD = "/$REPO/$API_VERSION/${DIRECTORY_CARD}"
-    const val MY_ACCOUNT_LIST = "/$REPO/$API_VERSION/${DIRECTORY_PROFILE}/accounts"
+    const val INQUIRE = "/$API_REPO/$API_VERSION/${DIRECTORY_ACCOUNT}/inquire"
+    const val REQUESTOTP = "/$API_REPO/$API_VERSION/${DIRECTORY_ACCOUNT}/request-otp"
+    const val REGISTRATION = "/$API_REPO/$API_VERSION/${DIRECTORY_ACCOUNT}"
+    const val CONNECT_TOKEN = "/$API_REPO/$API_VERSION/${DIRECTORY_CONNECT}/token"
+    const val GET_BANK_LIST = "/$API_REPO/$API_VERSION/${DIRECTORY_BANK_INFO}/bank-list"
+    const val ADD_BANK = "/$API_REPO/$API_VERSION/${DIRECTORY_BANK}"
+    const val ADD_CARD = "/$API_REPO/$API_VERSION/${DIRECTORY_CARD}"
+    const val MY_ACCOUNT_LIST = "/$API_REPO/$API_VERSION/${DIRECTORY_PROFILE}/accounts"
 
     // eDokanPat
-    const val ALL_MALL = "/$REPO/shopping-malls"
-    const val ALL_MERCHANTS = "/$REPO/all-merchants"
-    const val MERCHANT_PRODUCTS = "/$REPO/products-by-merchant/{id}"
-    const val SALE = "/$REPO/sale"
+    const val ALL_MALL = "/$API_REPO/shopping-malls"
+    const val ALL_MERCHANTS = "/$API_REPO/all-merchants"
+    const val MERCHANT_PRODUCTS = "/$API_REPO/products-by-merchant/{id}"
+    const val SALE = "/$API_REPO/sale"
+    const val ORDER_LIST = "/$API_REPO/sales/filter-by-date/undefined/undefined/false"
 }
 
 object ResponseCodes {

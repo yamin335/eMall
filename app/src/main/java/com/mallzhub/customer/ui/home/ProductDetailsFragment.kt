@@ -141,7 +141,7 @@ class ProductDetailsFragment :
                         product.product_image3, product.product_image4,
                         product.product_image5, product.category_id, product.merchant_id,
                         product.created_at, product.updated_at,
-                        ShopDetailsProductListFragment.orderMerchant, product.category), quantity)
+                        ShopDetailsProductListFragment.orderMerchant, product.category, 0), quantity)
             }
         }
 

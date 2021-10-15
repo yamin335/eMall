@@ -10,6 +10,15 @@
     <color name="buttonTextDisableColor">#383838</color>
     <color name="themeBackgroundColor">#F2F2F2</color>
 
+    // Order Status
+    <color name="orderProcessing">#FFC400</color>
+    <color name="orderPicked">#00B0FF</color>
+    <color name="orderShipped">#526DFF</color>
+    <color name="orderDelivered">#0EB53B</color>
+    <color name="orderCancelled">#d32f2f</color>
+
+    <color name="colorLightGray">#CED7D6</color>
+
     // Custom Toast Colors
     <color name="toast_error">#d32f2f</color>
     <color name="toast_warning">#C7A90D</color>

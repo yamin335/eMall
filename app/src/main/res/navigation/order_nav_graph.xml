@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/order_nav"
+    app:startDestination="@id/orderListFragment">
+
+    <include app:graph="@navigation/drawer_nav_graph" />
+    <fragment
+        android:id="@+id/orderListFragment"
+        android:name="com.mallzhub.customer.ui.order.OrderListFragment"
+        android:label="Order List"
+        tools:layout="@layout/fragment_order_list">
+        <action
+            android:id="@+id/action_orderListFragment_to_orderTrackHistoryFragment"
+            app:destination="@id/orderTrackHistoryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/orderTrackHistoryFragment"
+        android:name="com.mallzhub.customer.ui.order.OrderTrackHistoryFragment"
+        android:label="Order Track History"
+        tools:layout="@layout/fragment_order_track_history"/>
+
+
+</navigation>

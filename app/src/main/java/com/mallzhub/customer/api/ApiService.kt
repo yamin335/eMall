@@ -6,6 +6,7 @@ import com.mallzhub.customer.models.AllMerchantResponse
 import com.mallzhub.customer.models.AllProductResponse
 import com.mallzhub.customer.models.AllShoppingMallResponse
 import com.mallzhub.customer.models.common.MyAccountListResponse
+import com.mallzhub.customer.models.order.OrderListResponse
 import com.mallzhub.customer.models.payment_account_models.AddCardOrBankResponse
 import com.mallzhub.customer.models.payment_account_models.BankOrCardListResponse
 import com.mallzhub.customer.models.registration.InquiryResponse
@@ -102,5 +103,10 @@ interface ApiService {
     suspend fun getAllProducts(
         @Path("id") type: String
     ): Response<AllProductResponse>
+
+    @GET(ApiEndPoint.ORDER_LIST)
+    suspend fun getOrderList(
+        @Query("page") page: Int?,
+        @Query("token") token: String?): Response<OrderListResponse>
 
 }
