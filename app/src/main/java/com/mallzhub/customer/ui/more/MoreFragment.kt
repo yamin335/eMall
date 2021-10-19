@@ -49,18 +49,14 @@ class MoreFragment : BaseFragment<MoreFragmentBinding, MoreViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewDataBinding.logout.setOnClickListener {
-            SplashFragment.fromLogout = true
-            preferencesHelper.isLoggedIn = false
-            listener?.onLoggedOut()
+        viewDataBinding.btnSignOut.setOnClickListener {
+//            SplashFragment.fromLogout = true
+//            preferencesHelper.isLoggedIn = false
+//            listener?.onLoggedOut()
         }
 
         viewDataBinding.appLogo.setOnClickListener {
             drawerListener?.toggleNavDrawer()
-        }
-
-        viewDataBinding.addProduct.setOnClickListener {
-            navigateTo(MoreFragmentDirections.actionMoreFragmentToAddProductFragment())
         }
     }
 

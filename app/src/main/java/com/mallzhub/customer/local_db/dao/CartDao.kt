@@ -9,6 +9,9 @@ interface CartDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addItemToCart(item: CartItem): Long
 
+    @Query("DELETE FROM cart")
+    suspend fun deleteAllCartItems()
+
     @Delete
     suspend fun deleteCartItem(cartItem: CartItem)
 

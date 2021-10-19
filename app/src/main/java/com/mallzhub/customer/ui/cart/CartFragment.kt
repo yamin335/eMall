@@ -10,6 +10,9 @@ import com.mallzhub.customer.databinding.CartFragmentBinding
 import com.mallzhub.customer.models.Order
 import com.mallzhub.customer.models.OrderItem
 import com.mallzhub.customer.ui.common.BaseFragment
+import com.mallzhub.customer.util.showSuccessToast
+import com.mallzhub.shop.models.order.OrderStoreBody
+import com.mallzhub.shop.models.order.OrderStoreProduct
 import java.security.SecureRandom
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,13 +29,21 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
 
     lateinit var cartItemListAdapter: CartItemListAdapter
 
-    var invoiceID: String? = null
-
-    var order: Order? = null
+    var order: OrderStoreBody? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         registerToolbar(viewDataBinding.toolbar)
+
+        viewModel.orderPlaceResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer { response ->
+            response?.let {
+                if (it.data?.sale != null) {
+                    viewModel.deleteAllCartItems()
+                    showSuccessToast(requireContext(), "Order submitted successfully!")
+                    navController.popBackStack()
+                }
+            }
+        })
 
         cartItemListAdapter = CartItemListAdapter(
             appExecutors
@@ -44,7 +55,6 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
 
         viewModel.cartItems.observe(viewLifecycleOwner, Observer {
             it?.let { list ->
-
                 if (list.isEmpty()) {
                     viewDataBinding.container.visibility = View.GONE
                     viewDataBinding.emptyView.visibility = View.VISIBLE
@@ -53,7 +63,7 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
                     viewDataBinding.emptyView.visibility = View.GONE
                     cartItemListAdapter.submitList(list)
 
-                    val orderItems = ArrayList<OrderItem>()
+                    val orderItems = ArrayList<OrderStoreProduct>()
                     var total = 0.0
                     var merchantId: Int? = 0
                     list.forEach { item ->
@@ -62,54 +72,32 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
                         val quantity = item.quantity ?: 0
                         total += price * quantity
 
-                        orderItems.add(OrderItem(item.product.id, item.product.description, "qty",
-                        quantity, price, 0,
-                        "0.0", 0, "0.0",
-                        price * quantity, item.product, null))
+                        val product = item.product
+
+                        orderItems.add(OrderStoreProduct(product.id, product.description, "qty",
+                            quantity, price, 0, "0",
+                            0, "0", price * quantity, ""))
                     }
 
                     val today = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(
                         Date()
                     )
 
-                    order = Order(6, merchantId, "",
-                        invoiceID ?: generateInvoiceID(), today, "inclusive",
-                    "", total.toInt(), 0,
-                    0, total.toInt(), 0,
-                        total.toInt(), orderItems)
+                    order = OrderStoreBody(8, 1,
+                        "", viewModel.invoiceNumber.value ?: viewModel.generateInvoiceID(),
+                        today, "inclusive",
+                        "", total.toInt(),
+                        0, 0, total.toInt(), 0, total.toInt(), orderItems)
+
                     viewDataBinding.totalPrice = total.toString()
                 }
             }
         })
 
         viewDataBinding.checkoutNow.setOnClickListener {
-
+            order?.let {
+                viewModel.placeOrder(it)
+            }
         }
-
-//        viewDataBinding.toolbar.title = args.merchant.name
-//
-//        productListAdapter = ProductListAdapter(
-//            appExecutors
-//        ) { item ->
-//            navController.navigate(ProductListFragmentDirections.actionProductListFragmentToProductDetailsFragment(item))
-//        }
-//
-//        viewDataBinding.rvProductList.addItemDecoration(GridRecyclerItemDecorator(2, 20, true))
-//        viewDataBinding.rvProductList.layoutManager = GridLayoutManager(mContext, 2)
-//        viewDataBinding.rvProductList.adapter = productListAdapter
-//
-//        viewModel.productListResponse.observe(viewLifecycleOwner, Observer { response ->
-//            response?.data?.let { productList ->
-//                productListAdapter.submitList(productList)
-//            }
-//        })
-//
-//        viewModel.getProductList(args.merchant.id.toString())
-    }
-
-    private fun generateInvoiceID(): String {
-        val random1 = "${1 + SecureRandom().nextInt(9999999)}"
-        val random2 = "${1 + SecureRandom().nextInt(999999)}"
-        return "IV-${random1}${random2}"
     }
 }

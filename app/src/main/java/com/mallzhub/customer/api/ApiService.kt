@@ -11,6 +11,7 @@ import com.mallzhub.customer.models.payment_account_models.AddCardOrBankResponse
 import com.mallzhub.customer.models.payment_account_models.BankOrCardListResponse
 import com.mallzhub.customer.models.registration.InquiryResponse
 import com.mallzhub.customer.models.registration.DefaultResponse
+import com.mallzhub.shop.models.order.OrderStoreResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -108,5 +109,11 @@ interface ApiService {
     suspend fun getOrderList(
         @Query("page") page: Int?,
         @Query("token") token: String?): Response<OrderListResponse>
+
+    @Headers(ContentType)
+    @POST(ApiEndPoint.SALE)
+    suspend fun placeOrder(
+        @Body jsonObject: JsonObject
+    ): Response<OrderStoreResponse>
 
 }
