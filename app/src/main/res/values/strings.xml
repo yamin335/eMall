@@ -492,4 +492,6 @@
     <string name="take_picture">Take Picture</string>
     <string name="choose_from_gallery">Choose from gallery</string>
     <string name="choose_an_option">Choose an Option</string>
+
+    <string name="sign_taka">৳</string>
 </resources>

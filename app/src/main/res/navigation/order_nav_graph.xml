@@ -23,7 +23,11 @@
         android:id="@+id/orderTrackHistoryFragment"
         android:name="com.mallzhub.customer.ui.order.OrderTrackHistoryFragment"
         android:label="Order Track History"
-        tools:layout="@layout/fragment_order_track_history"/>
+        tools:layout="@layout/fragment_order_track_history">
+        <argument
+            android:name="order"
+            app:argType="com.mallzhub.customer.models.order.SalesData" />
+    </fragment>
 
 
 </navigation>
