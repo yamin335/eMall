@@ -21,6 +21,7 @@ import com.mallzhub.customer.util.DataBoundListAdapter
 
 class CartItemListAdapter(
     private val appExecutors: AppExecutors,
+    private val cartItemActionCallback: CartItemActionCallback,
     private val itemCallback: ((CartItem) -> Unit)? = null
 
 ) : DataBoundListAdapter<CartItem, CartListItemBinding>(
@@ -49,6 +50,10 @@ class CartItemListAdapter(
         )
     }
 
+    interface CartItemActionCallback {
+        fun incrementCartItemQuantity(id: Int)
+        fun decrementCartItemQuantity(id: Int)
+    }
 
     override fun bind(binding: CartListItemBinding, position: Int) {
         val item = getItem(position)
@@ -67,6 +72,15 @@ class CartItemListAdapter(
 
         binding.remove.setOnClickListener {
             itemCallback?.invoke(item)
+        }
+
+        binding.incrementQuantity.setOnClickListener {
+            cartItemActionCallback.incrementCartItemQuantity(item.id)
+        }
+        binding.decrementQuantity.setOnClickListener {
+            if (item.quantity ?: 0 > 1) {
+                cartItemActionCallback.decrementCartItemQuantity(item.id)
+            }
         }
     }
 

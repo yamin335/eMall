@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.mallzhub.customer.local_db.dao.CartDao
+import com.mallzhub.customer.models.LiveChatMessage
 import com.mallzhub.customer.ui.common.BaseViewModel
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
@@ -15,6 +16,10 @@ class LiveChatViewModel @Inject constructor(
     ) : BaseViewModel(application) {
 
     val newMessage: MutableLiveData<String> = MutableLiveData()
+
+    val chatMessages: MutableLiveData<MutableList<LiveChatMessage>> by lazy {
+        MutableLiveData<MutableList<LiveChatMessage>>()
+    }
 
     val cartItemCount: LiveData<Int> = liveData {
         cartDao.getCartItemsCount().collect { count ->

@@ -85,7 +85,7 @@ class MoreShoppingMallFragment :
             }
 
             R.id.menu_cart -> {
-                navController.navigate(MoreShoppingMallFragmentDirections.actionMoreShoppingMallFragmentToCartFragment())
+                navController.navigate(MoreShoppingMallFragmentDirections.actionMoreShoppingMallFragmentToCartNavGraph())
             }
         }
 

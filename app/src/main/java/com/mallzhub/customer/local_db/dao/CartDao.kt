@@ -20,4 +20,10 @@ interface CartDao {
 
     @Query("SELECT COUNT(id) FROM cart")
     fun getCartItemsCount(): Flow<Int>
+
+    @Query("UPDATE cart SET quantity = quantity + 1 WHERE id = :id")
+    suspend fun incrementCartItemQuantity(id: Int)
+
+    @Query("UPDATE cart SET quantity = quantity - 1 WHERE id = :id")
+    suspend fun decrementCartItemQuantity(id: Int)
 }

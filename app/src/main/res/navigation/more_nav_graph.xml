@@ -17,6 +17,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_moreFragment_to_cart_nav_graph"
+            app:destination="@id/cart_nav_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <include app:graph="@navigation/drawer_nav_graph" />
@@ -25,4 +32,5 @@
         android:name="com.mallzhub.customer.ui.add_product.AddProductFragment"
         android:label="Add New Product"
         tools:layout="@layout/fragment_add_product"/>
+    <include app:graph="@navigation/cart_nav_graph" />
 </navigation>

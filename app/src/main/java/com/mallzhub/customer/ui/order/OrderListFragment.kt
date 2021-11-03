@@ -13,6 +13,7 @@ import com.mallzhub.customer.models.order.SalesData
 import com.mallzhub.customer.ui.NavDrawerHandlerCallback
 import com.mallzhub.customer.ui.common.BaseFragment
 import com.mallzhub.customer.BR
+import com.mallzhub.customer.ui.home.Home2FragmentDirections
 
 class OrderListFragment : BaseFragment<OrderListFragmentBinding, OrderViewModel>() {
     override val bindingVariable: Int
@@ -79,6 +80,22 @@ class OrderListFragment : BaseFragment<OrderListFragmentBinding, OrderViewModel>
             orderList = it as ArrayList<SalesData>
             orderListAdapter.submitList(orderList)
             visibleGoneEmptyView()
+        })
+
+        viewDataBinding.cartMenu.setOnClickListener {
+            navController.navigate(OrderListFragmentDirections.actionOrderListFragmentToCartNavGraph())
+        }
+
+        viewModel.cartItemCount.observe(viewLifecycleOwner, Observer {
+            it?.let { value ->
+                if (value < 1) {
+                    viewDataBinding.badge.visibility = View.INVISIBLE
+                    return@Observer
+                } else {
+                    viewDataBinding.badge.visibility = View.VISIBLE
+                    viewDataBinding.badge.text = value.toString()
+                }
+            }
         })
     }
 

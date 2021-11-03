@@ -138,7 +138,7 @@ class ProductListFragment :
             }
 
             R.id.menu_cart -> {
-                navController.navigate(ProductListFragmentDirections.actionProductListFragmentToCartFragment())
+                navController.navigate(ProductListFragmentDirections.actionProductListFragmentToCartNavGraph())
             }
         }
 

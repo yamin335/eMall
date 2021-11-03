@@ -91,7 +91,7 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
         }
 
         viewDataBinding.cartMenu.setOnClickListener {
-            navController.navigate(Home2FragmentDirections.actionHome2FragmentToCartFragment())
+            navController.navigate(Home2FragmentDirections.actionHome2FragmentToCartNavGraph())
         }
 
         viewModel.cartItemCount.observe(viewLifecycleOwner, Observer {

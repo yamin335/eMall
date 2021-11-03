@@ -18,6 +18,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_orderListFragment_to_cart_nav_graph"
+            app:destination="@id/cart_nav_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/orderTrackHistoryFragment"
@@ -28,6 +35,7 @@
             android:name="order"
             app:argType="com.mallzhub.customer.models.order.SalesData" />
     </fragment>
+    <include app:graph="@navigation/cart_nav_graph" />
 
 
 </navigation>

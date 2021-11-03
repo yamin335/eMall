@@ -62,7 +62,7 @@ class OfferFragment : BaseFragment<OfferFragmentBinding, OfferViewModel>() {
         }
 
         viewDataBinding.cartMenu.setOnClickListener {
-            //navController.navigate(Home2FragmentDirections.actionHome2FragmentToCartFragment())
+            navController.navigate(OfferFragmentDirections.actionOfferFragmentToCartNavGraph())
         }
 
         viewModel.cartItemCount.observe(viewLifecycleOwner, Observer {

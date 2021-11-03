@@ -46,7 +46,17 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
         })
 
         cartItemListAdapter = CartItemListAdapter(
-            appExecutors
+            appExecutors,
+            object : CartItemListAdapter.CartItemActionCallback {
+                override fun incrementCartItemQuantity(id: Int) {
+                    viewModel.incrementOrderItemQuantity(id)
+                }
+
+                override fun decrementCartItemQuantity(id: Int) {
+                    viewModel.decrementOrderItemQuantity(id)
+                }
+
+            }
         ) { item ->
             viewModel.deleteCartItem(item)
         }

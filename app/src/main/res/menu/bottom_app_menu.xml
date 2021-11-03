@@ -9,7 +9,7 @@
         android:icon="@drawable/ic_outline_home_24" />
     <item
         android:id="@+id/bot_nav"
-        android:title="Bot"
+        android:title="Chat Bot"
         app:showAsAction="always"
         android:icon="@drawable/ic_outline_category_24"/>
 

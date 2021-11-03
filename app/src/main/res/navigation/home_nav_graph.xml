@@ -48,8 +48,8 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_home2Fragment_to_cartFragment"
-            app:destination="@id/cartFragment"
+            android:id="@+id/action_home2Fragment_to_cart_nav_graph"
+            app:destination="@id/cart_nav_graph"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -195,8 +195,8 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_moreShoppingMallFragment_to_cartFragment"
-            app:destination="@id/cartFragment"
+            android:id="@+id/action_moreShoppingMallFragment_to_cart_nav_graph"
+            app:destination="@id/cart_nav_graph"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -210,15 +210,15 @@
             android:name="shoppingMall"
             app:argType="com.mallzhub.customer.models.ShoppingMall" />
         <action
-            android:id="@+id/action_allShopListFragment_to_cartFragment"
-            app:destination="@id/cartFragment"
+            android:id="@+id/action_allShopListFragment_to_shopDetailsFragment"
+            app:destination="@id/shopDetailsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_allShopListFragment_to_shopDetailsFragment"
-            app:destination="@id/shopDetailsFragment"
+            android:id="@+id/action_allShopListFragment_to_cart_nav_graph"
+            app:destination="@id/cart_nav_graph"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -239,8 +239,8 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_productListFragment_to_cartFragment"
-            app:destination="@id/cartFragment"
+            android:id="@+id/action_productListFragment_to_cart_nav_graph"
+            app:destination="@id/cart_nav_graph"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -254,17 +254,13 @@
             android:name="product"
             app:argType="com.mallzhub.customer.models.Product" />
         <action
-            android:id="@+id/action_productDetailsFragment_to_cartFragment"
-            app:destination="@id/cartFragment"
+            android:id="@+id/action_productDetailsFragment_to_cart_nav_graph"
+            app:destination="@id/cart_nav_graph"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
-    <fragment
-        android:id="@+id/cartFragment"
-        android:name="com.mallzhub.customer.ui.cart.CartFragment"
-        android:label="Cart" />
     <fragment
         android:id="@+id/shopDetailsFragment"
         android:name="com.mallzhub.customer.ui.shops.ShopDetailsFragment"
@@ -275,13 +271,6 @@
         <action
             android:id="@+id/action_shopDetailsFragment_to_productListFragment"
             app:destination="@id/productListFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_shopDetailsFragment_to_cartFragment"
-            app:destination="@id/cartFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -300,6 +289,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_shopDetailsFragment_to_cart_nav_graph"
+            app:destination="@id/cart_nav_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/ARLocationFragment"
@@ -309,4 +305,5 @@
             android:name="location"
             app:argType="com.mallzhub.customer.models.LocationData" />
     </fragment>
+    <include app:graph="@navigation/cart_nav_graph" />
 </navigation>

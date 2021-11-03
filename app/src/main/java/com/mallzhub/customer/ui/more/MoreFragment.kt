@@ -4,12 +4,14 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.mallzhub.customer.BR
 import com.mallzhub.customer.R
 import com.mallzhub.customer.databinding.MoreFragmentBinding
 import com.mallzhub.customer.ui.LogoutHandlerCallback
 import com.mallzhub.customer.ui.NavDrawerHandlerCallback
 import com.mallzhub.customer.ui.common.BaseFragment
+import com.mallzhub.customer.ui.order.OrderListFragmentDirections
 import com.mallzhub.customer.ui.splash.SplashFragment
 
 class MoreFragment : BaseFragment<MoreFragmentBinding, MoreViewModel>() {
@@ -58,6 +60,22 @@ class MoreFragment : BaseFragment<MoreFragmentBinding, MoreViewModel>() {
         viewDataBinding.appLogo.setOnClickListener {
             drawerListener?.toggleNavDrawer()
         }
+
+        viewDataBinding.cartMenu.setOnClickListener {
+            navController.navigate(MoreFragmentDirections.actionMoreFragmentToCartNavGraph())
+        }
+
+        viewModel.cartItemCount.observe(viewLifecycleOwner, Observer {
+            it?.let { value ->
+                if (value < 1) {
+                    viewDataBinding.badge.visibility = View.INVISIBLE
+                    return@Observer
+                } else {
+                    viewDataBinding.badge.visibility = View.VISIBLE
+                    viewDataBinding.badge.text = value.toString()
+                }
+            }
+        })
     }
 
 }

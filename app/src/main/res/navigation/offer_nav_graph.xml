@@ -9,5 +9,14 @@
         android:id="@+id/offerFragment"
         android:name="com.mallzhub.customer.ui.offer.OfferFragment"
         android:label="Offer Products"
-        tools:layout="@layout/fragment_offer"/>
+        tools:layout="@layout/fragment_offer">
+        <action
+            android:id="@+id/action_offerFragment_to_cart_nav_graph"
+            app:destination="@id/cart_nav_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <include app:graph="@navigation/cart_nav_graph" />
 </navigation>

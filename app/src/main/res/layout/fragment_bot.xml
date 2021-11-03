@@ -114,13 +114,17 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/messageRecycler"
-                    android:clipToPadding="false"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_above="@id/footer"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/footer"
+                    android:layout_alignParentTop="true"
+                    android:clipToPadding="false"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="8dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:stackFromEnd="true"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/list_item_client_chat_row" />
 
                 <LinearLayout
                     android:id="@+id/footer"

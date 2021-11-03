@@ -205,7 +205,7 @@ class ShopDetailsFragment :
             }
 
             R.id.menu_cart -> {
-                navController.navigate(ShopDetailsFragmentDirections.actionShopDetailsFragmentToCartFragment())
+                navController.navigate(ShopDetailsFragmentDirections.actionShopDetailsFragmentToCartNavGraph())
             }
         }
 
