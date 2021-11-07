@@ -158,8 +158,7 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
                                 total += price * quantity
                             }
 
-                            val ss = productsList + productsList
-                            merchantWiseProductsList.add(MerchantWiseOrder(key, merchantName, total.toString(), ss))
+                            merchantWiseProductsList.add(MerchantWiseOrder(key, merchantName, total.toString(), productsList))
                         }
                     }
 
