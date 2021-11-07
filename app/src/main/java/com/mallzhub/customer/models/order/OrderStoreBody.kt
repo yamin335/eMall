@@ -1,4 +1,4 @@
-package com.mallzhub.shop.models.order
+package com.mallzhub.customer.models.order
 
 data class OrderStoreBody(val customer_id: Int?, val merchant_id: Int?,
                           val purchase_number: String?, val invoice_number: String?, 

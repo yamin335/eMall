@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.Point
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -14,6 +15,7 @@ import android.os.Build
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -35,6 +37,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.math.BigDecimal
 import java.math.RoundingMode
+import kotlin.math.roundToInt
 
 fun Double.toRounded(digit: Int): Double {
     return BigDecimal(this).setScale(digit, RoundingMode.HALF_UP).toDouble()
@@ -396,3 +399,37 @@ fun ImageView?.hasImage(): Boolean {
     }
     return hasImage
 }
+
+// extension property to get display metrics instance
+val Activity.displayMetrics: DisplayMetrics
+    get() {
+        // display metrics is a structure describing general information
+        // about a display, such as its size, density, and font scaling
+        val displayMetrics = DisplayMetrics()
+
+        if (Build.VERSION.SDK_INT >= 30){
+            display?.apply {
+                getRealMetrics(displayMetrics)
+            }
+        } else {
+            // getMetrics() method was deprecated in api level 30
+            windowManager.defaultDisplay.getMetrics(displayMetrics)
+        }
+
+        return displayMetrics
+    }
+
+// extension property to get screen width and height in dp
+val Activity.screenSizeInDp: Point
+    get() {
+        val point = Point()
+        displayMetrics.apply {
+            // screen width in dp
+            point.x = (widthPixels / density).roundToInt()
+
+            // screen height in dp
+            point.y = (heightPixels / density).roundToInt()
+        }
+
+        return point
+    }

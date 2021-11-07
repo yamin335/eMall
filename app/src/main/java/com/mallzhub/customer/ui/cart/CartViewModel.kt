@@ -11,8 +11,8 @@ import com.mallzhub.customer.local_db.dbo.CartItem
 import com.mallzhub.customer.repos.OrderRepository
 import com.mallzhub.customer.ui.common.BaseViewModel
 import com.mallzhub.customer.util.AppConstants
-import com.mallzhub.shop.models.order.OrderStoreBody
-import com.mallzhub.shop.models.order.OrderStoreProduct
+import com.mallzhub.customer.models.order.OrderStoreBody
+import com.mallzhub.customer.models.order.OrderStoreProduct
 import com.mallzhub.shop.models.order.OrderStoreResponse
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.collect

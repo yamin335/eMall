@@ -6,7 +6,11 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.34814814814814815" />
         <entry key="app/src/main/res/drawable/chat_bg_client.xml" value="0.34814814814814815" />
         <entry key="app/src/main/res/drawable/chat_bg_server.xml" value="0.34814814814814815" />
+        <entry key="app/src/main/res/drawable/cmn_btm_dialog_bg.xml" value="0.3435185185185185" />
+        <entry key="app/src/main/res/layout/dialog_bottom_checkout_options.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/dialog_bottom_order_overview.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_bot.xml" value="0.32037037037037036" />
+        <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_main2.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.36041666666666666" />
@@ -14,11 +18,13 @@
         <entry key="app/src/main/res/layout/fragment_order_list.xml" value="0.22395833333333334" />
         <entry key="app/src/main/res/layout/fragment_order_track_history.xml" value="0.16875" />
         <entry key="app/src/main/res/layout/list_item_cart.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/list_item_cart_overview.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_client_chat_row.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_order.xml" value="0.22395833333333334" />
         <entry key="app/src/main/res/layout/list_item_order_details_product.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_order_track.xml" value="0.16875" />
         <entry key="app/src/main/res/layout/list_item_server_chat_row.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/list_item_shop_wise_cart.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/menu/bottom_app_menu.xml" value="0.22395833333333334" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.22395833333333334" />
       </map>

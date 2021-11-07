@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.mallzhub.customer.api.ApiService
 import com.mallzhub.customer.models.order.OrderListResponse
-import com.mallzhub.shop.models.order.OrderStoreBody
+import com.mallzhub.customer.models.order.OrderStoreBody
 import com.mallzhub.shop.models.order.OrderStoreResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

@@ -1,5 +1,6 @@
 package com.mallzhub.customer.models
 
+import com.mallzhub.customer.local_db.dbo.CartItem
 import java.io.Serializable
 
 data class Order(val customer_id: Int?, val merchant_id: Int?, val purchase_number: String?,
@@ -29,3 +30,5 @@ data class OrderMerchant(val id: Int?, val name: String?, val user_name: String?
                          val shop_logo: String?, val thumbnail: String?, val isActive: Int?,
                          val shopping_mall_id: Int?, val shopping_mall_level_id: Int?,
                          val created_at: String?, val updated_at: String?): Serializable
+
+data class MerchantWiseOrder(val merchantId: Int, val merchantName: String?, val totalPrice: String, val orderProductList: List<CartItem>)
