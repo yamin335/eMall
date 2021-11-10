@@ -12,10 +12,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/themeBackgroundColor">
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:contentInsetStart="0dp"
@@ -106,15 +106,31 @@
                 android:indeterminate="true"
                 app:showLoader="@{viewModel.apiCallStatus}"/>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvOfferItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:paddingBottom="16dp"
+                android:paddingTop="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="2"
+                tools:listitem="@layout/list_item_offer" />
+
             <TextView
                 android:id="@+id/emptyView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_centerInParent="true"
+                android:gravity="center"
                 android:text="No Offer Products Found"
                 android:textAlignment="center"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
         </RelativeLayout>
 
     </LinearLayout>

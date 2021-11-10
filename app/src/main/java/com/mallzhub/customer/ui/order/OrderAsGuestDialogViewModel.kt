@@ -1,4 +1,4 @@
-package com.mallzhub.customer.ui.cart
+package com.mallzhub.customer.ui.order
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 import java.security.SecureRandom
 import javax.inject.Inject
 
-class CartViewModel @Inject constructor(
+class OrderAsGuestDialogViewModel @Inject constructor(
     private val application: Application,
     private val cartDao: CartDao,
     private val orderRepository: OrderRepository
@@ -50,44 +50,8 @@ class CartViewModel @Inject constructor(
         MutableLiveData<OrderStoreResponse>()
     }
 
-    val cartItems: LiveData<List<CartItem>> = liveData {
-        cartDao.getCartItems().collect { list ->
-            emit(list)
-        }
-    }
-
     val orderItems: MutableLiveData<List<OrderStoreProduct>> by lazy {
         MutableLiveData<List<OrderStoreProduct>>()
-    }
-
-    fun incrementOrderItemQuantity(id: Int) {
-        val handler = CoroutineExceptionHandler { _, exception ->
-            exception.printStackTrace()
-        }
-
-        viewModelScope.launch(handler) {
-            cartDao.incrementCartItemQuantity(id)
-        }
-    }
-
-    fun decrementOrderItemQuantity(id: Int) {
-        val handler = CoroutineExceptionHandler { _, exception ->
-            exception.printStackTrace()
-        }
-
-        viewModelScope.launch(handler) {
-            cartDao.decrementCartItemQuantity(id)
-        }
-    }
-
-    fun deleteCartItem(item: CartItem) {
-        val handler = CoroutineExceptionHandler { _, exception ->
-            exception.printStackTrace()
-        }
-
-        viewModelScope.launch(handler) {
-            cartDao.deleteCartItem(item)
-        }
     }
 
     fun deleteAllCartItems() {

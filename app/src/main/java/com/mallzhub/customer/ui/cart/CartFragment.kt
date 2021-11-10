@@ -12,6 +12,7 @@ import com.mallzhub.customer.ui.common.BaseFragment
 import com.mallzhub.customer.util.showSuccessToast
 import com.mallzhub.customer.models.order.OrderStoreBody
 import com.mallzhub.customer.models.order.OrderStoreProduct
+import com.mallzhub.customer.ui.order.OrderAsGuestDialogFragment
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -72,13 +73,44 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
                             override fun onGuestSelected() {
                                 checkoutOptionBottomDialog.dismiss()
 
-//                        val orderDialog = OrderDialogFragment(object : OrderDialogFragment.PlaceOrderCallback {
-//                            override fun onOrderPlaced() {
+                                val orderItems = ArrayList<OrderStoreProduct>()
+                                var total = 0.0
+
+                                val orderAsGuestDialog = OrderAsGuestDialogFragment(object : OrderAsGuestDialogFragment.PlaceOrderCallback {
+                                    override fun onOrderPlaced() {
+
+                                    }
+                                }, orderItems, total.toInt())
+
+                                orderAsGuestDialog.show(childFragmentManager, "#Order_As_Guest_Dialog_Fragment")
+//                                var merchantId: Int? = 0
+//                                item.orderProductList.forEach { cartItem ->
+//                                    merchantId = cartItem.product.merchant_id
+//                                    val price = cartItem.product.mrp ?: 0
+//                                    val quantity = cartItem.quantity ?: 0
+//                                    total += price * quantity
 //
-//                            }
-//                        }, viewModel.cartItems.value as ArrayList<CartItem>, total.toInt())
+//                                    val product = cartItem.product
 //
-//                        orderDialog.show(childFragmentManager, "#Order_Dialog_Fragment")
+//                                    orderItems.add(
+//                                        OrderStoreProduct(product.id, product.description, "qty",
+//                                            quantity, price, 0, "0",
+//                                            0, "0", price * quantity, "")
+//                                    )
+//                                }
+//
+//                                val today = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(
+//                                    Date()
+//                                )
+//
+//                                order = OrderStoreBody(8, 1,
+//                                    "", viewModel.invoiceNumber.value ?: viewModel.generateInvoiceID(),
+//                                    today, "inclusive",
+//                                    "", total.toInt(),
+//                                    0, 0, total.toInt(), 0, total.toInt(), orderItems)
+//                                order?.let {
+//                                    viewModel.placeOrder(it)
+//                                }
                             }
 
                             override fun onLoginSelected() {
@@ -90,40 +122,6 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
                 }, appExecutors, merchantWiseOrder)
                 cartOverviewBottomDialog
                 cartOverviewBottomDialog.show(childFragmentManager, "#Checkout_Overview_Dialog")
-
-
-
-
-//                val orderItems = ArrayList<OrderStoreProduct>()
-//                var total = 0.0
-//                var merchantId: Int? = 0
-//                item.orderProductList.forEach { cartItem ->
-//                    merchantId = cartItem.product.merchant_id
-//                    val price = cartItem.product.mrp ?: 0
-//                    val quantity = cartItem.quantity ?: 0
-//                    total += price * quantity
-//
-//                    val product = cartItem.product
-//
-//                    orderItems.add(
-//                        OrderStoreProduct(product.id, product.description, "qty",
-//                            quantity, price, 0, "0",
-//                            0, "0", price * quantity, "")
-//                    )
-//                }
-//
-//                val today = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(
-//                    Date()
-//                )
-//
-//                order = OrderStoreBody(8, 1,
-//                    "", viewModel.invoiceNumber.value ?: viewModel.generateInvoiceID(),
-//                    today, "inclusive",
-//                    "", total.toInt(),
-//                    0, 0, total.toInt(), 0, total.toInt(), orderItems)
-//                order?.let {
-//                    viewModel.placeOrder(it)
-//                }
             }
         )
 

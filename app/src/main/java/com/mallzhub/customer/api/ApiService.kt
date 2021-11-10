@@ -5,6 +5,7 @@ import com.mallzhub.customer.api.Api.ContentType
 import com.mallzhub.customer.models.AllMerchantResponse
 import com.mallzhub.customer.models.AllProductResponse
 import com.mallzhub.customer.models.AllShoppingMallResponse
+import com.mallzhub.customer.models.OfferProductListResponse
 import com.mallzhub.customer.models.common.MyAccountListResponse
 import com.mallzhub.customer.models.order.OrderListResponse
 import com.mallzhub.customer.models.payment_account_models.AddCardOrBankResponse
@@ -115,5 +116,8 @@ interface ApiService {
     suspend fun placeOrder(
         @Body jsonObject: JsonObject
     ): Response<OrderStoreResponse>
+
+    @GET(ApiEndPoint.OFFER_LIST)
+    suspend fun getOfferList(): Response<OfferProductListResponse>
 
 }

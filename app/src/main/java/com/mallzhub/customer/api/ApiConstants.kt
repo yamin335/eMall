@@ -6,6 +6,7 @@ import com.mallzhub.customer.api.Api.DIRECTORY_ACCOUNT
 import com.mallzhub.customer.api.Api.DIRECTORY_BANK
 import com.mallzhub.customer.api.Api.DIRECTORY_BANK_INFO
 import com.mallzhub.customer.api.Api.DIRECTORY_CARD
+import com.mallzhub.customer.api.Api.DIRECTORY_COMMON
 import com.mallzhub.customer.api.Api.DIRECTORY_CONNECT
 import com.mallzhub.customer.api.Api.DIRECTORY_PROFILE
 
@@ -23,6 +24,7 @@ object Api {
     const val DIRECTORY_BANK = "cardlink"
     const val DIRECTORY_PROFILE = "profile"
     const val ContentType = "Content-Type: application/json"
+    const val DIRECTORY_COMMON= "common"
 }
 
 object ApiEndPoint {
@@ -41,7 +43,8 @@ object ApiEndPoint {
     const val ALL_MERCHANTS = "/$API_REPO/all-merchants"
     const val MERCHANT_PRODUCTS = "/$API_REPO/products-by-merchant/{id}"
     const val SALE = "/$API_REPO/sale"
-    const val ORDER_LIST = "/$API_REPO/sales/filter-by-date/undefined/undefined/false"
+    const val ORDER_LIST= "/$API_REPO/sales/filter-by-date/undefined/undefined/false"
+    const val OFFER_LIST = "/$API_REPO/$DIRECTORY_COMMON/all/offers"
 }
 
 object ResponseCodes {

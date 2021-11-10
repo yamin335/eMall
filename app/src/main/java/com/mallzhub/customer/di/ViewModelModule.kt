@@ -33,6 +33,7 @@ import com.mallzhub.customer.ui.video_play.VideoPlayViewModel
 import com.mallzhub.customer.ui.login.ViewPagerViewModel
 import com.mallzhub.customer.ui.more.MoreViewModel
 import com.mallzhub.customer.ui.offer.OfferViewModel
+import com.mallzhub.customer.ui.order.OrderAsGuestDialogViewModel
 import com.mallzhub.customer.ui.order.OrderTrackHistoryViewModel
 import com.mallzhub.customer.ui.order.OrderViewModel
 import com.mallzhub.customer.ui.otp_signin.OtpSignInViewModel
@@ -314,5 +315,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(OrderTrackHistoryViewModel::class)
     abstract fun bindOrderTrackHistoryViewModel(viewModel: OrderTrackHistoryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OrderAsGuestDialogViewModel::class)
+    abstract fun bindOrderAsGuestDialogViewModel(viewModel: OrderAsGuestDialogViewModel): ViewModel
 
 }

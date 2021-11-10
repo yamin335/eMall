@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import com.mallzhub.customer.BR
 import com.mallzhub.customer.R
 import com.mallzhub.customer.databinding.OfferFragmentBinding
+import com.mallzhub.customer.models.MerchantWiseOffer
+import com.mallzhub.customer.models.MerchantWiseOrder
 import com.mallzhub.customer.ui.LogoutHandlerCallback
 import com.mallzhub.customer.ui.NavDrawerHandlerCallback
 import com.mallzhub.customer.ui.common.BaseFragment
@@ -25,6 +27,8 @@ class OfferFragment : BaseFragment<OfferFragmentBinding, OfferViewModel>() {
     private var listener: LogoutHandlerCallback? = null
 
     private var drawerListener: NavDrawerHandlerCallback? = null
+
+    lateinit var offerItemListAdapter: OfferItemListAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -57,6 +61,12 @@ class OfferFragment : BaseFragment<OfferFragmentBinding, OfferViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        offerItemListAdapter = OfferItemListAdapter(appExecutors) {
+
+        }
+        viewDataBinding.rvOfferItems.adapter = offerItemListAdapter
+
         viewDataBinding.appLogo.setOnClickListener {
             drawerListener?.toggleNavDrawer()
         }
@@ -76,5 +86,36 @@ class OfferFragment : BaseFragment<OfferFragmentBinding, OfferViewModel>() {
                 }
             }
         })
+
+        viewModel.offerProductList.observe(viewLifecycleOwner, Observer { list ->
+            if (list.isEmpty()) {
+                viewDataBinding.rvOfferItems.visibility = View.GONE
+                viewDataBinding.emptyView.visibility = View.VISIBLE
+            } else {
+                viewDataBinding.rvOfferItems.visibility = View.VISIBLE
+                viewDataBinding.emptyView.visibility = View.GONE
+
+                val merchantWiseProductsMap = list.groupBy { it.merchant_id }
+
+                val merchantWiseProductsList: ArrayList<MerchantWiseOffer> = ArrayList()
+                for (key in merchantWiseProductsMap.keys) {
+                    val productsList = merchantWiseProductsMap[key]
+                    val merchantName = if (!productsList.isNullOrEmpty()) {
+                        val shopName = productsList[0].merchant?.name
+                        if (shopName.isNullOrBlank()) "Unknown Shop" else shopName
+                    } else {
+                        "Unknown Shop"
+                    }
+
+                    if (key != null && !productsList.isNullOrEmpty()) {
+                        merchantWiseProductsList.add(MerchantWiseOffer(key, merchantName, productsList))
+                    }
+                }
+
+                offerItemListAdapter.submitList(merchantWiseProductsList)
+            }
+        })
+
+        viewModel.getAllOfferList()
     }
 }
