@@ -42,10 +42,6 @@ class CartViewModel @Inject constructor(
         MutableLiveData<String>()
     }
 
-    val invoiceNumber: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-
     val orderPlaceResponse: MutableLiveData<OrderStoreResponse> by lazy {
         MutableLiveData<OrderStoreResponse>()
     }
@@ -129,7 +125,6 @@ class CartViewModel @Inject constructor(
     fun generateInvoiceID(): String {
         val random1 = "${1 + SecureRandom().nextInt(9999999)}"
         val random2 = "${1 + SecureRandom().nextInt(999999)}"
-        invoiceNumber.postValue("IV-${random1}${random2}")
         return "IV-${random1}${random2}"
     }
 }

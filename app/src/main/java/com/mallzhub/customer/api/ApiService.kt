@@ -2,10 +2,7 @@ package com.mallzhub.customer.api
 
 import com.google.gson.JsonObject
 import com.mallzhub.customer.api.Api.ContentType
-import com.mallzhub.customer.models.AllMerchantResponse
-import com.mallzhub.customer.models.AllProductResponse
-import com.mallzhub.customer.models.AllShoppingMallResponse
-import com.mallzhub.customer.models.OfferProductListResponse
+import com.mallzhub.customer.models.*
 import com.mallzhub.customer.models.common.MyAccountListResponse
 import com.mallzhub.customer.models.order.OrderListResponse
 import com.mallzhub.customer.models.payment_account_models.AddCardOrBankResponse
@@ -119,5 +116,10 @@ interface ApiService {
 
     @GET(ApiEndPoint.OFFER_LIST)
     suspend fun getOfferList(): Response<OfferProductListResponse>
+
+    @GET(ApiEndPoint.PRODUCT_DETAILS)
+    suspend fun getProductDetails(
+        @Path("id") type: Int?
+    ): Response<ProductDetailsResponse>
 
 }

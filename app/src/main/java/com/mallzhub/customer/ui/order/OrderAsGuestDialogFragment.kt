@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mallzhub.customer.R
 import com.mallzhub.customer.binding.FragmentDataBindingComponent
 import com.mallzhub.customer.databinding.OrderAsGuestDialogFragmentBinding
+import com.mallzhub.customer.models.order.OrderStoreBody
 import com.mallzhub.customer.models.order.OrderStoreProduct
 import com.mallzhub.customer.util.autoCleared
 import com.mallzhub.customer.util.showSuccessToast
@@ -23,9 +24,8 @@ import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 class OrderAsGuestDialogFragment internal constructor(
-    private val callBack: PlaceOrderCallback,
-    private val orderItems: ArrayList<OrderStoreProduct>,
-    private val totalAmount: Int
+    private val orderPlaceCallback: PlaceOrderCallback,
+    private val orderStoreBody: OrderStoreBody
 ): DaggerDialogFragment() {
 
     @Inject
@@ -68,31 +68,31 @@ class OrderAsGuestDialogFragment internal constructor(
         viewModel.name.observe(viewLifecycleOwner, Observer {
             binding.btnPlaceOrder.isEnabled = !it.isNullOrBlank()
         })
-        
-        viewModel.orderPlaceResponse.observe(viewLifecycleOwner, Observer {
-            it?.let { response ->
-                showSuccessToast(requireContext(), "Your order is placed successfully")
-                dismiss()
+
+        viewModel.userNote.observe(viewLifecycleOwner, Observer {
+            orderStoreBody.customer_note = it
+        })
+
+        viewModel.orderPlaceResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer { response ->
+            response?.let {
+                if (it.data?.sale != null) {
+                    val items = orderStoreBody.list ?: ArrayList()
+                    val ids = ArrayList<Int>()
+                    for (item in items) {
+                        ids.add(item.product_id ?: 0)
+                    }
+                    viewModel.deleteCartItemsByIds(ids)
+                    showSuccessToast(requireContext(), "Your order is placed successfully")
+                    dismiss()
+                    orderPlaceCallback.onOrderPlaced()
+                }
+                binding.loader.visibility = View.GONE
             }
-            binding.loader.visibility = View.GONE
         })
 
         binding.btnPlaceOrder.setOnClickListener {
-            dismiss()
-//            if (orderItems.isEmpty()) {
-//                showWarningToast(requireContext(), "No items found in your cart, please add product to order!")
-//                return@setOnClickListener
-//            }
-//            val items = ArrayList<OrderItem>()
-//            orderItems.forEach {
-//                items.add(OrderItem(1, it.product.name, it.quantity, it.product.mrp?.toInt(), 0))
-//            }
-//            val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-//            val currentDate = dateFormatter.format(System.currentTimeMillis())
-//            val order = Order(1, viewModel.name.value, viewModel.mobile.value, viewModel.address.value,
-//                "", "", "", "pending", "", currentDate, totalAmount, items)
-//            viewModel.placeOrder(order)
-//            binding.loader.visibility = View.VISIBLE
+            binding.loader.visibility = View.VISIBLE
+            viewModel.placeOrder(orderStoreBody)
         }
     }
 

@@ -36,7 +36,12 @@ interface NavDrawerHandlerCallback {
     fun toggleNavDrawer()
 }
 
-class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavDrawerHandlerCallback, NavigationHost, NavigationView.OnNavigationItemSelectedListener {
+interface OrderTabSelection {
+    fun selectOrderTab()
+}
+
+class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavDrawerHandlerCallback,
+    NavigationHost, NavigationView.OnNavigationItemSelectedListener, OrderTabSelection {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -208,5 +213,9 @@ class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavDrawer
         //close navigation drawer
         binding.navDrawer.closeDrawer(GravityCompat.START);
         return true
+    }
+
+    override fun selectOrderTab() {
+        binding.mainContainer.bottomNav.selectedItemId = R.id.order_nav
     }
 }

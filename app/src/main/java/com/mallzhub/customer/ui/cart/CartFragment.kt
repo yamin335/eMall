@@ -1,5 +1,6 @@
 package com.mallzhub.customer.ui.cart
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -12,6 +13,7 @@ import com.mallzhub.customer.ui.common.BaseFragment
 import com.mallzhub.customer.util.showSuccessToast
 import com.mallzhub.customer.models.order.OrderStoreBody
 import com.mallzhub.customer.models.order.OrderStoreProduct
+import com.mallzhub.customer.ui.OrderTabSelection
 import com.mallzhub.customer.ui.order.OrderAsGuestDialogFragment
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,24 +30,33 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
 
     lateinit var cartItemListAdapter: CartItemListAdapter
 
-    var order: OrderStoreBody? = null
-
     lateinit var checkoutOptionBottomDialog: CheckoutOptionBottomDialog
     lateinit var cartOverviewBottomDialog: CartOverviewBottomDialog
+
+    private var orderTabSelection: OrderTabSelection? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OrderTabSelection) {
+            orderTabSelection = context
+        } else {
+            throw RuntimeException("$context must implement LoginHandlerCallback")
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         registerToolbar(viewDataBinding.toolbar)
 
-        viewModel.orderPlaceResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer { response ->
-            response?.let {
-                if (it.data?.sale != null) {
-                    viewModel.deleteAllCartItems()
-                    showSuccessToast(requireContext(), "Order submitted successfully!")
-                    navController.popBackStack()
-                }
-            }
-        })
+//        viewModel.orderPlaceResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer { response ->
+//            response?.let {
+//                if (it.data?.sale != null) {
+//                    viewModel.deleteAllCartItems()
+//                    showSuccessToast(requireContext(), "Order submitted successfully!")
+//                    navController.popBackStack()
+//                }
+//            }
+//        })
 
         cartItemListAdapter = CartItemListAdapter(
             appExecutors,
@@ -61,7 +72,6 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
             }, { item ->
                 viewModel.deleteCartItem(item)
             }, { merchantWiseOrder ->
-
                 cartOverviewBottomDialog = CartOverviewBottomDialog( object: CartOverviewBottomDialog.CheckoutOptionBottomDialogCallback {
                     override fun onCancelled() {
                         cartOverviewBottomDialog.dismiss()
@@ -72,45 +82,39 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
                         checkoutOptionBottomDialog = CheckoutOptionBottomDialog(object : CheckoutOptionBottomDialog.CheckoutOptionBottomDialogCallback {
                             override fun onGuestSelected() {
                                 checkoutOptionBottomDialog.dismiss()
-
                                 val orderItems = ArrayList<OrderStoreProduct>()
-                                var total = 0.0
+                                val total = merchantWiseOrder.totalPrice
+                                merchantWiseOrder.orderProductList.forEach { cartItem ->
+                                    val price = cartItem.product.mrp ?: 0
+                                    val quantity = cartItem.quantity ?: 0
+
+                                    val product = cartItem.product
+
+                                    orderItems.add(
+                                        OrderStoreProduct(product.id, product.description, "qty",
+                                            quantity, price, 0, "0",
+                                            0, "0", price * quantity, "")
+                                    )
+                                }
+
+                                val today = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(
+                                    Date()
+                                )
+
+                                val order = OrderStoreBody(8, merchantWiseOrder.merchantId,
+                                    "", viewModel.generateInvoiceID(),
+                                    today, "inclusive",
+                                    "", total.toDouble().toInt(),
+                                    0, 0, total.toDouble().toInt(), 0, total.toDouble().toInt(), orderItems)
 
                                 val orderAsGuestDialog = OrderAsGuestDialogFragment(object : OrderAsGuestDialogFragment.PlaceOrderCallback {
                                     override fun onOrderPlaced() {
-
+                                        navController.popBackStack()
+                                        orderTabSelection?.selectOrderTab()
                                     }
-                                }, orderItems, total.toInt())
+                                }, order)
 
                                 orderAsGuestDialog.show(childFragmentManager, "#Order_As_Guest_Dialog_Fragment")
-//                                var merchantId: Int? = 0
-//                                item.orderProductList.forEach { cartItem ->
-//                                    merchantId = cartItem.product.merchant_id
-//                                    val price = cartItem.product.mrp ?: 0
-//                                    val quantity = cartItem.quantity ?: 0
-//                                    total += price * quantity
-//
-//                                    val product = cartItem.product
-//
-//                                    orderItems.add(
-//                                        OrderStoreProduct(product.id, product.description, "qty",
-//                                            quantity, price, 0, "0",
-//                                            0, "0", price * quantity, "")
-//                                    )
-//                                }
-//
-//                                val today = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(
-//                                    Date()
-//                                )
-//
-//                                order = OrderStoreBody(8, 1,
-//                                    "", viewModel.invoiceNumber.value ?: viewModel.generateInvoiceID(),
-//                                    today, "inclusive",
-//                                    "", total.toInt(),
-//                                    0, 0, total.toInt(), 0, total.toInt(), orderItems)
-//                                order?.let {
-//                                    viewModel.placeOrder(it)
-//                                }
                             }
 
                             override fun onLoginSelected() {

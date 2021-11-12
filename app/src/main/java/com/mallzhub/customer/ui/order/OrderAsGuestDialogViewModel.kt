@@ -42,6 +42,10 @@ class OrderAsGuestDialogViewModel @Inject constructor(
         MutableLiveData<String>()
     }
 
+    val userNote: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
     val invoiceNumber: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
@@ -61,6 +65,16 @@ class OrderAsGuestDialogViewModel @Inject constructor(
 
         viewModelScope.launch(handler) {
             cartDao.deleteAllCartItems()
+        }
+    }
+
+    fun deleteCartItemsByIds(itemIds: List<Int>) {
+        val handler = CoroutineExceptionHandler { _, exception ->
+            exception.printStackTrace()
+        }
+
+        viewModelScope.launch(handler) {
+            cartDao.deleteCartItemsByIds(itemIds)
         }
     }
 

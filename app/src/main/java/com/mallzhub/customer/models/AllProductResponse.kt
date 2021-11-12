@@ -6,7 +6,8 @@ import java.io.Serializable
 
 data class AllProductResponse(val code: Int?, val status: String?, val message: String?, val data: List<Product>?)
 
-data class ProductCategory(val id: Int?, val name: String?, val description: String?, val merchant_id: Int?, val created_at: String?, val updated_at: String?) : Serializable
+data class ProductCategory(val id: Int?, val name: String?, val description: String?, val merchant_id: Int?,
+                           val created_at: String?, val updated_at: String?, val attributes: List<Attribute>?) : Serializable
 
 @Entity(tableName = "favorite")
 data class Product(
@@ -26,6 +27,11 @@ data class Product(
     val product_image5: String?,
     val category_id: Int?,
     val merchant_id: Int?,
+    val available_qty: Int?,
     val created_at: String?,
     val updated_at: String?,
     val category: ProductCategory?): Serializable
+
+data class Attribute(val id: Int?, val product_category_id: Int?, val merchant_id: Int?,
+                     val attribute_id: Int?, val attribute_name: String?,
+                     val attrribute_value: String?, val created_at: String?, val updated_at: String?): Serializable

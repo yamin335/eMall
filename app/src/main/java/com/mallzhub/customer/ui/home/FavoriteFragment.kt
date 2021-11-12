@@ -80,7 +80,7 @@ class FavoriteFragment : BaseFragment<FavoriteFragmentBinding, FavoriteViewModel
                 }
             }
         ) { item ->
-            navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToProductDetailsFragment2(item))
+            navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToProductDetailsNavGraph(item))
         }
 
         viewDataBinding.rvFavoriteList.adapter = favoriteListAdapter

@@ -5,6 +5,7 @@ import com.mallzhub.customer.api.ApiService
 import com.mallzhub.customer.models.AllMerchantResponse
 import com.mallzhub.customer.models.AllProductResponse
 import com.mallzhub.customer.models.AllShoppingMallResponse
+import com.mallzhub.customer.models.ProductDetailsResponse
 import com.mallzhub.customer.models.payment_account_models.AddCardOrBankResponse
 import com.mallzhub.customer.models.payment_account_models.BankOrCardListResponse
 import kotlinx.coroutines.Dispatchers
@@ -62,6 +63,12 @@ class HomeRepository @Inject constructor(private val apiService: ApiService) {
     suspend fun getAllProductsRepo(id: String): Response<AllProductResponse> {
         return withContext(Dispatchers.IO) {
             apiService.getAllProducts(id)
+        }
+    }
+
+    suspend fun getProductDetailsRepo(id: Int?): Response<ProductDetailsResponse> {
+        return withContext(Dispatchers.IO) {
+            apiService.getProductDetails(id)
         }
     }
 }

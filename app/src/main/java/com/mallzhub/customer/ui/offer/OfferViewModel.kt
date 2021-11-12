@@ -9,6 +9,8 @@ import com.mallzhub.customer.api.*
 import com.mallzhub.customer.local_db.dao.CartDao
 import com.mallzhub.customer.models.AllShoppingMallResponse
 import com.mallzhub.customer.models.OfferProductListResponseData
+import com.mallzhub.customer.models.Product
+import com.mallzhub.customer.repos.HomeRepository
 import com.mallzhub.customer.repos.OfferRepository
 import com.mallzhub.customer.ui.common.BaseViewModel
 import com.mallzhub.customer.util.AppConstants
@@ -20,7 +22,8 @@ import javax.inject.Inject
 class OfferViewModel @Inject constructor(
     private val application: Application,
     private val cartDao: CartDao,
-    private val offerRepository: OfferRepository
+    private val offerRepository: OfferRepository,
+    private val homeRepository: HomeRepository
 ) : BaseViewModel(application) {
     val cartItemCount: LiveData<Int> = liveData {
         cartDao.getCartItemsCount().collect { count ->
@@ -30,6 +33,34 @@ class OfferViewModel @Inject constructor(
 
     val offerProductList: MutableLiveData<List<OfferProductListResponseData>> by lazy {
         MutableLiveData<List<OfferProductListResponseData>>()
+    }
+
+    fun getProductDetails(id: Int?): LiveData<Product> {
+        val productDetails: MutableLiveData<Product> = MutableLiveData()
+        if (checkNetworkStatus()) {
+            val handler = CoroutineExceptionHandler { _, exception ->
+                exception.printStackTrace()
+                apiCallStatus.postValue(ApiCallStatus.ERROR)
+                toastError.postValue(AppConstants.serverConnectionErrorMessage)
+            }
+
+            apiCallStatus.postValue(ApiCallStatus.LOADING)
+            viewModelScope.launch(handler) {
+                when (val apiResponse = ApiResponse.create(homeRepository.getProductDetailsRepo(id))) {
+                    is ApiSuccessResponse -> {
+                        apiCallStatus.postValue(ApiCallStatus.SUCCESS)
+                        productDetails.postValue(apiResponse.body.data)
+                    }
+                    is ApiEmptyResponse -> {
+                        apiCallStatus.postValue(ApiCallStatus.EMPTY)
+                    }
+                    is ApiErrorResponse -> {
+                        apiCallStatus.postValue(ApiCallStatus.ERROR)
+                    }
+                }
+            }
+        }
+        return productDetails
     }
 
     fun getAllOfferList() {

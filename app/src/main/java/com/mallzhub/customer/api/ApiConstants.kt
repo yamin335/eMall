@@ -23,8 +23,8 @@ object Api {
     const val DIRECTORY_CARD = "banklink"
     const val DIRECTORY_BANK = "cardlink"
     const val DIRECTORY_PROFILE = "profile"
-    const val ContentType = "Content-Type: application/json"
     const val DIRECTORY_COMMON= "common"
+    const val ContentType = "Content-Type: application/json"
 }
 
 object ApiEndPoint {
@@ -45,6 +45,7 @@ object ApiEndPoint {
     const val SALE = "/$API_REPO/sale"
     const val ORDER_LIST= "/$API_REPO/sales/filter-by-date/undefined/undefined/false"
     const val OFFER_LIST = "/$API_REPO/$DIRECTORY_COMMON/all/offers"
+    const val PRODUCT_DETAILS = "/$API_REPO/$DIRECTORY_COMMON/{id}/product"
 }
 
 object ResponseCodes {

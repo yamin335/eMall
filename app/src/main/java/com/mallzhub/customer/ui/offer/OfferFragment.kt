@@ -63,7 +63,9 @@ class OfferFragment : BaseFragment<OfferFragmentBinding, OfferViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
         offerItemListAdapter = OfferItemListAdapter(appExecutors) {
-
+            viewModel.getProductDetails(it.product_id).observe(viewLifecycleOwner, Observer { product ->
+                navigateTo(OfferFragmentDirections.actionOfferFragmentToProductDetailsNavGraph(product, it.discount_percent ?: 0))
+            })
         }
         viewDataBinding.rvOfferItems.adapter = offerItemListAdapter
 

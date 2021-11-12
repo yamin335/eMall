@@ -163,7 +163,7 @@ class ShopDetailsFragment :
             viewLifecycleOwner, FragmentResultListener { key, bundle ->
                 val product = bundle.getSerializable("product") as Product?
                 product?.let {
-                    navController.navigate(ShopDetailsFragmentDirections.actionShopDetailsFragmentToProductDetailsFragment(it))
+                    navController.navigate(ShopDetailsFragmentDirections.actionShopDetailsFragmentToProductDetailsNavGraph(it))
                 }
             }
         )

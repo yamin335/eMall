@@ -90,7 +90,7 @@ class ProductListFragment :
                 }
 
             }) { item ->
-            navController.navigate(ProductListFragmentDirections.actionProductListFragmentToProductDetailsFragment(item))
+            navController.navigate(ProductListFragmentDirections.actionProductListFragmentToProductDetailsNavGraph(item))
         }
 
         //viewDataBinding.rvProductList.addItemDecoration(GridRecyclerItemDecorator(2, 40, true))

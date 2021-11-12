@@ -1,5 +1,6 @@
 package com.mallzhub.customer.ui.home
 
+import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
@@ -54,10 +55,32 @@ class ProductDetailsFragment :
         registerToolbar(viewDataBinding.toolbar)
 
         val product = args.product
+        val discount = args.discount
+
+        if (discount > 0) {
+            viewDataBinding.discount = discount.toString()
+            viewDataBinding.linearOfferPercent.visibility = View.VISIBLE
+            viewDataBinding.productPrice.apply {
+                paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }
+            viewDataBinding.productDiscountedPrice.visibility = View.VISIBLE
+        } else {
+            if ((viewDataBinding.productPrice.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG) > 0) {
+                viewDataBinding.productPrice.apply {
+                    paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                }
+            }
+
+            viewDataBinding.linearOfferPercent.visibility = View.GONE
+            viewDataBinding.productDiscountedPrice.visibility = View.GONE
+        }
 
         viewDataBinding.toolbar.title = product.name
         viewDataBinding.name = product.name
-        viewDataBinding.price = "$${product.mrp}"
+        val price = product.mrp ?: 0.0
+        val discountAmount = (price * discount)/100
+        viewDataBinding.price = "${getString(R.string.sign_taka)}${price}"
+        viewDataBinding.discountedPrice = "${getString(R.string.sign_taka)}${price - discountAmount}"
 
         viewModel.toastWarning.observe(viewLifecycleOwner, Observer {
             it?.let { message ->
@@ -81,7 +104,8 @@ class ProductDetailsFragment :
 
         viewDataBinding.rvSampleImage.adapter = pdImageSampleAdapter
 
-        pdImageSampleAdapter.submitList(listOf(product.thumbnail, product.thumbnail, product.thumbnail, product.thumbnail, product.thumbnail))
+        pdImageSampleAdapter.submitList(listOf(product.product_image1, product.product_image2, product.product_image3,
+            product.product_image4, product.product_image5))
 
         viewDataBinding.imageUrl = product.thumbnail
         viewDataBinding.imageRequestListener = object: RequestListener<Drawable> {
@@ -197,7 +221,7 @@ class ProductDetailsFragment :
             }
 
             R.id.menu_cart -> {
-                navController.navigate(ProductDetailsFragmentDirections.actionProductDetailsFragmentToCartNavGraph())
+                navController.navigate(ProductDetailsFragmentDirections.actionProductDetailsFragmentToCartNavGraph2())
             }
         }
 
