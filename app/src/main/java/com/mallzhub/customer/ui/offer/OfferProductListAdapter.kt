@@ -6,35 +6,30 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.mallzhub.customer.AppExecutors
 import com.mallzhub.customer.R
-import com.mallzhub.customer.databinding.CartListItemBinding
 import com.mallzhub.customer.databinding.OfferProductListItemBinding
-import com.mallzhub.customer.local_db.dbo.CartItem
-import com.mallzhub.customer.models.OfferProductListResponseData
-
+import com.mallzhub.customer.models.OfferProduct
 import com.mallzhub.customer.util.DataBoundListAdapter
 
 class OfferProductListAdapter(
     private val appExecutors: AppExecutors,
-    private val itemSelectionCallback: ((OfferProductListResponseData) -> Unit)
-) : DataBoundListAdapter<OfferProductListResponseData, OfferProductListItemBinding>(
-    appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<OfferProductListResponseData>() {
-        override fun areItemsTheSame(oldItem: OfferProductListResponseData, newItem: OfferProductListResponseData): Boolean {
+    private val itemSelectionCallback: ((OfferProduct) -> Unit)
+) : DataBoundListAdapter<OfferProduct, OfferProductListItemBinding>(
+    appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<OfferProduct>() {
+        override fun areItemsTheSame(oldItem: OfferProduct, newItem: OfferProduct): Boolean {
             return oldItem.id == newItem.id
         }
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: OfferProductListResponseData,
-            newItem: OfferProductListResponseData
+            oldItem: OfferProduct,
+            newItem: OfferProduct
         ): Boolean {
             return oldItem == newItem
         }

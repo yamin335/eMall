@@ -7,8 +7,7 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.mallzhub.customer.api.*
 import com.mallzhub.customer.local_db.dao.CartDao
-import com.mallzhub.customer.models.AllShoppingMallResponse
-import com.mallzhub.customer.models.OfferProductListResponseData
+import com.mallzhub.customer.models.OfferProduct
 import com.mallzhub.customer.models.Product
 import com.mallzhub.customer.repos.HomeRepository
 import com.mallzhub.customer.repos.OfferRepository
@@ -31,8 +30,8 @@ class OfferViewModel @Inject constructor(
         }
     }
 
-    val offerProductList: MutableLiveData<List<OfferProductListResponseData>> by lazy {
-        MutableLiveData<List<OfferProductListResponseData>>()
+    val offerProductList: MutableLiveData<List<OfferProduct>> by lazy {
+        MutableLiveData<List<OfferProduct>>()
     }
 
     fun getProductDetails(id: Int?): LiveData<Product> {

@@ -24,8 +24,6 @@ class TermsAndConditionsFragment : BaseFragment<TermsBinding, TermsViewModel>() 
         viewModelFactory
     }
 
-    val args: TermsAndConditionsFragmentArgs by navArgs()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mActivity.window?.setSoftInputMode(
@@ -39,9 +37,9 @@ class TermsAndConditionsFragment : BaseFragment<TermsBinding, TermsViewModel>() 
         registerToolbar(viewDataBinding.toolbar)
 
         viewDataBinding.btnAccept.setOnClickListener {
-            val helper = args.registrationHelper
-            helper.isTermsAccepted = true
-            navController.navigate(TermsAndConditionsFragmentDirections.actionTermsAndConditionsToOtpSignInFragment3(helper))
+//            val helper = args.registrationHelper
+//            helper.isTermsAccepted = true
+//            navController.navigate(TermsAndConditionsFragmentDirections.actionTermsAndConditionsToOtpSignInFragment3(helper))
         }
 
         viewDataBinding.webView.settings.javaScriptEnabled = true

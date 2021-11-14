@@ -3,11 +3,11 @@ package com.mallzhub.customer.local_db.dbo
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.mallzhub.customer.models.OrderProduct
+import com.mallzhub.customer.models.Product
 
 @Entity(tableName = "cart")
 data class CartItem(
     @PrimaryKey(autoGenerate = false) @ColumnInfo(name = "id") val id: Int,
-    @ColumnInfo(name = "product") val product: OrderProduct,
+    @ColumnInfo(name = "product") val product: Product,
     @ColumnInfo(name = "quantity") val quantity: Int?
 )

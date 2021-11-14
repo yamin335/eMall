@@ -12,11 +12,10 @@ import com.mallzhub.customer.BR
 import com.mallzhub.customer.R
 import com.mallzhub.customer.databinding.ShopDetailsProductListFragmentBinding
 import com.mallzhub.customer.models.Merchant
-import com.mallzhub.customer.models.OrderMerchant
-import com.mallzhub.customer.models.OrderProduct
 import com.mallzhub.customer.models.Product
 import com.mallzhub.customer.ui.common.BaseFragment
-import com.mallzhub.customer.ui.home.*
+import com.mallzhub.customer.ui.home.ProductListAdapter
+import com.mallzhub.customer.ui.home.ProductListViewModel
 import com.mallzhub.customer.util.showSuccessToast
 import com.mallzhub.customer.util.showWarningToast
 
@@ -46,13 +45,13 @@ class ShopDetailsProductListFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        orderMerchant = OrderMerchant(merchant?.id, merchant?.name, merchant?.user_name,
-            merchant?.password, merchant?.shop_name, merchant?.mobile,
-            merchant?.lat, merchant?.long, merchant?.whatsApp,
-            merchant?.email, merchant?.address, merchant?.shop_address,
-            merchant?.shop_logo, merchant?.thumbnail, merchant?.isActive,
-            merchant?.shopping_mall_id, merchant?.shopping_mall_level_id,
-            merchant?.created_at, merchant?.updated_at)
+//        orderMerchant = OrderMerchant(merchant?.id, merchant?.name, merchant?.user_name,
+//            merchant?.password, merchant?.shop_name, merchant?.mobile,
+//            merchant?.lat, merchant?.long, merchant?.whatsApp,
+//            merchant?.email, merchant?.address, merchant?.shop_address,
+//            merchant?.shop_logo, merchant?.thumbnail, merchant?.isActive,
+//            merchant?.shopping_mall_id, merchant?.shopping_mall_level_id,
+//            merchant?.created_at, merchant?.updated_at)
 
         viewModel.toastWarning.observe(viewLifecycleOwner, Observer {
             it?.let { message ->
@@ -76,15 +75,7 @@ class ShopDetailsProductListFragment :
                 }
 
                 override fun addToCart(item: Product) {
-                    viewModel.addToCart(
-                        OrderProduct(item.id, item.name, item.barcode,
-                        item.description, item.buying_price?.toInt(), item.selling_price?.toInt(),
-                        item.mrp?.toInt(), item.expired_date, item.thumbnail,
-                        item.product_image1, item.product_image2,
-                        item.product_image3, item.product_image4,
-                        item.product_image5, item.category_id, item.merchant_id,
-                        item.created_at, item.updated_at,
-                        orderMerchant, item.category, 0), 1)
+                    viewModel.addToCart(item, 1)
                 }
 
             }) { item ->
@@ -94,17 +85,17 @@ class ShopDetailsProductListFragment :
         viewDataBinding.rvProductList.layoutManager = StaggeredGridLayoutManager(3, OrientationHelper.VERTICAL)
         viewDataBinding.rvProductList.adapter = productListAdapter
 
-        viewModel.productListResponse.observe(viewLifecycleOwner, Observer { response ->
-            response?.data?.let { productList ->
-                if (productList.size < 7) {
-                    productListAdapter.submitList(productList)
-                } else {
-                    productList.subList(0, 6)
-                }
+        viewModel.productListResponse.observe(viewLifecycleOwner, Observer { productList ->
+            if (productList.size < 7) {
+                productListAdapter.submitList(productList)
+            } else {
+                productList.subList(0, 6)
             }
         })
 
-        viewModel.getProductList(merchant?.id.toString())
+        merchant?.let {
+            viewModel.getProductList(it)
+        }
 
         viewDataBinding.moreProduct.setOnClickListener {
             merchant?.let { merchant ->
@@ -123,7 +114,7 @@ class ShopDetailsProductListFragment :
          * @return A new instance of fragment 'ShopDetailsProductListFragment'.
          */
 
-        var orderMerchant: OrderMerchant? = null
+        //var orderMerchant: OrderMerchant? = null
 
         @JvmStatic
         fun newInstance(merchant: Merchant) =

@@ -1,6 +1,6 @@
 package com.mallzhub.customer.models.order
 
-import com.mallzhub.customer.models.OrderProduct
+import com.mallzhub.customer.models.Product
 import com.mallzhub.customer.models.customer.Customer
 import java.io.Serializable
 
@@ -25,7 +25,7 @@ data class SalesData(val id: Int?, val customer_id: Int?, val merchant_id: Int?,
 data class SalesDetails(val id: Int?, val sale_id: Int?, val product_id: Int?, val description: String?,
                         val unitType: String?, val qty: Int?, val unit_price: Int?, val taxType: String?,
                         val taxTypeValue: Double?, val discountType: String?, val discountTypeValue: Double?,
-                        val sub_total: Int?, val created_at: String?, val updated_at: String?, val product: OrderProduct?): Serializable
+                        val sub_total: Int?, val created_at: String?, val updated_at: String?, val product: Product?): Serializable
 
 
 

@@ -19,18 +19,6 @@ import com.mallzhub.customer.ui.how_works.HowWorksViewModel
 import com.mallzhub.customer.ui.info.InfoViewModel
 import com.mallzhub.customer.ui.live_chat.LiveChatViewModel
 import com.mallzhub.customer.ui.login.SignInViewModel
-import com.mallzhub.customer.ui.tou.TouViewModel
-import com.mallzhub.customer.ui.otp.OtpViewModel
-import com.mallzhub.customer.ui.pre_on_boarding.PreOnBoardingViewModel
-import com.mallzhub.customer.ui.profiles.ProfilesViewModel
-import com.mallzhub.customer.ui.registration.RegistrationViewModel
-import com.mallzhub.customer.ui.settings.SettingsViewModel
-import com.mallzhub.customer.ui.setup.SetupViewModel
-import com.mallzhub.customer.ui.setup_complete.SetupCompleteViewModel
-import com.mallzhub.customer.ui.splash.SplashViewModel
-import com.mallzhub.customer.ui.video_play.LoadWebViewViewModel
-import com.mallzhub.customer.ui.video_play.VideoPlayViewModel
-import com.mallzhub.customer.ui.login.ViewPagerViewModel
 import com.mallzhub.customer.ui.more.MoreViewModel
 import com.mallzhub.customer.ui.offer.OfferViewModel
 import com.mallzhub.customer.ui.order.OrderAsGuestDialogViewModel
@@ -38,14 +26,24 @@ import com.mallzhub.customer.ui.order.OrderTrackHistoryViewModel
 import com.mallzhub.customer.ui.order.OrderViewModel
 import com.mallzhub.customer.ui.otp_signin.OtpSignInViewModel
 import com.mallzhub.customer.ui.pin_number.PinNumberViewModel
-import com.mallzhub.customer.ui.profile_signin.ProfileSignInViewModel
+import com.mallzhub.customer.ui.pre_on_boarding.PreOnBoardingViewModel
+import com.mallzhub.customer.ui.profiles.ProfilesViewModel
+import com.mallzhub.customer.ui.registration.RegistrationViewModel
+import com.mallzhub.customer.ui.settings.SettingsViewModel
+import com.mallzhub.customer.ui.setup.SetupViewModel
+import com.mallzhub.customer.ui.setup_complete.SetupCompleteViewModel
 import com.mallzhub.customer.ui.shops.ShopDetailsContactUsViewModel
 import com.mallzhub.customer.ui.shops.ShopDetailsViewModel
+import com.mallzhub.customer.ui.splash.SplashViewModel
 import com.mallzhub.customer.ui.terms_and_conditions.TermsViewModel
 import com.mallzhub.customer.ui.topup.TopUpAmountViewModel
 import com.mallzhub.customer.ui.topup.TopUpBankCardViewModel
 import com.mallzhub.customer.ui.topup.TopUpMobileViewModel
 import com.mallzhub.customer.ui.topup.TopUpPinViewModel
+import com.mallzhub.customer.ui.tou.TouViewModel
+import com.mallzhub.customer.ui.transactions.TransactionsViewModel
+import com.mallzhub.customer.ui.video_play.LoadWebViewViewModel
+import com.mallzhub.customer.ui.video_play.VideoPlayViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -180,11 +178,6 @@ abstract class ViewModelModule {
     @ViewModelKey(RegistrationViewModel::class)
     abstract fun bindRegistrationViewModel(viewModel: RegistrationViewModel): ViewModel
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(OtpViewModel::class)
-    abstract fun bindOtpViewModel(viewModel: OtpViewModel): ViewModel
-
 
     @Binds
     @IntoMap
@@ -213,8 +206,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ViewPagerViewModel::class)
-    abstract fun bindSetupViewPagerViewModel(viewModel: ViewPagerViewModel): ViewModel
+    @ViewModelKey(TransactionsViewModel::class)
+    abstract fun bindTransactionsViewModel(viewModel: TransactionsViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -240,11 +233,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PinNumberViewModel::class)
     abstract fun bindSetupPinNumberViewModel(viewModel: PinNumberViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(ProfileSignInViewModel::class)
-    abstract fun bindSetupProfileSignInViewModel(viewModel: ProfileSignInViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -14,6 +14,7 @@ import com.mallzhub.customer.databinding.PinNumberBinding
 import com.mallzhub.customer.ui.common.BaseFragment
 import com.mallzhub.customer.util.hideKeyboard
 import com.mallzhub.customer.util.showErrorToast
+import com.mallzhub.customer.util.showSuccessToast
 import com.mallzhub.customer.util.showWarningToast
 import org.json.JSONObject
 
@@ -37,7 +38,7 @@ class PinNumberFragment : BaseFragment<PinNumberBinding, PinNumberViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateStatusBarBackgroundColor("#1E4356")
+        updateStatusBarBackgroundColor("#161E2C")
         registerToolbar(viewDataBinding.toolbar)
 
         val helper = args.registrationHelper
@@ -72,60 +73,64 @@ class PinNumberFragment : BaseFragment<PinNumberBinding, PinNumberViewModel>() {
         viewModel.pin.observe(viewLifecycleOwner, Observer { pin ->
             pin?.let {
                 if (helper.isRegistered) {
-                    viewDataBinding.btnSubmit.isEnabled = pin.length == 6
+                    viewDataBinding.btnSignIn.isEnabled = pin.length == 6
                 } else {
-                    viewDataBinding.btnSubmit.isEnabled = pin.length == 6 && viewModel.rePin.value?.length == 6
+                    viewDataBinding.btnSignIn.isEnabled = pin.length == 6 && viewModel.rePin.value?.length == 6
                 }
             }
         })
 
         viewModel.rePin.observe(viewLifecycleOwner, Observer { rePin ->
             rePin?.let {
-                viewDataBinding.btnSubmit.isEnabled = viewModel.pin.value?.length == 6 && rePin.length == 6
+                viewDataBinding.btnSignIn.isEnabled = viewModel.pin.value?.length == 6 && rePin.length == 6
             }
         })
 
-        viewDataBinding.btnSubmit.setOnClickListener {
+        viewDataBinding.btnSignIn.setOnClickListener {
             hideKeyboard()
-            var pin = ""
-            var rePin = ""
-
-            viewModel.pin.value?.let {
-                pin = it
-            }
-
-            viewModel.rePin.value?.let {
-                rePin = it
-            }
-
-            when {
-                helper.isRegistered && pin.isNotBlank() && rePin.isBlank() -> {
-                    viewModel.connectToken(
-                        helper.mobile,
-                        pin,
-                        "password",
-                        "offline_access",
-                        Build.ID,
-                        Build.MANUFACTURER,
-                        Build.MODEL,
-                        "qpayandroid",
-                        "07A96yr@!1t8r",
-                        helper.otp
-                    )
-                }
-                pin != rePin && !helper.isRegistered -> {
-                    viewDataBinding.etRepin.requestFocus()
-                    showErrorToast(requireContext(), "Both pin number does not match")
-                }
-                pin.isNotBlank() && rePin.isNotBlank() && pin == rePin && !helper.isRegistered -> {
-                    helper.pinNumber = pin
-                    val action =
-                        PinNumberFragmentDirections.actionPinNumberFragmentToPermissionsFragment(
-                            helper
-                        )
-                    navController.navigate(action)
-                }
-            }
+            showSuccessToast(requireContext(), "Signed In successfully!")
+            preferencesHelper.isLoggedIn = true
+            requireActivity().finish()
+            requireActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+//            var pin = ""
+//            var rePin = ""
+//
+//            viewModel.pin.value?.let {
+//                pin = it
+//            }
+//
+//            viewModel.rePin.value?.let {
+//                rePin = it
+//            }
+//
+//            when {
+//                helper.isRegistered && pin.isNotBlank() && rePin.isBlank() -> {
+//                    viewModel.connectToken(
+//                        helper.mobile,
+//                        pin,
+//                        "password",
+//                        "offline_access",
+//                        Build.ID,
+//                        Build.MANUFACTURER,
+//                        Build.MODEL,
+//                        "qpayandroid",
+//                        "07A96yr@!1t8r",
+//                        helper.otp
+//                    )
+//                }
+//                pin != rePin && !helper.isRegistered -> {
+//                    viewDataBinding.etRepin.requestFocus()
+//                    showErrorToast(requireContext(), "Both pin number does not match")
+//                }
+//                pin.isNotBlank() && rePin.isNotBlank() && pin == rePin && !helper.isRegistered -> {
+//                    helper.pinNumber = pin
+////                    val action =
+////                        PinNumberFragmentDirections.actionPinNumberFragmentToPermissionsFragment(
+////                            helper
+////                        )
+////                    navController.navigate(action)
+//                }
+//            }
         }
     }
 }

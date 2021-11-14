@@ -64,7 +64,7 @@ class NIDScanCameraXFragment : BaseFragment<NIDScanCameraXFragmentBinding, NIDSc
 
     override val viewModel: NIDScanCameraXViewModel by viewModels { viewModelFactory }
 
-    val args: NIDScanCameraXFragmentArgs by navArgs()
+    //val args: NIDScanCameraXFragmentArgs by navArgs()
 
     private var cameraProvider: ProcessCameraProvider? = null
     private var previewUseCase: Preview? = null
@@ -133,8 +133,8 @@ class NIDScanCameraXFragment : BaseFragment<NIDScanCameraXFragmentBinding, NIDSc
         })
 
         viewDataBinding.btnSkip.setOnClickListener {
-            val action = NIDScanCameraXFragmentDirections.actionNIDScanCameraXFragmentToProfileSignInFragment(NIDDataModels(false, nidFrontData, nidBackData), args.registrationHelper)
-            navController.navigate(action)
+//            val action = NIDScanCameraXFragmentDirections.actionNIDScanCameraXFragmentToProfileSignInFragment(NIDDataModels(false, nidFrontData, nidBackData), args.registrationHelper)
+//            navController.navigate(action)
         }
     }
 
@@ -254,8 +254,8 @@ class NIDScanCameraXFragment : BaseFragment<NIDScanCameraXFragmentBinding, NIDSc
                             // We can only change the foreground Drawable using API level 23+ API
                             blinkUIAsCameraShutter()
 
-                            val action = NIDScanCameraXFragmentDirections.actionNIDScanCameraXFragmentToProfileSignInFragment(NIDDataModels(true, nidFrontData, nidBackData), args.registrationHelper)
-                            navController.navigate(action)
+//                            val action = NIDScanCameraXFragmentDirections.actionNIDScanCameraXFragmentToProfileSignInFragment(NIDDataModels(true, nidFrontData, nidBackData), args.registrationHelper)
+//                            navController.navigate(action)
                         }
                     }, imageType)
                 }

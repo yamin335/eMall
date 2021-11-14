@@ -1,8 +1,10 @@
 package com.mallzhub.customer.ui.login
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
+import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -35,29 +37,39 @@ class SignInFragment : BaseFragment<SignInBinding, SignInViewModel>() {
         mActivity.window?.setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
         )
+        // This callback will only be called when HomeFragment is at least Started.
+        requireActivity().onBackPressedDispatcher.addCallback(this, true) {
+            requireActivity().finish()
+            requireActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateStatusBarBackgroundColor("#1E4356")
-        registerToolbar(viewDataBinding.toolbar)
+        updateStatusBarBackgroundColor("#161E2C")
+        //registerToolbar(viewDataBinding.toolbar)
+
+        viewDataBinding.backButton.setOnClickListener {
+            requireActivity().finish()
+            requireActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        }
 
         viewModel.mobileNo.observe(viewLifecycleOwner, Observer {  mobileNo ->
             mobileNo?.let {
-                viewDataBinding.btnProceed.isEnabled = (it.length == 11) && (it[0] == '0')
+                viewDataBinding.btnNext.isEnabled = (it.length == 11) && (it[0] == '0')
             }
         })
 
-        viewDataBinding.btnProceed.setOnClickListener {
+        viewDataBinding.btnNext.setOnClickListener {
             hideKeyboard()
-            tempopenOperatorSelectionDialog()
+            tempOpenOperatorSelectionDialog()
 //            viewModel.mobileNo.value?.let { mobileNo ->
 //                inquireAccount(mobileNo, Build.ID)
 //            }
         }
     }
 
-    private fun tempopenOperatorSelectionDialog() {
+    private fun tempOpenOperatorSelectionDialog() {
         val bottomSheetDialog = BottomSheetDialog(mActivity)
         val binding = DataBindingUtil.inflate<LayoutOperatorSelectionBinding>(
             layoutInflater,
@@ -70,25 +82,25 @@ class SignInFragment : BaseFragment<SignInBinding, SignInViewModel>() {
 
         binding.btnBanglalink.setOnClickListener {
             bottomSheetDialog.dismiss()
-            val action = SignInFragmentDirections.actionSignInFragmentToTermsFragment(registrationHelper)
+            val action = SignInFragmentDirections.actionSignInFragmentToOtpSignInFragment(registrationHelper)
             navController.navigate(action)
         }
 
         binding.btnGrameenphone.setOnClickListener {
             bottomSheetDialog.dismiss()
-            val action = SignInFragmentDirections.actionSignInFragmentToTermsFragment(registrationHelper)
+            val action = SignInFragmentDirections.actionSignInFragmentToOtpSignInFragment(registrationHelper)
             navController.navigate(action)
         }
 
         binding.btnRobi.setOnClickListener {
             bottomSheetDialog.dismiss()
-            val action = SignInFragmentDirections.actionSignInFragmentToTermsFragment(registrationHelper)
+            val action = SignInFragmentDirections.actionSignInFragmentToOtpSignInFragment(registrationHelper)
             navController.navigate(action)
         }
 
         binding.btnTeletalk.setOnClickListener {
             bottomSheetDialog.dismiss()
-            val action = SignInFragmentDirections.actionSignInFragmentToTermsFragment(registrationHelper)
+            val action = SignInFragmentDirections.actionSignInFragmentToOtpSignInFragment(registrationHelper)
             navController.navigate(action)
         }
         bottomSheetDialog.show()
@@ -127,7 +139,7 @@ class SignInFragment : BaseFragment<SignInBinding, SignInViewModel>() {
         dialog.dismiss()
         registrationHelper.isRegistered = false
         registrationHelper.operator = operator
-        val action = SignInFragmentDirections.actionSignInFragmentToTermsFragment(registrationHelper)
+        val action = SignInFragmentDirections.actionSignInFragmentToOtpSignInFragment(registrationHelper)
         navController.navigate(action)
     }
 
@@ -149,4 +161,5 @@ class SignInFragment : BaseFragment<SignInBinding, SignInViewModel>() {
             }
         })
     }
+
 }

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.mallzhub.customer.BR
 import com.mallzhub.customer.R
 import com.mallzhub.customer.databinding.ProductListFragmentBinding
-import com.mallzhub.customer.models.OrderProduct
 import com.mallzhub.customer.models.Product
 import com.mallzhub.customer.ui.common.BaseFragment
 import com.mallzhub.customer.ui.shops.ShopDetailsProductListFragment
@@ -79,14 +78,7 @@ class ProductListFragment :
                 }
 
                 override fun addToCart(item: Product) {
-                    viewModel.addToCart(OrderProduct(item.id, item.name, item.barcode,
-                        item.description, item.buying_price?.toInt(), item.selling_price?.toInt(),
-                        item.mrp?.toInt(), item.expired_date, item.thumbnail,
-                        item.product_image1, item.product_image2,
-                        item.product_image3, item.product_image4,
-                        item.product_image5, item.category_id, item.merchant_id,
-                        item.created_at, item.updated_at,
-                        ShopDetailsProductListFragment.orderMerchant, item.category, 0), 1)
+                    viewModel.addToCart(item, 1)
                 }
 
             }) { item ->
@@ -97,13 +89,11 @@ class ProductListFragment :
         viewDataBinding.rvProductList.layoutManager = StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL)
         viewDataBinding.rvProductList.adapter = productListAdapter
 
-        viewModel.productListResponse.observe(viewLifecycleOwner, Observer { response ->
-            response?.data?.let { productList ->
-                productListAdapter.submitList(productList)
-            }
+        viewModel.productListResponse.observe(viewLifecycleOwner, Observer { productList ->
+            productListAdapter.submitList(productList)
         })
 
-        viewModel.getProductList(args.merchant.id.toString())
+        viewModel.getProductList(args.merchant)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

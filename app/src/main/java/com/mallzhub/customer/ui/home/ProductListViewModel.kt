@@ -11,7 +11,7 @@ import com.mallzhub.customer.local_db.dao.CartDao
 import com.mallzhub.customer.local_db.dao.FavoriteDao
 import com.mallzhub.customer.local_db.dbo.CartItem
 import com.mallzhub.customer.models.AllProductResponse
-import com.mallzhub.customer.models.OrderProduct
+import com.mallzhub.customer.models.Merchant
 import com.mallzhub.customer.models.Product
 import com.mallzhub.customer.repos.HomeRepository
 import com.mallzhub.customer.ui.common.BaseViewModel
@@ -28,8 +28,8 @@ class ProductListViewModel @Inject constructor(
     private val favoriteDao: FavoriteDao
 ) : BaseViewModel(application) {
 
-    val productListResponse: MutableLiveData<AllProductResponse> by lazy {
-        MutableLiveData<AllProductResponse>()
+    val productListResponse: MutableLiveData<List<Product>> by lazy {
+        MutableLiveData<List<Product>>()
     }
 
     val cartItemCount: LiveData<Int> = liveData {
@@ -57,7 +57,7 @@ class ProductListViewModel @Inject constructor(
         }
     }
 
-    fun addToCart(product: OrderProduct, quantity: Int) {
+    fun addToCart(product: Product, quantity: Int) {
         try {
             val handler = CoroutineExceptionHandler { _, exception ->
                 exception.printStackTrace()
@@ -76,7 +76,7 @@ class ProductListViewModel @Inject constructor(
         }
     }
 
-    fun getProductList(merchantID: String) {
+    fun getProductList(merchant: Merchant) {
         if (checkNetworkStatus()) {
             val handler = CoroutineExceptionHandler { _, exception ->
                 exception.printStackTrace()
@@ -86,10 +86,12 @@ class ProductListViewModel @Inject constructor(
 
             apiCallStatus.postValue(ApiCallStatus.LOADING)
             viewModelScope.launch(handler) {
-                when (val apiResponse = ApiResponse.create(repository.getAllProductsRepo(id = merchantID))) {
+                when (val apiResponse = ApiResponse.create(repository.getAllProductsRepo(id = merchant.id))) {
                     is ApiSuccessResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.SUCCESS)
-                        productListResponse.postValue(apiResponse.body)
+                        val productList = apiResponse.body.data ?: ArrayList()
+                        productList.map { it.merchant = merchant }
+                        productListResponse.postValue(productList)
                     }
                     is ApiEmptyResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.EMPTY)

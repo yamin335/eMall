@@ -85,7 +85,7 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
                                 val orderItems = ArrayList<OrderStoreProduct>()
                                 val total = merchantWiseOrder.totalPrice
                                 merchantWiseOrder.orderProductList.forEach { cartItem ->
-                                    val price = cartItem.product.mrp ?: 0
+                                    val price = cartItem.product.mrp?.toInt() ?: 0
                                     val quantity = cartItem.quantity ?: 0
 
                                     val product = cartItem.product
@@ -155,7 +155,7 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
                         if (key != null && !productsList.isNullOrEmpty()) {
                             var total = 0.0
                             productsList.forEach { cartItem ->
-                                val price = cartItem.product.mrp ?: 0
+                                val price = cartItem.product.mrp?.toInt() ?: 0
                                 val quantity = cartItem.quantity ?: 0
                                 total += price * quantity
                             }

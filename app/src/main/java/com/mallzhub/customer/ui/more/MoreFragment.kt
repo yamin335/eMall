@@ -1,18 +1,21 @@
 package com.mallzhub.customer.ui.more
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.mallzhub.customer.BR
+import com.mallzhub.customer.BuildConfig
 import com.mallzhub.customer.R
 import com.mallzhub.customer.databinding.MoreFragmentBinding
+import com.mallzhub.customer.ui.LoginActivity
 import com.mallzhub.customer.ui.LogoutHandlerCallback
+import com.mallzhub.customer.ui.MainActivity
 import com.mallzhub.customer.ui.NavDrawerHandlerCallback
 import com.mallzhub.customer.ui.common.BaseFragment
-import com.mallzhub.customer.ui.order.OrderListFragmentDirections
-import com.mallzhub.customer.ui.splash.SplashFragment
+import com.mallzhub.customer.util.showSuccessToast
 
 class MoreFragment : BaseFragment<MoreFragmentBinding, MoreViewModel>() {
 
@@ -48,12 +51,30 @@ class MoreFragment : BaseFragment<MoreFragmentBinding, MoreViewModel>() {
         drawerListener = null
     }
 
+    override fun onResume() {
+        super.onResume()
+        checkIsLoggedIn()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewDataBinding.btnSignOut.setOnClickListener {
+        checkIsLoggedIn()
+
+        viewDataBinding.version.text = "Version ${BuildConfig.VERSION_NAME}"
+
+        viewDataBinding.btnSignInSignOut.setOnClickListener {
+            if (preferencesHelper.isLoggedIn) {
+                showSuccessToast(requireContext(), "Signed out successfully!")
+                preferencesHelper.isLoggedIn = false
+                checkIsLoggedIn()
+            } else {
+                startActivity(Intent(requireActivity(), LoginActivity::class.java))
+                requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                //finish()
+            }
 //            SplashFragment.fromLogout = true
-//            preferencesHelper.isLoggedIn = false
+
 //            listener?.onLoggedOut()
         }
 
@@ -76,6 +97,26 @@ class MoreFragment : BaseFragment<MoreFragmentBinding, MoreViewModel>() {
                 }
             }
         })
+
+        viewDataBinding.menuProfiles.setOnClickListener {
+            navigateTo(MoreFragmentDirections.actionMoreFragmentToProfilesFragment())
+        }
+
+        viewDataBinding.menuTransactions.setOnClickListener {
+            navigateTo(MoreFragmentDirections.actionMoreFragmentToTransactionsFragment())
+        }
+
+        viewDataBinding.menuSettings.setOnClickListener {
+            navigateTo(MoreFragmentDirections.actionMoreFragmentToSettingsFragment())
+        }
+    }
+
+    private fun checkIsLoggedIn() {
+        if (preferencesHelper.isLoggedIn) {
+            viewDataBinding.btnSignInSignOut.text = "Sign Out"
+        } else {
+            viewDataBinding.btnSignInSignOut.text = "Sign In"
+        }
     }
 
 }

@@ -53,7 +53,8 @@ class SplashActivity : DaggerAppCompatActivity() {
 
                     startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                     this@SplashActivity.finish()
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out)
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    //overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left)
                 }
             }
 

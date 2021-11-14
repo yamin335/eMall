@@ -11,15 +11,29 @@
         android:label="More"
         tools:layout="@layout/fragment_more" >
         <action
-            android:id="@+id/action_moreFragment_to_addProductFragment"
-            app:destination="@id/addProductFragment"
+            android:id="@+id/action_moreFragment_to_cart_nav_graph"
+            app:destination="@id/cart_nav_graph"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_moreFragment_to_cart_nav_graph"
-            app:destination="@id/cart_nav_graph"
+            android:id="@+id/action_moreFragment_to_profilesFragment"
+            app:destination="@id/profilesFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_moreFragment_to_transactionsFragment"
+            app:destination="@id/transactionsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_moreFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -27,10 +41,20 @@
     </fragment>
 
     <include app:graph="@navigation/drawer_nav_graph" />
-    <fragment
-        android:id="@+id/addProductFragment"
-        android:name="com.mallzhub.customer.ui.add_product.AddProductFragment"
-        android:label="Add New Product"
-        tools:layout="@layout/fragment_add_product"/>
     <include app:graph="@navigation/cart_nav_graph" />
+    <fragment
+        android:id="@+id/profilesFragment"
+        android:name="com.mallzhub.customer.ui.profiles.ProfilesFragment"
+        android:label="ProfilesFragment"
+        tools:layout="@layout/fragment_profile"/>
+    <fragment
+        android:id="@+id/transactionsFragment"
+        android:name="com.mallzhub.customer.ui.transactions.TransactionsFragment"
+        android:label="TransactionsFragment"
+        tools:layout="@layout/fragment_transactions"/>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.mallzhub.customer.ui.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings"/>
 </navigation>

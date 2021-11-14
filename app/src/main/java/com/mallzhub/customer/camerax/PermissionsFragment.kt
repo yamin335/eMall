@@ -20,8 +20,6 @@ private val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.CAMERA)
 
 class PermissionsFragment : Fragment() {
 
-    val args: PermissionsFragmentArgs by navArgs()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (!hasPermissions(requireContext())) {
@@ -30,7 +28,7 @@ class PermissionsFragment : Fragment() {
         } else {
             // If permissions have already been granted, proceed
             //findNavController().navigate(PermissionsFragmentDirections.actionPermissionsFragmentToCameraFragment())
-            findNavController().navigate(PermissionsFragmentDirections.actionPermissionsFragmentToNIDScanCameraXFragment(args.registrationHelper))
+            //findNavController().navigate(PermissionsFragmentDirections.actionPermissionsFragmentToNIDScanCameraXFragment(args.registrationHelper))
         }
     }
 
@@ -42,7 +40,7 @@ class PermissionsFragment : Fragment() {
                 // Take the user to the success fragment when permission is granted
                 Toast.makeText(context, "Permission request granted", Toast.LENGTH_LONG).show()
                 //findNavController().navigate(PermissionsFragmentDirections.actionPermissionsFragmentToCameraFragment())
-                findNavController().navigate(PermissionsFragmentDirections.actionPermissionsFragmentToNIDScanCameraXFragment(args.registrationHelper))
+                //findNavController().navigate(PermissionsFragmentDirections.actionPermissionsFragmentToNIDScanCameraXFragment(args.registrationHelper))
             } else {
                 Toast.makeText(context, "Permission request denied", Toast.LENGTH_LONG).show()
                 findNavController().navigateUp()

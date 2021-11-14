@@ -2,7 +2,7 @@ package com.mallzhub.customer.local_db.db
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
-import com.mallzhub.customer.models.OrderProduct
+import com.mallzhub.customer.models.Merchant
 import com.mallzhub.customer.models.Product
 import com.mallzhub.customer.models.ProductCategory
 
@@ -32,14 +32,24 @@ class RoomDataConverter {
     }
 
     @TypeConverter
-    fun jsonStringToOrderProduct(value: String): OrderProduct {
-        return gson.fromJson(value, OrderProduct::class.java)
+    fun jsonStringToMerchant(value: String): Merchant {
+        return gson.fromJson(value, Merchant::class.java)
     }
 
     @TypeConverter
-    fun orderProductToJsonString(product: OrderProduct): String {
-        return gson.toJson(product)
+    fun merchantToJsonString(merchant: Merchant): String {
+        return gson.toJson(merchant)
     }
+
+//    @TypeConverter
+//    fun jsonStringToOrderProduct(value: String): Product {
+//        return gson.fromJson(value, Product::class.java)
+//    }
+
+//    @TypeConverter
+//    fun orderProductToJsonString(product: Product): String {
+//        return gson.toJson(product)
+//    }
 
 //    @TypeConverter
 //    fun fromString(value: String?): ArrayList<String?>? {

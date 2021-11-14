@@ -52,7 +52,7 @@ class OtpSignInFragment : BaseFragment<OtpSignInBinding, OtpSignInViewModel>(), 
     }
 
     override fun onPermissionGranted() {
-        helper.otp = viewDataBinding.etOtpCode.text.toString()
+        //helper.otp = viewDataBinding.etOtpCode.text.toString()
 
         val action = OtpSignInFragmentDirections.actionOtpSignInFragmentToPinNumberFragment(helper)
         navController.navigate(action)
@@ -60,7 +60,7 @@ class OtpSignInFragment : BaseFragment<OtpSignInBinding, OtpSignInViewModel>(), 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateStatusBarBackgroundColor("#1E4356")
+        updateStatusBarBackgroundColor("#161E2C")
         registerToolbar(viewDataBinding.toolbar)
 
         helper = args.registrationHelper
@@ -68,7 +68,7 @@ class OtpSignInFragment : BaseFragment<OtpSignInBinding, OtpSignInViewModel>(), 
 
         viewDataBinding.etOtpCode.isEnabled = true
 
-        viewDataBinding.btnSubmit.setOnClickListener {
+        viewDataBinding.btnNext.setOnClickListener {
             TedPermission.with(requireContext())
                 .setPermissionListener(this)
                 .setDeniedMessage(getString(R.string.if_you_reject_these_permission_the_app_wont_work_perfectly))
@@ -84,20 +84,20 @@ class OtpSignInFragment : BaseFragment<OtpSignInBinding, OtpSignInViewModel>(), 
 
         viewDataBinding.btnResend.setOnClickListener {
             startTimer()
-            if (helper.isRegistered) {
-                viewModel.requestOTPForRegisteredUser(args.registrationHelper.mobile, Build.ID)
-            } else {
-                viewModel.requestOTP(args.registrationHelper.mobile, args.registrationHelper.isTermsAccepted.toString())
-            }
+//            if (helper.isRegistered) {
+//                viewModel.requestOTPForRegisteredUser(args.registrationHelper.mobile, Build.ID)
+//            } else {
+//                viewModel.requestOTP(args.registrationHelper.mobile, args.registrationHelper.isTermsAccepted.toString())
+//            }
             viewDataBinding.tvOtpTextDescription.text = otpWaitMessage
             viewDataBinding.etOtpCode.setText("")
-            viewDataBinding.etOtpCode.isEnabled = false
-            viewDataBinding.btnSubmit.isEnabled = false
+//            viewDataBinding.etOtpCode.isEnabled = false
+//            viewDataBinding.btnNext.isEnabled = false
         }
 
         viewModel.otp.observe(viewLifecycleOwner, Observer { otp ->
             otp?.let {
-                viewDataBinding.btnSubmit.isEnabled = it.length == 6
+                viewDataBinding.btnNext.isEnabled = it.length == 6
             }
         })
 

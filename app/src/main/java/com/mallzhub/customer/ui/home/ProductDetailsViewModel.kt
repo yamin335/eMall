@@ -6,7 +6,6 @@ import androidx.lifecycle.*
 import com.mallzhub.customer.local_db.dao.CartDao
 import com.mallzhub.customer.local_db.dao.FavoriteDao
 import com.mallzhub.customer.local_db.dbo.CartItem
-import com.mallzhub.customer.models.OrderProduct
 import com.mallzhub.customer.models.Product
 import com.mallzhub.customer.ui.common.BaseViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -54,14 +53,14 @@ class ProductDetailsViewModel @Inject constructor(
 //        return result
 //    }
 
-    fun addToCart(product: OrderProduct, quantity: Int) {
+    fun addToCart(product: Product, quantity: Int) {
         try {
             val handler = CoroutineExceptionHandler { _, exception ->
                 exception.printStackTrace()
             }
 
             viewModelScope.launch(handler) {
-                val response = cartDao.addItemToCart(CartItem(product.id ?: 0, product, quantity))
+                val response = cartDao.addItemToCart(CartItem(product.id, product, quantity))
                 if (response == -1L) {
                     toastWarning.postValue("Already added to cart!")
                 } else {

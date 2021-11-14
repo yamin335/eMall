@@ -60,7 +60,7 @@ class CartOverviewProductListAdapter(
         }
 
         val quantity = item.quantity ?: 0
-        val unitPrice = item.product.mrp ?: 0
+        val unitPrice = item.product.mrp?.toInt() ?: 0
         binding.subTotal = "${quantity * unitPrice}"
     }
 }

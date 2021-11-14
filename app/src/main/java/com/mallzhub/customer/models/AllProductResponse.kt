@@ -30,7 +30,8 @@ data class Product(
     val available_qty: Int?,
     val created_at: String?,
     val updated_at: String?,
-    val category: ProductCategory?): Serializable
+    val category: ProductCategory?,
+    var merchant: Merchant?): Serializable
 
 data class Attribute(val id: Int?, val product_category_id: Int?, val merchant_id: Int?,
                      val attribute_id: Int?, val attribute_name: String?,

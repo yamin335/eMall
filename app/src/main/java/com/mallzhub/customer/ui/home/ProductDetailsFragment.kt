@@ -16,9 +16,7 @@ import com.mallzhub.customer.BR
 import com.mallzhub.customer.R
 import com.mallzhub.customer.databinding.ProductDetailsFragmentBinding
 import com.mallzhub.customer.local_db.dao.CartDao
-import com.mallzhub.customer.models.OrderProduct
 import com.mallzhub.customer.ui.common.BaseFragment
-import com.mallzhub.customer.ui.shops.ShopDetailsProductListFragment
 import com.mallzhub.customer.util.showSuccessToast
 import com.mallzhub.customer.util.showWarningToast
 import javax.inject.Inject
@@ -157,15 +155,7 @@ class ProductDetailsFragment :
             if (alreadyAddedToCart) {
                 showWarningToast(requireContext(), "Already added to cart!")
             } else {
-                viewModel.addToCart(
-                    OrderProduct(product.id, product.name, product.barcode,
-                        product.description, product.buying_price?.toInt(), product.selling_price?.toInt(),
-                        product.mrp?.toInt(), product.expired_date, product.thumbnail,
-                        product.product_image1, product.product_image2,
-                        product.product_image3, product.product_image4,
-                        product.product_image5, product.category_id, product.merchant_id,
-                        product.created_at, product.updated_at,
-                        ShopDetailsProductListFragment.orderMerchant, product.category, 0), quantity)
+                viewModel.addToCart(product, quantity)
             }
         }
 

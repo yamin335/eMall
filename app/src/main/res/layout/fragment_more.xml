@@ -212,100 +212,6 @@
                         android:backgroundTint="#B1B2B1"
                         app:cornerRadius="20dp"/>
                 </RelativeLayout>
-                <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-                    android:id="@+id/menuMyDevices"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardCornerRadius="0dp"
-                    app:cardElevation="0dp"
-                    app:contentPaddingLeft="16dp"
-                    app:contentPaddingRight="10dp"
-                    app:contentPaddingTop="8dp"
-                    app:contentPaddingBottom="8dp">
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:id="@+id/icProfile"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentStart="true"
-                            app:srcCompat="@drawable/icons8_light_on_100"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="My Devices"
-                            android:textSize="18sp"
-                            android:gravity="center_vertical"
-                            android:layout_centerVertical="true"
-                            android:layout_toEndOf="@id/icProfile"
-                            android:layout_toStartOf="@id/arrow1"/>
-
-                        <ImageView
-                            android:id="@+id/arrow1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            app:tint="@color/grayColor"
-                            android:visibility="gone"
-                            android:layout_alignParentEnd="true"
-                            app:srcCompat="@drawable/ic_baseline_keyboard_arrow_right_24"/>
-                    </RelativeLayout>
-                </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
-                <View
-                    android:background="?android:attr/listDivider"
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:visibility="gone"
-                    android:layout_marginStart="56dp"/>
-                <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-                    android:id="@+id/menuMyAccount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardCornerRadius="0dp"
-                    app:cardElevation="0dp"
-                    app:contentPaddingLeft="16dp"
-                    app:contentPaddingRight="10dp"
-                    app:contentPaddingTop="8dp"
-                    app:contentPaddingBottom="8dp">
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:id="@+id/icPayment"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentStart="true"
-                            app:srcCompat="@drawable/icons8_my_account_100"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="My Account"
-                            android:textSize="18sp"
-                            android:gravity="center_vertical"
-                            android:layout_centerVertical="true"
-                            android:layout_toEndOf="@id/icPayment"
-                            android:layout_toStartOf="@id/arrow3"/>
-                        <ImageView
-                            android:id="@+id/arrow3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            app:tint="@color/grayColor"
-                            android:visibility="gone"
-                            android:layout_alignParentEnd="true"
-                            app:srcCompat="@drawable/ic_baseline_keyboard_arrow_right_24"/>
-                    </RelativeLayout>
-                </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
                 <View
                     android:background="?android:attr/listDivider"
@@ -473,12 +379,12 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnSignOut"
+                        android:id="@+id/btnSignInSignOut"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="Sign Out"
+                        android:text="Sign In"
                         android:layout_marginEnd="24dp"
                         app:rippleColor="@color/colorPrimary"
                         android:textSize="18sp"

@@ -19,12 +19,12 @@ class LoginActivity : DaggerAppCompatActivity(), LoginHandlerCallback, Navigatio
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return findNavController(R.id.nav_host_fragment).navigateUp() || super.onSupportNavigateUp()
+        return findNavController(R.id.nav_host_container).navigateUp() || super.onSupportNavigateUp()
     }
 
     override fun registerToolbarWithNavigation(toolbar: Toolbar) {
         setSupportActionBar(toolbar)
-        setupActionBarWithNavController(findNavController(R.id.nav_host_fragment))
+        setupActionBarWithNavController(findNavController(R.id.nav_host_container))
     }
 
     override fun onLoggedIn() {

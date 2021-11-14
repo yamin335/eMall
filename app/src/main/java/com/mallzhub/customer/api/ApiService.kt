@@ -100,7 +100,7 @@ interface ApiService {
 
     @GET(ApiEndPoint.MERCHANT_PRODUCTS)
     suspend fun getAllProducts(
-        @Path("id") type: String
+        @Path("id") type: Int?
     ): Response<AllProductResponse>
 
     @GET(ApiEndPoint.ORDER_LIST)

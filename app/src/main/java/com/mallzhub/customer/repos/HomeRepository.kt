@@ -60,7 +60,7 @@ class HomeRepository @Inject constructor(private val apiService: ApiService) {
         }
     }
 
-    suspend fun getAllProductsRepo(id: String): Response<AllProductResponse> {
+    suspend fun getAllProductsRepo(id: Int?): Response<AllProductResponse> {
         return withContext(Dispatchers.IO) {
             apiService.getAllProducts(id)
         }
