@@ -39,7 +39,9 @@ import com.mallzhub.customer.ui.topup.TopUpAmountFragment
 import com.mallzhub.customer.ui.topup.TopUpBankCardFragment
 import com.mallzhub.customer.ui.topup.TopUpMobileFragment
 import com.mallzhub.customer.ui.topup.TopUpPinFragment
+import com.mallzhub.customer.ui.transactions.TransactionDetailsFragment
 import com.mallzhub.customer.ui.transactions.TransactionsFragment
+import com.mallzhub.customer.ui.wallet.WalletFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -197,4 +199,10 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeTransactionsFragment(): TransactionsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeTransactionDetailsFragment(): TransactionDetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeWalletFragment(): WalletFragment
 }

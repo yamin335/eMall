@@ -7,6 +7,8 @@ import com.mallzhub.customer.R
 import kotlinx.android.synthetic.main.toast_custom_error.view.*
 import kotlinx.android.synthetic.main.toast_custom_success.view.*
 import kotlinx.android.synthetic.main.toast_custom_warning.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun showErrorToast(context: Context, message: String) {
     val toast = Toast.makeText(context, "", Toast.LENGTH_LONG)
@@ -35,4 +37,17 @@ fun showSuccessToast(context: Context, message: String) {
     toastView.successMessage.text = message
     toast.view = toastView
     toast.show()
+}
+
+fun getCurrentDateTime(): String {
+    val dateFormat = SimpleDateFormat("dd MMM yyyy hh:mm a")
+    var currentDate = ""
+
+    try {
+        currentDate = dateFormat.format(Date())
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+
+    return currentDate
 }

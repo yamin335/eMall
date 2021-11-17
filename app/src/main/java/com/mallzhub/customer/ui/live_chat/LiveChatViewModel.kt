@@ -21,10 +21,4 @@ class LiveChatViewModel @Inject constructor(
         MutableLiveData<MutableList<LiveChatMessage>>()
     }
 
-    val cartItemCount: LiveData<Int> = liveData {
-        cartDao.getCartItemsCount().collect { count ->
-            emit(count)
-        }
-    }
-
 }

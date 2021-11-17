@@ -18,6 +18,8 @@ data class Product(
     val buying_price: Double?,
     val selling_price: Double?,
     val mrp: Double?,
+    var discountedPrice: Double?,
+    var discount_percent: Int?,
     val expired_date: String?,
     val thumbnail: String?,
     val product_image1: String?,

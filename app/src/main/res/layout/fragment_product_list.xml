@@ -43,13 +43,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/toolbar"
             android:layout_marginTop="8dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/list_item_product_category"
-            tools:itemCount="12"/>
+            tools:itemCount="12"
+            tools:listitem="@layout/list_item_product_category" />
 
 
         <androidx.recyclerview.widget.RecyclerView

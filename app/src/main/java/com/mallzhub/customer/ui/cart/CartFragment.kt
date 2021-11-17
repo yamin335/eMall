@@ -1,6 +1,7 @@
 package com.mallzhub.customer.ui.cart
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -13,6 +14,7 @@ import com.mallzhub.customer.ui.common.BaseFragment
 import com.mallzhub.customer.util.showSuccessToast
 import com.mallzhub.customer.models.order.OrderStoreBody
 import com.mallzhub.customer.models.order.OrderStoreProduct
+import com.mallzhub.customer.ui.LoginActivity
 import com.mallzhub.customer.ui.OrderTabSelection
 import com.mallzhub.customer.ui.order.OrderAsGuestDialogFragment
 import java.text.SimpleDateFormat
@@ -34,6 +36,8 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
     lateinit var cartOverviewBottomDialog: CartOverviewBottomDialog
 
     private var orderTabSelection: OrderTabSelection? = null
+
+    private lateinit var orderStoreBody: OrderStoreBody
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -58,6 +62,22 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
 //            }
 //        })
 
+        viewModel.orderPlaceResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer { response ->
+            response?.let {
+                if (it.data?.sale != null) {
+                    val items = orderStoreBody.list ?: ArrayList()
+                    val ids = ArrayList<Int>()
+                    for (item in items) {
+                        ids.add(item.product_id ?: 0)
+                    }
+                    viewModel.deleteCartItemsByIds(ids)
+                    showSuccessToast(requireContext(), "Your order is placed successfully")
+                    navController.popBackStack()
+                    orderTabSelection?.selectOrderTab()
+                }
+            }
+        })
+
         cartItemListAdapter = CartItemListAdapter(
             appExecutors,
             object : CartItemListAdapter.CartItemActionCallback {
@@ -72,6 +92,33 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
             }, { item ->
                 viewModel.deleteCartItem(item)
             }, { merchantWiseOrder ->
+                val orderItems = ArrayList<OrderStoreProduct>()
+                val total = merchantWiseOrder.totalPrice
+                merchantWiseOrder.orderProductList.forEach { cartItem ->
+                    val product = cartItem.product
+                    val mrp = product.mrp?.toInt() ?: 0
+                    val discountedPrice = product.discountedPrice?.toInt() ?: 0
+                    val price = if (discountedPrice > 0) discountedPrice else mrp
+                    val quantity = cartItem.quantity ?: 0
+
+                    orderItems.add(
+                        OrderStoreProduct(product.id, product.description, "qty",
+                            quantity, price, 0, "0",
+                            0, product.discountedPrice?.toString() ?: "0",
+                            price * quantity, 1, 72, "")
+                    )
+                }
+
+                val today = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(
+                    Date()
+                )
+
+                orderStoreBody = OrderStoreBody(8, merchantWiseOrder.merchantId,
+                    "", viewModel.generateInvoiceID(),
+                    today, "inclusive",
+                    "", total.toDouble().toInt(),
+                    0, 0, total.toDouble().toInt(), 0, total.toDouble().toInt(), orderItems)
+
                 cartOverviewBottomDialog = CartOverviewBottomDialog( object: CartOverviewBottomDialog.CheckoutOptionBottomDialogCallback {
                     override fun onCancelled() {
                         cartOverviewBottomDialog.dismiss()
@@ -79,49 +126,31 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
 
                     override fun onOrder() {
                         cartOverviewBottomDialog.dismiss()
-                        checkoutOptionBottomDialog = CheckoutOptionBottomDialog(object : CheckoutOptionBottomDialog.CheckoutOptionBottomDialogCallback {
-                            override fun onGuestSelected() {
-                                checkoutOptionBottomDialog.dismiss()
-                                val orderItems = ArrayList<OrderStoreProduct>()
-                                val total = merchantWiseOrder.totalPrice
-                                merchantWiseOrder.orderProductList.forEach { cartItem ->
-                                    val price = cartItem.product.mrp?.toInt() ?: 0
-                                    val quantity = cartItem.quantity ?: 0
 
-                                    val product = cartItem.product
-
-                                    orderItems.add(
-                                        OrderStoreProduct(product.id, product.description, "qty",
-                                            quantity, price, 0, "0",
-                                            0, "0", price * quantity, "")
-                                    )
-                                }
-
-                                val today = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(
-                                    Date()
-                                )
-
-                                val order = OrderStoreBody(8, merchantWiseOrder.merchantId,
-                                    "", viewModel.generateInvoiceID(),
-                                    today, "inclusive",
-                                    "", total.toDouble().toInt(),
-                                    0, 0, total.toDouble().toInt(), 0, total.toDouble().toInt(), orderItems)
-
-                                val orderAsGuestDialog = OrderAsGuestDialogFragment(object : OrderAsGuestDialogFragment.PlaceOrderCallback {
-                                    override fun onOrderPlaced() {
-                                        navController.popBackStack()
-                                        orderTabSelection?.selectOrderTab()
-                                    }
-                                }, order)
-
-                                orderAsGuestDialog.show(childFragmentManager, "#Order_As_Guest_Dialog_Fragment")
-                            }
-
-                            override fun onLoginSelected() {
-                                checkoutOptionBottomDialog.dismiss()
-                            }
-                        })
-                        checkoutOptionBottomDialog.show(childFragmentManager, "#Checkout_Option_Dialog")
+                        if (preferencesHelper.isLoggedIn) {
+                            viewModel.placeOrder(orderStoreBody)
+                        } else {
+                            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+                            requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+//                            checkoutOptionBottomDialog = CheckoutOptionBottomDialog(object : CheckoutOptionBottomDialog.CheckoutOptionBottomDialogCallback {
+//                                override fun onGuestSelected() {
+//                                    checkoutOptionBottomDialog.dismiss()
+//                                    val orderAsGuestDialog = OrderAsGuestDialogFragment(object : OrderAsGuestDialogFragment.PlaceOrderCallback {
+//                                        override fun onOrderPlaced() {
+//                                            navController.popBackStack()
+//                                            orderTabSelection?.selectOrderTab()
+//                                        }
+//                                    }, orderStoreBody)
+//
+//                                    orderAsGuestDialog.show(childFragmentManager, "#Order_As_Guest_Dialog_Fragment")
+//                                }
+//
+//                                override fun onLoginSelected() {
+//                                    checkoutOptionBottomDialog.dismiss()
+//                                }
+//                            })
+//                            checkoutOptionBottomDialog.show(childFragmentManager, "#Checkout_Option_Dialog")
+                        }
                     }
                 }, appExecutors, merchantWiseOrder)
                 cartOverviewBottomDialog
@@ -155,7 +184,12 @@ class CartFragment : BaseFragment<CartFragmentBinding, CartViewModel>() {
                         if (key != null && !productsList.isNullOrEmpty()) {
                             var total = 0.0
                             productsList.forEach { cartItem ->
-                                val price = cartItem.product.mrp?.toInt() ?: 0
+                                val discountedPrice = cartItem.product.discountedPrice ?: 0.0
+                                val price = if (discountedPrice > 0.0) {
+                                    discountedPrice.toInt()
+                                } else {
+                                    cartItem.product.mrp?.toInt() ?: 0
+                                }
                                 val quantity = cartItem.quantity ?: 0
                                 total += price * quantity
                             }

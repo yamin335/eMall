@@ -56,6 +56,16 @@ class CartViewModel @Inject constructor(
         MutableLiveData<List<OrderStoreProduct>>()
     }
 
+    fun deleteCartItemsByIds(itemIds: List<Int>) {
+        val handler = CoroutineExceptionHandler { _, exception ->
+            exception.printStackTrace()
+        }
+
+        viewModelScope.launch(handler) {
+            cartDao.deleteCartItemsByIds(itemIds)
+        }
+    }
+
     fun incrementOrderItemQuantity(id: Int) {
         val handler = CoroutineExceptionHandler { _, exception ->
             exception.printStackTrace()

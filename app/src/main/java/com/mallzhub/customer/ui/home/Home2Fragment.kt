@@ -86,6 +86,11 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
 //
 //
 //
+
+        viewDataBinding.btnNewChat.setOnClickListener {
+            navigateTo(Home2FragmentDirections.actionHome2FragmentToBotNav())
+        }
+
         viewDataBinding.appLogo.setOnClickListener {
             drawerListener?.toggleNavDrawer()
         }

@@ -76,7 +76,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/logo_edokanpat" />
+            android:src="@drawable/malls_hub_logo" />
 
         <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"

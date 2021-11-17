@@ -6,6 +6,12 @@
         <import type="com.bumptech.glide.request.RequestListener"/>
         <import type="android.graphics.drawable.Drawable"/>
         <variable
+            name="mrp"
+            type="String" />
+        <variable
+            name="discountedPrice"
+            type="String" />
+        <variable
             name="subTotal"
             type="String" />
         <variable
@@ -76,20 +82,32 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tvMrp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sign_taka"
                     android:textColor="#404040"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{item.product.mrp.toString()}"
-                    android:textColor="#404040"
+                    android:text="@{mrp}"
                     android:textSize="12sp"
                     tools:text="12000.00" />
+
+                <TextView
+                    android:id="@+id/tvOldPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/toast_error"
+                    android:textSize="12sp"
+                    android:text="@{mrp}"
+                    tools:text="120.00" />
+
+                <TextView
+                    android:id="@+id/tvNewPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/toast_success"
+                    android:textSize="12sp"
+                    android:text="@{discountedPrice}"
+                    tools:text="100.00" />
 
             </LinearLayout>
 

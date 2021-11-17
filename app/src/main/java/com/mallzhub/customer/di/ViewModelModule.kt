@@ -41,9 +41,11 @@ import com.mallzhub.customer.ui.topup.TopUpBankCardViewModel
 import com.mallzhub.customer.ui.topup.TopUpMobileViewModel
 import com.mallzhub.customer.ui.topup.TopUpPinViewModel
 import com.mallzhub.customer.ui.tou.TouViewModel
+import com.mallzhub.customer.ui.transactions.TransactionDetailsViewModel
 import com.mallzhub.customer.ui.transactions.TransactionsViewModel
 import com.mallzhub.customer.ui.video_play.LoadWebViewViewModel
 import com.mallzhub.customer.ui.video_play.VideoPlayViewModel
+import com.mallzhub.customer.ui.wallet.WalletViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -308,5 +310,15 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(OrderAsGuestDialogViewModel::class)
     abstract fun bindOrderAsGuestDialogViewModel(viewModel: OrderAsGuestDialogViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TransactionDetailsViewModel::class)
+    abstract fun bindTransactionDetailsViewModel(viewModel: TransactionDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WalletViewModel::class)
+    abstract fun bindWalletViewModel(viewModel: WalletViewModel): ViewModel
 
 }

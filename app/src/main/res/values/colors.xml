@@ -3,8 +3,8 @@
     // eDokanPat
     <color name="color1">#6E757C</color>
     <color name="themeColor">#161E2C</color>
-    <color name="themeColorLight">#1D2637</color>
-    <color name="themeColorVeryLight">#212B3E</color>
+    <color name="themeColorLight">#222C3F</color>
+    <color name="themeColorVeryLight">#29354D</color>
     <color name="themeButtonColor">#E91E63</color>
     <color name="grayColor">#808080</color>
     <color name="buttonTextDisableColor">#383838</color>

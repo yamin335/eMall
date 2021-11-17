@@ -40,7 +40,7 @@ abstract class AppDatabase : RoomDatabase() {
             }
 
         private fun buildDatabase(app: Application) =
-            Room.databaseBuilder(app, AppDatabase::class.java, "customer_v1")
+            Room.databaseBuilder(app, AppDatabase::class.java, "customer_v4")
                 // prepopulate the database after onCreate was called
 //                .addCallback(object : Callback() {
 //                    override fun onCreate(db: SupportSQLiteDatabase) {

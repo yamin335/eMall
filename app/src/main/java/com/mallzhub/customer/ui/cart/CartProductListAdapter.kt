@@ -1,8 +1,10 @@
 package com.mallzhub.customer.ui.cart
 
 import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
@@ -55,6 +57,31 @@ class CartProductListAdapter(
     override fun bind(binding: CartListItemBinding, position: Int) {
         val item = getItem(position)
         binding.item = item
+
+        val mrp = item.product.mrp ?: 0.0
+        val discountedPrice = item.product.discountedPrice ?: 0.0
+
+        val context = binding.root.context
+        binding.mrp = "${context.getString(R.string.sign_taka)} $mrp"
+        binding.discountedPrice = "${context.getString(R.string.sign_taka)} $discountedPrice"
+
+        if (discountedPrice > 0.0) {
+            binding.tvMrp.visibility = View.GONE
+            binding.tvOldPrice.visibility = View.VISIBLE
+            binding.tvNewPrice.visibility = View.VISIBLE
+            binding.tvOldPrice.apply {
+                paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }
+        } else {
+            binding.tvMrp.visibility = View.VISIBLE
+            binding.tvOldPrice.visibility = View.GONE
+            binding.tvNewPrice.visibility = View.GONE
+            if ((binding.tvOldPrice.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG) > 0) {
+                binding.tvOldPrice.apply {
+                    paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                }
+            }
+        }
 
         binding.imageRequestListener = object: RequestListener<Drawable> {
             override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {

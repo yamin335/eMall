@@ -69,7 +69,7 @@
                             android:layout_height="80dp"
                             android:layout_gravity="center_horizontal"
                             android:adjustViewBounds="true"
-                            android:src="@drawable/logo_edokanpat" />
+                            android:src="@drawable/malls_hub_logo" />
 
                         <TextView
                             android:layout_width="match_parent"

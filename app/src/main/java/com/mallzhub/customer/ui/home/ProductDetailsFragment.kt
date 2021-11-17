@@ -19,6 +19,7 @@ import com.mallzhub.customer.local_db.dao.CartDao
 import com.mallzhub.customer.ui.common.BaseFragment
 import com.mallzhub.customer.util.showSuccessToast
 import com.mallzhub.customer.util.showWarningToast
+import kotlinx.android.synthetic.main.list_item_offer_product.*
 import javax.inject.Inject
 
 class ProductDetailsFragment :
@@ -54,6 +55,9 @@ class ProductDetailsFragment :
 
         val product = args.product
         val discount = args.discount
+        val price = product.mrp ?: 0.0
+
+        viewDataBinding.price = "${getString(R.string.sign_taka)}${price}"
 
         if (discount > 0) {
             viewDataBinding.discount = discount.toString()
@@ -62,6 +66,14 @@ class ProductDetailsFragment :
                 paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             }
             viewDataBinding.productDiscountedPrice.visibility = View.VISIBLE
+
+            val discountAmount = (price * discount)/100
+            val discountedPrice = price - discountAmount
+
+            product.discount_percent = discount
+            product.discountedPrice = discountedPrice
+
+            viewDataBinding.discountedPrice = "${getString(R.string.sign_taka)}${discountedPrice}"
         } else {
             if ((viewDataBinding.productPrice.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG) > 0) {
                 viewDataBinding.productPrice.apply {
@@ -75,10 +87,6 @@ class ProductDetailsFragment :
 
         viewDataBinding.toolbar.title = product.name
         viewDataBinding.name = product.name
-        val price = product.mrp ?: 0.0
-        val discountAmount = (price * discount)/100
-        viewDataBinding.price = "${getString(R.string.sign_taka)}${price}"
-        viewDataBinding.discountedPrice = "${getString(R.string.sign_taka)}${price - discountAmount}"
 
         viewModel.toastWarning.observe(viewLifecycleOwner, Observer {
             it?.let { message ->

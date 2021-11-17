@@ -12,5 +12,4 @@ data class OrderStoreProduct(val product_id: Int?, val description: String?,
                           val unitType: String?, val unitValue: Int?,
                           val unitPrice: Int?, val taxType: Int?,
                           val taxTypeValue: String?, val discount: Int?,
-                          val discountAmount: String?, val amount: Int?,
-                          val vatAndTax: Any?)
+                          val discountAmount: String?, val amount: Int?, val barcode_id: Int?, val product_detail_id: Int?, val vatAndTax: Any?)

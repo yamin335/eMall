@@ -7,10 +7,14 @@
         <entry key="app/src/main/res/drawable/chat_bg_client.xml" value="0.34814814814814815" />
         <entry key="app/src/main/res/drawable/chat_bg_server.xml" value="0.34814814814814815" />
         <entry key="app/src/main/res/drawable/cmn_btm_dialog_bg.xml" value="0.3435185185185185" />
+        <entry key="app/src/main/res/layout/activity_live_chat.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.24322916666666666" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1175925925925926" />
         <entry key="app/src/main/res/layout/dialog_bottom_checkout_options.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/dialog_bottom_order_overview.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/dialog_fragment_order_as_guest.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/fragment_add_bank.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/fragment_add_card.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_bot.xml" value="0.32037037037037036" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.36041666666666666" />
@@ -23,23 +27,33 @@
         <entry key="app/src/main/res/layout/fragment_otp_sign_in.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/fragment_pin_number.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_product_details.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/fragment_product_list.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/fragment_profile_sign_in.xml" value="0.24322916666666666" />
         <entry key="app/src/main/res/layout/fragment_profiles.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_topup_bank_card.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/fragment_transaction_details.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_transactions.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/fragment_view_pager.xml" value="0.24322916666666666" />
+        <entry key="app/src/main/res/layout/fragment_wallet.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/layout_add_payment_method.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/layout_bank_list_row.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/layout_payment_method_row.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_cart.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_cart_overview.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/list_item_chat_suggestion.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_client_chat_row.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_offer.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_offer_product.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_order.xml" value="0.22395833333333334" />
         <entry key="app/src/main/res/layout/list_item_order_details_product.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_order_track.xml" value="0.16875" />
+        <entry key="app/src/main/res/layout/list_item_product_category.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_server_chat_row.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_shop_wise_cart.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/list_item_transaction.xml" value="0.335" />
         <entry key="app/src/main/res/menu/bottom_app_menu.xml" value="0.22395833333333334" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.22395833333333334" />
       </map>

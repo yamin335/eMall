@@ -13,8 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#1E4356"
-        android:layout_marginBottom="?attr/actionBarSize"
+        android:background="@color/themeColor"
         android:orientation="vertical">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -85,20 +84,20 @@
                         android:id="@+id/btnAdd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
-                        android:layout_alignParentTop="true"
                         android:backgroundTint="@color/button_enable_disable_colors"
                         android:enabled="false"
                         android:onClick="@{() -> viewModel.addBankAccount()}"
-                        app:icon="@drawable/ic_baseline_check_24"
-                        app:iconPadding="8dp"
-                        app:iconGravity="textStart"
                         android:text="Save Now"
                         android:textAllCaps="false"
                         android:textColor="@color/button_text_enable_disable_colors"
                         android:textSize="18sp"
-                        app:cornerRadius="5dp" />
+                        app:cornerRadius="5dp"
+                        app:icon="@drawable/ic_baseline_check_24"
+                        app:iconGravity="textStart"
+                        app:iconPadding="8dp" />
                 </RelativeLayout>
             </RelativeLayout>
         </ScrollView>

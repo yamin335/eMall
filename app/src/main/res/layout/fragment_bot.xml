@@ -16,80 +16,13 @@
         android:background="@color/themeBackgroundColor">
 
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:contentInsetStart="0dp"
+            android:layout_height="?attr/actionBarSize"
             android:background="@color/themeColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/appLogo"
-                    android:layout_width="130dp"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_marginStart="8dp"
-                    android:contentDescription="App logo"
-                    android:padding="4dp"
-                    android:src="@drawable/logo_edokanpat"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cartMenu"
-                    style="?attr/actionButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:clipToPadding="false"
-                    android:focusable="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/appLogo"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:tint="@color/white"
-                        app:srcCompat="@drawable/ic_outline_shopping_cart_24"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/badge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:background="@drawable/notification_badge"
-                        android:gravity="center"
-                        android:minWidth="24dp"
-                        android:padding="5dp"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/white"
-                        android:textSize="10sp"
-                        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-                        app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-                        app:layout_constraintStart_toEndOf="@+id/imageView2"
-                        app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.appbar.MaterialToolbar>
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextColor="@color/white" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/mainLayout"
@@ -116,7 +49,7 @@
                     android:id="@+id/messageRecycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_above="@id/footer"
+                    android:layout_above="@id/rvChatSuggestion"
                     android:layout_alignParentTop="true"
                     android:clipToPadding="false"
                     android:paddingTop="24dp"
@@ -125,6 +58,19 @@
                     app:stackFromEnd="true"
                     tools:itemCount="4"
                     tools:listitem="@layout/list_item_client_chat_row" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvChatSuggestion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/footer"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="12"
+                    tools:listitem="@layout/list_item_chat_suggestion" />
 
                 <LinearLayout
                     android:id="@+id/footer"
@@ -189,7 +135,7 @@
                             app:layout_constraintVertical_bias="1.0">
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/server_ip"
+                                android:id="@+id/etMessage"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="top|start"

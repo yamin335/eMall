@@ -50,11 +50,28 @@
     <fragment
         android:id="@+id/transactionsFragment"
         android:name="com.mallzhub.customer.ui.transactions.TransactionsFragment"
-        android:label="TransactionsFragment"
-        tools:layout="@layout/fragment_transactions"/>
+        android:label="All Transactions"
+        tools:layout="@layout/fragment_transactions">
+        <action
+            android:id="@+id/action_transactionsFragment_to_transactionDetailsFragment"
+            app:destination="@id/transactionDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.mallzhub.customer.ui.settings.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings"/>
+    <fragment
+        android:id="@+id/transactionDetailsFragment"
+        android:name="com.mallzhub.customer.ui.transactions.TransactionDetailsFragment"
+        android:label="Transaction Details"
+        tools:layout="@layout/fragment_transaction_details">
+        <argument
+            android:name="order"
+            app:argType="com.mallzhub.customer.models.order.SalesData" />
+    </fragment>
 </navigation>

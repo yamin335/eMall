@@ -13,6 +13,7 @@ import com.mallzhub.customer.models.LiveChatMessage
 import com.mallzhub.customer.ui.LogoutHandlerCallback
 import com.mallzhub.customer.ui.NavDrawerHandlerCallback
 import com.mallzhub.customer.ui.common.BaseFragment
+import com.mallzhub.customer.util.getCurrentDateTime
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.logging.SimpleFormatter
@@ -31,6 +32,8 @@ class BotFragment : BaseFragment<BotFragmentBinding, LiveChatViewModel>() {
     private var drawerListener: NavDrawerHandlerCallback? = null
 
     private lateinit var chatBotMessageAdapter: ChatBotMessageAdapter
+
+    private lateinit var chatSuggestionListAdapter: ChatSuggestionListAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -63,26 +66,15 @@ class BotFragment : BaseFragment<BotFragmentBinding, LiveChatViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        registerToolbar(viewDataBinding.toolbar)
 
-        viewDataBinding.appLogo.setOnClickListener {
-            drawerListener?.toggleNavDrawer()
+        val chatSuggestions = listOf("Hi", "Red Color", "T-Shirt", "Money Back", "Product Return", "Yellow Hat")
+        chatSuggestionListAdapter = ChatSuggestionListAdapter(appExecutors) {
+            chatBotMessageAdapter.addMessage(LiveChatMessage(chatBotMessageAdapter.getMessageCount(), it, getCurrentDateTime(), 0))
         }
 
-        viewDataBinding.cartMenu.setOnClickListener {
-            navController.navigate(BotFragmentDirections.actionBotFragmentToCartNavGraph())
-        }
-
-        viewModel.cartItemCount.observe(viewLifecycleOwner, Observer {
-            it?.let { value ->
-                if (value < 1) {
-                    viewDataBinding.badge.visibility = View.INVISIBLE
-                    return@Observer
-                } else {
-                    viewDataBinding.badge.visibility = View.VISIBLE
-                    viewDataBinding.badge.text = value.toString()
-                }
-            }
-        })
+        viewDataBinding.rvChatSuggestion.adapter = chatSuggestionListAdapter
+        chatSuggestionListAdapter.submitList(chatSuggestions)
 
         chatBotMessageAdapter = ChatBotMessageAdapter {
 
@@ -90,22 +82,15 @@ class BotFragment : BaseFragment<BotFragmentBinding, LiveChatViewModel>() {
         viewDataBinding.messageRecycler.adapter = chatBotMessageAdapter
 
         viewDataBinding.btnSend.setOnClickListener {
-            val dateFormat = SimpleDateFormat("dd MMM yyyy hh:mm a")
-            var currentDate = ""
-
-            try {
-                currentDate = dateFormat.format(Date())
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
 
             if (viewModel.newMessage.value?.get(0) == '0') {
-                chatBotMessageAdapter.addMessage(LiveChatMessage(chatBotMessageAdapter.getMessageCount(), viewModel.newMessage.value?.removePrefix("0"), currentDate, 0))
+                chatBotMessageAdapter.addMessage(LiveChatMessage(chatBotMessageAdapter.getMessageCount(), viewModel.newMessage.value?.removePrefix("0"), getCurrentDateTime(), 0))
             } else {
-                chatBotMessageAdapter.addMessage(LiveChatMessage(chatBotMessageAdapter.getMessageCount(), viewModel.newMessage.value, currentDate, 1))
+                chatBotMessageAdapter.addMessage(LiveChatMessage(chatBotMessageAdapter.getMessageCount(), viewModel.newMessage.value, getCurrentDateTime(), 1))
             }
 
             viewModel.newMessage.postValue("")
+            //chatSuggestionListAdapter.resetList()
         }
 
 //        viewModel.chatMessages.observe(viewLifecycleOwner, androidx.lifecycle.Observer { orderItems ->
