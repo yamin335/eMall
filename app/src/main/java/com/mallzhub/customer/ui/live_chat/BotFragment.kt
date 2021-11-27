@@ -58,7 +58,6 @@ class BotFragment : BaseFragment<BotFragmentBinding, LiveChatViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
         mActivity.window?.setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN
         )

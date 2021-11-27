@@ -39,6 +39,10 @@ class WalletFragment : BaseFragment<WalletFragmentBinding, WalletViewModel>() {
 
         //registerToolbar(viewDataBinding.toolbar)
 
+        viewDataBinding.btnShow.setOnClickListener {
+            navigateTo(WalletFragmentDirections.actionWalletFragmentToGiftPointHistoryFragment())
+        }
+
         viewDataBinding.cartMenu.setOnClickListener {
             navController.navigate(WalletFragmentDirections.actionWalletFragmentToCartNavGraph())
         }
@@ -55,13 +59,13 @@ class WalletFragment : BaseFragment<WalletFragmentBinding, WalletViewModel>() {
             //navController.navigate(HomeFragmentDirections.actionBooksToChapterList(it))
         }
 
-        viewModel.slideDataList.forEach { slideData ->
-            val slide = SliderView(requireContext())
-            slide.sliderTextTitle = slideData.textTitle
-            slide.sliderTextDescription = slideData.descText
-            slide.sliderImage(slideData.slideImage)
-            viewDataBinding.sliderLayout.addSlider(slide)
-        }
+//        viewModel.slideDataList.forEach { slideData ->
+//            val slide = SliderView(requireContext())
+//            slide.sliderTextTitle = slideData.textTitle
+//            slide.sliderTextDescription = slideData.descText
+//            slide.sliderImage(slideData.slideImage)
+//            viewDataBinding.sliderLayout.addSlider(slide)
+//        }
 
         paymentListAdapter.submitList(viewModel.paymentMethodList)
         viewDataBinding.recyclerPaymentMethods.adapter = paymentListAdapter

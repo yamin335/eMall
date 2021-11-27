@@ -32,6 +32,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_walletFragment_to_giftPointHistoryFragment"
+            app:destination="@id/giftPointHistoryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -160,4 +167,9 @@
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <include app:graph="@navigation/cart_nav_graph" />
+    <fragment
+        android:id="@+id/giftPointHistoryFragment"
+        android:name="com.mallzhub.customer.ui.gift_point.GiftPointHistoryFragment"
+        android:label="Gift Point History"
+        tools:layout="@layout/fragment_gift_point_history"/>
 </navigation>

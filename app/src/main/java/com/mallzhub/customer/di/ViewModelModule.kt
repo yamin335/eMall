@@ -14,6 +14,7 @@ import com.mallzhub.customer.ui.add_product.AddProductViewModel
 import com.mallzhub.customer.ui.cart.CartViewModel
 import com.mallzhub.customer.ui.chapter_list.ChapterListViewModel
 import com.mallzhub.customer.ui.exams.ExamsViewModel
+import com.mallzhub.customer.ui.gift_point.GiftPointHistoryViewModel
 import com.mallzhub.customer.ui.home.*
 import com.mallzhub.customer.ui.how_works.HowWorksViewModel
 import com.mallzhub.customer.ui.info.InfoViewModel
@@ -320,5 +321,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(WalletViewModel::class)
     abstract fun bindWalletViewModel(viewModel: WalletViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GiftPointHistoryViewModel::class)
+    abstract fun bindGiftPointHistoryViewModel(viewModel: GiftPointHistoryViewModel): ViewModel
 
 }

@@ -1661,6 +1661,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="giftPointHistoryFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-536" />
+                            <option name="y" value="-114" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="topUpAmountFragment">
                     <value>
                       <LayoutPositions>
@@ -1757,6 +1769,11 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_walletFragment_to_addPaymentMethodsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_walletFragment_to_cart_nav_graph">
                               <value>
                                 <LayoutPositions />
                               </value>

@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/themeColor">
+        android:background="@color/themeBackgroundColor">
 
         <RelativeLayout
             android:id="@+id/topHeader"
@@ -22,9 +22,9 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:contentInsetStart="0dp"
+                android:layout_alignParentTop="true"
                 android:background="@color/themeColor"
-                android:layout_alignParentTop="true">
+                app:contentInsetStart="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -62,12 +62,12 @@
                             android:id="@+id/imageView2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:tint="@color/white"
-                            app:srcCompat="@drawable/ic_outline_shopping_cart_24"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_outline_shopping_cart_24"
+                            app:tint="@color/white" />
 
                         <TextView
                             android:id="@+id/badge"
@@ -117,16 +117,85 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <com.daimajia.slider.library.SliderLayout
-                    android:id="@+id/sliderLayout"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    app:auto_cycle="false"
-                    app:indicator_visibility="visible"
-                    app:pager_animation="Default" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvUserType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mobile: 01918777222"
+                        android:textSize="18sp"
+                        android:gravity="center_vertical"
+                        android:textColor="#404040"/>
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Balance: ৳1200"
+                        android:textSize="18sp"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="8dp"
+                        android:textStyle="bold"
+                        android:textColor="#404040"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="#FDB40B">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_toStartOf="@id/btnShow"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gift Points:"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:gravity="center_vertical"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:text="500"
+                            android:layout_marginStart="8dp"
+                            android:textSize="20sp"
+                            android:gravity="center_vertical"/>
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnShow"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:backgroundTint="#B1B2B1"
+                        android:text="Show"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        android:windowSoftInputMode="adjustResize"
+                        app:cornerRadius="20dp"
+                        app:rippleColor="@color/colorPrimary"
+                        app:strokeColor="@color/themeColor" />
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -146,7 +215,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?android:attr/selectableItemBackground"
-                        app:cardBackgroundColor="@color/themeColorVeryLight"
+                        app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="16dp"
                         app:contentPaddingTop="12dp"
                         app:contentPaddingBottom="12dp"
@@ -163,15 +232,16 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:scaleType="fitCenter"
-                                android:src="@drawable/shape"/>
+                                android:src="@drawable/ic_baseline_add_card_24"
+                                app:tint="#404040" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:fontFamily="@font/muli_bold"
-                                android:text="Topup"
-                                android:textColor="@color/colorWhite"/>
+                                android:text="Add Money"
+                                android:textColor="#404040"/>
 
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -187,7 +257,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?android:attr/selectableItemBackground"
-                        app:cardBackgroundColor="@color/themeColorVeryLight"
+                        app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="16dp"
                         app:contentPaddingTop="12dp"
                         app:contentPaddingBottom="12dp"
@@ -204,15 +274,16 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:scaleType="fitCenter"
-                                android:src="@drawable/shape"/>
+                                android:src="@drawable/shape_trans"
+                                app:tint="#404040" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:fontFamily="@font/muli_bold"
-                                android:text="ATM Cash"
-                                android:textColor="@color/colorWhite"/>
+                                android:text="Send Money"
+                                android:textColor="#404040"/>
 
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -228,7 +299,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?android:attr/selectableItemBackground"
-                        app:cardBackgroundColor="@color/themeColorVeryLight"
+                        app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="16dp"
                         app:contentPaddingTop="12dp"
                         app:contentPaddingBottom="12dp"
@@ -245,15 +316,16 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:scaleType="fitCenter"
-                                android:src="@drawable/shape_trans"/>
+                                android:src="@drawable/shape"
+                                app:tint="#404040" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:fontFamily="@font/muli_bold"
-                                android:text="Send Money"
-                                android:textColor="@color/colorWhite"/>
+                                android:text="Payment"
+                                android:textColor="#404040"/>
 
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -266,7 +338,7 @@
                     android:fontFamily="@font/noto_bn_regular"
                     android:padding="10dp"
                     android:text="Payment methods"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="#404040"
                     android:textSize="20sp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -278,6 +350,39 @@
                     tools:listitem="@layout/layout_payment_method_row"/>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnEarnPoint"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardUseCompatPadding="false"
+            app:cardElevation="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/icons8_coin_earn_point_100"
+                android:background="@color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
