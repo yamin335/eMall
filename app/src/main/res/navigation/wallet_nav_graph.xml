@@ -171,5 +171,22 @@
         android:id="@+id/giftPointHistoryFragment"
         android:name="com.mallzhub.customer.ui.gift_point.GiftPointHistoryFragment"
         android:label="Gift Point History"
-        tools:layout="@layout/fragment_gift_point_history"/>
+        tools:layout="@layout/fragment_gift_point_history">
+        <action
+            android:id="@+id/action_giftPointHistoryFragment_to_giftPointHistoryDetailsFragment"
+            app:destination="@id/giftPointHistoryDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/giftPointHistoryDetailsFragment"
+        android:name="com.mallzhub.customer.ui.gift_point.GiftPointHistoryDetailsFragment"
+        android:label="Points details"
+        tools:layout="@layout/fragment_gift_point_history_details">
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
 </navigation>

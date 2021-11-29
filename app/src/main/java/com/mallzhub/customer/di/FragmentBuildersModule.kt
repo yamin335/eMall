@@ -9,6 +9,7 @@ import com.mallzhub.customer.ui.add_product.AddProductFragment
 import com.mallzhub.customer.ui.cart.CartFragment
 import com.mallzhub.customer.ui.chapter_list.ChapterListFragment
 import com.mallzhub.customer.ui.exams.ExamsFragment
+import com.mallzhub.customer.ui.gift_point.GiftPointHistoryDetailsFragment
 import com.mallzhub.customer.ui.gift_point.GiftPointHistoryFragment
 import com.mallzhub.customer.ui.home.*
 import com.mallzhub.customer.ui.how_works.HowWorksFragment
@@ -209,4 +210,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeGiftPointHistoryFragment(): GiftPointHistoryFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGiftPointHistoryDetailsFragment(): GiftPointHistoryDetailsFragment
 }

@@ -1661,13 +1661,25 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="giftPointHistoryDetailsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="194" />
+                            <option name="y" value="-865" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="giftPointHistoryFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-536" />
-                            <option name="y" value="-114" />
+                            <option name="x" value="-96" />
+                            <option name="y" value="-879" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -1774,6 +1786,11 @@
                               </value>
                             </entry>
                             <entry key="action_walletFragment_to_cart_nav_graph">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_walletFragment_to_giftPointHistoryFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
