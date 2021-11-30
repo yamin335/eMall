@@ -1,5 +1,6 @@
 package com.mallzhub.customer.ui.wallet
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -9,6 +10,7 @@ import com.mallzhub.customer.BR
 import com.mallzhub.customer.R
 import com.mallzhub.customer.databinding.WalletFragmentBinding
 import com.mallzhub.customer.models.topup.TopUpHelper
+import com.mallzhub.customer.ui.barcode_reader.LiveBarcodeScanningActivity
 import com.mallzhub.customer.ui.common.BaseFragment
 import com.mallzhub.customer.ui.home.Home2FragmentDirections
 import com.mallzhub.customer.ui.home.PaymentMethodListAdapter
@@ -38,6 +40,10 @@ class WalletFragment : BaseFragment<WalletFragmentBinding, WalletViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
         //registerToolbar(viewDataBinding.toolbar)
+
+        viewDataBinding.btnEarnPoint.setOnClickListener {
+            startActivity(Intent(requireActivity(), LiveBarcodeScanningActivity::class.java))
+        }
 
         viewDataBinding.btnShow.setOnClickListener {
             navigateTo(WalletFragmentDirections.actionWalletFragmentToGiftPointHistoryFragment())

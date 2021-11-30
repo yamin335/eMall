@@ -10,6 +10,11 @@
     <color name="buttonTextDisableColor">#383838</color>
     <color name="themeBackgroundColor">#F2F2F2</color>
 
+    //Barcode Scanner
+    <color name="barcode_reticle_background">#99000000</color>
+    <color name="barcode_reticle_stroke">#40000000</color>
+    <color name="reticle_ripple">#9AFFFFFF</color>
+
     // Order Status
     <color name="orderProcessing">#FFC400</color>
     <color name="orderPicked">#00B0FF</color>
