@@ -20,8 +20,10 @@ import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.browser.customtabs.CustomTabsService
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -38,6 +40,15 @@ import java.io.File
 import java.math.BigDecimal
 import java.math.RoundingMode
 import kotlin.math.roundToInt
+
+fun AppCompatActivity.checkSelfPermissionCompat(permission: String) =
+    ActivityCompat.checkSelfPermission(this, permission)
+
+fun AppCompatActivity.shouldShowRequestPermissionRationaleCompat(permission: String) =
+    ActivityCompat.shouldShowRequestPermissionRationale(this, permission)
+
+fun AppCompatActivity.requestPermissionsCompat(permissionsArray: Array<String>, requestCode: Int) =
+    ActivityCompat.requestPermissions(this, permissionsArray, requestCode)
 
 fun Double.toRounded(digit: Int): Double {
     return BigDecimal(this).setScale(digit, RoundingMode.HALF_UP).toDouble()

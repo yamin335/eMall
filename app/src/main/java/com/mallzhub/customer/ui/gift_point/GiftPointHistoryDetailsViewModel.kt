@@ -3,7 +3,6 @@ package com.mallzhub.customer.ui.gift_point
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.mallzhub.customer.models.GiftPointHistoryDetailsItem
-import com.mallzhub.customer.models.GiftPointHistoryItem
 import com.mallzhub.customer.repos.OrderRepository
 import com.mallzhub.customer.ui.common.BaseViewModel
 import javax.inject.Inject

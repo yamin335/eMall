@@ -1,24 +1,15 @@
 package com.mallzhub.customer.ui.gift_point
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
-import com.mallzhub.customer.R
 import com.mallzhub.customer.BR
+import com.mallzhub.customer.R
 import com.mallzhub.customer.databinding.GiftPointHistoryDetailsFragmentBinding
-import com.mallzhub.customer.databinding.GiftPointHistoryFragmentBinding
-import com.mallzhub.customer.databinding.TransactionsFragmentBinding
 import com.mallzhub.customer.models.GiftPointHistoryDetailsItem
-import com.mallzhub.customer.models.GiftPointHistoryItem
-import com.mallzhub.customer.models.order.SalesData
 import com.mallzhub.customer.ui.common.BaseFragment
-import com.mallzhub.customer.ui.order.OrderListAdapter
-import com.mallzhub.customer.ui.order.OrderListFragment
-import com.mallzhub.customer.ui.order.OrderListFragmentDirections
-import com.mallzhub.customer.ui.transactions.TransactionsViewModel
 
 class GiftPointHistoryDetailsFragment : BaseFragment<GiftPointHistoryDetailsFragmentBinding, GiftPointHistoryDetailsViewModel>() {
     override val bindingVariable: Int

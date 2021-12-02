@@ -1,21 +1,14 @@
 package com.mallzhub.customer.ui.gift_point
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.mallzhub.customer.R
 import com.mallzhub.customer.BR
+import com.mallzhub.customer.R
 import com.mallzhub.customer.databinding.GiftPointHistoryFragmentBinding
-import com.mallzhub.customer.databinding.TransactionsFragmentBinding
-import com.mallzhub.customer.models.GiftPointHistoryItem
-import com.mallzhub.customer.models.order.SalesData
+import com.mallzhub.customer.models.ShopWiseGiftPointRewards
 import com.mallzhub.customer.ui.common.BaseFragment
-import com.mallzhub.customer.ui.order.OrderListAdapter
-import com.mallzhub.customer.ui.order.OrderListFragment
-import com.mallzhub.customer.ui.order.OrderListFragmentDirections
-import com.mallzhub.customer.ui.transactions.TransactionsViewModel
 
 class GiftPointHistoryFragment : BaseFragment<GiftPointHistoryFragmentBinding, GiftPointHistoryViewModel>() {
     override val bindingVariable: Int
@@ -31,7 +24,7 @@ class GiftPointHistoryFragment : BaseFragment<GiftPointHistoryFragmentBinding, G
     override fun onResume() {
         super.onResume()
         if (giftPointHistoryList.isEmpty()) {
-            viewModel.getGiftPointHistory()
+            viewModel.getShopWiseGiftPoints(8)
         } else {
             pointHistoryListAdapter.submitList(giftPointHistoryList)
         }
@@ -58,13 +51,13 @@ class GiftPointHistoryFragment : BaseFragment<GiftPointHistoryFragmentBinding, G
         registerToolbar(viewDataBinding.toolbar)
 
         pointHistoryListAdapter = GiftPointsListAdapter(appExecutors) {
-            navigateTo(GiftPointHistoryFragmentDirections.actionGiftPointHistoryFragmentToGiftPointHistoryDetailsFragment(it.shopName ?: "Unknown Shop"))
+            navigateTo(GiftPointHistoryFragmentDirections.actionGiftPointHistoryFragmentToGiftPointHistoryDetailsFragment(it.shop_name ?: "Unknown Shop"))
         }
 
         viewDataBinding.historyRecycler.adapter = pointHistoryListAdapter
 
         viewModel.giftPointsHistoryList.observe(viewLifecycleOwner, Observer {
-            giftPointHistoryList = it as ArrayList<GiftPointHistoryItem>
+            giftPointHistoryList = it as ArrayList<ShopWiseGiftPointRewards>
             pointHistoryListAdapter.submitList(giftPointHistoryList)
             visibleGoneEmptyView()
         })
@@ -81,6 +74,6 @@ class GiftPointHistoryFragment : BaseFragment<GiftPointHistoryFragmentBinding, G
     }
 
     companion object {
-        var giftPointHistoryList = ArrayList<GiftPointHistoryItem>()
+        var giftPointHistoryList = ArrayList<ShopWiseGiftPointRewards>()
     }
 }

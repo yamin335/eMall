@@ -122,4 +122,17 @@ interface ApiService {
         @Path("id") type: Int?
     ): Response<ProductDetailsResponse>
 
+    @Headers(ContentType)
+    @POST(ApiEndPoint.GIFT_POINT_STORE)
+    suspend fun saveGiftPoints(
+        @Body jsonObject: JsonObject
+    ): Response<GiftPointStoreResponse>
+
+    @Headers(ContentType)
+    @POST(ApiEndPoint.SHOP_WISE_GIFT_POINT)
+    suspend fun getShopWiseGiftPoints(
+        @Query("page") page: Int?,
+        @Body jsonObject: JsonObject
+    ): Response<ShopWiseGiftPointResponse>
+
 }

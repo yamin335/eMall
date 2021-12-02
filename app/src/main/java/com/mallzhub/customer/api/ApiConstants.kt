@@ -46,6 +46,8 @@ object ApiEndPoint {
     const val ORDER_LIST= "/$API_REPO/sales/filter-by-date/undefined/undefined/false"
     const val OFFER_LIST = "/$API_REPO/$DIRECTORY_COMMON/all/offers"
     const val PRODUCT_DETAILS = "/$API_REPO/$DIRECTORY_COMMON/{id}/product"
+    const val GIFT_POINT_STORE = "/$API_REPO/set/customer/merchant/reward"
+    const val SHOP_WISE_GIFT_POINT = "/$API_REPO/get/customer/merchant/reward"
 }
 
 object ResponseCodes {

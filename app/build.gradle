@@ -304,5 +304,6 @@ dependencies {
 
     // Barcode model
     implementation 'com.google.mlkit:barcode-scanning:16.2.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
 }
 //apply plugin: 'com.google.gms.google-services'

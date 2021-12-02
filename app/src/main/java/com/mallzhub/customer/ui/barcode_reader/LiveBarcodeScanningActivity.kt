@@ -103,7 +103,11 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.close_button -> onBackPressed()
+            R.id.close_button -> {
+                setResult(RESULT_CANCELED, intent) //Set result Cancelled
+                finish()
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            }
             R.id.flash_button -> {
                 flashButton?.let {
                     if (it.isSelected) {
@@ -142,7 +146,7 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
         }
     }
 
-    private fun     setUpWorkflowModel() {
+    private fun setUpWorkflowModel() {
         workflowModel = ViewModelProviders.of(this).get(WorkflowModel::class.java)
 
         // Observes the workflow state changes, if happens, update the overlay view indicators and
@@ -188,9 +192,16 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
 
         workflowModel?.detectedBarcode?.observe(this, Observer { barcode ->
             if (barcode != null) {
-                val barcodeFieldList = ArrayList<BarcodeField>()
-                barcodeFieldList.add(BarcodeField("Raw Value", barcode.rawValue ?: ""))
-                BarcodeResultFragment.show(supportFragmentManager, barcodeFieldList)
+                //Send back barcode result raw value to Caller Activity
+                val intent = Intent()
+                intent.putExtra("barcode_result", barcode.rawValue ?: "")
+                setResult(RESULT_OK, intent) //Set result OK
+                finish()
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+//                val barcodeFieldList = ArrayList<BarcodeField>()
+//                barcodeFieldList.add(BarcodeField("Raw Value", barcode.rawValue ?: ""))
+//                BarcodeResultFragment.show(supportFragmentManager, barcodeFieldList)
             }
         })
     }

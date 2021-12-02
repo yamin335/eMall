@@ -75,8 +75,7 @@ object BarcodeReaderUtils {
 
     internal fun allPermissionsGranted(context: Context): Boolean = getRequiredPermissions(
         context
-    )
-        .all { checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED }
+    ).all { checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED }
 
     private fun getRequiredPermissions(context: Context): Array<String> {
         return try {

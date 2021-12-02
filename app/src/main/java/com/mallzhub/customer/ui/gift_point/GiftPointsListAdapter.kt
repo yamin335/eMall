@@ -8,22 +8,22 @@ import androidx.recyclerview.widget.DiffUtil
 import com.mallzhub.customer.AppExecutors
 import com.mallzhub.customer.R
 import com.mallzhub.customer.databinding.GiftPointHistoryListItemBinding
-import com.mallzhub.customer.models.GiftPointHistoryItem
+import com.mallzhub.customer.models.ShopWiseGiftPointRewards
 import com.mallzhub.customer.util.DataBoundListAdapter
 
 class GiftPointsListAdapter(
     private val appExecutors: AppExecutors,
-    private val itemCallback: ((GiftPointHistoryItem) -> Unit)? = null
-) : DataBoundListAdapter<GiftPointHistoryItem, GiftPointHistoryListItemBinding>(
-    appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<GiftPointHistoryItem>() {
-        override fun areItemsTheSame(oldItem: GiftPointHistoryItem, newItem: GiftPointHistoryItem): Boolean {
+    private val itemCallback: ((ShopWiseGiftPointRewards) -> Unit)? = null
+) : DataBoundListAdapter<ShopWiseGiftPointRewards, GiftPointHistoryListItemBinding>(
+    appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<ShopWiseGiftPointRewards>() {
+        override fun areItemsTheSame(oldItem: ShopWiseGiftPointRewards, newItem: ShopWiseGiftPointRewards): Boolean {
             return oldItem.id == newItem.id
         }
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: GiftPointHistoryItem,
-            newItem: GiftPointHistoryItem
+            oldItem: ShopWiseGiftPointRewards,
+            newItem: ShopWiseGiftPointRewards
         ): Boolean {
             return oldItem == newItem
         }
@@ -40,8 +40,8 @@ class GiftPointsListAdapter(
 
     override fun bind(binding: GiftPointHistoryListItemBinding, position: Int) {
         val item = getItem(position)
-        binding.shopName = item.shopName ?: "Unknown Shop"
-        binding.giftPoint = item.point?.toString() ?: "0"
+        binding.shopName = item.shop_name ?: "Unknown Shop"
+        binding.giftPoint = item.total_rewards?.toString() ?: "0"
 
         binding.root.setOnClickListener {
             itemCallback?.invoke(item)
