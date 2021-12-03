@@ -23,12 +23,7 @@ class GiftPointHistoryFragment : BaseFragment<GiftPointHistoryFragmentBinding, G
 
     override fun onResume() {
         super.onResume()
-        if (giftPointHistoryList.isEmpty()) {
-            viewModel.getShopWiseGiftPoints(8)
-        } else {
-            pointHistoryListAdapter.submitList(giftPointHistoryList)
-        }
-
+        viewModel.getShopWiseGiftPoints(8)
         visibleGoneEmptyView()
     }
 

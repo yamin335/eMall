@@ -72,6 +72,7 @@ class WalletFragment : BaseFragment<WalletFragmentBinding, WalletViewModel>() {
         viewModel.giftPointStoreResponse.observe(viewLifecycleOwner, Observer { rewards ->
             rewards?.let {
                 showSuccessToast(requireContext(), "You have earned ${it.reward} gift points!")
+                viewModel.giftPointStoreResponse.postValue(null)
             }
         })
 
