@@ -6,6 +6,7 @@ import com.google.gson.JsonParser
 import com.mallzhub.customer.api.ApiService
 import com.mallzhub.customer.models.GiftPointStoreBody
 import com.mallzhub.customer.models.GiftPointStoreResponse
+import com.mallzhub.customer.models.GiftPointsHistoryDetailsResponse
 import com.mallzhub.customer.models.ShopWiseGiftPointResponse
 import com.mallzhub.customer.models.order.OrderListResponse
 import com.mallzhub.customer.models.order.OrderStoreBody
@@ -39,6 +40,16 @@ class GiftPointRepository @Inject constructor(private val apiService: ApiService
         }
         return withContext(Dispatchers.IO) {
             apiService.getShopWiseGiftPoints(1, jsonObject)
+        }
+    }
+
+    suspend fun getShopWiseGiftPointsDetails(customerId: Int, merchantId: Int): Response<GiftPointsHistoryDetailsResponse> {
+        val jsonObject = JsonObject().apply {
+            addProperty("customer_id", customerId)
+            addProperty("merchant_id", merchantId)
+        }
+        return withContext(Dispatchers.IO) {
+            apiService.getShopWiseGiftPointsDetails(1, jsonObject)
         }
     }
 }

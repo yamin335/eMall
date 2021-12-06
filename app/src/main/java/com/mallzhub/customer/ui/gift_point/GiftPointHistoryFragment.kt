@@ -46,7 +46,7 @@ class GiftPointHistoryFragment : BaseFragment<GiftPointHistoryFragmentBinding, G
         registerToolbar(viewDataBinding.toolbar)
 
         pointHistoryListAdapter = GiftPointsListAdapter(appExecutors) {
-            navigateTo(GiftPointHistoryFragmentDirections.actionGiftPointHistoryFragmentToGiftPointHistoryDetailsFragment(it.shop_name ?: "Unknown Shop"))
+            navigateTo(GiftPointHistoryFragmentDirections.actionGiftPointHistoryFragmentToGiftPointHistoryDetailsFragment(it.shop_name ?: "Unknown Shop", it.merchant_id ?: 0))
         }
 
         viewDataBinding.historyRecycler.adapter = pointHistoryListAdapter

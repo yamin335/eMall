@@ -2,11 +2,11 @@ package com.mallzhub.customer.models
 
 data class GiftPointHistoryDetailsItem(val id: Int?, val title: String?, val description: String?, val point: Int?)
 
-data class GiftPointStoreBody(var merchant_id: Int?, var customer_id: Int?, var reward: Int?, var remarks: String?)
+data class GiftPointStoreBody(var merchant_id: Int?, var customer_id: Int?, var remarks: String?)
 
 data class GiftPointStoreResponse(val code: Int?, val message: String?, val data: GiftPointStoreResponseData?)
 
-data class GiftPointStoreResponseData(val rewards: GiftPointRewards?, val total_reward: Int?)
+data class GiftPointStoreResponseData(val reward: String?)
 
 data class GiftPointRewards(val merchant_id: Int?, val customer_id: Int?, val reward: Int?,
                             val remarks: String?, val updated_at: String?, val created_at: String?, val id: Int?)
@@ -26,3 +26,12 @@ data class ShopWiseGiftPointRewards(val id: Int?, val created_at: String?, val u
                             val agreement_duration: Any?, val type: String?, val offer_discount_type: Any?,
                             val offer_discount_percent: Any?, val offer_banner: Any?, val offer_valid_from: Any?,
                             val offer_valid_to: Any?, val total_rewards: Int?)
+
+data class GiftPointsHistoryDetailsResponse(val code: Int?, val message: String?, val data: GiftPointsHistoryDetailsResponseData?)
+
+data class GiftPointsHistoryDetailsResponseData(val rewards: List<GiftPointsHistoryDetailsRewards>?, val total_reward: Int?)
+
+data class GiftPointsHistoryDetailsRewards(val id: Int?, val created_at: String?, val updated_at: String?,
+                            val customer_id: Int?, val merchant_id: Int?,
+                            val reward_setting_id: Int?, val customer_mobile: String?,
+                            val reward: Int?, val remarks: String?, val is_approved: Int?)

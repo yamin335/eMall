@@ -10,6 +10,7 @@ import com.mallzhub.customer.api.*
 import com.mallzhub.customer.local_db.dao.CartDao
 import com.mallzhub.customer.models.GiftPointRewards
 import com.mallzhub.customer.models.GiftPointStoreBody
+import com.mallzhub.customer.models.GiftPointStoreResponseData
 import com.mallzhub.customer.models.PaymentMethod
 import com.mallzhub.customer.models.order.SalesData
 import com.mallzhub.customer.repos.GiftPointRepository
@@ -50,8 +51,8 @@ class WalletViewModel @Inject constructor(
             )
         )
 
-    val giftPointStoreResponse: MutableLiveData<GiftPointRewards> by lazy {
-        MutableLiveData<GiftPointRewards>()
+    val giftPointStoreResponse: MutableLiveData<GiftPointStoreResponseData> by lazy {
+        MutableLiveData<GiftPointStoreResponseData>()
     }
 
     fun saveGiftPoints(giftPointStoreBody: GiftPointStoreBody) {
@@ -67,7 +68,7 @@ class WalletViewModel @Inject constructor(
                 when (val apiResponse = ApiResponse.create(giftPointRepository.saveGiftPoints(giftPointStoreBody))) {
                     is ApiSuccessResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.SUCCESS)
-                        giftPointStoreResponse.postValue(apiResponse.body.data?.rewards)
+                        giftPointStoreResponse.postValue(apiResponse.body.data)
                     }
                     is ApiEmptyResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.EMPTY)

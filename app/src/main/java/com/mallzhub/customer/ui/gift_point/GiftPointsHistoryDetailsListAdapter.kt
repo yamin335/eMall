@@ -8,22 +8,22 @@ import androidx.recyclerview.widget.DiffUtil
 import com.mallzhub.customer.AppExecutors
 import com.mallzhub.customer.R
 import com.mallzhub.customer.databinding.GiftPointHistoryDetailsListItemBinding
-import com.mallzhub.customer.models.GiftPointHistoryDetailsItem
+import com.mallzhub.customer.models.GiftPointsHistoryDetailsRewards
 import com.mallzhub.customer.util.DataBoundListAdapter
 
 class GiftPointsHistoryDetailsListAdapter(
     private val appExecutors: AppExecutors,
-    private val itemCallback: ((GiftPointHistoryDetailsItem) -> Unit)? = null
-) : DataBoundListAdapter<GiftPointHistoryDetailsItem, GiftPointHistoryDetailsListItemBinding>(
-    appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<GiftPointHistoryDetailsItem>() {
-        override fun areItemsTheSame(oldItem: GiftPointHistoryDetailsItem, newItem: GiftPointHistoryDetailsItem): Boolean {
+    private val itemCallback: ((GiftPointsHistoryDetailsRewards) -> Unit)? = null
+) : DataBoundListAdapter<GiftPointsHistoryDetailsRewards, GiftPointHistoryDetailsListItemBinding>(
+    appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<GiftPointsHistoryDetailsRewards>() {
+        override fun areItemsTheSame(oldItem: GiftPointsHistoryDetailsRewards, newItem: GiftPointsHistoryDetailsRewards): Boolean {
             return oldItem.id == newItem.id
         }
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: GiftPointHistoryDetailsItem,
-            newItem: GiftPointHistoryDetailsItem
+            oldItem: GiftPointsHistoryDetailsRewards,
+            newItem: GiftPointsHistoryDetailsRewards
         ): Boolean {
             return oldItem == newItem
         }
@@ -40,9 +40,9 @@ class GiftPointsHistoryDetailsListAdapter(
 
     override fun bind(binding: GiftPointHistoryDetailsListItemBinding, position: Int) {
         val item = getItem(position)
-        binding.title = item.title ?: "Reason not found"
-        binding.description = item.title ?: "No description available"
-        binding.point = item.point?.toString() ?: "0"
+        binding.title = item.remarks ?: "Reason not found"
+        binding.description = if (item.is_approved == 1) "Status: Approved" else "Status: Not Approved"
+        binding.point = item.reward?.toString() ?: "0"
 
         binding.root.setOnClickListener {
             itemCallback?.invoke(item)

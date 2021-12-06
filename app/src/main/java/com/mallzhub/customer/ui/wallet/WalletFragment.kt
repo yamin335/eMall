@@ -119,7 +119,7 @@ class WalletFragment : BaseFragment<WalletFragmentBinding, WalletViewModel>() {
                 if (qrCodeData.isNotBlank()) {
                     val dataArray = qrCodeData.split(",")
                     if (dataArray.size >= 3) {
-                        viewModel.saveGiftPoints(GiftPointStoreBody(dataArray[0].toInt(), 8, 11, "Test by YAMIN"))
+                        viewModel.saveGiftPoints(GiftPointStoreBody(dataArray[0].toInt(), 8, "Test by YAMIN"))
                     } else {
                         showErrorToast(requireContext(), "Invalid QR Code!")
                     }

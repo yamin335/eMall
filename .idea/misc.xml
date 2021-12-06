@@ -31,6 +31,7 @@
         <entry key="app/src/main/res/layout/fragment_bot.xml" value="0.32037037037037036" />
         <entry key="app/src/main/res/layout/fragment_camera.xml" value="0.31574074074074077" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/fragment_chapter_list.xml" value="0.32760416666666664" />
         <entry key="app/src/main/res/layout/fragment_gift_point_history.xml" value="0.2989583333333333" />
         <entry key="app/src/main/res/layout/fragment_gift_point_history_details.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.36041666666666666" />
@@ -74,6 +75,7 @@
         <entry key="app/src/main/res/layout/list_item_server_chat_row.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_shop_wise_cart.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_transaction.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/test_ss.xml" value="0.32760416666666664" />
         <entry key="app/src/main/res/layout/top_action_bar_in_live_camera.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/menu/bottom_app_menu.xml" value="0.22395833333333334" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.22395833333333334" />

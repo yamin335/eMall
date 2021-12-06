@@ -9,6 +9,7 @@ import com.mallzhub.customer.BR
 import com.mallzhub.customer.R
 import com.mallzhub.customer.databinding.GiftPointHistoryDetailsFragmentBinding
 import com.mallzhub.customer.models.GiftPointHistoryDetailsItem
+import com.mallzhub.customer.models.GiftPointsHistoryDetailsRewards
 import com.mallzhub.customer.ui.common.BaseFragment
 
 class GiftPointHistoryDetailsFragment : BaseFragment<GiftPointHistoryDetailsFragmentBinding, GiftPointHistoryDetailsViewModel>() {
@@ -26,12 +27,7 @@ class GiftPointHistoryDetailsFragment : BaseFragment<GiftPointHistoryDetailsFrag
 
     override fun onResume() {
         super.onResume()
-        if (giftPointHistoryList.isEmpty()) {
-            viewModel.getGiftPointHistory()
-        } else {
-            pointHistoryListAdapter.submitList(giftPointHistoryList)
-        }
-
+        viewModel.getGiftPointsHistoryDetails(8, args.merchantId)
         visibleGoneEmptyView()
     }
 
@@ -54,7 +50,6 @@ class GiftPointHistoryDetailsFragment : BaseFragment<GiftPointHistoryDetailsFrag
         registerToolbar(viewDataBinding.toolbar)
 
         viewDataBinding.toolbar.title = args.title
-        viewDataBinding.totalPoints = totalPoints.toString()
 
         pointHistoryListAdapter = GiftPointsHistoryDetailsListAdapter(appExecutors) {
             //navigateTo(TransactionsFragmentDirections.actionTransactionsFragmentToTransactionDetailsFragment(it))
@@ -62,15 +57,13 @@ class GiftPointHistoryDetailsFragment : BaseFragment<GiftPointHistoryDetailsFrag
 
         viewDataBinding.historyRecycler.adapter = pointHistoryListAdapter
 
-        viewModel.giftPointsHistoryList.observe(viewLifecycleOwner, Observer {
-            giftPointHistoryList = it as ArrayList<GiftPointHistoryDetailsItem>
-            totalPoints = 0
-            for (item in giftPointHistoryList) {
-                totalPoints += item.point ?: 0
+        viewModel.giftPointsHistoryDetailsResponse.observe(viewLifecycleOwner, Observer { response ->
+            response?.let {
+                giftPointHistoryList = it.rewards as ArrayList<GiftPointsHistoryDetailsRewards>
+                viewDataBinding.totalPoints = response.total_reward?.toString() ?: "0"
+                pointHistoryListAdapter.submitList(giftPointHistoryList)
+                visibleGoneEmptyView()
             }
-            viewDataBinding.totalPoints = totalPoints.toString()
-            pointHistoryListAdapter.submitList(giftPointHistoryList)
-            visibleGoneEmptyView()
         })
     }
 
@@ -85,7 +78,6 @@ class GiftPointHistoryDetailsFragment : BaseFragment<GiftPointHistoryDetailsFrag
     }
 
     companion object {
-        var giftPointHistoryList = ArrayList<GiftPointHistoryDetailsItem>()
-        var totalPoints = 0
+        var giftPointHistoryList = ArrayList<GiftPointsHistoryDetailsRewards>()
     }
 }
