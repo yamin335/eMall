@@ -193,6 +193,7 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
         workflowModel?.detectedBarcode?.observe(this, Observer { barcode ->
             if (barcode != null) {
                 //Send back barcode result raw value to Caller Activity
+                    val ss = barcode.rawValue
                 val intent = Intent()
                 intent.putExtra("barcode_result", barcode.rawValue ?: "")
                 setResult(RESULT_OK, intent) //Set result OK

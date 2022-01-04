@@ -23,6 +23,8 @@
         <entry key="app/src/main/res/layout/barcode_bottom_sheet.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/barcode_field.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/camera_preview_overlay.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/camera_ui_container.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/dialog_bottom_checkout_options.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/dialog_bottom_order_overview.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/dialog_fragment_order_as_guest.xml" value="0.36041666666666666" />
@@ -79,6 +81,7 @@
         <entry key="app/src/main/res/layout/top_action_bar_in_live_camera.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/menu/bottom_app_menu.xml" value="0.22395833333333334" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.22395833333333334" />
+        <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.36041666666666666" />
       </map>
     </option>
   </component>

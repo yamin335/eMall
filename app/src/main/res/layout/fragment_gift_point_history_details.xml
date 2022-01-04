@@ -25,7 +25,7 @@
             android:background="@color/themeColor"
             android:theme="@style/AppTheme.AppBarOverlay"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="Details"
+            app:title="Points Details"
             app:titleTextColor="@color/white" />
 
         <ProgressBar
