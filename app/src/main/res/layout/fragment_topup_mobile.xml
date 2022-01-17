@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.topup.TopUpMobileViewModel" />
+            type="com.rtchubs.arfixture.ui.topup.TopUpMobileViewModel" />
     </data>
 
 

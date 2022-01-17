@@ -5,7 +5,7 @@
     <data class="OrderAsGuestDialogFragmentBinding">
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.order.OrderAsGuestDialogViewModel" />
+            type="com.rtchubs.arfixture.ui.order.OrderAsGuestDialogViewModel" />
     </data>
 
     <RelativeLayout

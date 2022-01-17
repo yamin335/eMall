@@ -8,7 +8,7 @@
     <fragment
         tools:layout="@layout/fragment_main2"
         android:id="@+id/home2Fragment"
-        android:name="com.mallzhub.customer.ui.home.Home2Fragment"
+        android:name="com.rtchubs.arfixture.ui.home.Home2Fragment"
         android:label="QPay" >
 
         <action
@@ -46,11 +46,18 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_home2Fragment_to_productListFragment"
+            app:destination="@id/productListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <include app:graph="@navigation/exams_nav_graph" />
     <fragment
         android:id="@+id/moreShoppingMallFragment"
-        android:name="com.mallzhub.customer.ui.home.MoreShoppingMallFragment"
+        android:name="com.rtchubs.arfixture.ui.home.MoreShoppingMallFragment"
         android:label="Shopping Malls" >
         <action
             android:id="@+id/action_moreShoppingMallFragment_to_allShopListFragment"
@@ -69,11 +76,11 @@
     </fragment>
     <fragment
         android:id="@+id/allShopListFragment"
-        android:name="com.mallzhub.customer.ui.home.AllShopListFragment"
+        android:name="com.rtchubs.arfixture.ui.home.AllShopListFragment"
         android:label="Shops" >
         <argument
             android:name="shoppingMall"
-            app:argType="com.mallzhub.customer.models.ShoppingMall" />
+            app:argType="com.rtchubs.arfixture.models.ShoppingMall" />
         <action
             android:id="@+id/action_allShopListFragment_to_shopDetailsFragment"
             app:destination="@id/shopDetailsFragment"
@@ -91,11 +98,11 @@
     </fragment>
     <fragment
         android:id="@+id/productListFragment"
-        android:name="com.mallzhub.customer.ui.home.ProductListFragment"
+        android:name="com.rtchubs.arfixture.ui.home.ProductListFragment"
         android:label="Products" >
         <argument
             android:name="merchant"
-            app:argType="com.mallzhub.customer.models.Merchant" />
+            app:argType="com.rtchubs.arfixture.models.Merchant" />
         <action
             android:id="@+id/action_productListFragment_to_cart_nav_graph"
             app:destination="@id/cart_nav_graph"
@@ -112,17 +119,17 @@
             app:popExitAnim="@anim/slide_out_right">
             <argument
                 android:name="product"
-                app:argType="com.mallzhub.customer.models.Product" />
+                app:argType="com.rtchubs.arfixture.models.Product" />
         </action>
     </fragment>
 
     <fragment
         android:id="@+id/shopDetailsFragment"
-        android:name="com.mallzhub.customer.ui.shops.ShopDetailsFragment"
+        android:name="com.rtchubs.arfixture.ui.shops.ShopDetailsFragment"
         android:label="ShopDetailsFragment" >
         <argument
             android:name="merchant"
-            app:argType="com.mallzhub.customer.models.Merchant" />
+            app:argType="com.rtchubs.arfixture.models.Merchant" />
         <action
             android:id="@+id/action_shopDetailsFragment_to_productListFragment"
             app:destination="@id/productListFragment"
@@ -153,16 +160,16 @@
             app:popExitAnim="@anim/slide_out_right">
             <argument
                 android:name="product"
-                app:argType="com.mallzhub.customer.models.Product" />
+                app:argType="com.rtchubs.arfixture.models.Product" />
         </action>
     </fragment>
     <fragment
         android:id="@+id/ARLocationFragment"
-        android:name="com.mallzhub.customer.ar_location.ARLocationFragment"
+        android:name="com.rtchubs.arfixture.ar_location.ARLocationFragment"
         android:label="ARLocationFragment" >
         <argument
             android:name="location"
-            app:argType="com.mallzhub.customer.models.LocationData" />
+            app:argType="com.rtchubs.arfixture.models.LocationData" />
     </fragment>
     <include app:graph="@navigation/cart_nav_graph" />
     <include app:graph="@navigation/product_details_nav_graph" />

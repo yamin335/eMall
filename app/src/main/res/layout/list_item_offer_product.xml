@@ -10,7 +10,7 @@
             type="String" />
         <variable
             name="item"
-            type="com.mallzhub.customer.models.OfferProduct" />
+            type="com.rtchubs.arfixture.models.OfferProduct" />
         <variable
             name="imageRequestListener"
             type="com.bumptech.glide.request.RequestListener&lt;Drawable>" />

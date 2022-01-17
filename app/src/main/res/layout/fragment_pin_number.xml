@@ -5,7 +5,7 @@
     <data class="PinNumberBinding">
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.pin_number.PinNumberViewModel" />
+            type="com.rtchubs.arfixture.ui.pin_number.PinNumberViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

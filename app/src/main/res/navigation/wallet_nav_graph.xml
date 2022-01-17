@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/walletFragment"
-        android:name="com.mallzhub.customer.ui.wallet.WalletFragment"
+        android:name="com.rtchubs.arfixture.ui.wallet.WalletFragment"
         android:label="WalletFragment"
         tools:layout="@layout/fragment_wallet">
         <action
@@ -44,7 +44,7 @@
     <fragment
         android:id="@+id/addPaymentMethodsFragment"
         tools:layout="@layout/layout_add_payment_method"
-        android:name="com.mallzhub.customer.ui.add_payment_methods.AddPaymentMethodsFragment"
+        android:name="com.rtchubs.arfixture.ui.add_payment_methods.AddPaymentMethodsFragment"
         android:label="@string/select_account_type" >
         <action
             android:id="@+id/action_addPaymentMethodsFragment_to_addBankFragment"
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/addBankFragment"
-        android:name="com.mallzhub.customer.ui.add_payment_methods.AddBankFragment"
+        android:name="com.rtchubs.arfixture.ui.add_payment_methods.AddBankFragment"
         android:label="Add Bank Account"
         tools:layout="@layout/fragment_add_bank" >
         <action
@@ -78,11 +78,11 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="selectedBank"
-            app:argType="com.mallzhub.customer.models.payment_account_models.BankOrCard" />
+            app:argType="com.rtchubs.arfixture.models.payment_account_models.BankOrCard" />
     </fragment>
     <fragment
         android:id="@+id/addCardFragment"
-        android:name="com.mallzhub.customer.ui.add_payment_methods.AddCardFragment"
+        android:name="com.rtchubs.arfixture.ui.add_payment_methods.AddCardFragment"
         android:label="Add Debit/Credit Card"
         tools:layout="@layout/fragment_add_card" >
         <action
@@ -97,16 +97,16 @@
             app:popUpToInclusive="true"/>
         <argument
             android:name="selectedCard"
-            app:argType="com.mallzhub.customer.models.payment_account_models.BankOrCard" />
+            app:argType="com.rtchubs.arfixture.models.payment_account_models.BankOrCard" />
     </fragment>
     <fragment
         android:id="@+id/topUpMobileFragment"
-        android:name="com.mallzhub.customer.ui.topup.TopUpMobileFragment"
+        android:name="com.rtchubs.arfixture.ui.topup.TopUpMobileFragment"
         android:label="Mobile Number"
         tools:layout="@layout/fragment_topup_mobile">
         <argument
             android:name="topUpHelper"
-            app:argType="com.mallzhub.customer.models.topup.TopUpHelper" />
+            app:argType="com.rtchubs.arfixture.models.topup.TopUpHelper" />
         <action
             android:id="@+id/action_topUpMobileFragment_to_topUpAmountFragment"
             app:destination="@id/topUpAmountFragment"
@@ -117,12 +117,12 @@
     </fragment>
     <fragment
         android:id="@+id/topUpAmountFragment"
-        android:name="com.mallzhub.customer.ui.topup.TopUpAmountFragment"
+        android:name="com.rtchubs.arfixture.ui.topup.TopUpAmountFragment"
         android:label="Recharge Amount"
         tools:layout="@layout/fragment_topup_amount">
         <argument
             android:name="topUpHelper"
-            app:argType="com.mallzhub.customer.models.topup.TopUpHelper" />
+            app:argType="com.rtchubs.arfixture.models.topup.TopUpHelper" />
         <action
             android:id="@+id/action_topUpAmountFragment_to_topUpBankCardFragment"
             app:destination="@id/topUpBankCardFragment"
@@ -133,12 +133,12 @@
     </fragment>
     <fragment
         android:id="@+id/topUpPinFragment"
-        android:name="com.mallzhub.customer.ui.topup.TopUpPinFragment"
+        android:name="com.rtchubs.arfixture.ui.topup.TopUpPinFragment"
         android:label="Pin Number"
         tools:layout="@layout/fragment_topup_pin">
         <argument
             android:name="topUpHelper"
-            app:argType="com.mallzhub.customer.models.topup.TopUpHelper" />
+            app:argType="com.rtchubs.arfixture.models.topup.TopUpHelper" />
         <action
             android:id="@+id/action_topUpPinFragment_to_home2Fragment"
             app:destination="@id/walletFragment"
@@ -152,12 +152,12 @@
     </fragment>
     <fragment
         android:id="@+id/topUpBankCardFragment"
-        android:name="com.mallzhub.customer.ui.topup.TopUpBankCardFragment"
+        android:name="com.rtchubs.arfixture.ui.topup.TopUpBankCardFragment"
         tools:layout="@layout/fragment_topup_bank_card"
         android:label="Select Account">
         <argument
             android:name="topUpHelper"
-            app:argType="com.mallzhub.customer.models.topup.TopUpHelper" />
+            app:argType="com.rtchubs.arfixture.models.topup.TopUpHelper" />
         <action
             android:id="@+id/action_topUpBankCardFragment_to_topUpPinFragment"
             app:destination="@id/topUpPinFragment"
@@ -169,7 +169,7 @@
     <include app:graph="@navigation/cart_nav_graph" />
     <fragment
         android:id="@+id/giftPointHistoryFragment"
-        android:name="com.mallzhub.customer.ui.gift_point.GiftPointHistoryFragment"
+        android:name="com.rtchubs.arfixture.ui.gift_point.GiftPointHistoryFragment"
         android:label="Gift Point History"
         tools:layout="@layout/fragment_gift_point_history">
         <action
@@ -182,7 +182,7 @@
     </fragment>
     <fragment
         android:id="@+id/giftPointHistoryDetailsFragment"
-        android:name="com.mallzhub.customer.ui.gift_point.GiftPointHistoryDetailsFragment"
+        android:name="com.rtchubs.arfixture.ui.gift_point.GiftPointHistoryDetailsFragment"
         android:label="Points details"
         tools:layout="@layout/fragment_gift_point_history_details">
         <argument

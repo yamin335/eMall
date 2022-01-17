@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.mallzhub.customer.ui.cart.CartFragment"
+        android:name="com.rtchubs.arfixture.ui.cart.CartFragment"
         android:label="Cart"
         tools:layout="@layout/fragment_cart"/>
 </navigation>

@@ -6,14 +6,14 @@
     android:keepScreenOn="true"
     android:background="@color/black">
 
-    <com.mallzhub.customer.ui.barcode_reader.camera.BarcodeReaderCameraSourcePreview
+    <com.rtchubs.arfixture.ui.barcode_reader.camera.BarcodeReaderCameraSourcePreview
         android:id="@+id/camera_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <include layout="@layout/camera_preview_overlay"/>
 
-    </com.mallzhub.customer.ui.barcode_reader.camera.BarcodeReaderCameraSourcePreview>
+    </com.rtchubs.arfixture.ui.barcode_reader.camera.BarcodeReaderCameraSourcePreview>
 
     <include
         layout="@layout/top_action_bar_in_live_camera"

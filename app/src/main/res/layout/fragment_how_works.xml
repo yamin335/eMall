@@ -5,7 +5,7 @@
     <data class="HowWorksBinding">
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.how_works.HowWorksViewModel" />
+            type="com.rtchubs.arfixture.ui.how_works.HowWorksViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/offerFragment"
-        android:name="com.mallzhub.customer.ui.offer.OfferFragment"
+        android:name="com.rtchubs.arfixture.ui.offer.OfferFragment"
         android:label="Offer Products"
         tools:layout="@layout/fragment_offer">
         <action
@@ -26,7 +26,7 @@
             app:popExitAnim="@anim/slide_out_right">
             <argument
                 android:name="product"
-                app:argType="com.mallzhub.customer.models.Product" />
+                app:argType="com.rtchubs.arfixture.models.Product" />
             <argument
                 android:name="discount"
                 app:argType="integer"

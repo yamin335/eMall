@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.mallzhub.customer.ui.login.SignInFragment"
+        android:name="com.rtchubs.arfixture.ui.login.SignInFragment"
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_otpSignInFragment"
@@ -19,11 +19,11 @@
     </fragment>
     <fragment
         android:id="@+id/otpSignInFragment"
-        android:name="com.mallzhub.customer.ui.otp_signin.OtpSignInFragment"
+        android:name="com.rtchubs.arfixture.ui.otp_signin.OtpSignInFragment"
         tools:layout="@layout/fragment_otp_sign_in">
         <argument
             android:name="registrationHelper"
-            app:argType="com.mallzhub.customer.models.registration.RegistrationHelperModel" />
+            app:argType="com.rtchubs.arfixture.models.registration.RegistrationHelperModel" />
         <action
             android:id="@+id/action_otpSignInFragment_to_pinNumberFragment"
             app:destination="@id/pinNumberFragment"
@@ -34,11 +34,11 @@
     </fragment>
     <fragment
         android:id="@+id/pinNumberFragment"
-        android:name="com.mallzhub.customer.ui.pin_number.PinNumberFragment"
+        android:name="com.rtchubs.arfixture.ui.pin_number.PinNumberFragment"
         tools:layout="@layout/fragment_pin_number">
         <argument
             android:name="registrationHelper"
-            app:argType="com.mallzhub.customer.models.registration.RegistrationHelperModel" />
+            app:argType="com.rtchubs.arfixture.models.registration.RegistrationHelperModel" />
     </fragment>
 
 </navigation>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/botFragment"
-        android:name="com.mallzhub.customer.ui.live_chat.BotFragment"
+        android:name="com.rtchubs.arfixture.ui.live_chat.BotFragment"
         android:label="Bot"
         tools:layout="@layout/fragment_bot"/>
 </navigation>

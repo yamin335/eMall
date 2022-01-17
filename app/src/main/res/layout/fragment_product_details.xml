@@ -16,7 +16,7 @@
 
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.home.ProductDetailsViewModel" />
+            type="com.rtchubs.arfixture.ui.home.ProductDetailsViewModel" />
 
         <variable
             name="name"

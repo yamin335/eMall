@@ -16,7 +16,7 @@
             type="String" />
         <variable
             name="item"
-            type="com.mallzhub.customer.local_db.dbo.CartItem" />
+            type="com.rtchubs.arfixture.local_db.dbo.CartItem" />
         <variable
             name="imageRequestListener"
             type="com.bumptech.glide.request.RequestListener&lt;Drawable>" />

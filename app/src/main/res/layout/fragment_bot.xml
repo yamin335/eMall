@@ -6,7 +6,7 @@
     <data class="BotFragmentBinding">
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.live_chat.LiveChatViewModel" />
+            type="com.rtchubs.arfixture.ui.live_chat.LiveChatViewModel" />
     </data>
 
     <LinearLayout

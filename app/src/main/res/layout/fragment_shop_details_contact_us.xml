@@ -4,7 +4,7 @@
     <data class="ShopDetailsContactUsFragmentBinding">
         <variable
             name="merchant"
-            type="com.mallzhub.customer.models.Merchant" />
+            type="com.rtchubs.arfixture.models.Merchant" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

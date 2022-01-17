@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.transactions.TransactionsViewModel" />
+            type="com.rtchubs.arfixture.ui.transactions.TransactionsViewModel" />
     </data>
 
     <RelativeLayout

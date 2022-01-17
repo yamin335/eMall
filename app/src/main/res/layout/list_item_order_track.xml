@@ -5,7 +5,7 @@
     <data class="OrderTrackHistoryListItemBinding">
         <variable
             name="item"
-            type="com.mallzhub.customer.models.order.OrderTrackHistory" />
+            type="com.rtchubs.arfixture.models.order.OrderTrackHistory" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

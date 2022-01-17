@@ -4,7 +4,7 @@
     android:id="@+id/drawer_nav_graph">
     <fragment
         android:id="@+id/infoFragment"
-        android:name="com.mallzhub.customer.ui.info.InfoFragment"
+        android:name="com.rtchubs.arfixture.ui.info.InfoFragment"
         android:label="InfoFragment" />
 
 </navigation>

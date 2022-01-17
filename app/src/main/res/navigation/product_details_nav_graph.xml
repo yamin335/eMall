@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/productDetailsFragment"
-        android:name="com.mallzhub.customer.ui.home.ProductDetailsFragment"
+        android:name="com.rtchubs.arfixture.ui.home.ProductDetailsFragment"
         android:label="ProductDetailsFragment"
         tools:layout="@layout/fragment_product_details">
         <argument
             android:name="product"
-            app:argType="com.mallzhub.customer.models.Product" />
+            app:argType="com.rtchubs.arfixture.models.Product" />
         <action
             android:id="@+id/action_productDetailsFragment_to_cart_nav_graph2"
             app:destination="@id/cart_nav_graph"

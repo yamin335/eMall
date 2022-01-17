@@ -2,7 +2,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <com.mallzhub.customer.ui.barcode_reader.camera.BarcodeReaderCameraGraphicOverlay
+  <com.rtchubs.arfixture.ui.barcode_reader.camera.BarcodeReaderCameraGraphicOverlay
       android:id="@+id/camera_preview_graphic_overlay"
       android:layout_width="match_parent"
       android:layout_height="match_parent"/>

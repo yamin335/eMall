@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class="ShopOutletListItemBinding">
+        <import type="com.bumptech.glide.request.RequestListener"/>
+        <import type="android.graphics.drawable.Drawable"/>
+        <variable
+            name="merchant"
+            type="com.rtchubs.arfixture.models.Merchant" />
+
+        <variable
+            name="imageRequestListener"
+            type="com.bumptech.glide.request.RequestListener&lt;Drawable>" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardElevation="6dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="8dp"
+        app:cardUseCompatPadding="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_marginBottom="-8dp"
+                app:layout_constrainedHeight="true"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:minHeight="120dp"
+                app:imageUrl="@{merchant.thumbnail}"
+                app:imageRequestListener="@{imageRequestListener}"
+                app:layout_constraintBottom_toTopOf="@+id/dataView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:srcCompat="@drawable/shopping_mall"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dataView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_rectangle_1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="1.0">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:gravity="center"
+                    android:text="@{merchant.shop_name}"
+                    android:textAlignment="center"
+                    android:textColor="#404040"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Shopping Mall Name" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

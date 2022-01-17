@@ -8,7 +8,7 @@
     <include app:graph="@navigation/drawer_nav_graph" />
     <fragment
         android:id="@+id/orderListFragment"
-        android:name="com.mallzhub.customer.ui.order.OrderListFragment"
+        android:name="com.rtchubs.arfixture.ui.order.OrderListFragment"
         android:label="Order List"
         tools:layout="@layout/fragment_order_list">
         <action
@@ -28,12 +28,12 @@
     </fragment>
     <fragment
         android:id="@+id/orderTrackHistoryFragment"
-        android:name="com.mallzhub.customer.ui.order.OrderTrackHistoryFragment"
+        android:name="com.rtchubs.arfixture.ui.order.OrderTrackHistoryFragment"
         android:label="Order Track History"
         tools:layout="@layout/fragment_order_track_history">
         <argument
             android:name="order"
-            app:argType="com.mallzhub.customer.models.order.SalesData" />
+            app:argType="com.rtchubs.arfixture.models.order.SalesData" />
     </fragment>
     <include app:graph="@navigation/cart_nav_graph" />
 

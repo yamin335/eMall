@@ -6,7 +6,7 @@
     <data class="GiftPointHistoryFragmentBinding">
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.gift_point.GiftPointHistoryViewModel" />
+            type="com.rtchubs.arfixture.ui.gift_point.GiftPointHistoryViewModel" />
     </data>
 
     <RelativeLayout

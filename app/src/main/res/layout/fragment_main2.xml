@@ -6,7 +6,7 @@
     <data class="Home2Binding">
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.home.HomeViewModel" />
+            type="com.rtchubs.arfixture.ui.home.HomeViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -134,316 +134,38 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:text="Nearby Malls"
+                    android:layout_marginTop="20dp"
+                    android:text="Your Malls"
                     android:textColor="@color/gray" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint1"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerShopOutlets"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
                     android:paddingTop="8dp"
-                    android:layout_marginBottom="80dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/linearLayout2"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/item1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:background="@drawable/spinner_background"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/item2"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:id="@+id/logo1"
-                                android:layout_width="0dp"
-                                android:layout_height="70dp"
-                                android:layout_margin="8dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.0" />
-
-                            <TextView
-                                android:id="@+id/label1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:ellipsize="end"
-                                android:gravity="center"
-                                android:maxLines="2"
-                                android:textColor="@color/gray"
-                                android:textSize="13sp"
-                                app:layout_constrainedWidth="true"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/logo1" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/item2"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:background="@drawable/spinner_background"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/item3"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/item1"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:id="@+id/logo2"
-                                android:layout_width="0dp"
-                                android:layout_height="70dp"
-                                android:layout_margin="8dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.0" />
-
-                            <TextView
-                                android:id="@+id/label2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:ellipsize="end"
-                                android:gravity="center"
-                                android:maxLines="2"
-                                android:textColor="@color/gray"
-                                android:textSize="13sp"
-                                app:layout_constrainedWidth="true"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/logo2" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/item3"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:background="@drawable/spinner_background"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/item2"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:id="@+id/logo3"
-                                android:layout_width="0dp"
-                                android:layout_height="70dp"
-                                android:layout_margin="8dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.0" />
-
-                            <TextView
-                                android:id="@+id/label3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:ellipsize="end"
-                                android:gravity="center"
-                                android:maxLines="2"
-                                android:textColor="@color/gray"
-                                android:textSize="13sp"
-                                app:layout_constrainedWidth="true"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/logo3" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/linearLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/item4"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:background="@drawable/spinner_background"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/item5"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:id="@+id/logo4"
-                                android:layout_width="0dp"
-                                android:layout_height="70dp"
-                                android:layout_margin="8dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.0" />
-
-                            <TextView
-                                android:id="@+id/label4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:ellipsize="end"
-                                android:gravity="center"
-                                android:maxLines="2"
-                                android:textColor="@color/gray"
-                                android:textSize="13sp"
-                                app:layout_constrainedWidth="true"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/logo4" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/item5"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:background="@drawable/spinner_background"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/item6"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/item4"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:id="@+id/logo5"
-                                android:layout_width="0dp"
-                                android:layout_height="70dp"
-                                android:layout_margin="8dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.0" />
-
-                            <TextView
-                                android:id="@+id/label5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:ellipsize="end"
-                                android:gravity="center"
-                                android:maxLines="2"
-                                android:textColor="@color/gray"
-                                android:textSize="13sp"
-                                app:layout_constrainedWidth="true"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/logo5" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/item6"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:background="@drawable/spinner_background"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/item5"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:id="@+id/logo6"
-                                android:layout_width="0dp"
-                                android:layout_height="70dp"
-                                android:layout_margin="8dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.0"
-                                app:srcCompat="@drawable/more_shopping_malls" />
-
-                            <TextView
-                                android:id="@+id/label6"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:gravity="center"
-                                android:text="More"
-                                android:textColor="@color/gray"
-                                android:textSize="13sp"
-                                app:layout_constrainedWidth="true"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/logo6" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:paddingBottom="32dp"
+                    android:orientation="vertical"
+                    tools:listitem="@layout/list_item_shop_outlet"
+                    app:spanCount="3"
+                    tools:itemCount="4"/>
 
             </LinearLayout>
-
         </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/emptyView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Malls Found"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/btnNewChat"

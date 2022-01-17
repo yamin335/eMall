@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.add_product.AddProductViewModel" />
+            type="com.rtchubs.arfixture.ui.add_product.AddProductViewModel" />
     </data>
 
 

@@ -7,7 +7,7 @@
     <data class="AddCardFragmentBinding">
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.add_payment_methods.AddCardViewModel" />
+            type="com.rtchubs.arfixture.ui.add_payment_methods.AddCardViewModel" />
     </data>
 
     <LinearLayout

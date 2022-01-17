@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.otp_signin.OtpSignInViewModel" />
+            type="com.rtchubs.arfixture.ui.otp_signin.OtpSignInViewModel" />
     </data>
 
     <RelativeLayout

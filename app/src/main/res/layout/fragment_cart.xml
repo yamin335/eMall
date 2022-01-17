@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.cart.CartViewModel" />
+            type="com.rtchubs.arfixture.ui.cart.CartViewModel" />
 
         <variable
             name="totalPrice"

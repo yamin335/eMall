@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.transactions.TransactionDetailsViewModel" />
+            type="com.rtchubs.arfixture.ui.transactions.TransactionDetailsViewModel" />
         <variable
             name="vatTax"
             type="String" />

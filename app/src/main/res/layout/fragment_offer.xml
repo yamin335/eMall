@@ -6,7 +6,7 @@
     <data class="OfferFragmentBinding">
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.offer.OfferViewModel" />
+            type="com.rtchubs.arfixture.ui.offer.OfferViewModel" />
     </data>
 
     <LinearLayout

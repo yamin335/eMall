@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.profiles.ProfilesViewModel" />
+            type="com.rtchubs.arfixture.ui.profiles.ProfilesViewModel" />
     </data>
 
 

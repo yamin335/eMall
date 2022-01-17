@@ -5,7 +5,7 @@
     <data class="WalletFragmentBinding">
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.wallet.WalletViewModel" />
+            type="com.rtchubs.arfixture.ui.wallet.WalletViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

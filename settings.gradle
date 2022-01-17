@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "MallzHub"
+rootProject.name = "AR Fixture"

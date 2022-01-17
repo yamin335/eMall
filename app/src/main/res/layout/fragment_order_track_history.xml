@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.mallzhub.customer.ui.order.OrderTrackHistoryViewModel" />
+            type="com.rtchubs.arfixture.ui.order.OrderTrackHistoryViewModel" />
         <variable
             name="vatTax"
             type="String" />
