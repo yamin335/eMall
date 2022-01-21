@@ -418,14 +418,18 @@ val Activity.displayMetrics: DisplayMetrics
         // about a display, such as its size, density, and font scaling
         val displayMetrics = DisplayMetrics()
 
-        if (Build.VERSION.SDK_INT >= 30){
-            display?.apply {
-                getRealMetrics(displayMetrics)
-            }
-        } else {
-            // getMetrics() method was deprecated in api level 30
-            windowManager.defaultDisplay.getMetrics(displayMetrics)
-        }
+//        if (Build.VERSION.SDK_INT >= 30){
+//            display?.apply {
+//                getRealMetrics(displayMetrics)
+//            }
+//        }
+//        else {
+//            // getMetrics() method was deprecated in api level 30
+//            windowManager.defaultDisplay.getMetrics(displayMetrics)
+//        }
+
+        // remove this line and uncomment the previous lines after upgrading version
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
 
         return displayMetrics
     }

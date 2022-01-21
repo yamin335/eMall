@@ -2,8 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
-
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.ar.sceneform.plugin'
+
 // Add the Fabric plugin.
 //apply plugin: 'io.fabric'
 android {
@@ -17,12 +18,12 @@ android {
         }
     }*/
 
-    compileSdkVersion build_versions.target_sdk
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "com.rtchubs.arfixture"
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
+        minSdkVersion 24
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -196,7 +197,7 @@ dependencies {
 
     implementation deps.androidx.recyclerview
 
-    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
     implementation "androidx.recyclerview:recyclerview:1.2.1"
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
@@ -305,5 +306,68 @@ dependencies {
     // Barcode model
     implementation 'com.google.mlkit:barcode-scanning:16.2.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
+
+    // Fab Button
+    implementation 'com.github.clans:fab:1.6.4'
+
+    // AR Core
+    implementation 'com.google.ar:core:1.13.0'
+    // Sceneform for AR Texture View
+    implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.13.0'
+
+    // For ad library // Remove it later
+    implementation 'com.google.android.gms:play-services-ads:18.3.0'
 }
-//apply plugin: 'com.google.gms.google-services'
+
+sceneform.asset('sampledata/models/pineTree/model.obj',
+        'default',
+        'sampledata/models/pineTree/model.sfa',
+        'src/main/res/raw/pine_tree')
+
+
+
+sceneform.asset('sampledata/models/tree_one/model.obj',
+        'default',
+        'sampledata/models/tree_one/model.sfa',
+        'src/main/res/raw/model')
+
+sceneform.asset('sampledata/models/tree_two/tree_two.obj',
+        'default',
+        'sampledata/models/tree_two/tree_two.sfa',
+        'src/main/res/raw/tree_two')
+
+sceneform.asset('sampledata/models/tree_three/tree_three.obj',
+        'default',
+        'sampledata/models/tree_three/tree_three.sfa',
+        'src/main/res/raw/tree_three')
+
+sceneform.asset('sampledata/models/tree_four/tree_four.obj',
+        'default',
+        'sampledata/models/tree_four/tree_four.sfa',
+        'src/main/res/raw/tree_four')
+
+sceneform.asset('sampledata/models/tree_six/tree_six.obj',
+        'default',
+        'sampledata/models/tree_six/tree_six.sfa',
+        'src/main/res/raw/tree_six')
+
+sceneform.asset('sampledata/models/tree_seven/tree_seven.obj',
+        'default',
+        'sampledata/models/tree_seven/tree_seven.sfa',
+        'src/main/res/raw/tree_seven')
+
+
+sceneform.asset('sampledata/models/tree_five/tree_five.obj',
+        'default',
+        'sampledata/models/tree_five/tree_five.sfa',
+        'src/main/res/raw/tree_five')
+
+sceneform.asset('sampledata/models/tree_eight/tree_eight.obj',
+        'default',
+        'sampledata/models/tree_eight/tree_eight.sfa',
+        'src/main/res/raw/tree_eight')
+
+sceneform.asset('sampledata/models/tree_nine/tree_nine.obj',
+        'default',
+        'sampledata/models/tree_nine/tree_nine.sfa',
+        'src/main/res/raw/tree_nine')

@@ -15,11 +15,14 @@
         <entry key="app/src/main/res/drawable/ic_image_search_vd_black_24.xml" value="0.2630208333333333" />
         <entry key="app/src/main/res/drawable/ic_photo_library_vd_white_24.xml" value="0.2630208333333333" />
         <entry key="app/src/main/res/drawable/top_action_bar_scrim.xml" value="0.2630208333333333" />
+        <entry key="app/src/main/res/layout/activity_ar_texture.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/activity_barcode_reader.xml" value="0.246875" />
         <entry key="app/src/main/res/layout/activity_live_barcode.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_live_chat.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.24322916666666666" />
+        <entry key="app/src/main/res/layout/activity_photo_view.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1175925925925926" />
+        <entry key="app/src/main/res/layout/activity_video_view.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/barcode_bottom_sheet.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/barcode_field.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/camera_preview_overlay.xml" value="0.25" />

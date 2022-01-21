@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_SMS" />
@@ -30,6 +31,7 @@
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -42,11 +44,12 @@
         <!-- This tag indicates that this application requires ARCore. This results in the
     application only being visible in the Google Play Store on devices that support
     ARCore. -->
-        <meta-data android:name="com.google.ar.core" android:value="required" />
+<!--        <meta-data android:name="com.google.ar.core" android:value="required" />-->
 
         <activity android:name="com.rtchubs.arfixture.ui.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            android:exported="true">
             <!-- Ensures that the Activity is LAUNCHER -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,6 +63,28 @@
                 android:value="true" />
 
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/ad_appId"/>
+
+        <activity android:name=".sceneform.VideoViewActivity"></activity>
+        <activity
+            android:name=".sceneform.PhotoViewActivity"
+            android:screenOrientation="locked" />
+        <!--
+         This tag indicates that this application requires ARCore. This results in the
+            application only being visible in the Google Play Store on devices that support
+            ARCore.
+        -->
+        <meta-data
+            android:name="com.google.ar.core"
+            android:value="required" />
+
+        <activity
+            android:name=".sceneform.HomeActivity"
+            android:exported="true"
+            android:screenOrientation="locked"/>
 
         <activity
             android:name="com.rtchubs.arfixture.ui.barcode_reader.LiveBarcodeScanningActivity"
@@ -83,7 +108,8 @@
             android:rotationAnimation="seamless"
             android:screenOrientation="portrait"
             android:theme="@style/MainTheme"
-            tools:targetApi="O">
+            tools:targetApi="O"
+            android:exported="false">
 
             <!-- Register as a system camera app -->
             <intent-filter>

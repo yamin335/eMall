@@ -1,6 +1,7 @@
 package com.rtchubs.arfixture.ui.home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -13,7 +14,9 @@ import com.rtchubs.arfixture.R
 import com.rtchubs.arfixture.databinding.Home2Binding
 import com.rtchubs.arfixture.models.Merchant
 import com.rtchubs.arfixture.models.ShoppingMall
+import com.rtchubs.arfixture.sceneform.HomeActivity
 import com.rtchubs.arfixture.ui.LogoutHandlerCallback
+import com.rtchubs.arfixture.ui.MainActivity
 import com.rtchubs.arfixture.ui.NavDrawerHandlerCallback
 import com.rtchubs.arfixture.ui.common.BaseFragment
 import com.rtchubs.arfixture.ui.login.SliderView
@@ -95,7 +98,9 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
         viewDataBinding.recyclerShopOutlets.adapter = shopOutletListAdapter
 
         viewDataBinding.btnNewChat.setOnClickListener {
-            navigateTo(Home2FragmentDirections.actionHome2FragmentToBotNav())
+            //navigateTo(Home2FragmentDirections.actionHome2FragmentToBotNav())
+            startActivity(Intent(requireActivity(), HomeActivity::class.java))
+            requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         viewDataBinding.appLogo.setOnClickListener {
