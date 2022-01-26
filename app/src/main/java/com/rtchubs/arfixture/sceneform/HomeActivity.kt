@@ -1,5 +1,6 @@
 package com.rtchubs.arfixture.sceneform
 
+import android.Manifest
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.ContentValues
@@ -10,6 +11,7 @@ import android.graphics.Point
 import android.media.CamcorderProfile
 import android.net.Uri
 import android.os.*
+import android.os.Environment.getExternalStoragePublicDirectory
 import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
@@ -19,6 +21,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.github.clans.fab.FloatingActionButton
@@ -33,16 +36,26 @@ import com.google.ar.sceneform.rendering.PlaneRenderer.MATERIAL_UV_SCALE
 import com.google.ar.sceneform.rendering.Renderable
 import com.google.ar.sceneform.rendering.Texture
 import com.google.ar.sceneform.ux.TransformableNode
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import com.rtchubs.arfixture.BuildConfig
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import com.rtchubs.arfixture.R
+import com.rtchubs.arfixture.models.Product
+import com.rtchubs.arfixture.ui.product_ar_view.ProductARViewListAdapter
+import com.rtchubs.arfixture.util.AppConstants
+import com.rtchubs.arfixture.util.showErrorToast
+import com.rtchubs.arfixture.util.showSuccessToast
 import kotlinx.android.synthetic.main.activity_ar_texture.*
+import kotlinx.coroutines.Dispatchers
+import net.lingala.zip4j.ZipFile
+import net.lingala.zip4j.exception.ZipException
+import net.lingala.zip4j.progress.ProgressMonitor
+import java.io.*
+import java.util.concurrent.Callable
+import kotlin.collections.ArrayList
 
 
 class HomeActivity : AppCompatActivity() {
@@ -60,17 +73,37 @@ class HomeActivity : AppCompatActivity() {
     private var isTracking: Boolean = false
     private var isHitting: Boolean = false
     private var pointer: PointerDrawable = PointerDrawable()
+    private var arModelsFolderPath = ""
+    private lateinit var productARViewListAdapter: ProductARViewListAdapter
+
+    companion object {
+        var productList = ArrayList<Product>()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (intent.hasExtra(AppConstants.KEY_FILE_PATH) && intent.hasExtra(AppConstants.KEY_FILE_NAME)) {
+            val filePath = intent.getStringExtra(AppConstants.KEY_FILE_PATH) ?: ""
+            val fileName = intent.getStringExtra(AppConstants.KEY_FILE_NAME) ?: ""
+            if (filePath.isNotBlank() && fileName.isNotBlank()) {
+                arModelsFolderPath = "${filePath}/${fileName}"
+            } else {
+                showErrorToast(this, "Unable to show AR View!")
+            }
+        } else {
+            showErrorToast(this, "Unable to show AR View!")
+            onBackPressed()
+        }
 
         if (!checkIsSupportedDeviceOrFinish(this)) {
             return
         }
         setContentView(R.layout.activity_ar_texture)
 
-        window.setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+        window.setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
         setSupportActionBar(findViewById(R.id.my_toolbar))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.app_name)
         if (intent.hasCategory("tree_co")) {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -78,20 +111,27 @@ class HomeActivity : AppCompatActivity() {
 
         arFragment = supportFragmentManager.findFragmentById(R.id.ux_fragment) as WritingArFragment?
 
-        val adapter = TreeAdapter()
+//        val adapter = TreeAdapter()
+//        val recyclerView = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerView)
+//        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL, false)
+//        recyclerView.adapter = adapter
+
+//        adapter.updateList(getArTreeData())
+//        adapter.setOnItemClickListener(object : TreeAdapter.OnItemClickListener {
+//            override fun onItemClick(view: View?, position: Int) {
+//                val clickedData = adapter.runHistoryList[position]
+////                createNewModelRender(clickedData.rendable)
+//                addObject(clickedData.rendable)
+//            }
+//        })
+
+        productARViewListAdapter = ProductARViewListAdapter {
+            addObject()
+        }
         val recyclerView = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = productARViewListAdapter
 
-
-        adapter.updateList(getArTreeData())
-        adapter.setOnItemClickListener(object : TreeAdapter.OnItemClickListener {
-            override fun onItemClick(view: View?, position: Int) {
-                val clickedData = adapter.runHistoryList[position]
-//                createNewModelRender(clickedData.rendable)
-                addObject(clickedData.rendable)
-            }
-        })
+        productARViewListAdapter.submitList(productList)
 
         arFragment?.arSceneView?.scene?.addOnUpdateListener { frameTime ->
             arFragment?.onUpdate(frameTime)
@@ -138,7 +178,7 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    private fun rateApp(){
+    private fun rateApp() {
         val uri = Uri.parse("market://details?id=" + BuildConfig.APPLICATION_ID)
         var intent = Intent(Intent.ACTION_VIEW, uri)
 //      To count with Play market backstack, After pressing back button,
@@ -189,9 +229,34 @@ class HomeActivity : AppCompatActivity() {
                 }
     }
 
+    private fun addARObject() {
 
+    }
 
-    private fun addObject(rendable: Int) {
+    private fun placeARObject(arFragment: WritingArFragment, anchor: Anchor?) {
+//        val path = getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+//        val modelPath = "$path/unzippedARModels/ar_models/tree_nine.sfb"
+        val modelPath = "$arModelsFolderPath/tree_nine.sfb"
+        val objectFile = File(modelPath)
+        val callable: Callable<InputStream> = Callable {
+            FileInputStream(objectFile);
+        }
+        ModelRenderable.builder()
+            .setSource(applicationContext, callable)
+            .build()
+            .thenAccept { renderable -> addNodeToScene(arFragment, anchor!!, renderable) }
+            .exceptionally { throwable ->
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage(throwable.message)
+                    .setTitle("Something wrong!")
+                val dialog = builder.create()
+                dialog.show()
+                null
+
+            }
+    }
+
+    private fun addObject() {
         var frame: Frame = arFragment?.arSceneView?.arFrame!!
         var pt: Point = getScreenCenter()
         val hits: List<HitResult>
@@ -200,7 +265,8 @@ class HomeActivity : AppCompatActivity() {
             for (hit in hits) {
                 val trackable = hit.trackable
                 if (trackable is Plane && trackable.isPoseInPolygon(hit.hitPose)) {
-                    placeObject(arFragment!!, hit.createAnchor(), rendable)
+                    placeARObject(arFragment!!, hit.createAnchor())
+                    //placeObject(arFragment!!, hit.createAnchor(), rendable)
                     break
 
                 }
@@ -500,9 +566,14 @@ class HomeActivity : AppCompatActivity() {
                 val snackbar = Snackbar.make(findViewById(android.R.id.content), "Photo saved", Snackbar.LENGTH_LONG)
                 snackbar.setAction("Open Photo") { v ->
                     val photoFile = File(filename)
-                    val photoURI = FileProvider.getUriForFile(this@HomeActivity,
-                            this@HomeActivity.getPackageName() + ".ar.codelab.name.provider",
-                            photoFile)
+                    val photoURI: Uri = FileProvider.getUriForFile(
+                        this@HomeActivity,
+                        "${BuildConfig.APPLICATION_ID}.provider",
+                        photoFile
+                    )
+//                    val photoURI = FileProvider.getUriForFile(this@HomeActivity,
+//                            this@HomeActivity.getPackageName() + ".ar.codelab.name.provider",
+//                            photoFile)
 //                    val intent = Intent(Intent.ACTION_VIEW, photoURI)
 //                    intent.setDataAndType(photoURI, "image/*")
 //                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
@@ -525,7 +596,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun generateFilename(): String {
         var date = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(Date());
-        var path = "${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)}" +
+        var path = "${getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)}" +
                 File.separator + "Sceneform/" + date + "_screenshot.jpg";
         return path
     }

@@ -98,9 +98,7 @@ class Home2Fragment : BaseFragment<Home2Binding, HomeViewModel>() {
         viewDataBinding.recyclerShopOutlets.adapter = shopOutletListAdapter
 
         viewDataBinding.btnNewChat.setOnClickListener {
-            //navigateTo(Home2FragmentDirections.actionHome2FragmentToBotNav())
-            startActivity(Intent(requireActivity(), HomeActivity::class.java))
-            requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            navigateTo(Home2FragmentDirections.actionHome2FragmentToBotNav())
         }
 
         viewDataBinding.appLogo.setOnClickListener {

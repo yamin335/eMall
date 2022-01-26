@@ -317,57 +317,57 @@ dependencies {
 
     // For ad library // Remove it later
     implementation 'com.google.android.gms:play-services-ads:18.3.0'
+
+    implementation 'net.lingala.zip4j:zip4j:2.6.3'
 }
 
-sceneform.asset('sampledata/models/pineTree/model.obj',
-        'default',
-        'sampledata/models/pineTree/model.sfa',
-        'src/main/res/raw/pine_tree')
-
-
-
-sceneform.asset('sampledata/models/tree_one/model.obj',
-        'default',
-        'sampledata/models/tree_one/model.sfa',
-        'src/main/res/raw/model')
-
-sceneform.asset('sampledata/models/tree_two/tree_two.obj',
-        'default',
-        'sampledata/models/tree_two/tree_two.sfa',
-        'src/main/res/raw/tree_two')
-
-sceneform.asset('sampledata/models/tree_three/tree_three.obj',
-        'default',
-        'sampledata/models/tree_three/tree_three.sfa',
-        'src/main/res/raw/tree_three')
-
-sceneform.asset('sampledata/models/tree_four/tree_four.obj',
-        'default',
-        'sampledata/models/tree_four/tree_four.sfa',
-        'src/main/res/raw/tree_four')
-
-sceneform.asset('sampledata/models/tree_six/tree_six.obj',
-        'default',
-        'sampledata/models/tree_six/tree_six.sfa',
-        'src/main/res/raw/tree_six')
-
-sceneform.asset('sampledata/models/tree_seven/tree_seven.obj',
-        'default',
-        'sampledata/models/tree_seven/tree_seven.sfa',
-        'src/main/res/raw/tree_seven')
-
-
-sceneform.asset('sampledata/models/tree_five/tree_five.obj',
-        'default',
-        'sampledata/models/tree_five/tree_five.sfa',
-        'src/main/res/raw/tree_five')
-
-sceneform.asset('sampledata/models/tree_eight/tree_eight.obj',
-        'default',
-        'sampledata/models/tree_eight/tree_eight.sfa',
-        'src/main/res/raw/tree_eight')
-
-sceneform.asset('sampledata/models/tree_nine/tree_nine.obj',
-        'default',
-        'sampledata/models/tree_nine/tree_nine.sfa',
-        'src/main/res/raw/tree_nine')
+//sceneform.asset('sampledata/models/pineTree/model.obj',
+//        'default',
+//        'sampledata/models/pineTree/model.sfa',
+//        'src/main/res/raw/pine_tree')
+//
+//sceneform.asset('sampledata/models/tree_one/model.obj',
+//        'default',
+//        'sampledata/models/tree_one/model.sfa',
+//        'src/main/res/raw/model')
+//
+//sceneform.asset('sampledata/models/tree_two/tree_two.obj',
+//        'default',
+//        'sampledata/models/tree_two/tree_two.sfa',
+//        'src/main/res/raw/tree_two')
+//
+//sceneform.asset('sampledata/models/tree_three/tree_three.obj',
+//        'default',
+//        'sampledata/models/tree_three/tree_three.sfa',
+//        'src/main/res/raw/tree_three')
+//
+//sceneform.asset('sampledata/models/tree_four/tree_four.obj',
+//        'default',
+//        'sampledata/models/tree_four/tree_four.sfa',
+//        'src/main/res/raw/tree_four')
+//
+//sceneform.asset('sampledata/models/tree_six/tree_six.obj',
+//        'default',
+//        'sampledata/models/tree_six/tree_six.sfa',
+//        'src/main/res/raw/tree_six')
+//
+//sceneform.asset('sampledata/models/tree_seven/tree_seven.obj',
+//        'default',
+//        'sampledata/models/tree_seven/tree_seven.sfa',
+//        'src/main/res/raw/tree_seven')
+//
+//
+//sceneform.asset('sampledata/models/tree_five/tree_five.obj',
+//        'default',
+//        'sampledata/models/tree_five/tree_five.sfa',
+//        'src/main/res/raw/tree_five')
+//
+//sceneform.asset('sampledata/models/tree_eight/tree_eight.obj',
+//        'default',
+//        'sampledata/models/tree_eight/tree_eight.sfa',
+//        'src/main/res/raw/tree_eight')
+//
+//sceneform.asset('sampledata/models/tree_nine/tree_nine.obj',
+//        'default',
+//        'sampledata/models/tree_nine/tree_nine.sfa',
+//        'src/main/res/raw/tree_nine')

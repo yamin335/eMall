@@ -5,6 +5,9 @@ import androidx.work.Configuration
 import androidx.work.WorkManager
 import com.rtchubs.arfixture.binding.FragmentDataBindingComponent
 import com.rtchubs.arfixture.di.DaggerAppComponent
+import com.rtchubs.arfixture.util.AppConstants.arModelsFolder
+import com.rtchubs.arfixture.util.AppConstants.downloadFolder
+import com.rtchubs.arfixture.util.FileUtils
 import com.rtchubs.arfixture.worker.DaggerWorkerFactory
 import com.squareup.picasso.Picasso
 import dagger.android.support.DaggerApplication
@@ -26,7 +29,8 @@ class App : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
-
+        FileUtils.makeEmptyFolderIntoExternalStorageWithTitle(this, downloadFolder)
+        FileUtils.makeEmptyFolderIntoExternalStorageWithTitle(this, arModelsFolder)
         // Inject this class's @Inject-annotated members.
         applicationInjector.inject(this)
         /*if (BuildConfig.DEBUG) {

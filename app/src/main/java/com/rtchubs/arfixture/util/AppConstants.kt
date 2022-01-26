@@ -15,4 +15,10 @@ object AppConstants {
     const val orderShipped = "Shipped"
     const val orderDelivered = "Delivered"
     const val orderCancelled = "Cancelled"
+
+    const val downloadFolder = "downloadedFiles"
+    const val KEY_DOWNLOAD_URL = "downloadUrl"
+    const val KEY_FILE_PATH = "filePath"
+    const val KEY_FILE_NAME = "fileName"
+    const val arModelsFolder = "arModels"
 }

@@ -39,7 +39,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
-        tools:targetApi="m">
+        tools:targetApi="m"
+        android:requestLegacyExternalStorage="true">
 
         <!-- This tag indicates that this application requires ARCore. This results in the
     application only being visible in the Google Play Store on devices that support

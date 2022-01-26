@@ -31,7 +31,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:clipToPadding="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/list_item_product_ar_view"
+        tools:itemCount="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
@@ -63,8 +70,8 @@
         app:menu_animationDelayPerItem="50"
         app:menu_backgroundColor="@android:color/transparent"
         app:menu_buttonSpacing="0dp"
-        app:menu_colorNormal="@color/colorPrimary"
-        app:menu_colorPressed="@color/colorPrimaryDark"
+        app:menu_colorNormal="@color/themeButtonColor"
+        app:menu_colorPressed="@color/themeButtonColorPressed"
         app:menu_colorRipple="#99FFFFFF"
         app:menu_fab_size="normal"
         app:menu_icon="@drawable/fab_add"
@@ -99,7 +106,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_capture"
-            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorNormal="@color/themeButtonColor"
+            app:fab_colorPressed="@color/themeButtonColorPressed"
             app:fab_label="Capture screen"
             app:fab_size="mini" />
 
@@ -109,7 +117,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_recording"
-            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorNormal="@color/themeButtonColor"
+            app:fab_colorPressed="@color/themeButtonColorPressed"
             app:fab_label="Record screen"
             app:fab_size="mini" />
 
@@ -119,7 +128,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_refresh"
-            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorNormal="@color/themeButtonColor"
+            app:fab_colorPressed="@color/themeButtonColorPressed"
             app:fab_label="Clear screen"
             app:fab_size="mini"/>
 
@@ -128,7 +138,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_star"
-            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorNormal="@color/themeButtonColor"
+            app:fab_colorPressed="@color/themeButtonColorPressed"
             app:fab_label="Rate Us"
             app:fab_size="mini"/>
 
