@@ -29,6 +29,7 @@ import com.rtchubs.arfixture.ui.order.OrderViewModel
 import com.rtchubs.arfixture.ui.otp_signin.OtpSignInViewModel
 import com.rtchubs.arfixture.ui.pin_number.PinNumberViewModel
 import com.rtchubs.arfixture.ui.pre_on_boarding.PreOnBoardingViewModel
+import com.rtchubs.arfixture.ui.product_ar_view.ProductARViewModel
 import com.rtchubs.arfixture.ui.profiles.ProfilesViewModel
 import com.rtchubs.arfixture.ui.registration.RegistrationViewModel
 import com.rtchubs.arfixture.ui.settings.SettingsViewModel
@@ -332,4 +333,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(GiftPointHistoryDetailsViewModel::class)
     abstract fun bindGiftPointHistoryDetailsViewModel(viewModel: GiftPointHistoryDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProductARViewModel::class)
+    abstract fun bindProductARViewModel(viewModel: ProductARViewModel): ViewModel
 }

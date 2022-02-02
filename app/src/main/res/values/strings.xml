@@ -507,5 +507,6 @@
     // From AR Project
     <string name="share">Share</string>
     <string name="ad_appId">ca-app-pub-7244188485522449~9162653892</string> <!-- Test app ID: "ca-app-pub-3940256099942544~3347511713"-->
-    <string name="ad_interestitial_unitId">ca-app-pub-7244188485522449/6017615808</string> <!-- TEST UNIT ID : "ca-app-pub-3940256099942544/1033173712"-->
+    <string name="ad_interestitial_unitId">ca-app-pub-7244188485522449/6017615808</string>
+    <string name="updating_surface_please_wait">Updating surface, please wait...</string> <!-- TEST UNIT ID : "ca-app-pub-3940256099942544/1033173712"-->
 </resources>

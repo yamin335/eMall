@@ -187,11 +187,12 @@ class ProductListFragment : BaseFragment<ProductListFragmentBinding, ProductList
     }
 
     private fun goToARView(filePath: String, fileName: String) {
-        val arIntent = Intent(requireActivity(), HomeActivity::class.java)
-        arIntent.putExtra(KEY_FILE_PATH, filePath)
-        arIntent.putExtra(KEY_FILE_NAME, fileName)
-        startActivity(arIntent)
-        requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        navigateTo(ProductListFragmentDirections.actionProductListFragmentToProductARViewFragment(filePath, fileName))
+//        val arIntent = Intent(requireActivity(), HomeActivity::class.java)
+//        arIntent.putExtra(KEY_FILE_PATH, filePath)
+//        arIntent.putExtra(KEY_FILE_NAME, fileName)
+//        startActivity(arIntent)
+//        requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 
     private fun unzipARModels(inputFilePath: String, inputFilename: String, outputFilePath: String, outputFileName: String) {

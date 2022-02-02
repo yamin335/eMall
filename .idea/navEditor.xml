@@ -782,6 +782,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_home2Fragment_to_bot_nav">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_home2Fragment_to_cart_nav_graph">
                               <value>
                                 <LayoutPositions />
@@ -793,6 +798,11 @@
                               </value>
                             </entry>
                             <entry key="action_home2Fragment_to_moreShoppingMallFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_home2Fragment_to_productListFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -824,6 +834,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="productARViewFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1696" />
+                            <option name="y" value="1226" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

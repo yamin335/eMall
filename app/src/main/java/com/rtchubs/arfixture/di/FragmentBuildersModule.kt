@@ -34,6 +34,7 @@ import com.rtchubs.arfixture.ui.order.OrderListFragment
 import com.rtchubs.arfixture.ui.order.OrderTrackHistoryFragment
 import com.rtchubs.arfixture.ui.otp_signin.OtpSignInFragment
 import com.rtchubs.arfixture.ui.pin_number.PinNumberFragment
+import com.rtchubs.arfixture.ui.product_ar_view.ProductARViewFragment
 import com.rtchubs.arfixture.ui.shops.ShopDetailsContactUsFragment
 import com.rtchubs.arfixture.ui.shops.ShopDetailsFragment
 import com.rtchubs.arfixture.ui.shops.ShopDetailsProductListFragment
@@ -213,4 +214,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeGiftPointHistoryDetailsFragment(): GiftPointHistoryDetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeProductARViewFragment(): ProductARViewFragment
 }

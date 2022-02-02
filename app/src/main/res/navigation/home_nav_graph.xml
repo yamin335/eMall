@@ -121,6 +121,13 @@
                 android:name="product"
                 app:argType="com.rtchubs.arfixture.models.Product" />
         </action>
+        <action
+            android:id="@+id/action_productListFragment_to_productARViewFragment"
+            app:destination="@id/productARViewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -174,4 +181,16 @@
     <include app:graph="@navigation/cart_nav_graph" />
     <include app:graph="@navigation/product_details_nav_graph" />
     <include app:graph="@navigation/chat_bot_nav_graph" />
+    <fragment
+        android:id="@+id/productARViewFragment"
+        android:name="com.rtchubs.arfixture.ui.product_ar_view.ProductARViewFragment"
+        android:label="ProductARViewFragment"
+        tools:layout="@layout/fragment_product_ar_view">
+        <argument
+            android:name="filePath"
+            app:argType="string" />
+        <argument
+            android:name="fileName"
+            app:argType="string" />
+    </fragment>
 </navigation>

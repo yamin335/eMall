@@ -20,14 +20,14 @@
         android:id="@+id/root"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="8dp"
         android:background="@drawable/glow_border"
         android:padding="5dp">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:adjustViewBounds="true"
             app:imageRequestListener="@{imageRequestListener}"
             app:imageUrl="@{imageUrl}"
@@ -42,8 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:ellipsize="end"
-            android:maxLines="2"
-            android:lines="2"
+            android:maxLines="1"
+            android:lines="1"
             android:gravity="center"
             android:textAlignment="center"
             android:textSize="12sp"
