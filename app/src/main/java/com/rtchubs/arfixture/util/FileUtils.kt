@@ -19,6 +19,14 @@ import java.math.RoundingMode
 class FileUtils {
     companion object {
 
+        fun deleteFileFromExternalStorage(file: File): Boolean {
+            if (file.exists()) {
+                if (!file.deleteRecursively())
+                    return false
+            }
+            return true
+        }
+
         fun getLocalStorageFilePath(applicationContext: Context, folderName: String): String {
             //If your app is used on a device that runs Android 4.3 (API level 18) or lower,
             // then the array contains just one element,

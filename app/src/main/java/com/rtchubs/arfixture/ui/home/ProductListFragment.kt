@@ -136,6 +136,11 @@ class ProductListFragment : BaseFragment<ProductListFragmentBinding, ProductList
         viewModel.productListResponse.observe(viewLifecycleOwner, Observer { productList ->
             productListAdapter.submitList(productList)
             HomeActivity.productList = productList as ArrayList<Product>
+            if (HomeActivity.productList.isNullOrEmpty()) {
+                viewDataBinding.btnARView.visibility = View.GONE
+            } else {
+                viewDataBinding.btnARView.visibility = View.VISIBLE
+            }
         })
 
         viewModel.showHideProgress.observe(viewLifecycleOwner, Observer { pair ->
@@ -197,8 +202,9 @@ class ProductListFragment : BaseFragment<ProductListFragmentBinding, ProductList
 
     private fun unzipARModels(inputFilePath: String, inputFilename: String, outputFilePath: String, outputFileName: String) {
         viewModel.showHideProgress.postValue(Pair(true, 0))
+        val inputFile = File(inputFilePath, inputFilename)
         try {
-            val zipFile = ZipFile(File(inputFilePath, inputFilename))
+            val zipFile = ZipFile(inputFile)
 //            if (zipFile.isEncrypted) {
 //                zipFile.setPassword(password)
 //            }
@@ -223,20 +229,24 @@ class ProductListFragment : BaseFragment<ProductListFragmentBinding, ProductList
                     goToARView(outputFilePath, outputFileName)
                 }
                 ProgressMonitor.Result.ERROR -> {
+                    FileUtils.deleteFileFromExternalStorage(inputFile)
                     viewModel.showHideProgress.postValue(Pair(false, 100))
                     showErrorToast(requireContext(), "Unzipping FAILED!")
                 }
                 ProgressMonitor.Result.CANCELLED -> {
+                    FileUtils.deleteFileFromExternalStorage(inputFile)
                     viewModel.showHideProgress.postValue(Pair(false, 100))
                     showErrorToast(requireContext(), "Unzipping CANCELLED!")
                 }
                 else -> {
+                    FileUtils.deleteFileFromExternalStorage(inputFile)
                     viewModel.showHideProgress.postValue(Pair(false, 100))
                     showErrorToast(requireContext(), "Unzipping FAILED!")
                 }
             }
         } catch (e: ZipException) {
             e.printStackTrace()
+            FileUtils.deleteFileFromExternalStorage(inputFile)
             showErrorToast(requireContext(), "Unzipping FAILED!")
             viewModel.showHideProgress.postValue(Pair(false, 100))
         }

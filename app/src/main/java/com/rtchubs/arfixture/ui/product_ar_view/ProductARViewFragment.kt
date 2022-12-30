@@ -18,6 +18,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import com.github.clans.fab.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -34,8 +36,12 @@ import com.rtchubs.arfixture.BR
 import com.rtchubs.arfixture.BuildConfig
 import com.rtchubs.arfixture.R
 import com.rtchubs.arfixture.databinding.ProductARViewFragmentBinding
+import com.rtchubs.arfixture.models.Product
 import com.rtchubs.arfixture.sceneform.*
 import com.rtchubs.arfixture.ui.common.BaseFragment
+import com.rtchubs.arfixture.ui.home.Home2FragmentDirections
+import com.rtchubs.arfixture.util.showSuccessToast
+import com.rtchubs.arfixture.util.showWarningToast
 import kotlinx.android.synthetic.main.activity_ar_texture.*
 import java.io.*
 import java.text.SimpleDateFormat
@@ -69,6 +75,8 @@ class ProductARViewFragment : BaseFragment<ProductARViewFragmentBinding, Product
 
     private val args: ProductARViewFragmentArgs by navArgs()
 
+    private var selectedProduct: Product? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -77,16 +85,51 @@ class ProductARViewFragment : BaseFragment<ProductARViewFragmentBinding, Product
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.toastWarning.observe(viewLifecycleOwner, Observer {
+            it?.let { message ->
+                showWarningToast(requireContext(), message)
+                viewModel.toastWarning.postValue(null)
+            }
+        })
+
+        viewModel.toastSuccess.observe(viewLifecycleOwner, Observer {
+            it?.let { message ->
+                showSuccessToast(requireContext(), message)
+                viewModel.toastSuccess.postValue(null)
+            }
+        })
+
         arModelsFolderPath = "${args.filePath}/${args.fileName}"
         arFragment = childFragmentManager.findFragmentById(R.id.ux_fragment) as WritingArFragment?
 
         productARViewListAdapter = ProductARViewListAdapter {
+            selectedProduct = it
             addObject()
         }
-
         viewDataBinding.recyclerView.adapter = productARViewListAdapter
-
         productARViewListAdapter.submitList(HomeActivity.productList)
+
+        viewDataBinding.btnAddToCart.setOnClickListener {
+            selectedProduct?.let { product ->
+                viewModel.addToCart(product, 1)
+            }
+        }
+
+        viewDataBinding.cartMenu.setOnClickListener {
+            navController.navigate(ProductARViewFragmentDirections.actionProductARViewFragmentToCartNavGraph())
+        }
+
+        viewModel.cartItemCount.observe(viewLifecycleOwner, Observer {
+            it?.let { value ->
+                if (value < 1) {
+                    viewDataBinding.badge.visibility = View.INVISIBLE
+                    return@Observer
+                } else {
+                    viewDataBinding.badge.visibility = View.VISIBLE
+                    viewDataBinding.badge.text = value.toString()
+                }
+            }
+        })
 
         arFragment?.arSceneView?.scene?.addOnUpdateListener { frameTime ->
             arFragment?.onUpdate(frameTime)
@@ -323,10 +366,10 @@ class ProductARViewFragment : BaseFragment<ProductARViewFragmentBinding, Product
 
                 if (isHitting) {
                     viewDataBinding.status.text = "Updated!"
-                    viewDataBinding.progress.visibility = View.GONE
+                    viewDataBinding.status.visibility = View.GONE
                 } else {
                     viewDataBinding.status.text = "Updating surface, please wait..."
-                    viewDataBinding.progress.visibility = View.VISIBLE
+                    viewDataBinding.status.visibility = View.VISIBLE
                 }
 
                 contentView.invalidate()

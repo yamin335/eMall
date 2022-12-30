@@ -41,7 +41,8 @@
             android:id="@+id/menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            android:layout_marginEnd="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnAddToCart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:menu_animationDelayPerItem="50"
@@ -111,16 +112,6 @@
                 app:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/fabCart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_outline_shopping_cart_24"
-                app:fab_colorNormal="@color/themeButtonColor"
-                app:fab_colorPressed="@color/themeButtonColorPressed"
-                app:fab_label="Add to cart"
-                app:fab_size="mini" />
-
-            <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fabrate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -146,39 +137,83 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/progress"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@drawable/rounded_bg_black_transparent"
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
             android:gravity="center"
-            android:orientation="vertical"
+            android:maxLines="2"
+            android:text="@string/updating_surface_please_wait"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/cartMenu"
+            app:layout_constraintStart_toEndOf="@+id/back"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Please Wait..." />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cartMenu"
+            style="?attr/actionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:clipToPadding="false"
+            android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.40">
+            app:layout_constraintVertical_bias="0.0">
 
-            <ProgressBar
+            <ImageView
+                android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:indeterminateTint="@color/white" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_outline_shopping_cart_24"
+                app:tint="@color/white" />
 
             <TextView
-                android:id="@+id/status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="4dp"
-                android:ellipsize="end"
+                android:id="@+id/badge"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@drawable/notification_badge"
                 android:gravity="center"
-                android:maxLines="2"
-                android:textColor="@color/white"
-                android:text="@string/updating_surface_please_wait"
-                tools:text="Please Wait..." />
-        </LinearLayout>
+                android:minWidth="24dp"
+                android:padding="5dp"
+                android:text="0"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toTopOf="@+id/imageView2"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAddToCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="Simple description"
+            app:backgroundTint="#E5525D"
+            app:srcCompat="@drawable/ic_round_add_shopping_cart_24"
+            app:tint="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

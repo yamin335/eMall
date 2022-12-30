@@ -13,7 +13,7 @@ import com.rtchubs.arfixture.api.Api.DIRECTORY_PROFILE
 object Api {
     private const val PROTOCOL = "https"
     //private const val API_ROOT = "backend.mallhubs.com"
-    private const val API_ROOT = "backend.mobmalls.com"
+    private const val API_ROOT = "backend.arfixture.com"
     const val API_ROOT_URL = "$PROTOCOL://$API_ROOT"
     const val API_REPO = "api"
     const val API_VERSION = "v1"
